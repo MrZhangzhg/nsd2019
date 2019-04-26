@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>达内云计算调查问卷</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <style>
+        nav{
+            margin: 5px 0 0 0;
+        }
+        .up10{
+            margin: 10px;
+        }
+        #footer {
+            border-top: 1px solid #cccccc;
+            padding: 20px;
+            text-align: center;
+        }
+        section{
+            margin-bottom: 10px;
+        }
+        .tab-content{
+            padding: 10px 0 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <div id="linux-carousel" class="carousel slide">
+            <ol class="carousel-indicators">
+                <li class="active" data-target="#linux-carousel" data-slide-to="0"></li>
+                <li data-target="#linux-carousel" data-slide-to="1"></li>
+                <li data-target="#linux-carousel" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="imgs/first.jpg" alt="Linux云计算学院">
+                </div>
+                <div class="item">
+                    <img src="imgs/second.jpg" alt="云计算课程">
+                </div>
+                <div class="item">
+                    <img src="imgs/third.jpg" alt="红帽认证">
+                </div>
+            </div>
+            <a href="#linux-carousel" data-slide="prev" class="carousel-control left">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <a href="#linux-carousel" data-slide="next" class="carousel-control right">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+        </div>
+
+        <div class="row">
+            <div class="up10 col-md-3">
+                <label class="control-label">当前讲师：</label>
+                <select name="teacher" class="form-control" form="main-form">
+                    <option value="">牛犇</option>
+                    <option value="">王凯</option>
+                    <option value="">丁明一</option>
+                </select>
+            </div>
+
+            <div class="up10 col-md-3">
+                <label class="control-label">我所在的班级：</label>
+                <select class="form-control" name="stu_class" form="main-form">
+                    <option>NSD1801</option>
+                    <option>NSD1802</option>
+                    <option>NSD1803</option>
+                    <option>NSD1804</option>
+                </select>
+            </div>
+            <div class="up10 col-md-4">
+                <label class="control-label">姓名：</label>
+                <input name="stu_name" type="text" class="form-control" placeholder="非必填项">
+            </div>
+        </div>
+
+
+        <nav>
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="#vote" data-toggle="tab">评 分</a>
+                </li>
+                <li>
+                    <a href="#comment" data-toggle="tab">建 议</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<section>
+    <div class="container">
+        <form action="" role="form" id="main-form">
+            <div class="tab-content">
+                <div class="tab-pane active fade in" id="vote">
+                    <table class="table table-bordered table-hover">
+                        <tbody>
+                        <tr class="bg-info">
+                            <td colspan="5">老师总是能够准时进入教室</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="radio" name="q1"> 5
+                            </td>
+                            <td>
+                                <input type="radio" name="q1"> 4
+                            </td>
+                            <td>
+                                <input type="radio" name="q1"> 3
+                            </td>
+                            <td>
+                                <input type="radio" name="q1"> 2
+                            </td>
+                            <td>
+                                <input type="radio" name="q1"> 1
+                            </td>
+                        </tr>
+                        <tr class="bg-info">
+                            <td colspan="5">老师总是能够准时进入教室</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="radio" name="q2"> 5
+                            </td>
+                            <td>
+                                <input type="radio" name="q2"> 4
+                            </td>
+                            <td>
+                                <input type="radio" name="q2"> 3
+                            </td>
+                            <td>
+                                <input type="radio" name="q2"> 2
+                            </td>
+                            <td>
+                                <input type="radio" name="q2"> 1
+                            </td>
+                        </tr>
+                        <tr class="bg-info">
+                            <td colspan="5">老师总是能够准时进入教室</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="radio" name="q3"> 5
+                            </td>
+                            <td>
+                                <input type="radio" name="q3"> 4
+                            </td>
+                            <td>
+                                <input type="radio" name="q3"> 3
+                            </td>
+                            <td>
+                                <input type="radio" name="q3"> 2
+                            </td>
+                            <td>
+                                <input type="radio" name="q3"> 1
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <div class="tab-pane fade" id="comment">
+                    <div class="form-group">
+                        <p>
+                            各位同学，大家好。为了提高教学质量，更好的服务于大家，特向大家征求意见和建议。该调查可以采用<span class="text-danger"><strong>匿名方式</strong></span>，请大家畅所欲言，发表自己的<span class="text-danger"><strong>真实感受</strong></span>。请大家提供对老师的授课评价和您认为需要提高的地方。
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">您对他/她的授课评价：</label>
+                        <textarea class="form-control" rows="5" placeholder="请输入您对老师的评价" name="assess"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <lable class="control-label">需要提高的地方：</lable>
+                        <textarea class="form-control" rows="5" placeholder="老师需要提高的地方" name="improve"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <lable class="control-label">是否可以听明白：</lable>
+                        <textarea class="form-control" rows="5" placeholder="是否可以听明白课程" name="understand"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <lable class="control-label">对课程的建议：</lable>
+                        <textarea class="form-control" rows="5" placeholder="您对课程的建议" name="suggestion"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <lable class="control-label">喜欢的授课方式：</lable>
+                        <textarea class="form-control" rows="5" placeholder="您更喜欢的授课方式" name="teach_style"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input class="btn btn-primary center-block" type="submit" value="确 认 提 交">
+            </div>
+        </form>
+    </div>
+</section>
+
+<footer id="footer">
+    <div class="container">
+        <p><a href="http://linux.tedu.cn" target="_blank">达内云计算学院</a></p>
+        <p>客服电话：400-111-8989 邮箱：admin@tedu.cn</p>
+    </div>
+</footer>
+
+
+<script src="static/js/jquery.min.js"></script>
+<script src="static/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    $('#linux-carousel').carousel({
+        interval : 3000
+    });
+</script>
+
+</body>
+</html>
