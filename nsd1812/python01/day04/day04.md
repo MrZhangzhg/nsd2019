@@ -150,11 +150,82 @@ if __name__ == '__main__':
     func()
 ```
 
+## 编程思路
+
+以创建文件为例
+
+1. 发呆。思考程序的运行方式：交互式？非交互式？
+
+```shell
+文件名: /etc/hosts
+文件已存在，请重试
+文件名: /tmp/mytest.txt
+请输入内容，输入END结束
+> Hello World!
+> 2nd line.
+> 3rd line.
+> END
+# cat /tmp/mytest.txt
+Hello World!
+2nd line.
+3rd line.
+```
+
+2. 思考程序有哪些功能，把这些功能编写成功能函数
+3. 编写程序主体代码，依次调用相关函数
+4. 编写函数的具体代码
+
+## 序列对象
+
+```python
+>>> str(10)
+'10'
+>>> list('abcd')
+['a', 'b', 'c', 'd']
+>>> tuple('abcd')
+('a', 'b', 'c', 'd')
+>>> alist = [10, 20, 30, 40]
+>>> tuple(alist)
+(10, 20, 30, 40)
+```
+
+### enumerate方法
+
+```python
+>>> alist = ['tom', 'jerry', 'bob', 'alice']
+>>> enumerate(alist)
+<enumerate object at 0x7f8afbb99e58>
+>>> list(enumerate(alist))
+[(0, 'tom'), (1, 'jerry'), (2, 'bob'), (3, 'alice')]
+```
+
+### reversed方法
+
+```python
+>>> import random
+>>> alist = [random.randint(1, 100) for i in range(10)]
+>>> alist
+[1, 66, 61, 91, 37, 71, 92, 85, 31, 95]
+>>> reversed(alist)
+<list_reverseiterator object at 0x7f8afcb3eeb8>
+>>> list(reversed(alist))
+[95, 31, 85, 92, 71, 37, 91, 61, 66, 1]
+>>> for i in reversed(alist):
+...     print(i)
+```
+
+### sorted方法
+
+```python
+>>> sorted(alist)
+[1, 31, 37, 61, 66, 71, 85, 91, 92, 95]
+>>> sorted(alist, reverse=True)
+[95, 92, 91, 85, 71, 66, 61, 37, 31, 1]
+```
 
 
 
-
-
+## 
 
 ## 
 
