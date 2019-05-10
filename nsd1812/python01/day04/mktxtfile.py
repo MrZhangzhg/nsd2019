@@ -24,9 +24,11 @@ def get_content():
     return content
 
 def wfile(fname, content):
-
+    with open(fname, 'w') as fobj:
+        fobj.writelines(content)
 
 if __name__ == '__main__':
     fname = get_fname()
     content = get_content()
+    content = [line + '\n' for line in content]
     wfile(fname, content)
