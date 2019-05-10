@@ -257,6 +257,42 @@ TypeError: %d format: a number is required, not str
 'tom       22      '
 ```
 
+其他简单了解的格式化方法
+
+```python
+>>> '97: %c' % 97
+'97: a'
+>>> '11: %#o' % 11
+'11: 0o13'
+>>> '11: %#x' % 11
+'11: 0xb'
+>>> '5 / 3 = %f' % (5 / 3)
+'5 / 3 = 1.666667'
+>>> '5 / 3 = %.2f' % (5 / 3)
+'5 / 3 = 1.67'
+>>> '%10d' % 5
+'         5'
+>>> '%010d' % 5
+'0000000005'
+```
+
+### format方法
+
+也用于实现字符串的格式化，与%s/%d类似
+
+```python
+>>> '{} is {} years old'.format('bob', 22)
+'bob is 22 years old'
+>>> '{} is {} years old'.format(22, 'bob')
+'22 is bob years old'
+>>> '{1} is {0} years old'.format(22, 'bob')
+'bob is 22 years old'
+
+# 第0个位置的数据是列表，根据第0个位置的下标取值
+>>> '{0[0]} is {0[1]} years old'.format(['bob', 22])
+'bob is 22 years old'
+```
+
 
 
 ## 
