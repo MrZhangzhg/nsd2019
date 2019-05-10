@@ -292,12 +292,3 @@ TypeError: %d format: a number is required, not str
 >>> '{0[0]} is {0[1]} years old'.format(['bob', 22])
 'bob is 22 years old'
 ```
-
-
-
-## 
-
-## 
-
-
-
