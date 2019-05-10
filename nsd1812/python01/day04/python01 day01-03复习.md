@@ -102,7 +102,167 @@ else:
 - break：结束循环，循环体内break后续代码不再执行
 - else：循环被break，else不执行；循环因为条件不再满足导致循环结束，else才执行
 
-## 
+## 列表解析
+
+```python
+>>> [5]
+[5]
+>>> [5 + 5]
+[10]
+>>> [5 + 5 for i in range(5)]
+[10, 10, 10, 10, 10]
+>>> [5 + i for i in range(1, 6)]
+[6, 7, 8, 9, 10]
+>>> [5 + i for i in range(1, 6) if i % 2 == 1]
+[6, 8, 10]
+>>> ['192.168.1.' + str(i) for i in range(1, 255)]
+```
+
+## 文件
+
+### 文件操作过程
+
+- 打开文件
+- 读写文件
+- 关闭文件
+
+### 常用的读取文本文件的方法
+
+```python
+>>> with open('/etc/passwd') as fobj:
+...     for line in fobj:
+...         print(line, end='')
+```
+
+## 常用的读取非文本文件的方法
+
+```python
+>>> with open('/etc/passwd', 'rb') as fobj:
+...     while True:
+...         data = fobj.read(4096)
+...         if not data:
+...             break
+...         print(data)
+```
+
+## 判断条件
+
+### 以数据类型作为判断条件
+
+- 数字：非0为真，0为假
+
+```python
+>>> if -0.0:
+...     print('yes')   # 不打印
+```
+
+- 其他数据类型：非空为真，空为假
+
+```python
+>>> if ' ':   # 空格也是字符，这是非空字符串
+...     print('yes')
+... 
+yes
+```
+
+## 函数
+
+函数基本的写法就是将过程代码加上名字而已
+
+```python
+fib = [0, 1]
+
+n = int(input('长度: '))
+for i in range(n - 2):
+    fib.append(fib[-1] + fib[-2])
+
+print(fib)
+```
+
+```python
+def gen_fib():
+    fib = [0, 1]
+
+    n = int(input('长度: '))
+    for i in range(n - 2):
+        fib.append(fib[-1] + fib[-2])
+
+    print(fib)
+```
+
+函数定义不会执行函数中的代码，需要调用函数才会。
+
+```python
+gen_fib()
+```
+
+函数执行的返回值需要用到关键字return，否则返回None
+
+```python
+def gen_fib():
+    fib = [0, 1]
+
+    n = int(input('长度: '))
+    for i in range(n - 2):
+        fib.append(fib[-1] + fib[-2])
+
+    print(fib)
+
+a = gen_fib()
+print(a)   # None
+```
+
+返回值由你自己决定，但是要合理
+
+```
+def gen_fib():
+    fib = [0, 1]
+
+    n = int(input('长度: '))
+    for i in range(n - 2):
+        fib.append(fib[-1] + fib[-2])
+
+    return '吃了吗'
+
+a = gen_fib()
+print(a)   # 吃了吗
+```
+
+```python
+def gen_fib():
+    fib = [0, 1]
+
+    n = int(input('长度: '))
+    for i in range(n - 2):
+        fib.append(fib[-1] + fib[-2])
+
+    return fib
+
+alist = gen_fib()  # 列表
+print(alist)
+print([i * 2 for i in alist])   
+```
+
+函数需要的数据应该通过参数进行传递。如果在函数中使用了input()，表示数据只能通过键盘输入获得，这样就把数据获取的渠道限定死了。
+
+```python
+def gen_fib(n=10):
+    fib = [0, 1]
+
+    for i in range(n - 2):
+        fib.append(fib[-1] + fib[-2])
+
+    return fib
+
+alist = gen_fib()
+print(alist)
+print([i * 2 for i in alist])
+print(gen_fib(5))
+```
+
+
+
+
 
 
 
