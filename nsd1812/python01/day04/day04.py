@@ -11,3 +11,19 @@ import shutil
 # shutil.copytree('/etc/security', '/tmp/anquan')  # cp -r
 # shutil.rmtree('/tmp/anquan')   # rm -rf
 
+alist = ['tom', 'jerry', 'bob', 'alice']
+for i in range(len(alist)):
+    print('%s: %s' % (i, alist[i]))
+
+for item in enumerate(alist):
+    print('%s: %s' % item)
+
+for ind, name in enumerate(alist):
+    print('%s: %s' % (ind, name))
+
+
+
+
+
+
+
