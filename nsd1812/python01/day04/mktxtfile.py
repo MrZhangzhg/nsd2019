@@ -11,7 +11,17 @@ def get_fname():
     return fname
 
 def get_content():
+    content = []
 
+    print('请输入内容，输入END结束。')
+    while True:
+        line = input('> ')
+        if line == 'END':
+            break
+
+        content.append(line)
+
+    return content
 
 def wfile(fname, content):
 
