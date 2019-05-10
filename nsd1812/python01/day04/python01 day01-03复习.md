@@ -260,9 +260,20 @@ print([i * 2 for i in alist])
 print(gen_fib(5))
 ```
 
+## 模块
 
+模块就是一个python程序文件。模块名是文件名去除.py后的部分。自定义的模块不要和系统模块重名。
 
+每个模块都有一个特殊的变量叫\_\_name\_\_，它的值有两个，一个是\_\_main\_\_，另一个是模块名。当程序文件直接运行的时候，它的值是\_\_main\_\_；当它被import导入时，间接运行，它的值是模块名。
 
-
-
+```shell
+[root@room8pc16 day04]# cat foo.py 
+print(__name__)
+[root@room8pc16 day04]# cat bar.py 
+import foo
+[root@room8pc16 day04]# python3 foo.py 
+__main__
+[root@room8pc16 day04]# python3 bar.py 
+foo
+```
 
