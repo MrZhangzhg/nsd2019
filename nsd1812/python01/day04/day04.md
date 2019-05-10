@@ -52,6 +52,8 @@ CompletedProcess(args=['ls', '~'], returncode=2)
 b'id: wangwu: no such user\n'
 >>> rc.stdout
 b'uid=0(root) gid=0(root) \xe7\xbb\x84=0(root)\n'
+>>> rc.stdout.decode()
+'uid=0(root) gid=0(root) 组=0(root)\n'
 ```
 
 ### 字符串分为bytes类型和str类型
