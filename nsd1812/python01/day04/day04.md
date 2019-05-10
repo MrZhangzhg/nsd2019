@@ -71,6 +71,89 @@ b'\xe8\xbe\xbe\xe5\x86\x85'
 '达内'
 ```
 
+## 语法
+
+```python
+>>> x = y = 10
+>>> a, b = 10, 20
+>>> a
+10
+>>> b
+20
+>>> c, d = (10, 20)
+>>> c
+10
+>>> d
+20
+>>> e, f = [10, 20]
+>>> e
+10
+>>> f
+20
+>>> a, b = b, a   # 将a、b的值互换
+```
+
+## 关键字
+
+```python
+>>> import keyword
+>>> keyword.kwlist
+['False', 'None', 'True', 'and', 'as', 'assert', 'break', 'class', 'continue', 'def', 'del', 'elif', 'else', 'except', 'finally', 'for', 'from', 'global', 'if', 'import', 'in', 'is', 'lambda', 'nonlocal', 'not', 'or', 'pass', 'raise', 'return', 'try', 'while', 'with', 'yield']
+```
+
+## 内建
+
+内建不是关键字，能够被覆盖，但是不推荐这么做
+
+[内置函数](https://docs.python.org/zh-cn/3/library/functions.html)
+
+```python
+>>> len('abcd')
+4
+>>> len = 10
+>>> len
+10
+>>> len('abcd')  # 现在len是10
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'int' object is not callable
+>>> 10('abcd')   # 数字是不能被调用的
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'int' object is not callable
+```
+
+## python代码布局
+
+```python
+#!/usr/bin/python3
+'文档字符串，用于在帮助中显示'
+
+# 模块导入部分
+import random
+import time
+
+# 全局变量定义
+all_chs = '0123456789qwertyuiopasdfghjklzxcvbnm'
+
+# 类的定义
+class MyClass:
+    pass
+
+# 函数定义
+def func():
+    pass
+
+# 程序主体代码
+if __name__ == '__main__':
+    mc = MyClass()
+    func()
+```
+
+
+
+
+
 
 
 ## 
