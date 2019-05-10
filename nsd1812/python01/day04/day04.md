@@ -223,6 +223,40 @@ Hello World!
 [95, 92, 91, 85, 71, 66, 61, 37, 31, 1]
 ```
 
+### 查看字符的编码值
+
+```python
+>>> ord('a')
+97
+>>> ord('A')
+65
+>>> ord('中')
+20013
+```
+
+### 字符串格式化操作符
+
+```python
+>>> '%s is %s years old' % ('bob', 22)
+'bob is 22 years old'
+>>> 'I am %s' % 'tom'   # 只有一个%s，％后面的数据不用写到元组
+'I am tom'
+>>> '%s is %d years old' % ('bob', 22)  # 整数可以用%d
+'bob is 22 years old'
+>>> '%d is %d years old' % ('bob', 22)  # 字符串不能用%d
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: %d format: a number is required, not str
+>>> '%10s%8s' % ('name', 'age')  # name占10列，age占8列
+'      name     age'
+>>> '%10s%8s' % ('tom', 22)
+'       tom      22'
+>>> '%-10s%-8s' % ('name', 'age')  # 负数表示左对齐
+'name      age     '
+>>> '%-10s%-8s' % ('tom', 22)
+'tom       22      '
+```
+
 
 
 ## 
