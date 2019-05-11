@@ -374,7 +374,44 @@ True
 {'a', 'e'}
 ```
 
+### 比较两个文件，将/tmp/mima中存在的，但是在/tmp/passwd中不存在的取出来。
 
+```shell
+[root@room8pc16 day05]# cp /etc/passwd /tmp/
+[root@room8pc16 day05]# cp /etc/passwd /tmp/mima
+[root@room8pc16 day05]# vim /tmp/mima  # 修改
+```
+
+```python
+>>> with open('/tmp/passwd') as f1:
+...     aset = set(f1)
+... 
+>>> with open('/tmp/mima') as f2:
+...     bset = set(f2)
+... 
+>>> cset = bset - aset
+>>> bset - aset
+{'hello world\n', 'my test\n'}
+>>> with open('/tmp/diff.txt', 'w') as fobj:
+...     fobj.writelines(cset)
+```
+
+```python
+>>> import random
+>>> nums = [random.randint(1, 10) for i in range(20)]
+>>> set(nums)
+{1, 2, 3, 4, 5, 6, 7, 9, 10}
+>>> list(set(nums))
+[1, 2, 3, 4, 5, 6, 7, 9, 10]
+#################################
+>>> result = []
+>>> for i in nums:
+...     if i not in result:
+...         result.append(i)
+... 
+>>> result
+[2, 10, 9, 3, 4, 1, 6, 5, 7]
+```
 
 
 
