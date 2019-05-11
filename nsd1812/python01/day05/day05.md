@@ -229,6 +229,106 @@ Bye-bye
 
 4. 填写函数代码
 
+## 字典
+
+容器、可变、映射
+
+### 创建字典
+
+```python
+>>> adict = {'name': 'bob', 'age': 25}
+>>> dict(['ab', ('name', 'alice'), ['age', '20']])
+{'a': 'b', 'name': 'alice', 'age': '20'}
+>>> {}.fromkeys(['bob', 'tom', 'jerry'], 'male')
+{'bob': 'male', 'tom': 'male', 'jerry': 'male'}
+```
+
+### 访问字典
+
+```python
+>>> adict
+{'name': 'bob', 'age': 25}
+>>> 'bob' in adict   # bob是字典的key吗？
+False
+>>> 'name' in adict
+True
+>>> for key in adict:
+...     print('%s: %s' % (key, adict[key]))
+... 
+name: bob
+age: 25
+>>> '%(name)s is %(age)s years old.' % adict
+'bob is 25 years old.'
+```
+
+### 更新字典
+
+字典的key不能重复。在进行赋值的时候，如果key不存在，则向字典加入新值；如key已存在，则更新。
+
+```python
+>>> adict
+{'name': 'bob', 'age': 25}
+>>> adict['email'] = 'bob@tedu.cn'
+>>> adict
+{'name': 'bob', 'age': 25, 'email': 'bob@tedu.cn'}
+>>> adict['age'] = 23
+>>> adict
+{'name': 'bob', 'age': 23, 'email': 'bob@tedu.cn'}
+```
+
+### del方法
+
+> del可以删除可种对象，如删除变量，列表中的某一项、字典中的某一项
+
+```python
+>>> del adict['email']
+>>> adict
+{'name': 'bob', 'age': 23}
+```
+
+### 字典的key
+
+- 字典的key必须是不可变类型：数字、字符串、元组
+- 通过hash函数判断是否可变
+
+```python
+>>> hash(10)
+10
+>>> hash('abc')
+-4683219747325187051
+>>> hash((1, 2))
+3713081631934410656
+>>> hash([1, 2])
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: unhashable type: 'list'
+```
+
+### 字典的方法
+
+```python
+>>> adict.get('name')
+'bob'
+>>> print(adict.get('qq'))
+None
+>>> adict.get('name', 'not found')  # 字典中有name，返回val
+'bob'
+>>> adict.get('qq', '123456')  # 字典中没有qq，返回123456
+'123456'
+
+>>> adict.update({'qq': '135265234', 'phone': '1508899007766'})
+>>> adict
+{'name': 'bob', 'age': 23, 'qq': '135265234', 'phone': '1508899007766'}
+>>> adict.pop('phone')
+'1508899007766'
+>>> adict.keys()
+dict_keys(['name', 'age', 'qq'])
+>>> adict.values()
+dict_values(['bob', 23, '135265234'])
+>>> adict.items()
+dict_items([('name', 'bob'), ('age', 23), ('qq', '135265234')])
+```
+
 
 
 
