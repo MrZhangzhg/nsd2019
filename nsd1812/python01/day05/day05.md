@@ -84,6 +84,34 @@ True
 4
 ```
 
+## 列表
+
+容器、可变、顺序
+
+```python
+>>> alist = [10, 80, 20, 60]
+>>> alist.append(50)  # 追加
+>>> alist.extend([15, 100])  # 将序列对象扩展到alist中
+>>> alist
+[10, 80, 20, 60, 50, 15, 100]
+>>> alist.remove(20)  # 删除元素
+>>> alist.clear(）  # 清空列表
+>>> alist.index(60)  # 取出60的下标
+2
+>>> alist.reverse()  # 反转
+>>> alist.insert(2, 60)  # 将60插入到下标为2的位置
+>>> alist
+[100, 15, 60, 50, 60, 80, 10]
+>>> alist.sort()  # 升序排列
+>>> alist.sort(reverse=True)  # 降序
+>>> alist.count(60)  # 统计60出现的次数
+2
+>>> alist.pop()  # 默认弹出最后一项
+10
+>>> alist.pop(2)  # 弹出下标为2的项目
+60
+```
+
 
 
 ## 
