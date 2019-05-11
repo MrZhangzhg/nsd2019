@@ -112,6 +112,31 @@ True
 >>> alist.clear(）  # 清空列表
 ```
 
+## 元组
+
+容器、不可变、顺序
+
+```python
+>>> atuple = (100, 80, 60, 50, 15)
+>>> atuple.count(30)
+0
+>>> atuple.index(50)
+3
+# 单元素元组，必须在结尾加逗号，否则不是元组
+>>> a = (10)
+>>> type(a)
+<class 'int'>
+>>> a
+10
+>>> a = (10,)
+>>> type(a)
+<class 'tuple'>
+>>> a
+(10,)
+>>> len(a)
+1
+```
+
 
 
 ## 
