@@ -95,7 +95,6 @@ True
 >>> alist
 [10, 80, 20, 60, 50, 15, 100]
 >>> alist.remove(20)  # 删除元素
->>> alist.clear(）  # 清空列表
 >>> alist.index(60)  # 取出60的下标
 2
 >>> alist.reverse()  # 反转
@@ -110,6 +109,7 @@ True
 10
 >>> alist.pop(2)  # 弹出下标为2的项目
 60
+>>> alist.clear(）  # 清空列表
 ```
 
 
