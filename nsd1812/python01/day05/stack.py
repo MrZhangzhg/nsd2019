@@ -1,12 +1,18 @@
+stack = []
+
 def push_it():
-    print('push')
+    item = input('数据: ').strip()
+    if item:
+        stack.append(item)
 
 def pop_it():
-    print('pop')
-
+    if stack:
+        print('\033[31;1m从表中弹出: %s\033[0m' % stack.pop())
+    else:
+        print('\033[31;1m空列表\033[0m')
 
 def view_it():
-    print('view')
+    print('\033[32;1m%s\033[0m' % stack)
 
 def show_menu():
     prompt = """(0) 压栈
