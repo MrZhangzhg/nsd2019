@@ -350,7 +350,28 @@ dict_items([('name', 'bob'), ('age', 23), ('qq', '135265234')])
 {'a'}
 >>> bset - aset
 {'d'}
+```
 
+### 集合方法
+
+```python
+>>> aset.update(['d', 'e'])
+>>> aset.add('hello')
+>>> aset.remove('hello')
+>>> aset
+{'e', 'c', 'b', 'a', 'd'}
+>>> bset
+{'b', 'c', 'd'}
+>>> aset.issuperset(bset)  # aset是bset的超集吗？
+True
+>>> bset.issubset(aset)  # bset是aset是aset的子集吗？
+True
+>>> aset.union(bset)  # aset | bset
+{'c', 'b', 'a', 'd', 'e'}
+>>> aset.intersection(bset)  # aset & bset
+{'b', 'c', 'd'}
+>>> aset.difference(bset)  # aset - bset
+{'a', 'e'}
 ```
 
 
