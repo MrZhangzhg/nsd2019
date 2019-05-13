@@ -122,6 +122,28 @@ datetime.datetime(2019, 2, 2, 10, 23, 29, 737582)
 datetime.datetime(2019, 8, 21, 12, 23, 29, 737582)
 ```
 
+## 异常处理
+
+当程序不能正常工作时，程序出现错误，它将崩溃终止执行，这时程序默认向终端抛出异常。
+
+把有可能发生异常的语句，放到try中执行。通过except捕获异常，异常不发生才需要执行的语句，放到else中。异常不管是否发生，都要执行的语句，放到finally中
+
+```python
+try:
+    nums = int(input('number: '))
+    result = 100 / nums
+except (ValueError, ZeroDivisionError):
+    print('无效输入')
+except (KeyboardInterrupt, EOFError):
+    print('\nBye-bye')
+else:
+    print(result)
+finally:
+    print('Done')
+```
+
+在编写程序时，并不总是需要写全部的语法，用的最多的组合是***try-except***和***try-finally***
+
 
 
 
