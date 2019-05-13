@@ -144,6 +144,75 @@ finally:
 
 在编写程序时，并不总是需要写全部的语法，用的最多的组合是***try-except***和***try-finally***
 
+## os模块
+
+```python
+>>> import os
+>>> os.getcwd()   # pwd
+>>> os.listdir()  # ls
+>>> os.listdir('/home')  # ls /home
+>>> os.mkdir('/tmp/demo')  # mkdir /tmp/demo
+>>> os.makedirs('/tmp/aaa/bbb/ccc') # mkdir -p /tmp/aaa/bbb/ccc
+>>> os.chdir('/tmp/demo')  # cd /tmp/demo
+>>> os.getcwd()
+'/tmp/demo'
+>>> os.listdir()
+[]
+>>> os.symlink('/etc/hosts', 'zhuji')  # ln -s
+>>> import shutil
+>>> shutil.copy('/etc/passwd', 'passwd')
+'passwd'
+>>> os.listdir()
+['zhuji', 'passwd']
+>>> os.stat('passwd')
+os.stat_result(st_mode=33188, st_ino=408593036, st_dev=64768, st_nlink=1, st_uid=0, st_gid=0, st_size=2727, st_atime=1557732810, st_mtime=1557732810, st_ctime=1557732810)
+>>> mima = os.stat('passwd')
+>>> mima.st_size
+2727
+>>> time.ctime(mima.st_atime)
+'Mon May 13 15:33:30 2019'
+>>> os.chmod('passwd', 0o755)   # chmod 755 passwd
+>>> os.chmod('passwd', 420)  # chmod 644 passwd
+>>> os.chown('passwd', 1014, 1015)  # chown
+>>> os.listdir()
+['zhuji', 'passwd']
+>>> os.remove('zhuji')  # rm -f
+>>> os.listdir()
+['passwd']
+```
+
+```python
+>>> os.getcwd()
+'/tmp/demo'
+>>> os.listdir()
+['passwd']
+>>> os.path.abspath('passwd')
+'/tmp/demo/passwd'
+
+>>> fname = os.path.abspath('passwd')
+>>> fname
+'/tmp/demo/passwd'
+>>> os.path.basename(fname)
+'passwd'
+>>> os.path.dirname(fname)
+'/tmp/demo'
+>>> os.path.split(fname)
+('/tmp/demo', 'passwd')
+>>> os.path.join('/tmp/demo', 'passwd')
+'/tmp/demo/passwd'
+
+>>> os.path.isdir('/etc/abc')  # [ -d /etc/abc ]
+False
+>>> os.path.isfile('/etc/hosts') # [ -f /etc/hosts ]
+True
+>>> os.path.islink('/etc/grub2.cfg')  # 是链接吗？
+True
+>>> os.path.ismount('/boot')  # 是挂载点吗？
+True
+>>> os.path.exists('/etc')   # 存在吗？
+True
+```
+
 
 
 
