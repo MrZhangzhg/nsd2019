@@ -1,22 +1,87 @@
 # py2_day01
 
-### 数据分类
+## 数据分类
 
 ### 存储
 
 - 标量：数字、字符串
 - 容器：列表、元组、字典
 
-## 更新
+### 更新
 
 - 可变：列表、字典
 - 不可变：数字、字符串、元组
 
-## 访问
+### 访问
 
 - 直接：数字
 - 顺序：字符串、列表、元组
 - 映射：字典
+
+## 时间
+
+### 时间表示方式
+
+#### 时间戳
+
+自1970-1-1 00:00:00到某一时间点之间的秒数
+
+```python
+>>> import time
+>>> time.time()
+1557710785.3078065
+```
+
+#### UTC：世界协调时
+
+字符串时间。以英国格林威治这个城市所在的经度为起始点，每隔15度角成为一个时区。
+
+```python
+>>> time.ctime()
+'Mon May 13 09:33:16 2019'
+```
+
+#### struct_time：九元组
+
+```python
+>>> time.localtime()
+time.struct_time(tm_year=2019, tm_mon=5, tm_mday=13, tm_hour=9, tm_min=34, tm_sec=11, tm_wday=0, tm_yday=133, tm_isdst=0)
+>>> t1 = time.localtime()
+>>> t1.tm_year
+2019
+>>> t1.tm_hour
+9
+```
+
+### time模块
+
+```python
+>>> import time
+>>> time.time()  # 自1970-1-1 00:00:00到time.time()之间的秒数
+1557711710.3989246
+>>> time.sleep(3)  # 睡眠
+>>> time.strftime('%Y-%m-%d %H:%M:%S')
+'2019-05-13 09:51:36'
+>>> time.strftime('%a %A')  # 周几
+'Mon Monday'
+
+# 给定字符串和时间样式，将字符串转换成struct_time
+>>> t1 = time.strptime('2019-05-13 09:51:36', '%Y-%m-%d %H:%M:%S')
+>>> t1
+time.struct_time(tm_year=2019, tm_mon=5, tm_mday=13, tm_hour=9, tm_min=51, tm_sec=36, tm_wday=0, tm_yday=133, tm_isdst=-1)
+>>> t2 = time.localtime()
+>>> t2
+time.struct_time(tm_year=2019, tm_mon=5, tm_mday=13, tm_hour=9, tm_min=56, tm_sec=58, tm_wday=0, tm_yday=133, tm_isdst=0)
+>>> t2 > t1
+True
+>>> t2 < t1
+False
+
+```
+
+
+
+
 
 
 
