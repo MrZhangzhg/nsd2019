@@ -213,6 +213,39 @@ True
 True
 ```
 
+## pickle模块
+
+常规的文件，只能写入字符串，不能写其他数据类型
+
+```python
+>>> f = open('/tmp/data', 'w')
+>>> f.write('ni hao\n')
+7
+>>> f.write({'name': 'bob', 'age': 20})
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: write() argument must be str, not dict
+>>> f.close()
+```
+
+pickle模块可以把任意的数据类型写入到文件，还可以无损地取出来。
+
+```python
+>>> import pickle
+>>> shop_list = {'eggs': 2, 'apple': 5, 'banana': 5}
+>>> with open('/tmp/shop.data', 'wb') as fobj:
+...     pickle.dump(shop_list, fobj)
+
+>>> with open('/tmp/shop.data', 'rb') as fobj:
+...     mydict = pickle.load(fobj)
+>>> type(mydict)
+<class 'dict'>
+>>> mydict
+{'eggs': 2, 'apple': 5, 'banana': 5}
+>>> mydict['apple']
+5
+```
+
 
 
 
