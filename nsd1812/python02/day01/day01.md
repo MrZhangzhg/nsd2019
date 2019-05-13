@@ -78,6 +78,32 @@ True
 False
 ```
 
+### datetime模块
+
+```python
+>>> from datetime import datetime
+#返回的对象，各部分是年月日时分秒毫秒
+>>> datetime.now()
+datetime.datetime(2019, 5, 13, 10, 43, 57, 336172)
+
+>>> t = datetime.now()
+>>> t.year
+2019
+>>> t.month
+5
+>>> t.day
+13
+>>> t.hour
+10
+>>> t.minute
+44
+>>> t.second
+39
+>>> t.microsecond
+319444
+
+```
+
 
 
 
