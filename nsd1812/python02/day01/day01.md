@@ -102,6 +102,16 @@ datetime.datetime(2019, 5, 13, 10, 43, 57, 336172)
 >>> t.microsecond
 319444
 
+>>> t.strftime('%Y%m%d %H:%M:%S')
+'20190513 10:44:39'
+>>> datetime.strptime('2019-05-13 12:00:00', '%Y-%m-%d %H:%M:%S')
+datetime.datetime(2019, 5, 13, 12, 0)
+
+>>> t1 = datetime(2019, 5, 13)
+>>> t1
+datetime.datetime(2019, 5, 13, 0, 0)
+
+
 ```
 
 
