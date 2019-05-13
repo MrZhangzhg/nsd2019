@@ -76,7 +76,6 @@ time.struct_time(tm_year=2019, tm_mon=5, tm_mday=13, tm_hour=9, tm_min=56, tm_se
 True
 >>> t2 < t1
 False
-
 ```
 
 
