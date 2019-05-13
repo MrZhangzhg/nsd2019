@@ -275,6 +275,3 @@ records = [
    ```python
    records[-1][-2]
    ```
-
-
-

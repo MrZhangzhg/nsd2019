@@ -1,3 +1,6 @@
+import os
+import pickle
+
 def save(fname):
 
 
@@ -15,7 +18,13 @@ def show_menu():
 (3) 退出
 请选择(0/1/2/3): '''
     fname = 'account.data'
-    
+    if not os.path.exists(fname):
+        init_data = [
+            ['2019-05-13', 0, 0, 10000, 'init'],
+        ]
+        with open(fname, 'wb') as fobj:
+            pickle.dump(init_data, fobj)
+
     while True:
         choice = input(prompt).strip()
         if choice not in ['0', '1', '2', '3']:
