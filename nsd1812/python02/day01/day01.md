@@ -110,8 +110,16 @@ datetime.datetime(2019, 5, 13, 12, 0)
 >>> t1 = datetime(2019, 5, 13)
 >>> t1
 datetime.datetime(2019, 5, 13, 0, 0)
+```
 
-
+```python
+>>> from datetime import datetime, timedelta
+>>> t1 = datetime.now()
+>>> d1 = timedelta(days=100, hours=1)
+>>> t1 - d1  # 100天零1小时之前的时间
+datetime.datetime(2019, 2, 2, 10, 23, 29, 737582)
+>>> t1 + d1  # 100天零1小时之后的时间
+datetime.datetime(2019, 8, 21, 12, 23, 29, 737582)
 ```
 
 
