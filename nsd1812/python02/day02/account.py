@@ -3,8 +3,13 @@ import pickle
 from time import strftime
 
 def save(fname):
-    amount = int(input('金额: '))
-    comment = input('备注: ')
+    try:
+        amount = int(input('金额: '))
+        comment = input('备注: ')
+    except (KeyboardInterrupt, EOFError, ValueError):
+        print('\n无效输入，返回。')
+        return
+
     date = strftime('%Y-%m-%d')
     with open(fname, 'rb') as fobj:
         records = pickle.load(fobj)
@@ -16,8 +21,13 @@ def save(fname):
         pickle.dump(records, fobj)
 
 def cost(fname):
-    amount = int(input('金额: '))
-    comment = input('备注: ')
+    try:
+        amount = int(input('金额: '))
+        comment = input('备注: ')
+    except (KeyboardInterrupt, EOFError, ValueError):
+        print('\n无效输入，返回。')
+        return
+
     date = strftime('%Y-%m-%d')
     with open(fname, 'rb') as fobj:
         records = pickle.load(fobj)
@@ -53,7 +63,11 @@ def show_menu():
             pickle.dump(init_data, fobj)
 
     while True:
-        choice = input(prompt).strip()
+        try:
+            choice = input(prompt).strip()
+        except (KeyboardInterrupt, EOFError):
+            choice = '3'
+
         if choice not in ['0', '1', '2', '3']:
             print('无效的选择，请重试。')
             continue
