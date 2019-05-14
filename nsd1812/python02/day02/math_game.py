@@ -1,5 +1,20 @@
+from random import randint, choice
+
 def exam():
-    print('exam')
+    nums = [randint(1, 100) for i in range(2)]
+    nums.sort(reverse=True)  # 降序排列
+    op = choice('+-')
+    if op == '+':
+        result = nums[0] + nums[1]
+    else:
+        result = nums[0] - nums[1]
+
+    prompt = '%s %s %s = ' % (nums[0], op, nums[1])
+    answer = int(input(prompt))
+    if answer == result:
+        print('Very Good!!!')
+    else:
+        print('Wrong Answer!!!')
 
 
 if __name__ == '__main__':
