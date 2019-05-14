@@ -66,7 +66,22 @@ bob is 20 years old
 {}
 >>> func2(name='bob', age=20)
 {'name': 'bob', 'age': 20}
+```
 
+调用函数时，如果参数有\*号，表示把参数拆开。
+
+```python
+>>> def add(x, y):
+...     print(x + y)
+... 
+>>> nums = [10, 20]
+>>> num_dict = {'x': 100, 'y': 200}
+>>> add(nums)  # Error，因为nums传给了x，y没有得到值
+>>> add(num_dict)  # Error，同上
+>>> add(*nums)  # nums拆成了10, 20
+30
+>>> add(**num_dict)  # 拆成了x=100, y=200
+300
 ```
 
 
