@@ -220,6 +220,34 @@ TypeError: 'int' object is not callable
 
 假定第一个数是中间值。把比这个数小的放到smaller列表，把比它大的数放到larger列表。最后把这三个部分拼接起来。smaller和larger采用相同的办法继续排序，直到列表的长度是0或1结束。
 
+### 生成器
+
+生成器本质上也是函数。和普通函数不同，普通函数只能通过return返回一个值，但是生成器可以通过yield返回多个中间值。
+
+生成器对象只能使用一次。
+
+```python
+>>> def mygen():
+...     yield 'hello'
+...     a = 10 + 20
+...     yield a
+...     yield 100
+... 
+>>> mg
+<generator object mygen at 0x7faa8cf631a8>
+>>> list(mg)
+['hello', 30, 100]
+>>> list(mg)
+[]
+>>> mg = mygen()
+>>> for i in mg:
+...     print(i)
+... 
+hello
+30
+100
+```
+
 
 
 
