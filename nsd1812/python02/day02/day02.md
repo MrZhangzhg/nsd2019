@@ -179,6 +179,28 @@ Traceback (most recent call last):
 TypeError: 'int' object is not callable
 ```
 
+### 偏函数
+
+可以理解为，改造现有函数，将现有函数中的一些参数赋值，生成新函数。
+
+```python
+>>> def add(a, b, c, d, e):
+...     return a + b + c + d + e
+... 
+>>> add(10, 20, 30, 40, 5)
+105
+>>> add(10, 20, 30, 40, 8)
+108
+>>> add(10, 20, 30, 40, 13)
+113
+>>> from functools import partial
+>>> myadd = partial(add, 10, 20, 30, 40)
+>>> myadd(5)
+105
+>>> myadd(8)
+108
+```
+
 
 
 
