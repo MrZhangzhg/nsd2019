@@ -38,10 +38,36 @@ bob is 20 years old
 >>> get_age(20, name='bob')  # Error，name得到了多个值
 >>> get_age('bob', age=20)   # OK
 bob is 20 years old
-
 ```
 
+### 参数组
 
+如果函数的参数个数是不固定的，可以使用参数组接收参数
+
+- 在参数名前加\*表示参数是元组
+- 在参数名前加\*\*表示参数是字典
+
+```python
+>>> def func1(*args):
+...     print(args)
+... 
+>>> func1()
+()
+>>> func1('bob')
+('bob',)
+>>> func1('bob', 123)
+('bob', 123)
+>>> func1('bob', 123, 'hello', 'aaa')
+('bob', 123, 'hello', 'aaa')
+>>> def func2(**kwargs):
+...     print(kwargs)
+... 
+>>> func2()
+{}
+>>> func2(name='bob', age=20)
+{'name': 'bob', 'age': 20}
+
+```
 
 
 
