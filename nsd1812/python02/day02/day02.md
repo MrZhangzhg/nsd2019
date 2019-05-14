@@ -101,6 +101,25 @@ Continute(y/n)? n
 Bye-bye
 ```
 
+### 匿名函数
+
+如果函数的代码块非常简单，只有一行，可以使用匿名函数。
+
+匿名函数使用lambda关键字定义。
+
+```python
+>>> def add(x, y):
+...     return x + y
+... 
+>>> lambda x, y: x + y
+<function <lambda> at 0x7f0b96735c80>
+>>> 
+>>> myadd = lambda x, y: x + y
+>>> myadd(10, 20)
+30
+>>> 
+```
+
 
 
 
