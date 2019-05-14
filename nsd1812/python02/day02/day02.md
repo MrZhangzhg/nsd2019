@@ -248,6 +248,21 @@ hello
 100
 ```
 
+生成器还可以使用生成器表达式
+
+```python
+>>> from random import randint
+>>> nums = (randint(1, 100) for i in range(10))
+>>> nums
+<generator object <genexpr> at 0x7faa8cf63eb8>
+>>> list(nums)
+[20, 97, 30, 67, 82, 99, 46, 81, 35, 71]
+>>> ips = ('192.168.1.%s' % i for i in range(1, 255))
+>>> ips
+>>> for ip in ips:
+...     print(ip)
+```
+
 
 
 
