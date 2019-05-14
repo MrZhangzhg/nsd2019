@@ -1,14 +1,41 @@
 import os
 import pickle
+from time import strftime
 
 def save(fname):
-    print('save')
+    amount = int(input('金额: '))
+    comment = input('备注: ')
+    date = strftime('%Y-%m-%d')
+    with open(fname, 'rb') as fobj:
+        records = pickle.load(fobj)
+        balance = records[-1][-2] + amount
+
+    record = [date, amount, 0, balance, comment]
+    records.append(record)
+    with open(fname, 'wb') as fobj:
+        pickle.dump(records, fobj)
 
 def cost(fname):
-    print('cost')
+    amount = int(input('金额: '))
+    comment = input('备注: ')
+    date = strftime('%Y-%m-%d')
+    with open(fname, 'rb') as fobj:
+        records = pickle.load(fobj)
+        balance = records[-1][-2] - amount
+
+    record = [date, 0, amount, balance, comment]
+    records.append(record)
+    with open(fname, 'wb') as fobj:
+        pickle.dump(records, fobj)
 
 def query(fname):
-    print('query')
+    print('%-12s%-8s%-8s%-12s%-20s' % ('date', 'save', 'cost', 'balance', 'comment'))
+
+    with open(fname, 'rb') as fobj:
+        records = pickle.load(fobj)
+
+    for record in records:
+        print('%-12s%-8s%-8s%-12s%-20s' % tuple(record))
 
 def show_menu():
     cmds = {'0': save, '1': cost, '2': query}
