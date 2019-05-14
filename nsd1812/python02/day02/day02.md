@@ -84,6 +84,23 @@ bob is 20 years old
 300
 ```
 
+### 加减法小程序
+
+```shell
+5 + 5 = 10
+Very Good!!!
+Continute(y/n)? y
+85 - 23 = 1
+Wrong answer.
+85 - 23 = 10
+Wrong answer.
+85 - 23 = 30
+Wrong answer.
+85 - 23 = 62  (系统给出正确答案)
+Continute(y/n)? n
+Bye-bye
+```
+
 
 
 
