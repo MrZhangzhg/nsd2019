@@ -13,7 +13,12 @@ def exam():
     counter = 0
 
     while counter < 3:
-        answer = int(input(prompt))
+        try:
+            answer = int(input(prompt))
+        except:   # 不指定异常可以捕获所有异常，但是不推荐
+            print()
+            continue
+
         if answer == result:
             print('Very Good!!!')
             break
@@ -27,7 +32,13 @@ if __name__ == '__main__':
     while True:
         exam()
         # 删除用户输入的多余空格，并取出第1个字符
-        yn = input('Continue(y/n)? ').strip()[0]
+        try:
+            yn = input('Continue(y/n)? ').strip()[0]
+        except IndexError:
+            yn = 'y'
+        except (KeyboardInterrupt, EOFError):
+            yn = 'n'
+
         if yn in 'nN':
             print('\nBye-bye')
             break
