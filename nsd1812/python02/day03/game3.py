@@ -21,4 +21,3 @@ if __name__ == '__main__':
     gl.attack()
     tm.speak('我去前面用脸探探路')
     tm.attack()
-
