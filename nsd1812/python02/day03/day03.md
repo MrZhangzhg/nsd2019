@@ -63,6 +63,29 @@ python导入模块时，将会从以下两个位置搜索模块：
 'e10adc3949ba59abbe56e057f20f883e'
 ```
 
+### tarfile模块
+
+实现归档压缩功能，支持gzip、bzip2、lzma格式的压缩。
+
+```python
+>>> import tarfile
+>>> tar = tarfile.open('/tmp/demo/myfile.tar.gz', 'w:gz')
+>>> tar.add('/etc/security')
+>>> tar.add('/etc/hosts')
+>>> tar.close()
+
+>>> tar = tarfile.open('/tmp/demo/myfile.tar.gz', 'r')
+# 不指定解压目标，默认解压到当前目录
+>>> tar.extractall('/tmp/demo')
+>>> tar.close()
+```
+
+
+
+
+
+
+
 
 
 
