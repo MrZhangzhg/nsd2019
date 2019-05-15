@@ -80,6 +80,40 @@ python导入模块时，将会从以下两个位置搜索模块：
 >>> tar.close()
 ```
 
+### os.walk方法
+
+```python
+>>> os.walk('/tmp/demo/security')
+<generator object walk at 0x7f5a2cccfe60>
+>>> list(os.walk('/tmp/demo/security'))
+[('/tmp/demo/security', ['console.apps', 'console.perms.d', 'limits.d', 'namespace.d'], ['access.conf', 'chroot.conf', 'console.handlers', 'console.perms', 'group.conf', 'limits.conf', 'namespace.conf', 'namespace.init', 'opasswd', 'pam_env.conf', 'sepermit.conf', 'time.conf', 'pwquality.conf']), ('/tmp/demo/security/console.apps', [], ['config-util', 'xserver', 'liveinst', 'setup']), ('/tmp/demo/security/console.perms.d', [], []), ('/tmp/demo/security/limits.d', [], ['20-nproc.conf']), ('/tmp/demo/security/namespace.d', [], [])]
+>>> a = list(os.walk('/tmp/demo/security'))
+>>> len(a)
+5
+>>> a[0]
+('/tmp/demo/security', ['console.apps', 'console.perms.d', 'limits.d', 'namespace.d'], ['access.conf', 'chroot.conf', 'console.handlers', 'console.perms', 'group.conf', 'limits.conf', 'namespace.conf', 'namespace.init', 'opasswd', 'pam_env.conf', 'sepermit.conf', 'time.conf', 'pwquality.conf'])
+>>> a[1]
+('/tmp/demo/security/console.apps', [], ['config-util', 'xserver', 'liveinst', 'setup'])
+```
+
+os.walk()方法返回的数据由多个元组构成。每个元组又有三项，这三项分别是：路径字符串、该路径下的目录列表、该路径下的文件列表。
+
+```python
+>>> list(os.walk('/tmp/demo/security'))
+[
+    ('父目录', ['父目录下的子目录列表'], ['父目录下的文件列表']),
+    ('子目录1', ['子目录1下的孙目录列表'], ['子目录下的文件列表']),
+    ('子目录2', ['子目录2下的孙目录列表'], ['子目录下的文件列表']),
+]
+```
+
+```python
+>>> for path, folders, files in os.walk('/tmp/demo/security'):
+...     for file in files:
+...         os.path.join(path, file)
+
+```
+
 
 
 
