@@ -111,10 +111,48 @@ os.walk()方法返回的数据由多个元组构成。每个元组又有三项�
 >>> for path, folders, files in os.walk('/tmp/demo/security'):
 ...     for file in files:
 ...         os.path.join(path, file)
+```
+
+## OOP：面向对象的编程
+
+如果使用以前所学知识，可以定义字典保存人物属性，创建函数定义人物的行为：
+
+```python
+lvbu = {'name': '吕布', 'weapon': '方天画戟', 'sex': '男'}
+def walk():
+    pass
+def attack():
+    pass
+```
+
+OOP的思想，是将现实世界的物体抽象成一个类class，这个类中有属性和行为，将数据和行为融合到一起。相当于创建了一个蓝图，然后再根据蓝图创建出具体的实例。
+
+```python
+class GameCharacter:
+    def __init__(self, name, weapon):
+        self.name = name
+        self.weapon = weapon
+    def speak(self, word):
+        print('我是%s, %s' % (self.name, word))
+
+>>> lvbu = GameCharacter('吕布', '方天画戟')
+>>> lvbu.name
+'吕布'
+>>> lvbu.weapon
+'方天画戟'
+>>> lvbu.speak('人在塔在')
+我是吕布, 人在塔在
+>>> guanyu = GameCharacter('关羽', '青龙偃月刀')
+>>> guanyu.name
+'关羽'
+>>> guanyu.weapon
+'青龙偃月刀'
+>>> guanyu.speak('呵呵')
+我是关羽, 呵呵
 
 ```
 
-
+\_\_init\_\_方法一般用于为实例对象绑定属性。当创建实例的时候，_\_init\_\_方法自动调用，实例（lvbu）会作为第一个参数传递。self不是关键字，java用this，但是都不是必须的名字，可以随意更换。一旦创建了实例，实例就会自动拥有类中定义的属性和方法（函数）。
 
 
 
