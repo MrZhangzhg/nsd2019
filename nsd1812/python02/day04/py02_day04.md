@@ -168,3 +168,40 @@ MariaDB [(none)]> CREATE DATABASE nsd1812 DEFAULT CHARSET utf8;
 
 工资表：工资日、员工ID、基本工资、奖金
 
+## sqlalchemy
+
+可以操作各种数据库，如mysql、sql server、oracle等。它不需要书写sql语句，可以通过简单的python语法，实现对数据库的增删改查。
+
+### 安装
+
+```shell
+[root@room8pc16 zzg_pypkgs]# cd sqlalchemy_pkgs/
+[root@room8pc16 sqlalchemy_pkgs]# pip3 install *
+```
+
+### ORM：Object Relationship Mapping
+
+对象关系映射。
+
+- 对象：指OOP编程的方式
+- 关系：关系型数据库
+- 将python中的class映射到数据库的表
+- class中的类变量映射到数据库表中的每个字段
+- class的每个实例映射到数据库表中的每行记录
+
+### 创建数据库
+
+```sql
+MariaDB [nsd1812]> CREATE DATABASE tedu1812 DEFAULT CHARSET utf8;
+```
+
+
+
+
+
+
+
+
+
+
+
