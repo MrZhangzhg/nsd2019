@@ -77,6 +77,38 @@ Counter({'1.1.1.1': 4, '1.1.1.2': 3, '1.1.1.3': 2})
 
 
 
+## pymysql模块
+
+### 更改安装源
+
+python软件包的官方站点：https://pypi.org/
+
+通过国内镜像站点安装软件包的设置：
+
+```shell
+[root@room8pc16 day04]# mkdir ~/.pip/
+[root@room8pc16 day04]# vim ~/.pip/pip.conf 
+[global]
+index-url = http://mirrors.163.com/pypi/simple/
+[install]  
+trusted-host=mirrors.163.com
+```
+
+### 安装pymysql模块
+
+```shell
+# 在线安装
+[root@room8pc16 day04]# pip install pymysql
+
+# 离线安装 
+[root@room8pc16 zzg_pypkgs]# cd pymysql_pkgs/
+[root@room8pc16 pymysql_pkgs]# pip3 install *
+```
+
+
+
+
+
 
 
 
