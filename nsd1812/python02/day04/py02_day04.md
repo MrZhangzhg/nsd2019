@@ -34,6 +34,18 @@ None
 ... 
 foo
 foo
+
+>>> re.split('-|\.', 'hello-world.tar.gz')
+['hello', 'world', 'tar', 'gz']
+>>> re.sub('X', 'tom', 'Hi X. Nice to meet you X.')
+'Hi tom. Nice to meet you tom.'
+
+# 当有大量内容需要匹配的时候，先把正则表达式的模式编译一下，将会有更好的执行效率
+>>> patt = re.compile('f..')
+>>> patt.search('seafood')
+<_sre.SRE_Match object; span=(3, 6), match='foo'>
+>>> patt.findall('seafood is food')
+['foo', 'foo']
 ```
 
 
