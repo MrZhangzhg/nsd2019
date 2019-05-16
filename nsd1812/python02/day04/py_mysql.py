@@ -11,12 +11,18 @@ conn = pymysql.connect(
 
 cursor = conn.cursor()
 
-create_dep = '''
-'''
-create_emp = '''
-'''
-create_sal = '''
-'''
+create_dep = '''CREATE TABLE departments(
+dep_id INT, dep_name VARCHAR(50),
+PRIMARY KEY(dep_id)
+)'''
+create_emp = '''CREATE TABLE employees(
+emp_id INT, emp_name VARCHAR(50), email VARCHAR(50), dep_id INT,
+PRIMARY KEY(emp_id), FOREIGN KEY(dep_id) REFERENCES departments(dep_id)
+)'''
+create_sal = '''CREATE TABLE salary(
+id INT, date DATE, emp_id INT, basic INT, awards INT,
+PRIMARY KEY(id), FOREIGN KEY(emp_id) REFERENCES employees(emp_id)
+)'''
 
 cursor.execute(create_dep)
 cursor.execute(create_emp)
