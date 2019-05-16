@@ -31,11 +31,21 @@ cursor = conn.cursor()
 # cursor.execute(create_sal)
 #############################################
 # 插入语句
-insert_dep = 'INSERT INTO departments VALUES(%s, %s)'
-cursor.executemany(insert_dep, [(1, '人事部')])
-deps = [(2, '财务部'), (3, '运维部'), (4, '开发部')]
-cursor.executemany(insert_dep, deps)
+# insert_dep = 'INSERT INTO departments VALUES(%s, %s)'
+# cursor.executemany(insert_dep, [(1, '人事部')])
+# deps = [(2, '财务部'), (3, '运维部'), (4, '开发部'), (5, '测试部'), (6, '市场部')]
+# cursor.executemany(insert_dep, deps)
 #############################################
+# 基础查询
+select1 = 'SELECT * FROM departments'
+cursor.execute(select1)
+print(cursor.fetchone())
+print('*' * 20)
+print(cursor.fetchmany(2))
+print('*' * 20)
+print(cursor.fetchall())
+#############################################
+
 
 
 
