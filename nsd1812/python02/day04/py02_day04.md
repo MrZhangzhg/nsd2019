@@ -48,6 +48,33 @@ foo
 ['foo', 'foo']
 ```
 
+### Counter对象
+
+```python
+>>> from collections import Counter
+>>> c = Counter()
+>>> c.update('1.1.1.1')
+>>> c
+Counter({'1': 4, '.': 3})
+>>> c1 = Counter()
+>>> c1.update(['1.1.1.1'])
+>>> c1
+Counter({'1.1.1.1': 1})
+>>> c1.update(['1.1.1.1'])
+>>> c1.update(['1.1.1.1'])
+>>> c1.update(['1.1.1.1'])
+>>> c1.update(['1.1.1.2'])
+>>> c1.update(['1.1.1.2'])
+>>> c1.update(['1.1.1.2'])
+>>> c1.update(['1.1.1.3'])
+>>> c1.update(['1.1.1.3'])
+>>> c1
+Counter({'1.1.1.1': 4, '1.1.1.2': 3, '1.1.1.3': 2})
+>>> c1.most_common(2)
+[('1.1.1.1', 4), ('1.1.1.2', 3)]
+
+```
+
 
 
 
