@@ -46,14 +46,22 @@ cursor = conn.cursor()
 # print(cursor.fetchall())
 #############################################
 # 移动游标
-select1 = 'SELECT * FROM departments ORDER BY dep_id'
-cursor.execute(select1)
-cursor.scroll(2, mode='relative')  # 以相对方式向下移动2行记录
-print(cursor.fetchone())
-print('*' * 20)
-cursor.scroll(0, mode='absolute')  # 以绝对方式移动到第1行记录
-print(cursor.fetchone())
+# select1 = 'SELECT * FROM departments ORDER BY dep_id'
+# cursor.execute(select1)
+# cursor.scroll(2, mode='relative')  # 以相对方式向下移动2行记录
+# print(cursor.fetchone())
+# print('*' * 20)
+# cursor.scroll(0, mode='absolute')  # 以绝对方式移动到第1行记录
+# print(cursor.fetchone())
 #############################################
+# 修改
+# update1 = 'UPDATE departments set dep_name=%s WHERE dep_name=%s'
+# cursor.execute(update1, ('人力资源部', '人事部'))
+#############################################
+# 删除
+delete1 = 'DELETE FROM departments WHERE dep_name=%s'
+cursor.execute(delete1, ('市场部',))
+
 
 
 
