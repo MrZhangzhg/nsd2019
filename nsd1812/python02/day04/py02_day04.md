@@ -105,9 +105,17 @@ trusted-host=mirrors.163.com
 [root@room8pc16 pymysql_pkgs]# pip3 install *
 ```
 
+### 配置mysql或mariadb
 
+1. 安装
+2. 启动
+3. 修改密码
+4. 创建数据库
 
-
+```shell
+[root@room8pc16 ~]# mysql -uroot -ptedu.cn
+MariaDB [(none)]> CREATE DATABASE nsd1812 DEFAULT CHARSET utf8;
+```
 
 
 
