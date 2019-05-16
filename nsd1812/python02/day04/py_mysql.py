@@ -37,15 +37,23 @@ cursor = conn.cursor()
 # cursor.executemany(insert_dep, deps)
 #############################################
 # 基础查询
-select1 = 'SELECT * FROM departments'
+# select1 = 'SELECT * FROM departments'
+# cursor.execute(select1)
+# print(cursor.fetchone())
+# print('*' * 20)
+# print(cursor.fetchmany(2))
+# print('*' * 20)
+# print(cursor.fetchall())
+#############################################
+# 移动游标
+select1 = 'SELECT * FROM departments ORDER BY dep_id'
 cursor.execute(select1)
+cursor.scroll(2, mode='relative')  # 以相对方式向下移动2行记录
 print(cursor.fetchone())
 print('*' * 20)
-print(cursor.fetchmany(2))
-print('*' * 20)
-print(cursor.fetchall())
+cursor.scroll(0, mode='absolute')  # 以绝对方式移动到第1行记录
+print(cursor.fetchone())
 #############################################
-
 
 
 
