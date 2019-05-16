@@ -98,7 +98,7 @@ trusted-host=mirrors.163.com
 
 ```shell
 # 在线安装
-[root@room8pc16 day04]# pip install pymysql
+[root@room8pc16 day04]# pip3 install pymysql
 
 # 离线安装 
 [root@room8pc16 zzg_pypkgs]# cd pymysql_pkgs/
