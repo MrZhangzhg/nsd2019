@@ -113,6 +113,8 @@ trusted-host=mirrors.163.com
 4. 创建数据库
 
 ```shell
+[root@room8pc16 ~]# yum install -y mariadb-server
+[root@room8pc16 ~]# systemctl start mariadb
 [root@room8pc16 ~]# mysql -uroot -ptedu.cn
 MariaDB [(none)]> CREATE DATABASE nsd1812 DEFAULT CHARSET utf8;
 ```
