@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, Column, Integer, String
+from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 
 engine = create_engine(
@@ -14,6 +14,15 @@ class Department(Base):
     __tablename__ = 'departments'  # 定义库中的表名
     dep_id = Column(Integer, primary_key=True)
     dep_name = Column(String(50), unique=True, nullable=False)
+
+class Employee(Base):
+    __tablename__ = 'employees'
+    emp_id = Column(Integer, primary_key=True)
+    emp_name = Column(String(50), nullable=False)
+    email = Column(String(50), unique=True, nullable=False)
+    dep_id = Column(Integer, ForeignKey('departments.dep_id'))
+
+
 
 if __name__ == '__main__':
     # 如果库中没有相关的表则创建，有的话不会创建
