@@ -27,7 +27,7 @@ systemd接管。如果systemd发现子进程是僵尸进程，就会处理。
 >>> data = html.read()
 >>> with open('/tmp/fork.jpg', 'wb') as fobj:
 ...     fobj.write(data)
-[root@room8pc16 day01]# eog /tmp/fork.jpg 
+[root@room8pc16 day01]# eog /tmp/fork.jpg
 ```
 
 
