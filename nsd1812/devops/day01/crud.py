@@ -78,11 +78,20 @@ session = Session()
 # for dep in qset4:  # 遍历实例列表中的每个实例
 #     print('%s: %s' % (dep.dep_id, dep.dep_name))
 #################################
-qset5 = session.query(Department).filter(Department.dep_id==2)
-print(qset5)
-print(qset5.all())  # all()返回列表
-dep = qset5.one()  # 返回一个实例，如果返回值不是一个，将报错
-print(dep.dep_id, dep.dep_name)
+# qset5 = session.query(Department).filter(Department.dep_id==2)
+# print(qset5)
+# print(qset5.all())  # all()返回列表
+# dep = qset5.one()  # 返回一个实例，如果返回值不是一个，将报错
+# print(dep.dep_id, dep.dep_name)
+#################################
+# qset6 = session.query(Department).filter(Department.dep_id>1).filter(Department.dep_id<4)
+# for dep in qset6:
+#     print(dep.dep_id, dep.dep_name, sep=', ')
+#################################
+qset7 = session.query(Employee).filter(Employee.email.like('%@qq.com'))
+for emp in qset7:
+    print(emp.emp_name, emp.email)
+
 
 
 
