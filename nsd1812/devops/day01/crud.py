@@ -96,10 +96,28 @@ session = Session()
 # for dep in qset8:
 #     print(dep.dep_id, dep.dep_name)
 #################################
-qset9 = session.query(Department).filter(Department.dep_name.isnot(None))
-for dep in qset9:
-    print(dep.dep_id, dep.dep_name)
-
+# qset9 = session.query(Department).filter(Department.dep_name.isnot(None))
+# for dep in qset9:
+#     print(dep.dep_id, dep.dep_name)
+#################################
+# query中先写的是Employee，join中要写Department
+# qset10 = session.query(Employee.emp_name, Department.dep_name).join(Department)
+# for row in qset10:
+#     print(row)
+#################################
+# qset11 = session.query(Department.dep_name, Employee.emp_name).join(Employee)
+# for row in qset11:
+#     print(row)
+#################################
+# 修改数据，先找到实例，再给实例的属性重新赋值
+# qset12 = session.query(Department).filter(Department.dep_name=='人事部')
+# hr = qset12.one()
+# hr.dep_name='人力资源部'
+#################################
+# 删除，只要找到实例，然后删除即可
+qset13 = session.query(Employee).filter(Employee.emp_id==6)
+emp = qset13.one()
+session.delete(emp)
 
 
 #################################
