@@ -53,14 +53,30 @@ session = Session()
 # )
 # session.add_all([wt, zj, sy, wjy, kzw, hzq, lh])
 #################################
-qset1 = session.query(Department)
-print(qset1)  # qset1只是个sql语句，当取具体值的时候，才真正查数据库
-# qset1.all()取出全部的部门，因为查询的是类名，所以返回所有的实例组成的列表
+# qset1 = session.query(Department)
+# print(qset1)  # qset1只是个sql语句，当取具体值的时候，才真正查数据库
+# # qset1.all()取出全部的部门，因为查询的是类名，所以返回所有的实例组成的列表
+# print('*' * 30)
+# print(qset1.all())
+# print('*' * 30)
+# for dep in qset1:  # 遍历实例列表中的每个实例
+#     print('%s: %s' % (dep.dep_id, dep.dep_name))
+#################################
+# qset2 = session.query(Department).order_by(Department.dep_id)
+# for dep in qset2:  # 遍历实例列表中的每个实例
+#     print('%s: %s' % (dep.dep_id, dep.dep_name))
+#################################
+qset3 = session.query(Employee.emp_name, Employee.email)
+# 查询的参数是字段，返回的结果是元组
+for item in qset3:
+    print(item)
 print('*' * 30)
-print(qset1.all())
-print('*' * 30)
-for dep in qset1:  # 遍历实例列表中的每个实例
-    print('%s: %s' % (dep.dep_id, dep.dep_name))
+for name, email in qset3:
+    print('%s: %s' % (name, email))
+#################################
+
+
+
 
 
 #################################
