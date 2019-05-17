@@ -43,7 +43,7 @@ url只允许一部分字符，如果需要用到其他字符，需要对这些�
 如果直接使用汉字，将会报错：
 ```python
 >>> html = request.urlopen('https://www.sogou.com/web?query=中国')
-```python
+```
 需要进行以下转换：
 ```python
 >>> url = 'https://www.sogou.com/web?query=' + request.quote('中国')
@@ -51,6 +51,9 @@ url只允许一部分字符，如果需要用到其他字符，需要对这些�
 'https://www.sogou.com/web?query=%E4%B8%AD%E5%9B%BD'
 >>> html = request.urlopen(url)
 ```
+### 异常处理
+- http://127.0.0.1/abc   不存在
+- http://127.0.0.1/ban   无权限
 
 
 
