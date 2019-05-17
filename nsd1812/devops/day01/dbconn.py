@@ -1,5 +1,6 @@
 from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Date
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
 
 engine = create_engine(
     # mysql+pymymysql://用户名:密码@服务器/数据库?参数
@@ -9,6 +10,7 @@ engine = create_engine(
 )
 # 创建ORM的基类
 Base = declarative_base()
+Session = sessionmaker(bind=engine)
 
 class Department(Base):
     __tablename__ = 'departments'  # 定义库中的表名
