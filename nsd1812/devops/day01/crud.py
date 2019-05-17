@@ -9,51 +9,58 @@ session = Session()
 # qa = Department(dep_id=5, dep_name='测试部')
 # session.add_all([hr, finance, ops, dev, qa])
 #################################
-wt = Employee(
-    emp_id=1,
-    emp_name='王涛',
-    email='wangtao@qq.com',
-    dep_id=3
-)
-zj = Employee(
-    emp_id=2,
-    emp_name='张钧',
-    email='zhangjun@163.com',
-    dep_id=3
-)
-sy = Employee(
-    emp_id=3,
-    emp_name='苏艳',
-    email='suyan@qq.com',
-    dep_id=1
-)
-wjy = Employee(
-    emp_id=4,
-    emp_name='吴计印',
-    email='wujiying@126.com',
-    dep_id=4
-)
-kzw = Employee(
-    emp_id=5,
-    emp_name='康志文',
-    email='kangzhiwen@qq.com',
-    dep_id=4
-)
-hzq = Employee(
-    emp_id=6,
-    emp_name='胡志强',
-    email='huzhiqiang@163.com',
-    dep_id=5
-)
-lh = Employee(
-    emp_id=7,
-    emp_name='李浩',
-    email='lihao@126.com',
-    dep_id=2
-)
-session.add_all([wt, zj, sy, wjy, kzw, hzq, lh])
-
-
+# wt = Employee(
+#     emp_id=1,
+#     emp_name='王涛',
+#     email='wangtao@qq.com',
+#     dep_id=3
+# )
+# zj = Employee(
+#     emp_id=2,
+#     emp_name='张钧',
+#     email='zhangjun@163.com',
+#     dep_id=3
+# )
+# sy = Employee(
+#     emp_id=3,
+#     emp_name='苏艳',
+#     email='suyan@qq.com',
+#     dep_id=1
+# )
+# wjy = Employee(
+#     emp_id=4,
+#     emp_name='吴计印',
+#     email='wujiying@126.com',
+#     dep_id=4
+# )
+# kzw = Employee(
+#     emp_id=5,
+#     emp_name='康志文',
+#     email='kangzhiwen@qq.com',
+#     dep_id=4
+# )
+# hzq = Employee(
+#     emp_id=6,
+#     emp_name='胡志强',
+#     email='huzhiqiang@163.com',
+#     dep_id=5
+# )
+# lh = Employee(
+#     emp_id=7,
+#     emp_name='李浩',
+#     email='lihao@126.com',
+#     dep_id=2
+# )
+# session.add_all([wt, zj, sy, wjy, kzw, hzq, lh])
+#################################
+qset1 = session.query(Department)
+print(qset1)  # qset1只是个sql语句，当取具体值的时候，才真正查数据库
+# qset1.all()取出全部的部门，因为查询的是类名，所以返回所有的实例组成的列表
+print('*' * 30)
+print(qset1.all())
+print('*' * 30)
+for dep in qset1:  # 遍历实例列表中的每个实例
+    print('%s: %s' % (dep.dep_id, dep.dep_name))
 
 
 #################################
