@@ -88,10 +88,17 @@ session = Session()
 # for dep in qset6:
 #     print(dep.dep_id, dep.dep_name, sep=', ')
 #################################
-qset7 = session.query(Employee).filter(Employee.email.like('%@qq.com'))
-for emp in qset7:
-    print(emp.emp_name, emp.email)
-
+# qset7 = session.query(Employee).filter(Employee.email.like('%@qq.com'))
+# for emp in qset7:
+#     print(emp.emp_name, emp.email)
+#################################
+# qset8 = session.query(Department).filter(Department.dep_id.in_([3, 4]))
+# for dep in qset8:
+#     print(dep.dep_id, dep.dep_name)
+#################################
+qset9 = session.query(Department).filter(Department.dep_name.isnot(None))
+for dep in qset9:
+    print(dep.dep_id, dep.dep_name)
 
 
 
