@@ -29,6 +29,29 @@ systemd接管。如果systemd发现子进程是僵尸进程，就会处理。
 ...     fobj.write(data)
 [root@room8pc16 day01]# eog /tmp/fork.jpg
 ```
+### 模拟客户端访问
+当客户机访问服务器时，客户机发送的请求头中使用User-Agent说明自己用的客户端是什么。服务器将在它的访问日志中记录。可以修改请求头，模拟正常的客户端访问，而不是通过python代码的访问。
+```python
+[root@room8pc16 httpd]# tail -f /var/log/access_log
+>>> from urllib import request
+>>> headers = {'User-Agent': "Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0"}
+>>> req = request.Request(url='http://127.0.0.1', headers=headers)
+>>> html = request.urlopen(req)
+```
+### 编码
+url只允许一部分字符，如果需要用到其他字符，需要对这些字符进行编码。
+如果直接使用汉字，将会报错：
+```python
+>>> html = request.urlopen('https://www.sogou.com/web?query=中国')
+```python
+需要进行以下转换：
+```python
+>>> url = 'https://www.sogou.com/web?query=' + request.quote('中国')
+>>> url
+'https://www.sogou.com/web?query=%E4%B8%AD%E5%9B%BD'
+>>> html = request.urlopen(url)
+```
+
 
 
 
