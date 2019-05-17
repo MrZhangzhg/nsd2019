@@ -20,7 +20,15 @@ systemd接管。如果systemd发现子进程是僵尸进程，就会处理。
 ### 多线程编程思路
 - 主线程生成工作线程
 - 工作线程做具体工作。当工作线程工作完成后，它就自动结束了，也不会产生僵尸进程。
-
+## urllib模块
+```python
+>>> from urllib import request
+>>> html = request.urlopen('https://upload-images.jianshu.io/upload_images/12347101-bc5e84e92e23c692.jpg')
+>>> data = html.read()
+>>> with open('/tmp/fork.jpg', 'wb') as fobj:
+...     fobj.write(data)
+[root@room8pc16 day01]# eog /tmp/fork.jpg 
+```
 
 
 
