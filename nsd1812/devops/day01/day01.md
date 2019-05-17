@@ -55,6 +55,9 @@ url只允许一部分字符，如果需要用到其他字符，需要对这些�
 - http://127.0.0.1/abc   不存在
 - http://127.0.0.1/ban   无权限
 
-
-
-
+## wget模块
+```shell
+[root@room8pc16 ~]# pip3 install wget
+>>> import wget
+>>> wget.download('https://upload-images.jianshu.io/upload_images/12347101-bc5e84e92e23c692.jpg', '/tmp')
+```

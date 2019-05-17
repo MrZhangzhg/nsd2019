@@ -12,4 +12,3 @@ try:
     request.urlopen(url2)
 except error.HTTPError as e:
     print('错误', e)
-
