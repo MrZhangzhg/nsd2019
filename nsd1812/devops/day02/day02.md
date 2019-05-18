@@ -54,6 +54,27 @@ b'id: john: no such user\n'
 1. 准备邮件
 2. 发送邮件
 
+## JSON
+
+在网络中传输数据时，都是bytes类型的数据。如果希望把其他数据类型通过网络传递，可以使用json将其转换成json字符串，接收方接收后再将其转换回去。
+
+```python
+>>> import json
+>>> adict = {'name': 'bob', 'age': 20}
+>>> json.dumps(adict)
+'{"name": "bob", "age": 20}'
+# 在网络中发送该字典前，将其转换成json字符串
+>>> jdata = json.dumps(adict)
+>>> type(jdata)
+<class 'str'>
+# 接收方收到数据后，将json字符串转换回字典
+>>> json.loads(jdata)
+{'name': 'bob', 'age': 20}
+>>> mydict = json.loads(jdata)
+>>> type(mydict)
+<class 'dict'>
+```
+
 
 
 
