@@ -1,5 +1,8 @@
 import paramiko
 import threading
+import sys
+import getpass
+import os
 
 def rcmd(host, user='root', pwd=None, port=22, command=None):
     ssh = paramiko.SSHClient()  # 实例化SSHClient
@@ -18,10 +21,17 @@ def rcmd(host, user='root', pwd=None, port=22, command=None):
     ssh.close()  # 关闭连接
 
 if __name__ == '__main__':
-    # rcmd('192.168.4.4', pwd='123456', command='id root; id john')
-    ipfile = 'ipaddr.txt'
+    if len(sys.argv) != 3:
+        print("Usage: %s ipfile 'command_to_execute'" % sys.argv[0])
+        exit(1)
+    if not os.path.isfile(sys.argv[1]):
+        print('No such file: %s' % sys.argv[1])
+        exit(2)
+    ipfile = sys.argv[1]
+    command = sys.argv[2]
+    pwd = getpass.getpass()
     with open(ipfile) as fobj:
         for line in fobj:
             ip = line.strip()  # 把一行文本两端的空白字符移除
-            t = threading.Thread(target=rcmd, args=(ip,), kwargs={'pwd': '123456', 'command': 'id root; id john'})
+            t = threading.Thread(target=rcmd, args=(ip,), kwargs={'pwd': pwd, 'command': command})
             t.start()  # target(*args, **kwargs)
