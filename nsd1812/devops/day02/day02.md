@@ -140,6 +140,19 @@ b'{"weatherinfo":{"city":"\xe5\x8c\x97\xe4\xba\xac","cityid":"101010100","temp":
 {'weatherinfo': {'city': '北京', 'cityid': '101010100', 'temp': '27.9', 'WD': '南风', 'WS': '小于3级', 'SD': '28%', 'AP': '1002hPa', 'njd': '暂无实况', 'WSE': '<3', 'time': '17:55', 'sm': '2.1', 'isRadar': '1', 'Radar': 'JC_RADAR_AZ9010_JB'}}
 ```
 
+### 查快递
+
+查询快递的接口（API应用程序编程接口）：http://www.kuaidi100.com/query?type=%s&postid=%s
+
+其中type是快递公司的名称，需要到相应的网站上查询，postid是单号
+
+```python
+>>> url = 'http://www.kuaidi100.com/query'
+>>> params = {'type': 'zhongtong', 'postid': '94285844684'} 
+>>> r = requests.get(url, params=params)
+>>> r.json()
+```
+
 
 
 
