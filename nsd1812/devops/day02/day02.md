@@ -47,7 +47,12 @@ b'uid=0(root) gid=0(root) \xe7\xbb\x84=0(root)\n'
 b'id: john: no such user\n'
 ```
 
+## 邮件
 
+发送邮件需要完成两个步骤：
+
+1. 准备邮件
+2. 发送邮件
 
 
 
