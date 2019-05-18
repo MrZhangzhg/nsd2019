@@ -101,6 +101,45 @@ b'{"weatherinfo":{"city":"\xe5\x8c\x97\xe4\xba\xac","cityid":"101010100","temp":
 {'weatherinfo': {'city': '北京', 'cityid': '101010100', 'temp': '27.9', 'WD': '南风', 'WS': '小于3级', 'SD': '28%', 'AP': '1002hPa', 'njd': '暂无实况', 'WSE': '<3', 'time': '17:55', 'sm': '2.1', 'isRadar': '1', 'Radar': 'JC_RADAR_AZ9010_JB'}}
 ```
 
+## requests模块
+
+它也是一个网络模块，底层采用urllib3。它把很多http的功能定义成了函数，需要某个功能，只要调用函数即可。
+
+### http主要的方法：
+
+- GET: 在浏览器中输入网址访问、点击超链接、通过表单查询
+- POST: 一般用于提交隐私的表单数据
+
+### requests应用
+
+```shell
+[root@room8pc16 zzg_pypkgs]# cd requests_pkgs/
+[root@room8pc16 requests_pkgs]# pip3 install *
+```
+
+```python
+>>> import requests
+# 纯文本
+>>> r = requests.get('http://www.sogou.com')
+>>> r.text
+
+# 非文本，如图片
+>>> r = requests.get('https://img02.sogoucdn.com/app/a/100520020/64190bd002489844ea26062df90171fc')
+>>> with open('/tmp/girl.jpg', 'wb') as fobj:
+...     fobj.write(r.content)
+
+# josn
+>>> r = requests.get('http://www.weather.com.cn/data/sk/101010100.html')
+>>> r.json()   # 乱码
+
+# 编码
+>>> r.encoding   # 查看默认编码
+'ISO-8859-1'
+>>> r.encoding = 'utf8'   # 修改字符编码
+>>> r.json()
+{'weatherinfo': {'city': '北京', 'cityid': '101010100', 'temp': '27.9', 'WD': '南风', 'WS': '小于3级', 'SD': '28%', 'AP': '1002hPa', 'njd': '暂无实况', 'WSE': '<3', 'time': '17:55', 'sm': '2.1', 'isRadar': '1', 'Radar': 'JC_RADAR_AZ9010_JB'}}
+```
+
 
 
 
