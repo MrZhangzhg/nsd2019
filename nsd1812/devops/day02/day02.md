@@ -153,6 +153,14 @@ b'{"weatherinfo":{"city":"\xe5\x8c\x97\xe4\xba\xac","cityid":"101010100","temp":
 >>> r.json()
 ```
 
+### 钉钉机器人
+
+实现方式实际上不复杂，只是需要创建一个群，在群里添加聊天机器人。可以通过python程序，让机器人在群中发言。
+
+搜索“钉钉机器人 开放平台”，找到官方手册页后，搜索“自定义机器人”
+
+https://open-doc.dingtalk.com/microapp/serverapi3/iydd5h
+
 
 
 
