@@ -44,7 +44,27 @@
 [root@room8pc16 ansible_pkg]# pip3 install ansible
 ```
 
+### 配置ansible的基础应用环境
 
+```shell
+[root@room8pc16 day03]# mkdir myansible
+[root@room8pc16 day03]# cd myansible/
+[root@room8pc16 myansible]# vim ansible.cfg
+[defaults]
+inventory = hosts
+remote_user = root
+[dbservers]
+node4.tedu.cn
+
+[webservers]
+node5.tedu.cn
+node6.tedu.cn
+[root@room8pc16 myansible]# ansible all -m ping -k
+```
+
+
+
+### 
 
 
 
