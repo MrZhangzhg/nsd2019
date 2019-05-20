@@ -151,6 +151,28 @@ playbook：在dbservers上配置mariadb，在webservers上配置apache
 
 官方手册页：https://docs.ansible.com/  ->[Ansible Documentation ](https://docs.ansible.com/ansible/latest/index.html)-> 搜索python api。把python api example中的代码复制粘贴到adhoc.py
 
+命名元组：为元组的下标起名，仍然具有元组的属性
+
+```python
+>>> from collections import namedtuple
+>>> Point = namedtuple('Point', ['x', 'y', 'z'])
+>>> p1 = Point(10, 20, 25)
+>>> len(p1)
+3
+>>> p1[0]
+10
+>>> p1[1:]
+(20, 25)
+>>> p1.x
+10
+>>> p1.y
+20
+>>> p1.z
+25
+```
+
+
+
 
 
 
