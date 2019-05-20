@@ -197,6 +197,23 @@ if __name__ == '__main__':
     main()
 
 [root@room8pc16 myansible]# ansible dbservers -m mycopy -a "yuan=/etc/hosts mubiao=/tmp/zj.txt"
+```
+
+### ansible-cmdb模块
+
+用于将ansible收集下来的主机信息转换成html页面
+
+```shell
+[root@room8pc16 zzg_pypkgs]# cd ansible-cmdb_pkgs/
+[root@room8pc16 ansible-cmdb_pkgs]# pip3 install *
+[root@room8pc16 ansible-cmdb_pkgs]# vim /usr/local/bin/ansible-cmdb 
+PY_BIN=$(which python3)   # 第8行改为python3，默认是python2
+
+# 通过setup模块收集远程主机信息并保存到/tmp/out/目录
+[root@room8pc16 myansible]# ansible all -m setup --tree /tmp/out/
+# 利用ansible-cmdb分析/tmp/out/下的文件，生成html
+[root@room8pc16 myansible]# ansible-cmdb /tmp/out/ > /tmp/hosts.html
+[root@room8pc16 myansible]# firefox /tmp/hosts.html
 
 ```
 
