@@ -75,6 +75,24 @@ set encoding=utf8
 autocmd FileType yaml setlocal sw=2 ts=2 et ai
 ```
 
+创建playbook，实现免密登陆
+
+```shell
+[root@room8pc16 ~]# ansible-doc authorized_key
+[root@room8pc16 myansible]# vim auth.yml
+---
+- name: user auth key
+  hosts: all
+  tasks:
+    - name: upload root pub key
+      authorized_key:
+        user: root
+        state: present
+        key: "{{ lookup('file', '/root/.ssh/id_rsa.pub') }}"
+[root@room8pc16 myansible]# ansible-playbook --syntax-check auth.yml
+[root@room8pc16 myansible]# ansible-playbook auth.yml -k
+```
+
 
 
 ### 
