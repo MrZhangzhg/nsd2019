@@ -49,10 +49,10 @@ options = Options(
 )
 loader = DataLoader()
 passwords = dict()
-inventory = InventoryManager(loader=loader, sources=['myansible/hosts'])
-variable_manager = VariableManager(loader=loader, inventory=inventory)
 
-def runpb(pb_path):
+def runpb(pb_path, sources):
+    inventory = InventoryManager(loader=loader, sources=sources)
+    variable_manager = VariableManager(loader=loader, inventory=inventory)
     playbook = PlaybookExecutor(
         playbooks=pb_path,
         inventory=inventory,
@@ -65,4 +65,4 @@ def runpb(pb_path):
     return result
 
 if __name__ == '__main__':
-    runpb(pb_path=['myansible/lamp.yml'])
+    runpb(pb_path=['myansible/lamp.yml'], sources=['myansible/hosts'])

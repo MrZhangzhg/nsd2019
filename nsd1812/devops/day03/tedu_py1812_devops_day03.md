@@ -171,6 +171,35 @@ playbook：在dbservers上配置mariadb，在webservers上配置apache
 25
 ```
 
+### ansible模块开发
+
+```shell
+# 建立自定义模块目录
+[root@room8pc16 day03]# mkdir library
+[root@room8pc16 day03]# cd library
+[root@room8pc16 library]# export ANSIBLE_LIBRARY=/var/ftp/nsd2019/nsd1812/devops/day03/library
+# 编写模块，用于在远程主机上将一个文件拷贝到目标位置
+[root@room8pc16 library]# vim mycopy.py
+import shutil
+from ansible.module_utils.basic import AnsibleModule
+
+def main():
+    module = AnsibleModule(
+        argument_spec=dict(
+            yuan=dict(required=True, type='str'),
+            mubiao=dict(required=True, type='str')
+        )
+    )
+    shutil.copy(module.params['yuan'], module.params['mubiao'])
+    module.exit_json(changed=True)
+
+if __name__ == '__main__':
+    main()
+
+[root@room8pc16 myansible]# ansible dbservers -m mycopy -a "yuan=/etc/hosts mubiao=/tmp/zj.txt"
+
+```
+
 
 
 
