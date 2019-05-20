@@ -34,11 +34,11 @@ inventory = InventoryManager(loader=loader, sources=['myansible/hosts'])
 variable_manager = VariableManager(loader=loader, inventory=inventory)
 
 # create datastructure that represents our play, including tasks, this is basically what our YAML loader does internally.
-play_source =  dict(
-        name = "Ansible Play",  # play的名字
-        hosts = 'webservers',    # 指定在哪些主机上执行命令
-        gather_facts = 'no',
-        tasks = [
+play_source = dict(
+        name="Ansible Play",  # play的名字
+        hosts='webservers',    # 指定在哪些主机上执行命令
+        gather_facts='no',
+        tasks=[
             dict(action=dict(module='shell', args='ls'), register='shell_out'),
             dict(action=dict(module='debug', args=dict(msg='{{shell_out.stdout}}')))
          ]
