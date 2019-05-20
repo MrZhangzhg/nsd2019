@@ -8,5 +8,29 @@
 
 那么zabbix api地址是：http://192.168.4.2/zabbix/api_jsonrpc.php
 
+## ansible
 
+### 准备环境
+
+启动三台虚拟机：
+
+| node4.tedu.cn | 192.168.4.4/24 |
+| ------------- | -------------- |
+| node5.tedu.cn | 192.168.4.5/24 |
+| node6.tedu.cn | 192.168.4.6/24 |
+
+名称解析：
+
+```shell
+[root@room8pc16 nsd2019]# for i in {1..254}
+> do
+> echo -e "192.168.4.$i\tnode$i.tedu.cn\tnode$i" >> /etc/hosts
+> done
+```
+
+收集主机密钥：
+
+```shell
+[root@room8pc16 ~]# ssh-keyscan 192.168.4.{4..6} node{4..6} node{4..6}.tedu.cn >> ~/.ssh/known_hosts 
+```
 
