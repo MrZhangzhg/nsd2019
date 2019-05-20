@@ -34,3 +34,19 @@
 [root@room8pc16 ~]# ssh-keyscan 192.168.4.{4..6} node{4..6} node{4..6}.tedu.cn >> ~/.ssh/known_hosts 
 ```
 
+安装ansible：
+
+```shell
+[root@room8pc16 zzg_pypkgs]# yum install -y sshpass
+[root@room8pc16 zzg_pypkgs]# cd ansible_pkg/
+[root@room8pc16 ansible_pkg]# pip3 install *
+或
+[root@room8pc16 ansible_pkg]# pip3 install ansible
+```
+
+
+
+
+
+
+
