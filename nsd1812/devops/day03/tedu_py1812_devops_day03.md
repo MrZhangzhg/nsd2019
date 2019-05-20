@@ -93,6 +93,28 @@ autocmd FileType yaml setlocal sw=2 ts=2 et ai
 [root@room8pc16 myansible]# ansible-playbook auth.yml -k
 ```
 
+通过playbook配置yum
+
+```shell
+[root@room8pc16 myansible]# mkdir files
+[root@room8pc16 myansible]# vim files/server.repo
+[root@room8pc16 myansible]# vim yum.yml
+---
+- name: upload yum repo file
+  hosts: all
+  tasks:
+    - name: upload server.repo
+      copy:
+        src: files/server.repo
+        dest: /etc/yum.repos.d/server.repo
+[root@room8pc16 myansible]# ansible-playbook --syntax-check yum.yml
+[root@room8pc16 myansible]# ansible-playbook yum.yml
+# 检查web服务器是否安装了mariadb-server
+[root@room8pc16 myansible]# ansible dbservers -m yum -a "list=mariadb-server"
+```
+
+
+
 
 
 ### 
