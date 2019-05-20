@@ -113,6 +113,40 @@ autocmd FileType yaml setlocal sw=2 ts=2 et ai
 [root@room8pc16 myansible]# ansible dbservers -m yum -a "list=mariadb-server"
 ```
 
+playbook：在dbservers上配置mariadb，在webservers上配置apache
+
+```shell
+[root@room8pc16 myansible]# vim lamp.yml
+---
+- name: configure dbservers
+  hosts: dbservers
+  tasks:
+    - name: install mariadb
+      yum:
+        name: mariadb-server
+        state: present
+    - name: start mariadb
+      service:
+        name: mariadb
+        state: started
+        enabled: yes
+
+- name: configure webservers
+  hosts: webservers
+  tasks:
+    - name: install apache
+      yum:
+        name: [httpd, php, php-mysql]
+        state: latest
+    - name: start httpd
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+[root@room8pc16 myansible]# ansible-playbook --syntax-check lamp.yml
+[root@room8pc16 myansible]# ansible-playbook lamp.yml
+```
+
 
 
 
