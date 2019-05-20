@@ -62,6 +62,19 @@ node6.tedu.cn
 [root@room8pc16 myansible]# ansible all -m ping -k
 ```
 
+### playbook
+
+调整vim的配置，使它能够适应yaml的语法
+
+```shell
+[root@room8pc16 ~]# cat ~/.vimrc 
+set ai
+set ts=4
+set et
+set encoding=utf8
+autocmd FileType yaml setlocal sw=2 ts=2 et ai
+```
+
 
 
 ### 
