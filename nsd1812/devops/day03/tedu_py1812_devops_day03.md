@@ -147,6 +147,10 @@ playbook：在dbservers上配置mariadb，在webservers上配置apache
 [root@room8pc16 myansible]# ansible-playbook lamp.yml
 ```
 
+### ansible python api
+
+官方手册页：https://docs.ansible.com/  ->[Ansible Documentation ](https://docs.ansible.com/ansible/latest/index.html)-> 搜索python api。把python api example中的代码复制粘贴到adhoc.py
+
 
 
 
