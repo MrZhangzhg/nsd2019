@@ -84,3 +84,90 @@ cache--确认-->ver
 .git  index.html
 ```
 
+### git应用
+
+```shell
+[root@node3 devops]# git status  # 状态
+# 位于分支 master
+#
+# 初始提交
+#
+# 未跟踪的文件:
+#   （使用 "git add <file>..." 以包含要提交的内容）
+#
+#	index.html
+提交为空，但是存在尚未跟踪的文件（使用 "git add" 建立跟踪）
+[root@node3 devops]# git status -s  # 简要信息
+?? index.html
+[root@node3 devops]# git add .   # 将目录下所有内容加入暂存区，开始跟踪
+# 位于分支 master
+#
+# 初始提交
+#
+# 要提交的变更：
+#   （使用 "git rm --cached <file>..." 撤出暂存区）
+#
+#	新文件：    index.html
+#
+[root@node3 devops]# git status -s
+A  index.html
+[root@node3 devops]# git rm --cached index.html   # 撤出暂存区
+rm 'index.html'
+[root@node3 devops]# git status
+# 位于分支 master
+#
+# 初始提交
+#
+# 未跟踪的文件:
+#   （使用 "git add <file>..." 以包含要提交的内容）
+#
+#	index.html
+提交为空，但是存在尚未跟踪的文件（使用 "git add" 建立跟踪）
+[root@node3 devops]# git status -s
+?? index.html
+[root@node3 devops]# git add .  # 重新加入暂存区
+[root@node3 devops]# git status -s
+A  index.html
+[root@node3 devops]# git commit  # 确认至版本库，需要写日志
+[root@node3 devops]# git status
+# 位于分支 master
+无文件要提交，干净的工作区
+[root@node3 devops]# git status -s
+
+# 接下来的常规则应用，就是修改代码、加入跟踪、确认至版本库
+[root@node3 devops]# echo '<h2>nsd 1812</n2>' >> index.html 
+[root@node3 devops]# cp /etc/hosts .
+[root@node3 devops]# git status -s
+ M index.html
+?? hosts
+[root@node3 devops]# git add .
+[root@node3 devops]# git status -s
+A  hosts
+M  index.html
+[root@node3 devops]# git status 
+# 位于分支 master
+# 要提交的变更：
+#   （使用 "git reset HEAD <file>..." 撤出暂存区）
+#
+#	新文件：    hosts
+#	修改：      index.html
+#
+[root@node3 devops]# git commit -m "modify index.html, add hosts"
+[master 0fff998] modify index.html, add hosts
+ 2 files changed, 3 insertions(+)
+ create mode 100644 hosts
+[root@node3 devops]# git status
+# 位于分支 master
+无文件要提交，干净的工作区
+```
+
+
+
+
+
+
+
+
+
+
+
