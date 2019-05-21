@@ -35,14 +35,14 @@ variable_manager = VariableManager(loader=loader, inventory=inventory)
 
 # create datastructure that represents our play, including tasks, this is basically what our YAML loader does internally.
 play_source = dict(
-        name="Ansible Play",  # play的名字
-        hosts='webservers',    # 指定在哪些主机上执行命令
-        gather_facts='no',
-        tasks=[
-            dict(action=dict(module='shell', args='ls'), register='shell_out'),
-            dict(action=dict(module='debug', args=dict(msg='{{shell_out.stdout}}')))
-         ]
-    )
+    name="Ansible Play",  # play的名字
+    hosts='webservers',    # 指定在哪些主机上执行命令
+    gather_facts='no',
+    tasks=[
+        dict(action=dict(module='shell', args='ls'), register='shell_out'),
+        dict(action=dict(module='debug', args=dict(msg='{{shell_out.stdout}}')))
+     ]
+)
 
 # Create play object, playbook objects use .load instead of init or new methods,
 # this will also automatically create the task objects from the info provided in play_source

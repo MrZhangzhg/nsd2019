@@ -15,13 +15,13 @@ def adhoc(sources=None, hosts=None, module=None, args=None):
     inventory = InventoryManager(loader=loader, sources=sources)
     variable_manager = VariableManager(loader=loader, inventory=inventory)
     play_source = dict(
-            name="Ansible Play",  # play的名字
-            hosts=hosts,    # 指定在哪些主机上执行命令
-            gather_facts='no',
-            tasks=[
-                dict(action=dict(module=module, args=args), register='shell_out'),
-             ]
-        )
+        name="Ansible Play",  # play的名字
+        hosts=hosts,    # 指定在哪些主机上执行命令
+        gather_facts='no',
+        tasks=[
+            dict(action=dict(module=module, args=args), register='shell_out'),
+         ]
+    )
     play = Play().load(play_source, variable_manager=variable_manager, loader=loader)
     tqm = None
     try:
