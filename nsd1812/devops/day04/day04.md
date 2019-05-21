@@ -331,6 +331,23 @@ anaconda-ks.cfg  index.html  mima
 
 ```
 
+## gitlab服务器
+
+为了实现多人共享代码，可以将git内容上传到gitlab服务器。
+
+创建虚拟机，内存4G以上。安装docker
+
+启动docker，导入镜像
+
+```shell
+[root@node1 ~]# systemctl start docker
+[root@node1 ~]# systemctl enable docker
+[root@node1 images]# docker load < gitlab_zh.tar
+
+```
+
+
+
 
 
 
