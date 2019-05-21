@@ -343,6 +343,27 @@ anaconda-ks.cfg  index.html  mima
 [root@node1 ~]# systemctl start docker
 [root@node1 ~]# systemctl enable docker
 [root@node1 images]# docker load < gitlab_zh.tar
+```
+
+将docker宿主机的SSH端口改为2022
+
+```shell
+[root@node1 ~]# vim /etc/ssh/sshd_config 
+Port 2022
+[root@node1 ~]# systemctl restart sshd
+# 退出node1再次ssh
+[root@room8pc16 nsd2019]# ssh -p2022 192.168.122.137
+[root@node1 ~]# 
+```
+
+
+
+启动容器
+
+```shell
+[root@node1 ~]# docker run -d -h gitlab --name gitlab -p 443:443 -p 80:80 -p 22:22 --restart always -v /srv/gitlab/config:/etc/gitlab -v /srv/gitlab/logs:/var/log/gitlab -v /srv/gitlab/data:/var/opt/gitlab gitlab_zh:latest 
+# 注意：因为服务很多，启动较慢
+[root@node1 ~]# docker ps   # 当状态是health: OK才能正常工作
 
 ```
 
