@@ -219,7 +219,24 @@ D  hosts
 [master 0ddfcb2] del hosts
  1 file changed, 2 deletions(-)
  delete mode 100644 hosts
+```
 
+改名、移动
+
+```shell
+[root@node3 devops]# cp /etc/passwd .
+[root@node3 devops]# git add .
+[root@node3 devops]# git commit -m "add passwd"
+[master 1db7e89] add passwd
+ 1 file changed, 40 insertions(+)
+ create mode 100644 passwd
+[root@node3 devops]# git mv passwd mima
+[root@node3 devops]# git status -s
+R  passwd -> mima
+[root@node3 devops]# git commit -m "rename passwd -> mima"
+[master 8e1c9eb] rename passwd -> mima
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename passwd => mima (100%)
 ```
 
 
