@@ -278,6 +278,59 @@ index.html  hosts
 index.html  mima
 ```
 
+### 分支管理
+
+git允许不同的用户创建不同的分支实现代码管理，还可以把分支合并到主干分支。默认情况下，git有一个名为master的主干分支。
+
+```shell
+# 查看分支
+[root@node3 devops]# git branch
+* master
+[root@node3 devops]# ls
+index.html  mima
+# 新建分支
+[root@node3 devops]# git branch fn1
+[root@node3 devops]# git branch
+  fn1
+* master
+# 切换分支
+[root@node3 devops]# git checkout fn1
+切换到分支 'fn1'
+[root@node3 devops]# git branch
+* fn1
+  master
+# 在fn1分支中编写程序
+[root@node3 devops]# cp ~/anaconda-ks.cfg .
+[root@node3 devops]# git add .
+[root@node3 devops]# git commit -m "fn1 add anaconda"
+[fn1 619f6fb] fn1 add anaconda
+ 1 file changed, 65 insertions(+)
+ create mode 100644 anaconda-ks.cfg
+[root@node3 devops]# ls
+anaconda-ks.cfg  index.html  mima
+# 切换回master分支
+[root@node3 devops]# git checkout master
+切换到分支 'master'
+[root@node3 devops]# ls
+index.html  mima
+# 合并fn1分支到主干
+[root@node3 devops]# git merge fn1
+更新 8e1c9eb..619f6fb
+Fast-forward
+ anaconda-ks.cfg | 65 ++++++++++++++++++++++++++++++++++++
+ 1 file changed, 65 insertions(+)
+ create mode 100644 anaconda-ks.cfg
+[root@node3 devops]# ls
+anaconda-ks.cfg  index.html  mima
+
+# fn1分支使命已经达成，可以删除
+[root@node3 devops]# git branch -d fn1
+已删除分支 fn1（曾为 619f6fb）。
+[root@node3 devops]# git branch 
+* master
+
+```
+
 
 
 
