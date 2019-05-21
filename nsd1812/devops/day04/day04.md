@@ -378,7 +378,37 @@ Port 2022
 
 新建组，名为devops。群组等级为公开。
 
-为devops组中的成员创建用户。新建用户的时候，不能创建密码。用户建立好之后，修改用户，可以为其加密码。
+为devops组中的成员创建用户zzg。新建用户的时候，不能创建密码。用户建立好之后，修改用户，可以为其加密码。
+
+新建项目devops。新建的用户zzg是新项目的主程序员。可见等级为公开。项目创建完成后，点击左下角的“折叠边栏”=>“设置”=>“成员”=>邀请上一步创建的用户，角色是“主程序员”。
+
+### 新建的用户上传代码
+
+上传代码有两种方式，一种是http的方式，这种方式，每次上传代码都需要填写用户名和密码。另一种是通过ssh实现免密登陆。
+
+ssh免密登陆需要将用户的公钥上传：
+
+```shell
+[root@node3 devops]# ssh-keygen -t rsa -C "zzg@tedu.cn" -b 4096
+[root@node3 devops]# cat ~/.ssh/id_rsa.pub 
+```
+
+在用户的设置页面中，点击左侧的ssh密钥，把公钥内容粘贴进去。
+
+### 上传代码到gitlab服务器
+
+```shell
+[root@node3 devops]# git remote rename origin old-origin
+如果出现以下报错，忽略
+error: 不能重命名配置小节 'remote.origin' 到 'remote.old-origin'
+[root@node3 devops]# git remote add origin \ git@192.168.122.137:devops/devops.git
+[root@node3 devops]# git push -u origin --all
+[root@node3 devops]# git push -u origin --tags
+```
+
+
+
+
 
 
 
