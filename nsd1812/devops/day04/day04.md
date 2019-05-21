@@ -180,6 +180,46 @@ M  index.html
 [root@node3 devops]# ls
 hosts  index.html
 
+# 如果真想删除文件应该采用以下方式：
+[root@node3 devops]# git rm hosts
+rm 'hosts'
+[root@node3 devops]# ls
+index.html
+[root@node3 devops]# git status -s
+D  hosts
+[root@node3 devops]# git status
+# 位于分支 master
+# 要提交的变更：
+#   （使用 "git reset HEAD <file>..." 撤出暂存区）
+#
+#	删除：      hosts
+#
+[root@node3 devops]# git reset HEAD hosts
+重置后撤出暂存区的变更：
+D	hosts
+[root@node3 devops]# git status
+# 位于分支 master
+# 尚未暂存以备提交的变更：
+#   （使用 "git add/rm <file>..." 更新要提交的内容）
+#   （使用 "git checkout -- <file>..." 丢弃工作区的改动）
+#
+#	删除：      hosts
+#
+修改尚未加入提交（使用 "git add" 和/或 "git commit -a"）
+[root@node3 devops]# git checkout -- hosts
+[root@node3 devops]# ls
+hosts  index.html
+
+# 删除文件的完整过程
+[root@node3 devops]# git rm hosts
+rm 'hosts'
+[root@node3 devops]# git status -s
+D  hosts
+[root@node3 devops]# git commit -m "del hosts"
+[master 0ddfcb2] del hosts
+ 1 file changed, 2 deletions(-)
+ delete mode 100644 hosts
+
 ```
 
 
