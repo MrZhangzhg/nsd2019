@@ -239,6 +239,45 @@ R  passwd -> mima
  rename passwd => mima (100%)
 ```
 
+切换到以前版本
+
+```mermaid
+graph LR
+init(init)
+c1(c1)
+c2(c2)
+c3(c3)
+master(master)
+head(HEAD)
+init-->c1
+c1-->c2
+c2-->c3
+master-->c3
+head-->master
+```
+
+将HEAD指针指向以前的某个提交就可以切换到以前的某个状态了。
+
+```shell
+[root@node3 devops]# git log  # 查看所有的提交，
+... ...
+commit 0fff998482d7630caa531f28d51587884745b423
+Author: zzg <zzg@tedu.cn>
+Date:   Tue May 21 14:16:04 2019 +0800
+
+    modify index.html, add hosts
+... ...
+[root@node3 devops]# git checkout \ 0fff998482d7630caa531f28d51587884745b423
+现在目录下出现了index.html和hosts两个文件
+[root@node3 devops]# ls
+index.html  hosts
+
+# 返回到最新的提交
+[root@node3 devops]# git checkout master
+[root@node3 devops]# ls
+index.html  mima
+```
+
 
 
 
