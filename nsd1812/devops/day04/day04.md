@@ -161,6 +161,27 @@ M  index.html
 无文件要提交，干净的工作区
 ```
 
+恢复误删除的文件
+
+```shell
+[root@node3 devops]# rm -rf *
+[root@node3 devops]# ls
+[root@node3 devops]# git status
+# 位于分支 master
+# 尚未暂存以备提交的变更：
+#   （使用 "git add/rm <file>..." 更新要提交的内容）
+#   （使用 "git checkout -- <file>..." 丢弃工作区的改动）
+#
+#	删除：      hosts
+#	删除：      index.html
+#
+修改尚未加入提交（使用 "git add" 和/或 "git commit -a"）
+[root@node3 devops]# git checkout -- *
+[root@node3 devops]# ls
+hosts  index.html
+
+```
+
 
 
 
