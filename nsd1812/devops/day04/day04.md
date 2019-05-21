@@ -337,7 +337,7 @@ anaconda-ks.cfg  index.html  mima
 
 创建虚拟机，内存4G以上。安装docker
 
-启动docker，导入镜像
+### 启动docker，导入镜像
 
 ```shell
 [root@node1 ~]# systemctl start docker
@@ -345,7 +345,7 @@ anaconda-ks.cfg  index.html  mima
 [root@node1 images]# docker load < gitlab_zh.tar
 ```
 
-将docker宿主机的SSH端口改为2022
+### 将docker宿主机的SSH端口改为2022
 
 ```shell
 [root@node1 ~]# vim /etc/ssh/sshd_config 
@@ -356,20 +356,29 @@ Port 2022
 [root@node1 ~]# 
 ```
 
-
-
-启动容器
+### 启动容器
 
 ```shell
 [root@node1 ~]# docker run -d -h gitlab --name gitlab -p 443:443 -p 80:80 -p 22:22 --restart always -v /srv/gitlab/config:/etc/gitlab -v /srv/gitlab/logs:/var/log/gitlab -v /srv/gitlab/data:/var/opt/gitlab gitlab_zh:latest 
 # 注意：因为服务很多，启动较慢
-[root@node1 ~]# docker ps   # 当状态是health: OK才能正常工作
-
+[root@node1 ~]# docker ps   # 当状态是healthy才能正常工作
 ```
 
+### 配置gitlab服务器
 
+访问http://192.168.122.137。初始化密码必须是8位以上，复杂。
 
+登陆时的用户名是root。
 
+### gitlab中重要的概念
+
+- 群组group：对应成一个部门、开发团队
+- 成员：对应用户
+- 项目：对应软件项目
+
+新建组，名为devops。群组等级为公开。
+
+为devops组中的成员创建用户。新建用户的时候，不能创建密码。用户建立好之后，修改用户，可以为其加密码。
 
 
 
