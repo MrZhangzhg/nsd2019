@@ -33,6 +33,14 @@ ops--编译后上线-->web2
 
 打开http://192.168.122.73:8080。安装插件选择自定义=>无。不用创建管理员帐号，使用admin登陆即可。登陆后，将管理员的密码改掉。
 
+### 在Jenkins上安装插件
+
+配置方法详见：https://blog.csdn.net/you227/article/details/81076032
+
+清华大学插件地址：https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/update-center.json
+
+在可选插件中安装git parameter。
+
 
 
 
