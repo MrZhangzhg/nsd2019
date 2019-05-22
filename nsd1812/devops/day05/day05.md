@@ -55,11 +55,42 @@ http://mirrors.jenkins-ci.org/redhat/jenkins-2.177-1.1.noarch.rpm
 
 jenkins2.177默认已集成插件git parameter。
 
-如果是英文界面，可以在插件管理中，安装：[Localization: Chinese (Simplified)](https://plugins.jenkins.io/localization-zh-cn)
+如果是英文界面，可以在插件管理中，安装：Localization: Chinese (Simplified)
+
+### 在jenkins上安装git
+
+```shell
+[root@node4 ~]# yum install -y git
+```
 
 
 
+## 项目流程
 
+1. 程序员在自己的电脑上编写程序
+
+```shell
+[root@node3 ~]# git init myweb
+[root@node3 myweb]# echo '<h1>My Web Site</h1>' > index.html
+[root@node3 myweb]# git add .
+[root@node3 myweb]# git commit -m "web 1.0"
+[root@node3 myweb]# git tag 1.0   # 将当前状态标记为1.0版本
+[root@node3 myweb]# echo '<h2>2nd version</h2>' >> index.html 
+[root@node3 myweb]# git add .
+[root@node3 myweb]# git commit -m "web 2.0"
+[root@node3 myweb]# git tag 2.0
+```
+
+2. 在gitlab上，在devops组中创建名为myweb的公开项目，新建的用户是该项目的主程序员
+
+3. 程序员上传代码到gitlab
+
+```shell
+[root@node3 myweb]# git remote rename origin old-origin
+[root@node3 myweb]# git remote add origin git@192.168.122.137:devops/myweb.git
+[root@node3 myweb]# git push -u origin --all
+[root@node3 myweb]# git push -u origin --tags
+```
 
 
 
