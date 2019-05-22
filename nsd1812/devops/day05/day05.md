@@ -114,6 +114,7 @@ myweb
 [root@node4 ~]# mkdir -p /var/www/html/deploy/pkgs
 # /var/www/html/deploy/: 保存livever、lastver，即当前版本和前一个版本的版本号
 # /var/www/html/deploy/pkgs/: 保存软件压缩包和它的md5值
+[root@node4 ~]# chown -R jenkins.jenkins /var/www/html/deploy/
 ```
 
 3. jenkins服务器上有很多版本，需要标明最新（当前）版本和前一版本
