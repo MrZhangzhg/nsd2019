@@ -53,7 +53,9 @@ http://mirrors.jenkins-ci.org/redhat/jenkins-2.177-1.1.noarch.rpm
 [root@node4 ~]# systemctl start jenkins
 ```
 
+jenkins2.177默认已集成插件git parameter。
 
+如果是英文界面，可以在插件管理中，安装：[Localization: Chinese (Simplified)](https://plugins.jenkins.io/localization-zh-cn)
 
 
 
