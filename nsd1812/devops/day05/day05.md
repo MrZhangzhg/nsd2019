@@ -43,6 +43,16 @@ ops--编译后上线-->web2
 
 因为现在使用的是jenkins低版本，无法安装插件，插件需要更高的版本。所以下载新版本：https://pkg.jenkins.io/redhat-stable/jenkins-2.164.3-1.1.noarch.rpm
 
+http://mirrors.jenkins-ci.org/redhat/jenkins-2.177-1.1.noarch.rpm
+
+升级jenkins：
+
+```shell
+[root@node4 ~]# systemctl stop jenkins
+[root@node4 ~]# yum update -y jenkins-2.177-1.1.noarch.rpm 
+[root@node4 ~]# systemctl start jenkins
+```
+
 
 
 
