@@ -102,7 +102,23 @@ myweb
 <h1>My Web Site</h1>
 ```
 
+### 完善jenkins
 
+1. jenkins下载web项目后，将其打包
+
+2. 为了应用服务器可以下载项目软件包，在jenkins上安装httpd服务，以便应用服务器下载
+```shell
+[root@node4 ~]# yum install -y httpd
+[root@node4 ~]# systemctl start httpd 
+[root@node4 ~]# systemctl enable httpd
+[root@node4 ~]# mkdir -p /var/www/html/deploy/pkgs
+# /var/www/html/deploy/: 保存livever、lastver，即当前版本和前一个版本的版本号
+# /var/www/html/deploy/pkgs/: 保存软件压缩包和它的md5值
+```
+
+3. jenkins服务器上有很多版本，需要标明最新（当前）版本和前一版本
+
+4. jenkins服务器需要公布软件包的md5值，供文件完整性检查
 
 
 
