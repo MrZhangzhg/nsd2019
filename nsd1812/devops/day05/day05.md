@@ -121,6 +121,24 @@ myweb
 
 4. jenkins服务器需要公布软件包的md5值，供文件完整性检查
 
+编辑项目，选择下面的Additional Behavious => 新增 Checkout to a sub-directory: myweb-$webver
+
+增加构建步骤=> Excute shell:
+
+```shell
+deploy_dir=/var/www/html/deploy
+pkgs_dir=/var/www/html/deploy/pkgs
+cp -r myweb-$webver $pkgs_dir  # 将下载的软件目录拷贝到web服务器目录
+cd $pkgs_dir
+rm -rf myweb-$webver/.git   # 删除版本库文件
+tar czf myweb-$webver.tar.gz myweb-$webver  # 打包压缩
+md5sum myweb-$webver.tar.gz | awk '{print $1}' > myweb-$webver.tar.gz.md5  # 计算并保存md5值
+rm -rf myweb-$webver  # 删除程序目录
+cd $deploy_dir
+[ -f livever ] && cat livever > lastver   # 将当前版本内容写到前一版本文件
+echo $webver > livever  # 更新当前版本
+```
+
 
 
 
