@@ -92,6 +92,20 @@ jenkins2.177默认已集成插件git parameter。
 [root@node3 myweb]# git push -u origin --tags
 ```
 
+4. 在jenkins上创建工程，自动下载代码。创建一个自由风格的项目=>勾选This project is parameterized =>添加参数 git parameter=> name: webver, Default Value: origin/master =>源码管理：git =>Repository URL: http://192.168.122.137/devops/myweb.git => Branch Specifier (blank for 'any'): $webver => 保存
+5. 执行任务，jenkins将会下载myweb项目到/var/lib/jenkins/workspace目录
+
+```shell
+[root@node4 ~]# ls /var/lib/jenkins/workspace/
+myweb
+[root@node4 ~]# cat /var/lib/jenkins/workspace/myweb/index.html 
+<h1>My Web Site</h1>
+```
+
+
+
+
+
 
 
 
