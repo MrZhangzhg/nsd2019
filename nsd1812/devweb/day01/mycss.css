@@ -1,0 +1,44 @@
+* {
+    margin: 0;  /*外边距*/
+    padding: 0; /*内边距*/
+}
+
+body {
+    color: blue;
+}
+
+a:link {  /*访问之前的样式*/
+    color: red;
+}
+a:hover {   /*鼠标悬停时的样式*/
+    font-size: 30px;
+}
+a:visited {   /*访问之后的样式*/
+    color: gray;
+}
+
+.c1 {
+    text-align: center;
+}
+
+.c2, .c3 {
+    text-align: right;
+}
+
+#id1 {
+    background: orange;
+}
+
+p {
+    color: purple;
+}
+
+div {
+    font-size: 40px;
+}
+
+hr {
+    color: red;
+}
+
+
