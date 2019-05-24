@@ -21,3 +21,26 @@ html {
     font-size: 2rem;   /*是根元素大小的2倍 => 20pt*/
     color: olivedrab;
 }
+
+.box {
+    width: 300px;
+    border: 1px black solid;  /*黑色实线1px的边框*/
+    padding: 20px;   /*内边距*/
+    margin: 30px 10px 20px 40px;   /*外边距，上右下左的顺序*/
+    font-size: 20pt;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
