@@ -24,6 +24,22 @@ twitter公司发布的开源前端框架，可以理解为它是一个大的样�
 
 将前一天的static目录拷贝过来。
 
+### boostrap颜色
+
+dange：红， warning：黄， primary：蓝， info：蓝， success：绿
+
+### 表单
+
+为了组件之件有恰当的间距，需要把组件放到form-group中，标签的类是control-label，input的类是form-control。
+
+
+
+
+
+
+
+
+
 
 
 
