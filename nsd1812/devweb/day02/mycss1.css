@@ -4,16 +4,20 @@ html {
 
 .c1 {
     font-size: 15px;
+    color: rgb(255, 0, 0);
 }
 
 .c3, .c4 {
     font-size: 30pt;
+    color: #e27b22;
 }
 
 .c3s1 {
     font-size: 2em;   /*是当前大小的2倍 => 60pt*/
+    color: #0000FF;   /*可以简写成#00F*/
 }
 
 .c4s1 {
     font-size: 2rem;   /*是根元素大小的2倍 => 20pt*/
+    color: olivedrab;
 }
