@@ -1,0 +1,19 @@
+html {
+    font-size: 10pt;
+}
+
+.c1 {
+    font-size: 15px;
+}
+
+.c3, .c4 {
+    font-size: 30pt;
+}
+
+.c3s1 {
+    font-size: 2em;   /*是当前大小的2倍 => 60pt*/
+}
+
+.c4s1 {
+    font-size: 2rem;   /*是根元素大小的2倍 => 20pt*/
+}
