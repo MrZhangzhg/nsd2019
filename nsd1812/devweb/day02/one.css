@@ -1,0 +1,9 @@
+.container {
+    width: 1000px;
+    margin: 0 auto;    /*上下为0，左右自动*/
+}
+
+.footer {
+    text-align: center;
+}
+

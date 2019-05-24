@@ -1,0 +1,23 @@
+.container {
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.banner, .footer {
+    height: 100px;
+    background: #ccc;
+}
+
+.left {
+    float: left;
+    height: 200px;
+    width: 200px;
+    background: olivedrab;
+}
+.right {
+    margin-left: 200px;
+    height: 200px;
+    width: 800px;
+    background: #e27b22;
+}
+
