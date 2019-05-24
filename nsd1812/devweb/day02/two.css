@@ -1,23 +1,37 @@
 .container {
+    /*background-image: url("https://android-artworks.25pp.com/fs08/2018/01/22/1/2_6e247232dc92d94054497529a1a45da4_con_130x130.png");*/
+    /*background-repeat: no-repeat;*/
+    /*background-repeat: repeat-y;*/
+    /*background-repeat: repeat-x;*/
     width: 1000px;
     margin: 0 auto;
 }
 
 .banner, .footer {
     height: 100px;
-    background: #ccc;
+    /*background: #ccc;*/
 }
 
 .left {
+    font-size: 18px;
+    font-weight: bold;
+    font-style: italic;
     float: left;
     height: 200px;
     width: 200px;
-    background: olivedrab;
+    /*background: olivedrab;*/
 }
 .right {
     margin-left: 200px;
     height: 200px;
     width: 800px;
-    background: #e27b22;
+    /*background: #e27b22;*/
 }
 
+a {
+    text-decoration: none;
+}
+
+.footer {
+    text-align: center;
+}
