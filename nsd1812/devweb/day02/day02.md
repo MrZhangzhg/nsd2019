@@ -32,6 +32,10 @@ dange：红， warning：黄， primary：蓝， info：蓝， success：绿
 
 为了组件之件有恰当的间距，需要把组件放到form-group中，标签的类是control-label，input的类是form-control。
 
+### 栅格系统
+
+实现布局。所有的元素都放到container中，container包含的直接子元素是row。一行(row)最多可以分为12列，在行内的div设置每个div能够占多少列即可。
+
 
 
 
