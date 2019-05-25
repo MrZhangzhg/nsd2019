@@ -137,6 +137,33 @@ MariaDB [dj1812]> show tables;   # 查看上一步生成的表
 (djenv) [root@room8pc16 mysite]# python manage.py runserver 0:80
 ```
 
+### 创建应用
+
+软件开发也希望能实现即插即用一样的功能，在编写python程序时，本着DRY（Don't Repeat Yourself）原则。
+
+可以把一个项目拆解成很多应用。每一个应用编写好后，还可以集成到其他项目。
+
+#### 创建投票应用
+
+```shell
+(djenv) [root@room8pc16 mysite]# python manage.py startapp polls
+```
+
+#### 集成应用到项目
+
+```shell
+# mysite/settings.py
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'polls',
+]
+```
+
 
 
 
