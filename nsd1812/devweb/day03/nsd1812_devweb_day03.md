@@ -164,7 +164,33 @@ INSTALLED_APPS = [
 ]
 ```
 
+#### url规划
 
+- http://127.0.0.1:8000/polls/：投票首页，列出全部的问题
+- http://127.0.0.1:8000/polls/1/：1号问题投票详情
+- http://127.0.0.1:8000/polls/1/result/：1号问题的投票结果
+
+#### 授权
+
+项目的入口是mysite/urls.py，如果所有应用涉及到的网址全部写到这个文件，文件内容将会非常多，不便于管理。
+
+为了方便管理，将某一应用的URL交给应用处理。比如投票应用的url都以polls/开头，所以将以polls/开头的URL交给polls应用处理。
+
+```shell
+# mysite/urls.py
+from django.conf.urls import url, include
+from django.contrib import admin
+
+urlpatterns = [
+    url(r'^admin/', admin.site.urls),
+    url(r'^polls/', include('polls.urls')),
+]
+# vim polls/urls.py
+from django.conf.urls import url
+
+urlpatterns = [
+]
+```
 
 
 
