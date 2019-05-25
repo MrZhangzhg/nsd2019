@@ -79,9 +79,11 @@ mysite/         # 项目的根目录
 # 访问http://127.0.0.1:8000/
 ```
 
+### 配置pycharm
 
+File -> Settings -> Project: day03 -> Project Interpreter -> 点右上角齿轮 -> add Local -> Existing environment (勾选Make available to all project) -> 点右侧... -> /opt/djenv/bin/python
 
-### 
+File -> Settings -> Languages & Frameworks -> django -> Enable django support -> django project root 填写外层mysite目录 -> settings 选择 mysite/settings.py
 
 
 
