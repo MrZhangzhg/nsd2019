@@ -50,11 +50,38 @@ t-->c
 (djenv) [root@room8pc16 zzg_pypkgs]# cd dj_pkgs/
 (djenv) [root@room8pc16 dj_pkgs]# pip install *
 
-#
+# 在线安装
 (djenv) [root@room8pc16 dj_pkgs]# pip install django==1.11.6
 ```
 
+### 创建django项目
 
+```shell
+(djenv) [root@room8pc16 day03]# django-admin startproject mysite
+(djenv) [root@room8pc16 day03]# tree mysite/
+mysite/         # 项目的根目录
+├── manage.py   # 项目管理工具
+└── mysite      # 项目配置目录
+    ├── __init__.py
+    ├── settings.py  # 配置文件
+    ├── urls.py      # 程序的入口文件 URLConf
+    └── wsgi.py      # 将项目部署到Web服务器时应用
+
+1 directory, 5 files
+```
+
+### 测试站点
+
+```shell
+(djenv) [root@room8pc16 day03]# cd mysite/
+# django提供了一个测试服务器，功能简单，不能用于生产环境
+(djenv) [root@room8pc16 mysite]# python manage.py runserver
+# 访问http://127.0.0.1:8000/
+```
+
+
+
+### 
 
 
 
