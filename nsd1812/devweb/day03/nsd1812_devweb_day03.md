@@ -212,10 +212,19 @@ urlpatterns = [
 
 ```python
 # mysite/polls/views.py
+from django.shortcuts import render
 
+def index(request):
+    return render(request, 'index.html')
 ```
 
+函数至少需要有一个参数，用户的请求会传给该参数。返回值是通过render函数调用一个模板，将模板文件发送给用户。
 
+3. 创建模板文件index.html
+
+```python
+
+```
 
 
 
