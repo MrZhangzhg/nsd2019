@@ -117,7 +117,31 @@ pymysql.install_as_MySQLdb()
 # 0:80 表示 0.0.0.0：80
 ```
 
+### 生成内建应用的表
 
+```shell
+(djenv) [root@room8pc16 mysite]# python manage.py makemigrations
+(djenv) [root@room8pc16 mysite]# python manage.py migrate
+MariaDB [dj1812]> show tables;   # 查看上一步生成的表
+```
+
+### 创建管理员
+
+```shell
+(djenv) [root@room8pc16 mysite]# python manage.py createsuperuser
+```
+
+### 访问后台管理页面 :http://127.0.0.1/admin
+
+```shell
+(djenv) [root@room8pc16 mysite]# python manage.py runserver 0:80
+```
+
+
+
+
+
+### 
 
 
 
