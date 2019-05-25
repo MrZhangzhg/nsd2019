@@ -283,15 +283,74 @@ def detail(request, question_id):
 </html>
 ```
 
+#### 投票结果页
 
+1. url
 
+```python
+# mysite/polls/urls.py
+    url(r'^(?P<question_id>\d+)/result/$', views.result, name='result'),
+```
 
+2. views
 
+```python
+def result(request, question_id):
+    return render(request, 'result.html', {'qid': question_id})
+```
 
+3. template
 
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票结果</title>
+</head>
+<body>
+<div class="container">
+    <h1>{{ qid }}号问题投票结果</h1>
+</div>
+</body>
+</html>
+```
 
+### 模型
 
+模型对应数据库。投票应用需要的字段有：问题ID、问题内容、选项、票数。
 
+经过分析，需要两张表：问题表，选项表
+
+问题表：
+
+| ID   | 内容             |
+| ---- | ---------------- |
+| 1    | 期待的工资？     |
+| 2    | 希望进入的公司？ |
+
+选项表：
+
+| ID   | 内容      | 问题ID | 票数 |
+| ---- | --------- | ------ | ---- |
+| 1    | 达内      | 2      | 0    |
+|      | 5000-8000 | 1      | 0    |
+| 3    | 华为      | 2      | 0    |
+|      | \> 10000  | 1      | 0    |
+
+编写模型声明
+
+```python
+# mysite/polls/models.py
+from django.db import models
+
+class Question(models.Model):
+    question_text = models.CharField(max_length=200, unique=True, null=False)
+    pub_date = models.DateTimeField()
+
+    def __str__(self):
+        return '问题: %s' % self.question_text
+```
 
 
 
