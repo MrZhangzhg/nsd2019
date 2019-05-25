@@ -185,6 +185,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^polls/', include('polls.urls')),
 ]
+
 # vim polls/urls.py
 from django.conf.urls import url
 
@@ -192,9 +193,27 @@ urlpatterns = [
 ]
 ```
 
+#### 创建首页
 
+1. 配置URL
 
-### 
+```python
+# mysite/polls/urls.py
+from django.conf.urls import url
+from . import views
+
+urlpatterns = [
+    # url(正则, 函数, name=该url的名字),
+    url(r'^$', views.index, name='index'),
+]
+```
+
+2. 编写函数
+
+```python
+# mysite/polls/views.py
+
+```
 
 
 
