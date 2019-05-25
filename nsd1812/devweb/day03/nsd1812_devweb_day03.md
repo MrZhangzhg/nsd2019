@@ -338,7 +338,7 @@ def result(request, question_id):
 | 3    | 华为      | 2      | 0    |
 |      | \> 10000  | 1      | 0    |
 
-编写模型声明
+#### 编写问题模型声明
 
 ```python
 # mysite/polls/models.py
@@ -351,6 +351,52 @@ class Question(models.Model):
     def __str__(self):
         return '问题: %s' % self.question_text
 ```
+
+#### 生成问题表
+
+```shell
+(djenv) [root@room8pc16 mysite]# python manage.py makemigrations
+(djenv) [root@room8pc16 mysite]# python manage.py migrate
+MariaDB [dj1812]> show tables;
+- polls_question  => 应用名_类名  （全部采用小写）
+MariaDB [dj1812]> desc polls_question;
+```
+
+#### 编写选项模型
+
+```python
+class Choice(models.Model):
+    choice_text = models.CharField(max_length=200, null=False)
+    votes = models.IntegerField(default=0)
+    q = models.ForeignKey(Question, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return '问题: %s => %s' % (self.q, self.choice_text)
+```
+
+#### 生成选项表
+
+```shell
+(djenv) [root@room8pc16 mysite]# python manage.py makemigrations
+(djenv) [root@room8pc16 mysite]# python manage.py migrate
+MariaDB [dj1812]> show tables;
+MariaDB [dj1812]> desc polls_choice;
+# 发现表中有一个字段是q_id
+```
+
+因为Question和Choice是有主外键约束的，也就是说一个问题可以对应多个选项。但是一个选项只能对应一个问题。在Choice中，q是外键，数据库自动为它加上\_id，成为外键字段，如果Choice中用的是question，那么外键字段的名字就是question\_id。
+
+将Choice类中的q改为question。完成之后更新数据库：
+
+```shell
+(djenv) [root@room8pc16 mysite]# python manage.py makemigrations
+Did you rename choice.q to choice.question (a ForeignKey)? [y/N] y
+(djenv) [root@room8pc16 mysite]# python manage.py migrate
+MariaDB [dj1812]> desc polls_choice;
+# q_id变成了question_id
+```
+
+
 
 
 
