@@ -85,6 +85,38 @@ File -> Settings -> Project: day03 -> Project Interpreter -> 点右上角齿轮 
 
 File -> Settings -> Languages & Frameworks -> django -> Enable django support -> django project root 填写外层mysite目录 -> settings 选择 mysite/settings.py
 
+### 配置项目
+
+```shell
+(djenv) [root@room8pc16 ~]# mysql -uroot -ptedu.cn
+MariaDB [(none)]> CREATE DATABASE dj1812 DEFAULT CHARSET utf8;
+
+# mysite/settings.py
+ALLOWED_HOSTS = '*'
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'dj1812',
+        'USER': 'root',
+        'PASSWORD': 'tedu.cn',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+    }
+}
+LANGUAGE_CODE = 'zh-hans'
+TIME_ZONE = 'Asia/Shanghai'
+USE_TZ = False
+
+# mysite/__init__.py
+import pymysql
+pymysql.install_as_MySQLdb()
+
+
+(djenv) [root@room8pc16 mysite]# systemctl stop httpd
+(djenv) [root@room8pc16 mysite]# python manage.py runserver 0:80
+# 0:80 表示 0.0.0.0：80
+```
+
 
 
 
