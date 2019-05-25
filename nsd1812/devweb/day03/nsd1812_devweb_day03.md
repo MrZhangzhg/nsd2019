@@ -396,7 +396,21 @@ MariaDB [dj1812]> desc polls_choice;
 # q_id变成了question_id
 ```
 
+### 将模型注册到后台管理界面
 
+```python
+# mysite/polls/admin.py
+from django.contrib import admin
+from .models import Question, Choice
+
+admin.site.register(Question)
+admin.site.register(Choice)
+
+# 启动开发服务器
+(djenv) [root@room8pc16 mysite]# python manage.py runserver 0:80
+```
+
+访问后台http://127.0.0.1/admin/。添加一些问题和选项。
 
 
 

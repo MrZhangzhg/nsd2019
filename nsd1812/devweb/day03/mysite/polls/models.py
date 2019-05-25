@@ -13,4 +13,4 @@ class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
 
     def __str__(self):
-        return '问题: %s => %s' % (self.question, self.choice_text)
+        return '%s => %s' % (self.question, self.choice_text)
