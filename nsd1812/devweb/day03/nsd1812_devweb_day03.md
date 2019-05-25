@@ -246,3 +246,56 @@ def index(request):
 ```
 
 访问http://127.0.0.1/出现404是正常的，因为确实没有定义；访问http://127.0.0.1/polls/才能显示应用的首页。
+
+#### 投票详情页
+
+1. URL
+
+```python
+# mysite/polls/urls.py
+    # url(r'^1/$', views.detail, name='detail'),
+    # url(r'^\d+/$', views.detail, name='detail'),
+    # url(r'^(\d+)/$', views.detail, name='detail'),
+    url(r'^(?P<question_id>\d+)/$', views.detail, name='detail'),
+```
+
+2. views.py
+
+```python
+def detail(request, question_id):
+    return render(request, 'detail.html', {'qid': question_id})
+```
+
+3. detail.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票详情</title>
+</head>
+<body>
+<div class="container">
+    <h1>{{ qid }}号问题投票详情</h1>
+</div>
+</body>
+</html>
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
