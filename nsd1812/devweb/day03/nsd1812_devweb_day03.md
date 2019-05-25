@@ -222,11 +222,27 @@ def index(request):
 
 3. 创建模板文件index.html
 
-```python
-
+```shell
+(djenv) [root@room8pc16 mysite]# mkdir polls/templates
+# mysite/polls/templates/index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票首页</title>
+</head>
+<body>
+<div class="container">
+    <h1>投票首页</h1>
+</div>
+</body>
+</html>
 ```
 
+4. 测试
 
+```shell
+(djenv) [root@room8pc16 mysite]# python manage.py runserver 0:80
+```
 
-
-
+访问http://127.0.0.1/出现404是正常的，因为确实没有定义；访问http://127.0.0.1/polls/才能显示应用的首页。
