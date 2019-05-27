@@ -354,6 +354,7 @@ def detail(request, question_id):
     <h1 class="text-center text-warning">{{ question.id }}号问题投票详情</h1>
     <h3>{{ question.question_text }}</h3>
     <form action="" method="post">
+    {% csrf_token %}
         {% for choice in question.choice_set.all %}
             <div class="radio">
                 <label>
@@ -369,9 +370,49 @@ def detail(request, question_id):
 {% endblock %}
 ```
 
+## 实现投票功能
+
+- 在投票详情页选择某一项后，投票
+- 投票需要修改数据库。数据库通过调用函数进行修改
+- 访问某一URL，触发函数调用
+
+### 为投票函数定义URL
+
+```python
+# polls/urls.py
+url(r'^(?P<question_id>\d+)/vote/$', views.vote, name='vote'),
+```
+
+### 定义投票函数
+
+```python
+from django.shortcuts import render, redirect
+
+def vote(request, question_id):
+    # 取出问题
+    question = Question.objects.get(id=question_id)
+    if request.method == 'POST':
+        # 取出用户的选择
+        choice_id = request.POST.get('choice_id')
+        # 取出选项实例
+        choice = question.choice_set.get(id=choice_id)
+        choice.votes += 1
+        choice.save()
+
+    # redirect相当于打开一个新窗口，访问网址。
+    # 如果仍然采用render，将会把request的数据继续向result传递
+    return redirect('result', question_id=question_id)
+```
+
+### 修改表单的action行为
+
+```html
+action="{% url 'vote' question_id=question.id %}"
+```
 
 
 
+### 
 
 
 
