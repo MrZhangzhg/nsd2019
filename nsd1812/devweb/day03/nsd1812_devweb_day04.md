@@ -410,9 +410,43 @@ def vote(request, question_id):
 action="{% url 'vote' question_id=question.id %}"
 ```
 
+## 实现投票结果
+
+### 修改函数
+
+```python
+def result(request, question_id):
+    question = Question.objects.get(id=question_id)
+    return render(request, 'result.html', {'question': question})
+```
+
+### 修改结果模板
+
+```html
+<!--result.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}投票结果{% endblock %}
+{% block content %}
+    <h1 class="text-center text-warning">{{ question.id }}号问题投票结果</h1>
+    <h3>{{ question.question_text }}</h3>
+    <table class="table table-bordered table-striped table-hover h4">
+        <tr class="info text-center">
+            <td>选项</td>
+            <td>票数</td>
+        </tr>
+        {% for choice in question.choice_set.all %}
+            <tr>
+                <td>{{ choice.choice_text }}</td>
+                <td>{{ choice.votes }}</td>
+            </tr>
+        {% endfor %}
+
+    </table>
+{% endblock %}
+```
 
 
-### 
 
 
 
