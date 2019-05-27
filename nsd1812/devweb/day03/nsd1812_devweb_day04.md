@@ -153,7 +153,16 @@ def index(request):
 </body>
 ```
 
+> 说明：{{var}}表示变量，{% %}是模板语法标签，在{}以外的是html语法。
 
+### 为超链接加上具体的url
+
+```html
+<li>
+    <a href="http://127.0.0.1/polls/{{ question.id }}/">{{ question.question_text }}</a>
+    {{ question.pub_date }}
+</li>
+```
 
 
 

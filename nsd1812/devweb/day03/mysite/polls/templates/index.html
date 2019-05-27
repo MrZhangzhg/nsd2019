@@ -11,7 +11,9 @@
         <ol>
             {% for question in questions %}
                 <li>
-                    <a href="">{{ question.question_text }}</a>
+                    <a href="{% url 'detail' question_id=question.id %}" target="_blank">
+                        {{ question.question_text }}
+                    </a>
                     {{ question.pub_date }}
                 </li>
             {% endfor %}
