@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}执行任务{% endblock %}
+{% block content %}
+<form action="" method="post" style="margin-top: 20px">
+{% csrf_token %}
+    <div class="form-group h4">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#server" data-toggle="tab">主机</a></li>
+            <li><a href="#servergroup" data-toggle="tab">主机组</a></li>
+        </ul>
+        <div class="tab-content" style="margin-top: 5px">
+            <div class="tab-pane active in fade" id="server">
+                <select name="host" class="form-control">
+                    <option value="">无</option>
+                    {% for host in hosts %}
+                        <option value="{{ host.ipaddr }}">{{ host.hostname }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="tab-pane fade" id="servergroup">
+                <select name="group" class="form-control">
+                    <option value="">无</option>
+                    {% for group in groups %}
+                        <option value="{{ group.groupname }}">{{ group.groupname }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="h4">
+        <table class="table table-bordered table-striped table-hover">
+            <tr class="info">
+                <td>模块</td>
+                <td>参数</td>
+            </tr>
+            {% for module in modules %}
+                <tr>
+                    <td>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="module" value="{{ module.modulename }}">
+                                {{ module.modulename }}
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        {% for arg in module.argument_set.all %}
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="argument" value="{{ arg.arg_text }}">
+                                    {{ arg.arg_text }}
+                                </label>
+                            </div>
+                        {% endfor %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="form-group text-center">
+        <input class="btn btn-primary" type="submit" value="执 行">
+    </div>
+</form>
+{% endblock %}

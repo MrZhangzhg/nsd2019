@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}My Ansible Project{% endblock %}
+{% block content %}
+<div class="row h4">
+    <div class="col-sm-3 text-center">
+        <a href="{% url 'mainpage' %}" target="_blank">
+            <img width="150px" src="{% static 'imgs/linux.jpg' %}"><br>
+            主机信息
+        </a>
+    </div>
+    <div class="col-sm-3 text-center">
+        <a href="{% url 'addhosts' %}" target="_blank">
+            <img width="150px" src="{% static 'imgs/linux.jpg' %}"><br>
+            添加主机
+        </a>
+    </div>
+    <div class="col-sm-3 text-center">
+        <a href="{% url 'addmodules' %}" target="_blank">
+            <img width="150px" src="{% static 'imgs/linux.jpg' %}"><br>
+            添加模块
+        </a>
+    </div>
+    <div class="col-sm-3 text-center">
+        <a href="{% url 'tasks' %}" target="_blank">
+            <img width="150px" src="{% static 'imgs/linux.jpg' %}"><br>
+            执行任务
+        </a>
+    </div>
+</div>
+{% endblock %}

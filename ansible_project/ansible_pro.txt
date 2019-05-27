@@ -1,0 +1,462 @@
+ansible_django项目
+1、安装必须的软件包
+[root@room8pc16 ~]# source /opt/djenv/bin/activate
+(djenv) [root@room8pc16 zzg_pypkgs]# pip install ansible_pkg/*
+(djenv) [root@room8pc16 zzg_pypkgs]# pip install ansible-cmdb_pkgs/*
+(djenv) [root@room8pc16 zzg_pypkgs]# pip install requests_pkgs/*
+(djenv) [root@room8pc16 zzg_pypkgs]# pip install sqlalchemy_pkgs/*
+2、创建项目
+(djenv) [root@room8pc16 ansible_project]# django-admin startproject myansible
+(djenv) [root@room8pc16 ansible_project]# cd myansible/
+3、修改pycharm:解释器、django支持
+4、创建应用
+(djenv) [root@room8pc16 myansible]# python manage.py startapp webansi
+5、修改配置
+# myansible/settings.py
+ALLOWED_HOSTS = '*'
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'webansi',
+]
+LANGUAGE_CODE = 'zh-hans'
+TIME_ZONE = 'Asia/Shanghai'
+USE_TZ = False
+6、生成数据库
+(djenv) [root@room8pc16 myansible]# python manage.py makemigrations
+(djenv) [root@room8pc16 myansible]# python manage.py migrate
+(djenv) [root@room8pc16 myansible]# ls
+db.sqlite3  manage.py  myansible  webansi
+说明：sqlite是一个文件型数据库，一个文件就是一个库。
+(djenv) [root@room8pc16 myansible]# sqlite3 db.sqlite3
+sqlite> .help
+sqlite> .tables   # 相当于是show tables
+sqlite> .schema auth_user   # desc auth_user
+sqlite> SELECT * FROM auth_user;
+7、创建用户
+(djenv) [root@room8pc16 myansible]# python manage.py createsuperuser
+8、启动开发服务器测试
+(djenv) [root@room8pc16 myansible]# python manage.py runserver 0:80
+
+
+9、规划网址
+http://127.0.0.1/  显示所有的功能
+http://127.0.0.1/webansi/   应用首页，显示服务器的信息
+http://127.0.0.1/webansi/addhosts/  显示、添加主机、主机组
+http://127.0.0.1/webansi/addmodules/   显示、添加模块和参数
+http://127.0.0.1/webansi/tasks/   执行任务
+
+10、授权，把以webansi开头的URL，交给应用处理
+# myansible/urls.py
+from django.conf.urls import url, include
+from django.contrib import admin
+
+urlpatterns = [
+    url(r'^admin/', admin.site.urls),
+    url(r'^webansi/', include('webansi.urls')),
+]
+# webansi/urls.py    # 需要新建
+from django.conf.urls import url
+
+urlpatterns = [
+
+]
+
+制作首页
+因为该项目只有一个应用，这里采用了不正规的做法，将首页交给应用处理
+1、 url
+# myansible/urls.py
+from django.conf.urls import url, include
+from django.contrib import admin
+from webansi import views
+
+urlpatterns = [
+    url(r'^$', views.index, name='index'),
+    url(r'^admin/', admin.site.urls),
+    url(r'^webansi/', include('webansi.urls')),
+]
+注意：需要在pycharm中，右击外层的myansible目录，把它标记为source root
+
+2、视图函数
+# webansi/views.py
+from django.shortcuts import render
+
+def index(request):
+    return render(request, 'index.html')
+
+3、模板文件
+# mkdir webansi/templates/
+# webansi/templates/index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Ansible Project</title>
+</head>
+<body>
+测试页面
+</body>
+</html>
+4、启动开发服务器测试
+(djenv) [root@room8pc16 myansible]# python manage.py runserver 0:80
+5、引入boostrap
+把static目录拷贝到webansi目录下
+6、实现模板继承
+
+
+编写模型
+1、需要的模型
+主机组、主机、模块、参数
+2、编写模型
+# webansi/models.py
+from django.db import models
+
+class HostGroup(models.Model):
+    groupname = models.CharField(max_length=50, unique=True, null=False)
+
+    def __str__(self):
+        return '组: %s' % self.groupname
+
+class Host(models.Model):
+    hostname = models.CharField(max_length=100, unique=True, null=False)
+    ipaddr = models.CharField(max_length=15, unique=True, null=False)
+    group = models.ForeignKey(HostGroup, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return '%s=> %s' % (self.hostname, self.group)
+
+class Module(models.Model):
+    modulename = models.CharField(max_length=50, unique=True, null=False)
+
+    def __str__(self):
+        return '模块: %s' % self.modulename
+
+class Argument(models.Model):
+    arg_text = models.CharField(max_length=200, unique=True, null=False)
+    module = models.ForeignKey(Module, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return '%s=> %s' % (self.module, self.arg_text)
+3、生成数据库表
+(djenv) [root@room8pc16 myansible]# python manage.py makemigrations
+(djenv) [root@room8pc16 myansible]# python manage.py migrate
+(djenv) [root@room8pc16 myansible]# sqlite3 db.sqlite3
+sqlite> .tables
+sqlite> .schema webansi_hostgroup
+
+4、注册模型到后台
+# webansi/admin.py
+from django.contrib import admin
+from webansi.models import HostGroup, Host, Module, Argument
+
+for item in [HostGroup, Host, Module, Argument]:
+    admin.site.register(item)
+
+
+
+配置ansible
+1、创建配置文件
+(djenv) [root@room8pc16 myansible]# mkdir ansicfg
+(djenv) [root@room8pc16 myansible]# vim ansicfg/ansible.cfg
+[defaults]
+inventory = dhosts.py
+remote_user = root
+2、编写动态主机清单文件
+(djenv) [root@room8pc16 myansible]# touch ansicfg/dhosts.py
+(djenv) [root@room8pc16 myansible]# chmod +x ansicfg/dhosts.py
+动态主机清单文件的输出，要求是以下样式：
+{'dbservers': {'hosts': ['192.168.4.4']},
+ 'lvs': {'hosts': ['192.168.4.1', '192.168.4.2']},
+ 'storage': {'hosts': ['192.168.4.7']},
+ 'webservers': {'hosts': ['192.168.4.5', '192.168.4.6']}}
+分析样式：
+{}
+{
+    '组1': {},
+}
+{
+    '组1': {'hosts': []}
+}
+{
+    '组1': {'hosts': [ip1, ip2, ip3]},
+    '组2': {'hosts': [ip4, ip5, ]},
+}
+# vim ansicfg/dhosts.py
+#!/opt/djenv/bin/python
+
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, Integer, String, ForeignKey, Date
+from sqlalchemy.orm import sessionmaker
+import json
+
+engine = create_engine(
+    'sqlite:////var/ftp/nsd_2018/nsd1811/devweb/ansible_project/myansible/db.sqlite3',
+    encoding='utf8',
+)
+Base = declarative_base()
+Session = sessionmaker(bind=engine)
+
+class HostGroup(Base):
+    __tablename__ = 'webansi_hostgroup'
+    id = Column(Integer, primary_key=True)
+    groupname = Column(String(50), nullable=False, unique=True)
+
+class Host(Base):
+    __tablename__ = 'webansi_host'
+    id = Column(Integer, primary_key=True)
+    hostname = Column(String(100), nullable=False, unique=True)
+    ipaddr = Column(String(15), nullable=False, unique=True)
+    group_id = Column(Integer, ForeignKey('webansi_hostgroup.id'))
+
+if __name__ == '__main__':
+    session = Session()
+    qset = session.query(HostGroup.groupname, Host.ipaddr).join(Host)
+    # print(qset.all())
+    result = {}
+    for group, ip in qset:
+        if group not in result:  # 组不是字典的key，创建一个项目
+            result[group] = {}   # result['dbservers'] = {}
+            result[group]['hosts'] = [] # result['dbservers']['hosts'] = []
+        result[group]['hosts'].append(ip)
+    print(json.dumps(result))
+(djenv) [root@room8pc16 ansicfg]# ansible all -m ping
+
+
+制作主机信息页面
+1、url
+# webansi/urls.py
+from django.conf.urls import url
+from . import views
+
+urlpatterns = [
+    url(r'^$', views.mainpage, name='mainpage'),
+]
+2、视图函数
+def mainpage(request):
+    return render(request, 'mainpage.html')
+3、生成mainpage.html
+(djenv) [root@room8pc16 ansicfg]# ansible all -m setup --tree /tmp/out2/
+(djenv) [root@room8pc16 ansicfg]# ansible-cmdb /tmp/out2/ > ../webansi/templates/mainpage.html
+4、修改index.html的超链接
+        <a href="{% url 'mainpage' %}" target="_blank">
+
+
+
+实现添加主机页面
+1、url
+# webansi/urls.py
+    url(r'^addhosts/$', views.addhosts, name='addhosts'),
+
+2、视图函数
+# webansi/views.py
+def addhosts(request):
+    return render(request, 'addhosts.html')
+
+3、创建模板
+# webansi/templates/addhosts.html
+{% extends 'base.html' %}
+{% block title %}添加主机{% endblock %}
+{% block content %}
+添加主机
+{% endblock %}
+
+4、修改index.html的超链接
+        <a href="{% url 'addhosts' %}" target="_blank">
+
+5、修改addhosts.html，实现表单
+<div style="margin-top: 20px">
+    <form action="" method="post" class="form-inline">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>主机组：</label>
+            <input type="text" class="form-control" name="group">
+        </div>
+        <div class="form-group">
+            <label>主机：</label>
+            <input type="text" class="form-control" name="host">
+        </div>
+        <div class="form-group">
+            <label>IP地址：</label>
+            <input type="text" class="form-control" name="ip">
+        </div>
+        <div class="form-group">
+            <input class="btn btn-primary" type="submit" value="提 交">
+        </div>
+    </form>
+</div>
+
+6、修改视图函数，将主机和组发送到前台
+def addhosts(request):
+    groups = HostGroup.objects.all()
+    return render(request, 'addhosts.html', {'groups': groups})
+
+7、修改addhosts.html，增加表格数据
+<div class="h4">
+    <table class="table table-striped table-hover">
+        <tr class="info">
+            <td>主机组</td>
+            <td>主机</td>
+        </tr>
+        {% for group in groups %}
+            <tr>
+                <td>{{ group.groupname }}</td>
+                <td>
+                    <ul class="list-unstyled">
+                        {% for host in group.host_set.all %}
+                            <li>{{ host.hostname }}: {{ host.ipaddr }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+8、修改视图，实现创建主机的功能
+def addhosts(request):
+    if request.method == 'POST':
+        groupname = request.POST.get('group').strip()
+        hostname = request.POST.get('host').strip()
+        ip = request.POST.get('ip').strip()
+        if groupname:
+            # get_or_create返回的是元组(组实例, True|False)
+            group = HostGroup.objects.get_or_create(groupname=groupname)[0]
+            if hostname and ip:
+                group.host_set.get_or_create(hostname=hostname, ipaddr=ip)
+
+    groups = HostGroup.objects.all()
+    return render(request, 'addhosts.html', {'groups': groups})
+注意：模板的form表单action=""，表示提交数据给自己
+
+
+
+实现添加模块页面
+1、url
+    url(r'^addmodules/$', views.addmodules, name='addmodules'),
+2、视图函数
+# webansi/views.py
+def addmodules(request):
+    modules = Module.objects.all()
+    return render(request, 'addmodules.html', {'modules': modules})
+3、模板
+# webansi/templates/addmodules.html
+{% extends 'base.html' %}
+{% block title %}添加模块{% endblock %}
+{% block content %}
+添加模块
+{% endblock %}
+4、修改index.html的超链接
+        <a href="{% url 'addmodules' %}" target="_blank">
+5、addmodules.html，实现表单
+<div class="h4" style="margin-top: 20px">
+    <form action="" method="post" class="form-inline">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>模块：</label>
+            <input type="text" class="form-control" name="module">
+        </div>
+        <div class="form-group">
+            <label>参数：</label>
+            <input type="text" class="form-control" name="args">
+        </div>
+        <div class="form-group">
+            <input class="btn btn-primary" type="submit" value="提 交">
+        </div>
+    </form>
+</div>
+
+6、addmodules.html，增加表格数据
+<div class="h4">
+    <table class="table table-striped table-hover">
+        <tr class="info">
+            <td>模块</td>
+            <td>参数</td>
+        </tr>
+        {% for module in modules %}
+            <tr>
+                <td>{{ module.modulename }}</td>
+                <td>
+                    <ul class="list-unstyled">
+                        {% for arg in module.argument_set.all %}
+                            <li>{{ arg.arg_text }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+7、修改视图，实现添加模块的功能
+def addmodules(request):
+    if request.method == 'POST':
+        modulename = request.POST.get('module').strip()
+        argument = request.POST.get('args').strip()
+        if modulename:
+            module = Module.objects.get_or_create(modulename=modulename)[0]
+            if argument:
+                module.argument_set.get_or_create(arg_text=argument)
+
+    modules = Module.objects.all()
+    return render(request, 'addmodules.html', {'modules': modules})
+
+
+实现删除参数的功能
+1、删除参数，可以给参数后面添加一个删除链接，链接就是一个URL。
+访问这个URL，可以对应执行一个函数。通过函数删除相应的参数。
+2、url
+    url(r'^delarg/(?P<arg_id>\d+)/$', views.delarg, name='delarg'),
+3、创建视图函数
+from django.shortcuts import render, redirect
+from .models import HostGroup, Module, Argument
+
+def delarg(request, arg_id):
+    argument = Argument.objects.get(id=arg_id)  # 取出参数实例
+    argument.delete()  # 删除参数
+    return redirect('addmodules')   # 跳转到addmodules
+
+4、修改addmodules.html，添加删除按钮
+<td>
+    <ul class="list-unstyled">
+        {% for arg in module.argument_set.all %}
+            <li>
+                <div class="col-sm-10">
+                    {{ arg.arg_text }}
+                </div>
+                <div class="col-sm-2">
+                    <a href="{% url 'delarg' arg_id=arg.id %}">
+                        删除
+                    </a>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</td>
+
+
+
+完成执行任务
+1、url
+    url(r'^tasks/$', views.tasks, name='tasks'),
+2、视图函数
+def tasks(request):
+    groups = HostGroup.objects.all()
+    modules = Module.objects.all()
+    context = {'groups': groups, 'modules': modules}
+    return render(request, 'tasks.html', context)
+3、模板
+{% extends 'base.html' %}
+{% block title %}执行任务{% endblock %}
+{% block content %}
+执行任务
+{% endblock %}
+4、修改index.html的超链接
+        <a href="{% url 'tasks' %}" target="_blank">
+
+5、修改模板文件
+详见addmodules.html
