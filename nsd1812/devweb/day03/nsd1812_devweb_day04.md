@@ -132,6 +132,27 @@ def index(request):
     return render(request, 'index.html', {'questions': questions})
 ```
 
+### 修改模板，显示所有问题
+
+```html
+<!-- index.html -->
+<body>
+<div class="container">
+    <h1>投票首页</h1>
+    <div>
+        <ol>
+            {% for question in questions %}
+                <li>
+                    <a href="">{{ question.question_text }}</a>
+                    {{ question.pub_date }}
+                </li>
+            {% endfor %}
+        </ol>
+    </div>
+</div>
+</body>
+```
+
 
 
 
