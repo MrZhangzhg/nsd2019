@@ -63,7 +63,7 @@ django为每一个ORM类都创建了名为objects的管理器，可以通过这�
 ### 修改问题
 
 ```python
->>> q2.question_text = '从达内结业后，你打算去哪个城市工作 ？'
+>>> q2.question_text = '从达内结业后，你打算去哪个城市工作？'
 >>> q2.save()
 ```
 
@@ -91,6 +91,45 @@ django为每一个ORM类都创建了名为objects的管理器，可以通过这�
 2019-06-01 12:00:00
 >>> Question.objects.order_by('-pub_date')  # 根据发布时间降序排列
 
+# 获取某一个问题的实例
+# get必须得到一个实例，否则报错。
+>>> Question.objects.get(id=1)  # 返回1号问题
+>>> Question.objects.get(id=10)  # 如果不存在，则报错
+>>> Question.objects.get(id__gt=1)  # id>1的问题，不只一项，报错。
+
+# 获取多个实例
+# filter可以得到0到多个实例的集合
+>>> Question.objects.filter(id=1)   # 具有一项的查询集
+>>> Question.objects.filter(id=10)  # 查询集为空
+>>> Question.objects.filter(id__gt=1)  # 查询集有多项
+```
+
+### 查询条件
+
+查询条件采用的形式是“属性__操作符=值”，id=1实际上是id\_\_exact=1的简写。
+
+```python
+>>> Question.objects.filter(id__exact=1)  # 等于1
+>>> Question.objects.filter(id__gt=1)  # 大于1
+>>> Question.objects.filter(id__gte=1)   # 大于等于1
+>>> Question.objects.filter(id__lt=1)   # 小于1
+>>> Question.objects.filter(id__lte=1)   # 小于等于1
+
+# 其他属性与数字属性类似，也是使用__
+>>> Question.objects.filter(question_text__startswith='从达内')
+>>> Question.objects.filter(pub_date__month=5)
+```
+
+## 完善首页
+
+### 修改函数，取出所有的问题
+
+```python
+from polls.models import Question
+
+def index(request):
+    questions = Question.objects.order_by('-pub_date')
+    return render(request, 'index.html', {'questions': questions})
 ```
 
 
