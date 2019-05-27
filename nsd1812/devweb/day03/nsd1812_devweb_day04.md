@@ -333,6 +333,42 @@ def index(request):
 {% endblock %}
 ```
 
+## 实现投票详情页
+
+### 修改函数
+
+```python
+def detail(request, question_id):
+    question = Question.objects.get(id=question_id)
+    return render(request, 'detail.html', {'question': question})
+```
+
+### 修改模板文件
+
+```python
+# detail.html
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}投票详情{% endblock %}
+{% block content %}
+    <h1 class="text-center text-warning">{{ question.id }}号问题投票详情</h1>
+    <h3>{{ question.question_text }}</h3>
+    <form action="" method="post">
+        {% for choice in question.choice_set.all %}
+            <div class="radio">
+                <label>
+                    <input type="radio" name="choice_id" value="{{ choice.id }}">
+                    {{ choice.choice_text }}
+                </label>
+            </div>
+        {% endfor %}
+        <div class="form-group">
+            <input class="btn btn-primary" type="submit" value="投 票">
+        </div>
+    </form>
+{% endblock %}
+```
+
 
 
 
