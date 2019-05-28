@@ -137,6 +137,67 @@ ENTRYPOINT ["curl", "-s", "http://ip.cn"]
 # 容器将运和地curl -s http://ip.cn -i
 ```
 
+- ENV：配置环境变量
+
+```shell
+[root@room8pc16 docker]# mkdir dfile5
+[root@room8pc16 docker]# cd dfile5
+[root@room8pc16 dfile5]# vim dockerfile
+FROM centos
+ENV NAME=admin PASSWORD=123456
+[root@room8pc16 dfile5]# docker build -t mycent6 .
+[root@room8pc16 dfile5]# docker run -it --rm mycent6 bash
+[root@de0c422bd4bd /]# echo $NAME
+admin
+[root@de0c422bd4bd /]# echo $PASSWORD
+123456
+```
+
+- VOLUME：用户忘记使用-v将数据目录挂到宿主机，将会自动创建一个匿名卷。
+
+```shell
+[root@room8pc16 dfile5]# mkdir ../dfile6
+[root@room8pc16 dfile5]# cd ../dfile6
+[root@room8pc16 dfile6]# vim dockerfile
+FROM centos
+VOLUME /data
+[root@room8pc16 dfile6]# docker build -t mycent7 .
+[root@room8pc16 dfile6]# docker run -ti --rm mycent7 bash
+[root@a7e16ff52fd7 /]# cp /etc/hosts /data/
+ls \ 
+/var/lib/docker/volumes/56479f6801520632d38cae130241e1467f2ae554a10c792fa628ae8c44ac605a/_data/
+hosts
+```
+
+- EXPOSE：声明端口仅仅是声明容器打算使用什么端口而已,并不会自动在宿主进行
+
+  端口映射。
+
+```shell
+[root@room8pc16 dfile6]# mkdir ../dfile7
+[root@room8pc16 dfile6]# cd ../dfile7
+[root@room8pc16 dfile7]# vim dockerfile
+FROM centos
+EXPOSE 80
+[root@room8pc16 dfile7]# docker build -t mycent8 .
+[root@room8pc16 dfile7]# docker run -idt -P mycent8 bash
+# 宿主机将随机选择一个端口与容器的80端口映射
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
