@@ -41,12 +41,56 @@
 [root@room8pc16 k8s]# docker logs mycent1   # 日志
 [root@room8pc16 k8s]# docker exec -it mycent1 bash  # 新启动Bash
 [root@room8pc16 k8s]# docker attach mycent1  # 连接到当前容器进程，不启动新进程
-
-
-
 ```
 
+生成新的镜像，可以通过commit指令将容器封装成镜像。但是这样做是不推荐的，因为它将产生太多的垃圾内容。
 
+#### 通过Dockerfile定制镜像
+
+一般来说，新建一个空目录，在这里创建名为dockerfile的文件进行镜像定制。
+
+```shell
+[root@room8pc16 k8s]# mkdir -p /tmp/docker/dfile1
+[root@room8pc16 k8s]# cd /tmp/docker/dfile1
+[root@room8pc16 dfile1]# vim dockerfile
+FROM centos
+RUN echo 'Hello World' > /tmp/hi.txt
+[root@room8pc16 dfile1]# docker build -t mycent1 .  # 构建镜像
+[root@room8pc16 dfile1]# docker history mycent1  # 查看详情
+[root@room8pc16 dfile1]# docker run -it mycent1 bash  # 测试
+[root@dfc6051dda08 /]# ls /tmp/hi.txt 
+/tmp/hi.txt
+[root@dfc6051dda08 /]# cat /tmp/hi.txt
+Hello World
+```
+
+新建镜像，执行多个指令：
+
+```shell
+[root@room8pc16 dfile1]# cd ..
+[root@room8pc16 docker]# mkdir dfile2
+[root@room8pc16 docker]# cd dfile2
+[root@room8pc16 dfile2]# vim dockerfile
+FROM centos
+RUN yum install -y net-tools
+RUN echo 'hello world' > /tmp/hi.txt
+RUN mkdir /tmp/demo
+[root@room8pc16 dfile2]# docker build -t mycent2 .
+[root@room8pc16 dfile2]# docker history mycent2
+```
+
+通过history观察到mycent2镜像增加了三个层次，因为每个RUN指令增加一个层次。制作镜像时，最好不要出现太多额外的层次，所以dockerfile最好改为以下样式：
+
+```shell
+[root@room8pc16 dfile2]# vim dockerfile 
+FROM centos
+RUN yum install -y net-tools \
+    && echo 'hello world' > /tmp/hi.txt \
+    && mkdir /tmp/demo
+[root@room8pc16 dfile2]# docker build -t mycent3 .
+[root@room8pc16 dfile2]# docker history mycent3
+# 发现构建的新镜像只有一个层次
+```
 
 
 
