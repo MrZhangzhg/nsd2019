@@ -92,9 +92,26 @@ RUN yum install -y net-tools \
 # 发现构建的新镜像只有一个层次
 ```
 
+> 注意：在构建镜像时使用的‘.’并不是指当前目录的意思，而是构建上下文环境context。docker是C/S模型运行，在构建时，客户端会把构建当前目录的内容拷贝到context，然后通过context环境执行构建。构建好的镜像放到服务器的镜像库中。
 
+### Dockerfile指令
 
+- FROM：基于哪个镜像进行构建
+- RUN：在构建过程中运行的指令
+- COPY：将从构建上下文目录中 \<源路径\> 的文件/目录复制到新的一层的镜像
+  内的\<目标路径\>位置
+- CMD：用于指定默认的容器主进程的启动命令的。
 
+```shell
+[root@room8pc16 dfile3]# vim dockerfile 
+FROM centos
+CMD /bin/echo Hello World
+[root@room8pc16 dfile3]# docker build -t mycent4 .
+[root@room8pc16 dfile3]# docker run --rm mycent4
+Hello World
+[root@room8pc16 dfile3]# docker run --rm -it mycent4 bash
+[root@324bc2a59213 /]# exit
+```
 
 
 
