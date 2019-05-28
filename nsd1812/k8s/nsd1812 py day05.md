@@ -215,7 +215,6 @@ curl: (7) Failed connect to 127.0.0.1:9000; 拒绝连接
 [root@room8pc16 dfile9]# docker run -v /tmp/html:/var/www/html -p 9000:80 -d cent_httpd   # 使用相同的命令再次启动一个容器
 [root@room8pc16 dfile9]# curl http://127.0.0.1:9000
 <h1>docker html</h1>
-
 ```
 
 
