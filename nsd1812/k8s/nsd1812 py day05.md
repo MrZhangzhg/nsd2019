@@ -186,6 +186,40 @@ EXPOSE 80
 
 
 
+制作基于centos的httpd镜像
+
+```shell
+[root@room8pc16 docker]# mkdir dfile9
+[root@room8pc16 docker]# cd dfile9
+[root@room8pc16 dfile9]# vim dockerfile
+FROM centos
+RUN rm -f /etc/yum.repos.d/*
+COPY ./server.repo /etc/yum.repos.d/
+RUN yum install -y httpd
+VOLUME /var/www/html/
+EXPOSE 80
+ENTRYPOINT ["httpd", "-D", "FOREGROUND"]
+[root@room8pc16 dfile9]# vim server.repo
+[server]
+name=server
+baseurl=ftp://172.17.0.1/centos7.4
+gpgcheck=0
+[root@room8pc16 dfile9]# docker build -t cent_httpd .
+[root@room8pc16 dfile9]# docker run -v /tmp/html:/var/www/html -p 9000:80 -d cent_httpd
+[root@room8pc16 dfile9]# echo '<h1>docker html</h1>' > /tmp/html/index.html
+[root@room8pc16 dfile9]# curl http://127.0.0.1:9000
+<h1>docker html</h1>
+[root@room8pc16 dfile9]# docker rm -f 6d75ee51c3a5b  # 强制删除容器
+[root@room8pc16 dfile9]# curl http://127.0.0.1:9000
+curl: (7) Failed connect to 127.0.0.1:9000; 拒绝连接
+[root@room8pc16 dfile9]# docker run -v /tmp/html:/var/www/html -p 9000:80 -d cent_httpd   # 使用相同的命令再次启动一个容器
+[root@room8pc16 dfile9]# curl http://127.0.0.1:9000
+<h1>docker html</h1>
+
+```
+
+
+
 
 
 
