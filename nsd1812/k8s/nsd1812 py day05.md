@@ -113,7 +113,29 @@ Hello World
 [root@324bc2a59213 /]# exit
 ```
 
+- ENTRYPOINT：与CMD类似，只不过它允许docker命令将参数传给ENTRYPOINT的命令。
 
+```shell
+[root@room8pc16 docker]# mkdir dfile4
+[root@room8pc16 docker]# cd dfile4
+[root@room8pc16 dfile4]# vim dockerfile
+FROM centos
+CMD ["curl", "-s", "https://ip.cn"]
+[root@room8pc16 dfile4]# docker build -t mycent5 .
+[root@room8pc16 dfile4]# docker run  --rm mycent5 
+[root@room8pc16 dfile4]# docker run  --rm mycent5 -s  # -s被当作命令，要求容器运行，但是-s并不是一个有效的命令
+docker: Error response from daemon: oci runtime error: exec: "-s": executable file not found in $PATH.
+
+[root@room8pc16 dfile4]# docker rmi mycent5
+[root@room8pc16 dfile4]# vim dockerfile 
+FROM centos
+ENTRYPOINT ["curl", "-s", "http://ip.cn"]
+[root@room8pc16 dfile4]# docker build -t mycent5 .
+[root@room8pc16 dfile4]# docker run  --rm mycent5 
+# 容器将运行curl -s http://ip.cn
+[root@room8pc16 dfile4]# docker run  --rm mycent5 -i
+# 容器将运和地curl -s http://ip.cn -i
+```
 
 
 
