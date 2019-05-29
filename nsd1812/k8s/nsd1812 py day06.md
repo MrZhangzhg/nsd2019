@@ -91,6 +91,71 @@ spec:
 # 查看到pod名称后，获取它的详细信息
 [root@node1 tomcat_mysql]# kubectl describe pod mysql-9vj45
 
+# 创建服务
+[root@node1 tomcat_mysql]# vim mysql-svc.yaml 
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+spec:
+  ports:
+    - port: 3306
+  selector:
+    app: mysql
+[root@node1 tomcat_mysql]# kubectl get service
+[root@node1 tomcat_mysql]# kubectl create -f mysql-svc.yaml 
+[root@node1 tomcat_mysql]# kubectl get service
+# mysql服务没有EXTERNAL IP，因为用户不直接访问mysql，而是访问web服务
+
+# 创建web服务
+[root@node1 tomcat_mysql]# vim myweb-rc.yaml 
+kind: ReplicationController
+metadata:
+  name: myweb
+spec:
+  replicas: 5
+  selector:
+    app: myweb
+  template:
+    metadata:
+      labels:
+        app: myweb
+    spec:
+      containers:
+        - name: myweb
+          image: 192.168.4.254:5000/tomcat-app
+          ports:
+          - containerPort: 8080
+          env:
+          - name: MYSQL_SERVICE_HOST
+            value: 'mysql'
+          - name: MYSQL_SERVICE_PORT
+            value: '3306'
+[root@node1 tomcat_mysql]# kubectl create -f myweb-rc.yaml
+[root@node1 tomcat_mysql]# kubectl get rc
+[root@node1 tomcat_mysql]# kubectl get pod
+[root@node1 tomcat_mysql]# docker ps
+# myweb将起动10个容器，因为每个pod中需要有一个架构容器，还需要有一个工作容器
+[root@node1 tomcat_mysql]# vim myweb-svc.yaml 
+apiVersion: v1
+kind: Service
+metadata:
+  name: myweb
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      nodePort: 30001
+  selector:
+    app: myweb
+# 访问node的300001，将会映射到pod的8080
+[root@node1 tomcat_mysql]# kubectl create -f myweb-svc.yaml 
+[root@node1 tomcat_mysql]# kubectl get service
+
+# 如果需要动态调整pod数目，只是将rc改个数字即可
+[root@node1 tomcat_mysql]# kubectl scale --replicas=3 replicationcontroller myweb 
+[root@node1 tomcat_mysql]# kubectl get rc
+[root@node1 tomcat_mysql]# kubectl get pod
 ```
 
 
