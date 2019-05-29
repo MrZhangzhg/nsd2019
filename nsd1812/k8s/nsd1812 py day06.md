@@ -49,6 +49,47 @@ KUBELET_POD_INFRA_CONTAINER="--pod-infra-container-image=192.168.4.254:5000/pod-
 [root@node1 k8s_pkgs]# systemctl enable kubelet
 [root@node1 k8s_pkgs]# systemctl start kube-proxy
 [root@node1 k8s_pkgs]# systemctl enable kube-proxy
+```
+
+### tomcat+mysql
+
+```shell
+# 创建mysql的rc声明文件
+[root@node1 tomcat_mysql]# vim mysql-rc.yaml 
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: mysql
+spec:
+  replicas: 1   # 要求标签是app:mysql的pod数目是1
+  selector:     # 选择器，查找标签是app:mysql的pod
+    app: mysql
+  template:     # 如果pod的数目不达标，创建满足以下条件的pod
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: 192.168.4.254:5000/mysql
+        ports:
+        - containerPort: 3306
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "123456"
+# 现在系统中没有rc / pod / 容器 / 镜像
+[root@node1 tomcat_mysql]# kubectl get rc
+[root@node1 tomcat_mysql]# kubectl get pod
+[root@node1 tomcat_mysql]# docker ps
+[root@node1 tomcat_mysql]# docker images
+# 根据ymal文件创建相关资源
+[root@node1 tomcat_mysql]# kubectl create -f mysql-rc.yaml  
+[root@node1 tomcat_mysql]# kubectl get rc
+[root@node1 tomcat_mysql]# kubectl get pod
+[root@node1 tomcat_mysql]# docker images
+[root@node1 tomcat_mysql]# docker ps
+# 查看到pod名称后，获取它的详细信息
+[root@node1 tomcat_mysql]# kubectl describe pod mysql-9vj45
 
 ```
 
