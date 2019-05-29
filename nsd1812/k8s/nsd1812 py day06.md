@@ -293,7 +293,7 @@ spec:
   selector:
     name: frontend
 [root@node1 php_redis]# kubectl create -f frontend-service.yaml
-
+# 访问宿主机http://宿主机IP:30001
 ```
 
 
