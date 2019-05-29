@@ -152,6 +152,8 @@ spec:
 [root@node1 tomcat_mysql]# kubectl create -f myweb-svc.yaml 
 [root@node1 tomcat_mysql]# kubectl get service
 
+# 访问 http://node_ip:30001
+
 # 如果需要动态调整pod数目，只是将rc改个数字即可
 [root@node1 tomcat_mysql]# kubectl scale --replicas=3 replicationcontroller myweb 
 [root@node1 tomcat_mysql]# kubectl get rc
