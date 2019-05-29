@@ -160,6 +160,142 @@ spec:
 [root@node1 tomcat_mysql]# kubectl get pod
 ```
 
+### 删除
+
+```shell
+[root@node1 tomcat_mysql]# kubectl delete service myweb
+[root@node1 tomcat_mysql]# kubectl delete service mysql
+[root@node1 tomcat_mysql]# kubectl delete rc myweb 
+[root@node1 tomcat_mysql]# kubectl delete rc mysql 
+```
+
+
+
+## php+redis主从
+
+```shell
+# redis-master
+[root@node1 php_redis]# vim redis-master-controller.yaml 
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: redis-master
+  labels:
+    name: redis-master
+spec:
+  replicas: 1
+  selector:
+    name: redis-master
+  template:
+    metadata:
+      labels:
+        name: redis-master
+    spec:
+      containers:
+      - name: master
+        image: 192.168.4.254:5000/redis-master
+        ports:
+        - containerPort: 6379
+[root@node1 php_redis]# kubectl create -f redis-master-controller.yaml
+[root@node1 php_redis]# vim redis-master-service.yaml 
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-master
+  labels:
+    name: redis-master
+spec:
+  ports:
+  - port: 6379
+    targetPort: 6379
+  selector:
+    name: redis-master
+[root@node1 php_redis]# kubectl create -f redis-master-service.yaml 
+
+# redis-slave
+[root@node1 php_redis]# vim redis-slave-controller.yaml 
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: redis-slave
+  labels:
+    name: redis-slave
+spec:
+  replicas: 2
+  selector:
+    name: redis-slave
+  template:
+    metadata:
+      labels:
+        name: redis-slave
+    spec:
+      containers:
+      - name: slave
+        image: 192.168.4.254:5000/guestbook-redis-slave
+        env:
+        - name: GET_HOSTS_FORM
+          value: env
+        ports:
+        - containerPort: 6379
+[root@node1 php_redis]# kubectl create -f redis-slave-controller.yaml
+[root@node1 php_redis]# vim redis-slave-service.yaml 
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-slave
+  labels:
+    name: redis-slave
+spec:
+  ports:
+  - port: 6379
+  selector:
+    name: redis-slave
+[root@node1 php_redis]# kubectl create -f redis-slave-service.yaml
+
+# php
+[root@node1 php_redis]# vim frontend-controller.yaml 
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: frontend
+  labels:
+    name: frontend
+spec:
+  replicas: 3
+  selector:
+    name: frontend
+  template:
+    metadata:
+      labels:
+        name: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: 192.168.4.254:5000/guestbook-php-frontend
+        env:
+        - name: GET_HOSTS_FROM
+          value: env
+        ports:
+          - containerPort: 80
+[root@node1 php_redis]# kubectl create -f frontend-controller.yaml
+[root@node1 php_redis]# vim frontend-service.yaml 
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  labels:
+    name: frontend
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    nodePort: 30001
+  selector:
+    name: frontend
+[root@node1 php_redis]# kubectl create -f frontend-service.yaml
+
+```
+
 
 
 
