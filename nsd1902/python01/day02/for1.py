@@ -14,4 +14,3 @@ for name in atuple:
 
 for key in adict:
     print('%s: %s' % (key, adict[key]))
-
