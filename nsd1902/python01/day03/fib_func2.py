@@ -24,4 +24,3 @@ def fib_func(n):
 
 for i in range(2, 20):
     print(fib_func(i))
-
