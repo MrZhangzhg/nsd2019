@@ -21,11 +21,12 @@ def get_content():
 
     return content
 
-
 def wfile(fname, content):
-    pass
+    with open(fname, 'w') as fobj:
+        fobj.writelines(content)
 
 if __name__ == '__main__':
     fname = get_fname()
     content = get_content()
+    content = ['%s\n' % line for line in content]
     wfile(fname, content)
