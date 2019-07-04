@@ -10,7 +10,17 @@ def get_fname():
     return fname
 
 def get_content():
-    pass
+    content = []
+
+    print('请输入内容，输入end表示结束')
+    while True:
+        line = input('(end to quit)> ')
+        if line == 'end':
+            break
+        content.append(line)
+
+    return content
+
 
 def wfile(fname, content):
     pass
