@@ -1,5 +1,13 @@
+import os
+
 def get_fname():
-    pass
+    while True:
+        fname = input('filename: ')
+        if not os.path.exists(fname):   # 判断文件如果不存在则中断
+            break
+        print('文件已存在，请重试。')
+
+    return fname
 
 def get_content():
     pass
