@@ -1,17 +1,23 @@
+stack = []
+
 def pop_it():
-    print('pop')
+    if stack:
+        print('从栈中弹出: %s' % stack.pop())
+    else:
+        print('空栈')
 
 def push_it():
-    print('push')
+    data = input('数据: ')
+    stack.append(data)
 
 def view_it():
-    print('view')
+    print(stack)
 
 def show_menu():
     # 把函数保存到字典中
     cmds = {'0': pop_it, '1': push_it, '2': view_it}
-    prompt = """(0) 压栈
-(1) 出栈
+    prompt = """(0) 出栈
+(1) 压栈
 (2) 查询
 (3) 退出
 请选择(0/1/2/3): """
