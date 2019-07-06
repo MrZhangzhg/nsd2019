@@ -15,7 +15,7 @@ def add_user(username, password, fname):
     info = """用户信息:
 用户名：%s
 密码：%s
-""" % (username, password)
+    """ % (username, password)
 
     # 首先判断用户是不是已存在
     result = subprocess.run('id %s &> /dev/null' % username, shell=True)
