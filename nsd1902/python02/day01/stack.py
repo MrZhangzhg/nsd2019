@@ -11,7 +11,7 @@ def push_it():
         data = input('数据: ')
     except (KeyboardInterrupt, EOFError):
         print()
-        return 
+        return
 
     stack.append(data)
 
