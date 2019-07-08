@@ -6,6 +6,7 @@ def set_age(name, age):
     print('%s is %s years old.' % (name, age))
 
 def set_age2(name, age):
+    # 如果判断条件为False，将会发生AssertionError异常
     assert 0 < age < 120, '年龄超出范围(1-120)'
     print('%s is %s years old.' % (name, age))
 
