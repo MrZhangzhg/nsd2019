@@ -7,7 +7,12 @@ def pop_it():
         print('空栈')
 
 def push_it():
-    data = input('数据: ')
+    try:
+        data = input('数据: ')
+    except (KeyboardInterrupt, EOFError):
+        print()
+        return 
+
     stack.append(data)
 
 def view_it():
@@ -22,13 +27,17 @@ def show_menu():
 请选择(0/1/2/3): """
 
     while True:
-        choice = input(prompt).strip()
+        try:
+            choice = input(prompt).strip()
+        except (KeyboardInterrupt, EOFError):
+            choice = '3'
+
         if choice not in ['0', '1', '2', '3']:
             print('无效输入，请重试')
             continue
 
         if choice == '3':
-            print('Bye-bye')
+            print('\nBye-bye')
             break
 
         cmds[choice]()  # 从字典中取出函数并调用
