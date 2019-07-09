@@ -1,11 +1,34 @@
 import os
 import pickle
+from time import strftime
 
 def save(fname):
-    print('save')
+    date = strftime('%Y-%m-%d')  # 日期
+    amount = int(input('amount: '))  # 金额，float代替int可以有小数点
+    comment = input('comment: ')  # 说明
+    # 从文件中取出全部的收支记录
+    with open(fname, 'rb') as fobj:
+        records = pickle.load(fobj)
+    balance = records[-1][-2] + amount   # 余额
+    new_record = [date, amount, 0, balance, comment]
+    records.append(new_record)  # 最新一笔收入追加到大列表中
+    # 将更新后的列表写回文件
+    with open(fname, 'wb') as fobj:
+        pickle.dump(records, fobj)
 
 def cost(fname):
-    print('cost')
+    date = strftime('%Y-%m-%d')  # 日期
+    amount = int(input('amount: '))  # 金额，float代替int可以有小数点
+    comment = input('comment: ')  # 说明
+    # 从文件中取出全部的收支记录
+    with open(fname, 'rb') as fobj:
+        records = pickle.load(fobj)
+    balance = records[-1][-2] - amount  # 余额
+    new_record = [date, 0, amount, balance, comment]
+    records.append(new_record)  # 最新一笔收入追加到大列表中
+    # 将更新后的列表写回文件
+    with open(fname, 'wb') as fobj:
+        pickle.dump(records, fobj)
 
 def query(fname):
     print('query')
