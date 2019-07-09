@@ -13,18 +13,35 @@ def exam():
 
     # 让用户作答
     prompt = '%s %s %s = ' % (nums[0], op, nums[1])
-    answer = int(input(prompt))
-    # 判断对错
-    if answer == result:
-        print('你真棒!!!')
-    else:
+    counter = 0
+
+    while counter < 3:
+        try:
+            answer = int(input(prompt))
+        except:  # 可以捕获所有异常
+            print()
+            continue
+
+        # 判断对错
+        if answer == result:
+            print('你真棒!!!')
+            break
         print('不对哟')
+        counter += 1
+    else:
+        print('The Anser is: %s%s' % (prompt, result))
 
 def main():
     while True:
         exam()
         # 去除空白字符后取第一个字符
-        yn = input('Continue(y/n)? ').strip()[0]
+        try:
+            yn = input('Continue(y/n)? ').strip()[0]
+        except IndexError:
+            yn = 'y'
+        except (KeyboardInterrupt, EOFError):
+            yn = 'n'
+
         if yn in 'nN':
             print('\nBye-bye')
             break
