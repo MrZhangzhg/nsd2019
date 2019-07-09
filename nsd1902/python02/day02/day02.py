@@ -19,5 +19,8 @@ def func1(x):
 
 print(func1(5))
 
+# >>> result = 1
+# >>> for i in range(1, 6):
+# ...   result *= i
 
 
