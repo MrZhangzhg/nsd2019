@@ -31,7 +31,14 @@ def cost(fname):
         pickle.dump(records, fobj)
 
 def query(fname):
-    print('query')
+    # 打印表头
+    print('%-12s%-8s%-8s%-12s%-15s' % ('date', 'save', 'cost', 'balance', 'comment'))
+    # 取出数据
+    with open(fname, 'rb') as fobj:
+        records = pickle.load(fobj)
+
+    for line in records:
+        print('%-12s%-8s%-8s%-12s%-15s' % tuple(line))
 
 def show_menu():
     cmds = {'0': save, '1': cost, '2': query}
