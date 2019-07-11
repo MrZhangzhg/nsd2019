@@ -14,16 +14,29 @@ conn = pymysql.connect(
 cursor = conn.cursor()
 
 # 查询
+# query_dep = 'SELECT * FROM departments'
+# cursor.execute(query_dep)
+# 取出数据
+# result1 = cursor.fetchone()  # 取一行
+# print(result1)
+# print('*' * 40)
+# result2 = cursor.fetchmany(2)  # 指定取出几行
+# print(result2)
+# print('*' * 40)
+# result3 = cursor.fetchall()   # 取出全部
+# print(result3)
+#######################
+# 移动游标
 query_dep = 'SELECT * FROM departments'
 cursor.execute(query_dep)
-result1 = cursor.fetchone()  # 取一行
-print(result1)
+cursor.scroll(3, mode='absolute')   # 必须从开头算起，进行移动
+result = cursor.fetchone()
+print(result)
 print('*' * 40)
-result2 = cursor.fetchmany(2)  # 指定取出几行
+cursor.scroll(1)   # 默认以相对当前位置移动
+result2 = cursor.fetchone()
 print(result2)
-print('*' * 40)
-result3 = cursor.fetchall()   # 取出全部
-print(result3)
+
 
 # 关闭游标和连接
 cursor.close()
