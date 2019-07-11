@@ -1,5 +1,6 @@
 from sqlalchemy import create_engine, Column, Integer, String, Date, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
 
 # 创建到数据库的引擎
 engine = create_engine(
@@ -9,6 +10,10 @@ engine = create_engine(
     encoding='utf8',
     # echo=True   # 打开调试模式，生产环境不要设置
 )
+
+# 创建一个会话类，只有在CRUD，即增删改查时需要，本模块文件实际上用不到
+# 为了在其他模块文件中可以直接调用，在本模块中创建
+Session = sessionmaker(bind=engine)
 
 # 生成实体类的基类
 Base = declarative_base()
@@ -28,6 +33,15 @@ class Employees(Base):
     email = Column(String(50))
     # dep_id与departments的dep_id构成外键约束关系
     dep_id = Column(Integer, ForeignKey('departments.dep_id'))
+
+# 创建工资表的实体类
+class Salary(Base):
+    __tablename__ = 'salary'
+    id = Column(Integer, primary_key=True)
+    date = Column(Date)
+    emp_id = Column(Integer, ForeignKey('employees.emp_id'))
+    basic = Column(Integer)
+    awards = Column(Integer)
 
 if __name__ == '__main__':
     # 库中无表则创建，有表只是关联，不会再覆盖
