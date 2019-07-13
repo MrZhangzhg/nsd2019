@@ -28,11 +28,33 @@ session = Session()
 #     print(dep.dep_id, dep.dep_name)
 #################################
 # 过滤，查找2号部门的员工
-qset5 = session.query(Employees).filter(Employees.dep_id==2)
-for emp in qset5:
-    print(emp.emp_name)
-
-
-
+# qset5 = session.query(Employees).filter(Employees.dep_id==2)
+# for emp in qset5:
+#     print(emp.emp_name, emp.email)
+#################################
+# 过滤，查找2号部门使用163邮箱的员工
+# qset6 = session.query(Employees).filter(Employees.dep_id==2)\
+#     .filter(Employees.email.like('%163.com'))
+# for emp in qset6:
+#     print(emp.emp_name, emp.email)
+#################################
+# all方法返回列表, first方法返回结果的第一项
+# qset7 = session.query(Departments).order_by(Departments.dep_id)
+# print(qset7.all())
+# print(qset7.first())
+# dep = qset7.first()
+# print(dep.dep_id, dep.dep_name)
+#################################
+# 多表查询，查询员工所在部门
+qset8 = session.query(Employees.emp_name, Departments.dep_name)\
+    .join(Departments)
+for item in qset8:
+    print(item)
+# 多表查询时，query的第一个参数是Employees.emp_name，join时要写Departments
+# 如果query的第一个参数是Departments.dep_name, join时要写Employees
+qset9 = session.query(Departments.dep_name, Employees.emp_name)\
+    .join(Employees)
+for item in qset9:
+    print(item)
 
 
