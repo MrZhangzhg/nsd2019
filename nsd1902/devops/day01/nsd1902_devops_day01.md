@@ -92,7 +92,46 @@ os.fork它的返回值是数字，这个数字在父子进程中不一样，在�
 >>> wget.download('https://upload-images.jianshu.io/upload_images/12347101-bc5e84e92e23c692.jpg', '/tmp/abc.jpg')
 ```
 
+### 修改请求头，模拟firefox请求
 
+```python
+>>> headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'}
+>>> r = request.Request('http://127.0.0.1', headers=headers)
+>>> html = request.urlopen(r)
+# tail -f /var/log/httpd/access_log  发现客户端显示的是Firefox
+```
+
+### 数据编码
+
+在URL中只允许一部分ascii字符，所以在url中如果有非法字符，需要先对其进行编码。
+
+```python
+>>> html = request.urlopen('https://www.sogou.com/web?query=中国')   # 报错，因为存在中文字符
+
+# 对汉字进行编码
+>>> url = 'https://www.sogou.com/web?query=' + request.quote('中国')
+>>> url
+'https://www.sogou.com/web?query=%E4%B8%AD%E5%9B%BD'
+>>> html = request.urlopen(url)   # 正常
+```
+
+### 异常处理
+
+配置一个没有权限的目录
+
+```shell
+# mkdir -m 000 /var/www/html/ban/
+```
+
+- http://127.0.0.1/abc  -> 不存在
+- http://127.0.0.1/ban  -> 没权限
+
+```python
+>>> html = request.urlopen('http://127.0.0.1/abc')
+urllib.error.HTTPError: HTTP Error 404: Not Found
+>>> html = request.urlopen('http://127.0.0.1/ban')
+urllib.error.HTTPError: HTTP Error 403: Forbidden
+```
 
 
 
