@@ -78,10 +78,18 @@ os.fork它的返回值是数字，这个数字在父子进程中不一样，在�
 ...   fobj.write(data)
 [root@room8pc16 day01]# firefox /tmp/163.html 
 
->>> html = request.urlopen('https://upload-images.jianshu.io/upload_images/12347101-bc5e84e92e23c692.jpg')>>> with open('/tmp/myimg.jpg', 'wb') as fobj:
+>>> html = request.urlopen('https://upload-images.jianshu.io/upload_images/12347101-bc5e84e92e23c692.jpg')
+>>> with open('/tmp/myimg.jpg', 'wb') as fobj:
 ...   fobj.write(html.read())
 [root@room8pc16 day01]# eog /tmp/myimg.jpg 
+```
 
+下载网上资源也可以使用wget模块
+
+```python
+(nsd1902) [root@room8pc16 day01]# pip3 install wget
+>>> import wget
+>>> wget.download('https://upload-images.jianshu.io/upload_images/12347101-bc5e84e92e23c692.jpg', '/tmp/abc.jpg')
 ```
 
 
