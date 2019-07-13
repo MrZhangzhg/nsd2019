@@ -61,6 +61,31 @@ os.fork它的返回值是数字，这个数字在父子进程中不一样，在�
 - 多线程没有递归生成工作线程的问题
 - 多线程也没有僵尸进程的问题
 
+## urllib模块
+
+- urllib.request可以用来发送request和获取request的结果
+- urllib.error包含了urllib.request产生的异常
+- urllib.parse用来解析和处理URL
+- urllib.robotparse用来解析页面的robots.txt文件
+
+### 获取网络资源
+
+```python
+>>> from urllib import request
+>>> html = request.urlopen('http://www.163.com')
+>>> data = html.read()
+>>> with open('/tmp/163.html', 'wb') as fobj:
+...   fobj.write(data)
+[root@room8pc16 day01]# firefox /tmp/163.html 
+
+>>> html = request.urlopen('https://upload-images.jianshu.io/upload_images/12347101-bc5e84e92e23c692.jpg')>>> with open('/tmp/myimg.jpg', 'wb') as fobj:
+...   fobj.write(html.read())
+[root@room8pc16 day01]# eog /tmp/myimg.jpg 
+
+```
+
+
+
 
 
 
