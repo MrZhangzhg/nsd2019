@@ -133,6 +133,49 @@ urllib.error.HTTPError: HTTP Error 404: Not Found
 urllib.error.HTTPError: HTTP Error 403: Forbidden
 ```
 
+## paramiko模块
+
+通过ssh远程管理服务器
+
+安装
+
+```shell
+# cd zzg_pypkgs/paramiko_pkgs/
+# pip3 install *
+# 或在线安装
+# pip3 install paramiko
+```
+
+应用
+
+```python
+>>> import paramiko
+# 创建一个SSHClient对象
+>>> ssh = paramiko.SSHClient()
+# 服务器发来密钥是自动接收。相当于回答yes
+>>> ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+# 连接服务器
+>>> ssh.connect('192.168.4.3', username='root', password='123456', port=22)
+# 在服务器上执行命令后，返回值是一个元组，分别是输入、输出和错误的类文件对象
+# 把这三个类文件对象分别赋值
+>>> stdin, stdout, stderr = ssh.exec_command('id root; id john')
+# 把输出和错误信息读取出来
+>>> out = stdout.read()
+>>> err = stderr.read()
+>>> out
+b'uid=0(root) gid=0(root) \xe7\xbb\x84=0(root)\n'
+>>> err
+b'id: john: no such user\n'
+>>> out.decode()   # 将bytes类型转成str类型
+'uid=0(root) gid=0(root) 组=0(root)\n'
+```
+
+
+
+
+
+
+
 
 
 
