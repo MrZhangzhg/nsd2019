@@ -46,15 +46,32 @@ session = Session()
 # print(dep.dep_id, dep.dep_name)
 #################################
 # 多表查询，查询员工所在部门
-qset8 = session.query(Employees.emp_name, Departments.dep_name)\
-    .join(Departments)
-for item in qset8:
-    print(item)
+# qset8 = session.query(Employees.emp_name, Departments.dep_name)\
+#     .join(Departments)
+# for item in qset8:
+#     print(item)
 # 多表查询时，query的第一个参数是Employees.emp_name，join时要写Departments
 # 如果query的第一个参数是Departments.dep_name, join时要写Employees
-qset9 = session.query(Departments.dep_name, Employees.emp_name)\
-    .join(Employees)
-for item in qset9:
-    print(item)
+# qset9 = session.query(Departments.dep_name, Employees.emp_name)\
+#     .join(Employees)
+# for item in qset9:
+#     print(item)
+#################################
+# 更新，首先找到记录对应的实例，然后对实例重新赋值即可
+# 注意，filter的结果是列表的形式
+# qset10 = session.query(Departments).filter(Departments.dep_name=='人事部')
+# hr = qset10[0]  # 从列表中取出第一个元素
+# hr.dep_name = '人力资源部'
+# session.commit()  # 增删改都要commit
+#################################
+# 删除，将7号部门删除
+qset11 = session.query(Departments).filter(Departments.dep_id==7)
+sales = qset11[0]
+session.delete(sales)
+session.commit()
+
+
+
+
 
 
