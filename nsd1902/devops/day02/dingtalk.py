@@ -1,7 +1,7 @@
 import json
 import requests
 import sys
-
+import getpass
 
 def send_msg(url, reminders, msg):
     headers = {'Content-Type': 'application/json;charset=utf-8'}
@@ -16,12 +16,12 @@ def send_msg(url, reminders, msg):
         }
     }
     r = requests.post(url, data=json.dumps(data), headers=headers)
-    return r.text
+    return r.json()   # 服务器的返回信息，用于调试
 
 if __name__ == '__main__':
     msg = sys.argv[1]
     reminders = ['15055667788']  # 特殊提醒要查看的人,就是@某人一下
-    url = 此处填写上面第5步webhook的内容
+    url = getpass.getpass()
     print(send_msg(url, reminders, msg))
 
 
