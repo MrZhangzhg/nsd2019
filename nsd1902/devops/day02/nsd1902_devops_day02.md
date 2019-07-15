@@ -169,6 +169,12 @@ requests模块针对不同的http方法，分别创建了相关的函数，实�
 
 微信机器人模块：itchat
 
+## zabbix编程
+
+手册页：https://www.zabbix.com/documentation/3.4/zh/manual
+
+
+
 
 
 
