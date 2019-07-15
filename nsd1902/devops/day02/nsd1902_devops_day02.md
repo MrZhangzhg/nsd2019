@@ -130,6 +130,13 @@ requests模块针对不同的http方法，分别创建了相关的函数，实�
 'ISO-8859-1'
 >>> r.encoding = 'utf8'   # 更换编码方式
 >>> r.json()
+
+# 如果资源比较大，可以采用切分处理
+>>> r = requests.get('https://upload-images.jianshu.io/upload_images/7610279-f4563d12e2cc2c14.jpg')
+>>> with open('/tmp/newimg.jpg', 'wb') as fobj:
+...   for data in r.iter_content(4096):   # 每次读取4096字节
+...     fobj.write(data)
+# r.iter_content()用于迭代内容
 ```
 
 
