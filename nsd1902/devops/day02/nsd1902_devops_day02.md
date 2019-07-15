@@ -123,6 +123,13 @@ requests模块针对不同的http方法，分别创建了相关的函数，实�
 >>> with open('/tmp/myimg.jpg', 'wb') as fobj:
 ...   fobj.write(r.content)
 
+>>> url = 'http://www.weather.com.cn/data/zs/101010100.html'
+>>> r = requests.get(url)
+>>> r.json()    # 乱码
+>>> r.encoding  # 查看编码
+'ISO-8859-1'
+>>> r.encoding = 'utf8'   # 更换编码方式
+>>> r.json()
 ```
 
 
