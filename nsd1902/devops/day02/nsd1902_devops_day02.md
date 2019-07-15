@@ -175,6 +175,8 @@ requests模块针对不同的http方法，分别创建了相关的函数，实�
 
 api：application programming interface应用程序编程接口
 
+api地址：zabbix首页地址如果是http://x.x.x.x/zabbix，那么api地址就是http://x.x.x.x/zabbix/api_jsonrpc.php
+
 
 
 
