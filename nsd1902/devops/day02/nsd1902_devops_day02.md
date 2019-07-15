@@ -87,6 +87,44 @@ url = 'http://www.kuaidi100.com/query?type=%s&postid=%s'
 
 下载并注册一个钉钉账号
 
+## requests模块
+
+### http常用的方法
+
+- get：
+  - 在浏览器中直接输出网址
+  - 在网页中点击超链接
+  - 在一些表单中进行提交查询，如通过搜索引擎进行搜索
+- post：通过表单提交数据，如注册、登陆
+
+requests模块针对不同的http方法，分别创建了相关的函数，实现与之对应的功能。
+
+### requests应用
+
+安装：
+
+```shell
+# cd requests_pkgs/
+# pip3 install *
+
+# 或在线安装
+# pip3 install requests
+```
+
+应用：
+
+```python
+>>> import requests
+>>> r = requests.get('http://www.sogou.com')
+>>> r.text   # 访问文本内容
+
+>>> r = requests.get('https://upload-images.jianshu.io/upload_images/7610279-f4563d12e2cc2c14.jpg')
+>>> r.content   # 非文本内容
+>>> with open('/tmp/myimg.jpg', 'wb') as fobj:
+...   fobj.write(r.content)
+
+```
+
 
 
 
