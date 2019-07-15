@@ -139,6 +139,28 @@ requests模块针对不同的http方法，分别创建了相关的函数，实�
 # r.iter_content()用于迭代内容
 ```
 
+参数处理
+
+```python
+>>> url = 'http://www.kuaidi100.com/query'
+>>> params = {'type': 'youzhengguonei', 'postid': '9893442769997'}
+>>> r = requests.get(url, params=params)
+>>> r.json()
+```
+
+头部信息
+
+```python
+>>> url = 'http://www.jianshu.com'
+>>> r = requests.get(url)
+>>> r.text   # 正文中有forbidden（禁止），原因是简书有反爬虫设置
+
+# 修改请求头，设置客户端浏览器字符串为火狐
+>>> headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'}
+>>> r = requests.get(url, headers=headers)
+>>> r.text  # 正常
+```
+
 
 
 
