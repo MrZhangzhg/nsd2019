@@ -131,6 +131,32 @@ node7.tedu.cn
 # ansible-playbook lamp.yml
 ```
 
+### 命名元组
+
+命名元组是对元组的一个扩展，它也支持原始的元组的操作，同时它给每个元素起名。访问元组的元素时，既可以通过下标访问，也可以通过名称访问。
+
+```python
+>>> from collections import namedtuple
+>>> Point = namedtuple('Point', ['x', 'y', 'z'])
+>>> p1 = Point(10, 20, 30)
+>>> p1
+Point(x=10, y=20, z=30)
+>>> p1.x
+10
+>>> p1.y
+20
+>>> p1.z
+30
+>>> p1[0]
+10
+>>> p1[:2]
+(10, 20)
+```
+
+
+
+
+
 
 
 
