@@ -153,6 +153,44 @@ Point(x=10, y=20, z=30)
 (10, 20)
 ```
 
+## ansible编程
+
+ansible官方手册：https://docs.ansible.com
+
+找到ansible2.7的手册页：https://docs.ansible.com/ansible/2.7/index.html，搜索python api，找到：https://docs.ansible.com/ansible/2.7/dev_guide/developing_api.html?highlight=python%20api
+
+### yaml对应成python的数据类型
+
+```python
+# vim  mkrepo.yml
+---
+- name: configure yum
+  hosts: all
+  tasks:
+    - name: upload repo file
+      copy:
+        src: files/servers.repo
+        dest: /etc/yum.repos.d/server.repo
+# 对应的数据类型如下：
+[
+    {
+        'name': 'configure yum',
+        'hosts': 'all',
+        'tasts': [
+            {
+                'name': 'upload repo file',
+                'copy': {
+                    'src': 'files/servers.repo',
+                    'dest': '/etc/yum.repos.d/server.repo'
+                },
+            },
+            {},
+        ]
+    },
+    {},
+]
+```
+
 
 
 
