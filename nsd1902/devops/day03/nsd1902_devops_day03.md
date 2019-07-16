@@ -98,6 +98,39 @@ node7.tedu.cn
 # ansible-playbook mkrepo.yml
 ```
 
+### 配置lamp分离结构
+
+```shell
+# vim lamp.yml
+---
+- name: configure webservers
+  hosts: webservers
+  tasks:
+    - name: install web pkgs
+      yum:
+        name: [httpd, php, php-mysql]
+        state: present
+    - name: configure web service
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+
+- name: configure dbservers
+  hosts: dbservers
+  tasks:
+    - name: install db pkgs
+      yum:
+        name: mariadb-server
+        state: present
+    - name: configure db service
+      service:
+        name: mariadb
+        state: started
+        enabled: yes
+# ansible-playbook lamp.yml
+```
+
 
 
 
