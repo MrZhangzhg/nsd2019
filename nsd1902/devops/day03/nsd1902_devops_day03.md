@@ -191,6 +191,28 @@ ansible官方手册：https://docs.ansible.com
 ]
 ```
 
+### ansible-cmdb
+
+可以将服务器的信息以web形式展现
+
+```python
+# 在虚拟环境中安装ansible-cmdb
+# pip3 install ansible-cmdb_pkgs/*
+# 或在线安装
+# pip3 install ansible-cmdb
+
+# 获取远程主机的信息
+# ansible all -m setup --tree /tmp/servers
+# ls /tmp/servers
+
+# ansible-cmdb分析获取的信息文件，生成html文件
+# ansible-cmdb /tmp/servers > /tmp/servers.html
+# firefox /tmp/servers.html
+
+```
+
+
+
 
 
 
