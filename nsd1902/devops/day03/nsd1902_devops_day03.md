@@ -208,12 +208,55 @@ ansible官方手册：https://docs.ansible.com
 # ansible-cmdb分析获取的信息文件，生成html文件
 # ansible-cmdb /tmp/servers > /tmp/servers.html
 # firefox /tmp/servers.html
+```
 
+### 开发ansible模块
+
+指定自己编写模块的文件路径是/opt/myansible_lib/
+
+```shell
+# export ANSIBLE_LIBRARY=/opt/myansible_lib/
+# mkdir /opt/myansible_lib/
+```
+
+编写模块文件rcopy.py，实现远程主机在自己的系统内执行拷贝操作
+
+```python
+# vim /opt/myansible_lib/rcopy.py
+#!/usr/bin/env python
+
+from ansible.module_utils.basic import AnsibleModule
+import shutil
+
+def main():
+    module = AnsibleModule(
+        argument_spec=dict(
+            yuan=dict(required=True, type='str'),
+            mubiao=dict(required=True, type='str')
+        )
+    )
+    shutil.copy(module.params['yuan'], module.params['mubiao'])
+    module.exit_json(changed=True)
+
+if __name__ == '__main__':
+    main()
+```
+
+调用自己写的模块，将服务器上/etc/hosts拷贝到/tmp/zhuji
+
+```shell
+# ansible webservers -m rcopy -a "yuan=/etc/hosts mubiao=/tmp/zhuji"
 ```
 
 
 
+练习：编写模块
 
+- 模块名为download
+- 接受两个参数
+  - url：指定一个网络路径
+  - path：指定本地路径
+- 执行指令ansible all -m download -a "url=http://xxxx path=/path/to/local/file"，可以将网上的资源下载到本地
 
 
 
