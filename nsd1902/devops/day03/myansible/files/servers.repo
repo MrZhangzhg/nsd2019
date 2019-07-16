@@ -1,0 +1,4 @@
+[server]
+name=server
+baseurl=ftp://192.168.4.254/centos7.4
+gpgcheck=0

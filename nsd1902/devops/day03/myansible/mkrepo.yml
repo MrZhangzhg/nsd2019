@@ -1,0 +1,8 @@
+---
+- name: configure yum
+  hosts: all
+  tasks:
+    - name: upload repo file
+      copy:
+        src: files/servers.repo
+        dest: /etc/yum.repos.d/server.repo

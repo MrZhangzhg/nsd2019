@@ -77,10 +77,26 @@ node7.tedu.cn
 
 # 执行playbook
 # ansible-playbook auth_key.yml -k
-
 ```
 
+- 配置yum
 
+```shell
+# mkdir files
+# vim files/servers.repo
+# 编写playbook
+# vim  mkrepo.yml
+---
+- name: configure yum
+  hosts: all
+  tasks:
+    - name: upload repo file
+      copy:
+        src: files/servers.repo
+        dest: /etc/yum.repos.d/server.repo
+
+# ansible-playbook mkrepo.yml
+```
 
 
 
