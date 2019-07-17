@@ -111,11 +111,77 @@ z --git commit-->v
 .git  index.html
 ```
 
+2. 添加文件到暂存区
 
+```python
+[root@node5 pro2]# git status   # 查看状态
+# 位于分支 master
+#
+# 初始提交
+#
+# 未跟踪的文件:
+#   （使用 "git add <file>..." 以包含要提交的内容）
+#
+#	index.html
+提交为空，但是存在尚未跟踪的文件（使用 "git add" 建立跟踪）
+[root@node5 pro2]# git status -s
+?? index.html
+[root@node5 pro2]# git add index.html   # 提交到暂存区
+[root@node5 pro2]# git status
+# 位于分支 master
+#
+# 初始提交
+#
+# 要提交的变更：
+#   （使用 "git rm --cached <file>..." 撤出暂存区）
+#
+#	新文件：    index.html
+#
+[root@node5 pro2]# git status
+# 位于分支 master
+#
+# 初始提交
+#
+# 要提交的变更：
+#   （使用 "git rm --cached <file>..." 撤出暂存区）
+#
+#	新文件：    index.html
+#
+[root@node5 pro2]# git status -s
+A  index.html
+```
 
+3. 提交文件到版本库
 
+```shell
+[root@node5 pro2]# git commit -m "add new file index.html"
+[root@node5 pro2]# git status
+# 位于分支 master
+无文件要提交，干净的工作区
+[root@node5 pro2]# git status -s
+```
 
+4. 将文件从暂存区中撤出
 
+```shell
+[root@node5 pro2]# cp /etc/hosts .
+[root@node5 pro2]# git add .   # 将当前工作区中的所有文件提交到暂存区
+[root@node5 pro2]# git status
+# 位于分支 master
+# 要提交的变更：
+#   （使用 "git reset HEAD <file>..." 撤出暂存区）
+#
+#	新文件：    hosts
+#
+[root@node5 pro2]# git reset HEAD hosts
+[root@node5 pro2]# git status
+# 位于分支 master
+# 未跟踪的文件:
+#   （使用 "git add <file>..." 以包含要提交的内容）
+#
+#	hosts
+提交为空，但是存在尚未跟踪的文件（使用 "git add" 建立跟踪）
+```
 
 
 
