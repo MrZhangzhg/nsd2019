@@ -243,10 +243,43 @@ index.html
 [root@node5 pro2]# git status
 # 位于分支 master
 无文件要提交，干净的工作区
-
 ```
 
+6. 移动、复制
 
+```shell
+[root@node5 pro2]# mkdir abc
+[root@node5 pro2]# cp /etc/passwd .
+[root@node5 pro2]# cp /etc/shadow .
+[root@node5 pro2]# ls
+abc  index.html  passwd  shadow
+
+# 提交文件到版本库
+[root@node5 pro2]# git add .
+[root@node5 pro2]# git commit -m 'add new files'
+[root@node5 pro2]# git status
+# 位于分支 master
+无文件要提交，干净的工作区
+
+# 将passwd移动到abc中，改名为mima
+[root@node5 pro2]# git mv passwd abc/mima
+[root@node5 pro2]# git status
+# 位于分支 master
+# 要提交的变更：
+#   （使用 "git reset HEAD <file>..." 撤出暂存区）
+#
+#	重命名：    passwd -> abc/mima
+#
+[root@node5 pro2]# git commit -m "mv passwd -> abc/mima"
+[root@node5 pro2]# git status
+# 位于分支 master
+无文件要提交，干净的工作区
+
+# 将shadow拷贝到abc
+[root@node5 pro2]# cp shadow abc
+[root@node5 pro2]# git add .
+[root@node5 pro2]# git commit -m "cp shadow abc/"
+```
 
 
 
