@@ -307,6 +307,60 @@ hosts  index.html
 abc  index.html  shadow
 ```
 
+创建新的分支
+
+在编写程序时，可以在某一个提交点创建新的分支，在分支内编写代码。当分支代码的功能编写完后，再把它汇入主干。
+
+```shell
+# 查看分支
+[root@node5 pro2]# git branch
+* master
+
+# 创建分支b1
+[root@node5 pro2]# git branch b1
+# 查看分支，分支名前有*号的，表示当前分支
+[root@node5 pro2]# git branch
+  b1
+* master
+# 在当前分支中，新增加文件
+[root@node5 pro2]# cp /etc/redhat-release .
+[root@node5 pro2]# git add .
+[root@node5 pro2]# git commit -m "add redhat-release"
+
+# 切换到b1分支
+[root@node5 pro2]# git checkout b1
+切换到分支 'b1'
+[root@node5 pro2]# git branch
+* b1
+  master
+[root@node5 pro2]# ls
+abc  index.html  shadow
+# 在b1分支中，新建文件
+[root@node5 pro2]# echo 'hello world' > hello.txt
+[root@node5 pro2]# ls
+abc  hello.txt  index.html  shadow
+[root@node5 pro2]# git add .
+[root@node5 pro2]# git commit -m "add hello.txt"
+
+# 当b1中的代码已经完成了，就可以将分支汇入主干
+# 切换到master分支，并汇入
+[root@node5 pro2]# git checkout master
+切换到分支 'master'
+[root@node5 pro2]# ls
+abc  index.html  redhat-release  shadow
+[root@node5 pro2]# git merge b1
+[root@node5 pro2]# ls
+abc  hello.txt  index.html  redhat-release  shadow
+
+# 删除分支
+[root@node5 pro2]# git branch -d b1
+已删除分支 b1（曾为 8853c68）。
+[root@node5 pro2]# git branch
+* master
+```
+
+
+
 
 
 
