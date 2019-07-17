@@ -183,5 +183,76 @@ A  index.html
 提交为空，但是存在尚未跟踪的文件（使用 "git add" 建立跟踪）
 ```
 
+5. 删除文件
+
+```shell
+# 将尚未提交到版本库的文件提交
+[root@node5 pro2]# git add .
+[root@node5 pro2]# git commit -m "add hosts"
+
+# 删除hosts
+[root@node5 pro2]# rm -f hosts 
+[root@node5 pro2]# git status
+# 位于分支 master
+# 尚未暂存以备提交的变更：
+#   （使用 "git add/rm <file>..." 更新要提交的内容）
+#   （使用 "git checkout -- <file>..." 丢弃工作区的改动）
+#
+#	删除：      hosts
+#
+修改尚未加入提交（使用 "git add" 和/或 "git commit -a"）
+[root@node5 pro2]# git rm hosts
+rm 'hosts'
+[root@node5 pro2]# git status
+# 位于分支 master
+# 要提交的变更：
+#   （使用 "git reset HEAD <file>..." 撤出暂存区）
+#
+#	删除：      hosts
+#
+[root@node5 pro2]# git commit -m "delete hosts"
+[root@node5 pro2]# git status
+# 位于分支 master
+无文件要提交，干净的工作区
+
+# 继续删除index.html
+[root@node5 pro2]# git rm index.html 
+rm 'index.html'
+[root@node5 pro2]# git status
+# 位于分支 master
+# 要提交的变更：
+#   （使用 "git reset HEAD <file>..." 撤出暂存区）
+#
+#	删除：      index.html
+#
+[root@node5 pro2]# git reset HEAD index.html
+重置后撤出暂存区的变更：
+D	index.html
+[root@node5 pro2]# git status
+# 位于分支 master
+# 尚未暂存以备提交的变更：
+#   （使用 "git add/rm <file>..." 更新要提交的内容）
+#   （使用 "git checkout -- <file>..." 丢弃工作区的改动）
+#
+#	删除：      index.html
+#
+修改尚未加入提交（使用 "git add" 和/或 "git commit -a"）
+[root@node5 pro2]# git  checkout -- index.html
+[root@node5 pro2]# ls
+index.html
+[root@node5 pro2]# git status
+# 位于分支 master
+无文件要提交，干净的工作区
+
+```
+
+
+
+
+
+
+
+
+
 
 
