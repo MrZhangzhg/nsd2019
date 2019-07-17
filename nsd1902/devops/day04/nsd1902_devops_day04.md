@@ -411,6 +411,41 @@ Port 2022
 
 授权，授权新建的用户是pro2项止的主程序员。
 
+### 用户配置
+
+新用户不用配置任何选项，已经可以通过http协议进行代码的上传。但是，通过http上传代码，每次执行操作时，都需要填写用户名、密码。
+
+#### 配置ssh免密上传代码：
+
+- 生成ssh密钥
+
+  ```shell
+  [root@node5 pro2]# ssh-keygen -t rsa -C "zzg@tedu.cn" -b 4096
+  ```
+
+- 点击右上角用户“设置”
+
+- 点击左侧工具栏的“ssh密钥”，将公钥拷贝到“密钥”文本框中
+
+```shell
+[root@node5 pro2]# cat ~/.ssh/id_rsa.pub 
+```
+
+#### 上传代码
+
+```shell
+[root@node5 pro2]# cd ~/pro2/
+[root@node5 pro2]# git remote rename origin old-origin
+# 以下错误可忽略
+error: 不能重命名配置小节 'remote.origin' 到 'remote.old-origin'
+[root@node5 pro2]# git remote add origin git@192.168.4.6:devops/pro2.git
+[root@node5 pro2]# git push -u origin --all
+```
+
+
+
+
+
 
 
 
