@@ -359,13 +359,40 @@ abc  hello.txt  index.html  redhat-release  shadow
 * master
 ```
 
+## gitlab服务器
 
+### 准备虚拟机
 
+- 准备一台内存4G以上的虚拟机
+- 安装docker
+- 将gitlab-zh.tar镜像拷贝到虚拟机
 
+### 配置docker
 
+- 安装
+- 导入镜像
 
+```shell
+[root@node6 images]# docker load < gitlab_zh.tar
+```
 
+- 修改虚拟机ssh端口为2022，因为22端口需要留给容器用
 
+```shell
+[root@node6 images]# vim /etc/ssh/sshd_config 
+Port 2022
+[root@node6 images]# systemctl restart sshd
+# 重新使用2022端口远程连接服务器
+[root@room8pc16 nsd2019]# ssh -p2022 node6
+```
+
+- 启动容器
+
+```shell
+[root@node6 ~]# docker run -d -h gitlab --name gitlab -p 443:443 -p 80:80 -p 22:22 --restart always -v /srv/gitlab/config:/etc/gitlab -v /srv/gitlab/logs:/var/log/gitlab -v /srv/gitlab/data:/var/opt/gitlab gitlab_zh:latest 
+[root@node6 ~]# docker ps   # 查看状态
+# 当状态中，显示healthy时，容器才能正常使用
+```
 
 
 
