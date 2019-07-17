@@ -440,6 +440,26 @@ Port 2022
 error: 不能重命名配置小节 'remote.origin' 到 'remote.old-origin'
 [root@node5 pro2]# git remote add origin git@192.168.4.6:devops/pro2.git
 [root@node5 pro2]# git push -u origin --all
+
+# 后续上传代码的过程
+[root@node5 pro2]# cp /etc/bashrc .
+[root@node5 pro2]# git add .
+[root@node5 pro2]# git commit -m "add bashrc"
+[root@node5 pro2]# git push
+```
+
+#### 其他用户下载代码：
+
+- 协议应该使用http
+- 第一次下载的时候，用git clone
+- 后续如果有更新，只要git pull即可
+
+```shell
+[root@room8pc16 ~]# cd /tmp/
+[root@room8pc16 tmp]# git clone http://192.168.4.6/devops/pro2.git
+[root@room8pc16 tmp]# cd pro2/
+[root@room8pc16 pro2]# ls
+abc  bashrc  hello.txt  index.html  redhat-release  shadow
 ```
 
 
