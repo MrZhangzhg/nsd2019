@@ -258,7 +258,7 @@ if __name__ == '__main__':
   - path：指定本地路径
 - 执行指令ansible all -m download -a "url=http://xxxx path=/path/to/local/file"，可以将网上的资源下载到本地
 
-
+​         
 
 
 
