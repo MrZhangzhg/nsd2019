@@ -281,6 +281,34 @@ abc  index.html  passwd  shadow
 [root@node5 pro2]# git commit -m "cp shadow abc/"
 ```
 
+### 分支管理
+
+- git默认有一个名为master的分支
+- git默认情况下，名为HEAD的指针指向master
+
+返回到之前的某一次commit：
+
+```shell
+# 查看以前的所有提交
+[root@node5 pro2]# git log
+# 查看当前状态，务必保证当前状态是干净的
+[root@node5 pro2]# git status
+# 位于分支 master
+无文件要提交，干净的工作区
+
+# 回到add hosts这个时候的状态
+[root@node5 pro2]# git checkout 9f1054366641074f386ae4348a8fa920e575c43f
+[root@node5 pro2]# ls
+hosts  index.html
+
+# 回到最新的状态
+[root@node5 pro2]# git checkout master
+[root@node5 pro2]# ls
+abc  index.html  shadow
+```
+
+
+
 
 
 
