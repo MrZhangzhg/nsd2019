@@ -94,6 +94,32 @@
      2. 修改build_myweb工程。
         Additional Behaviours -> 新增 -> checkout to a sub-directory: myweb-$webver
      3. 保存后，重新构建测试
+   
+   # jenkins服务器为了方便最终的应用服务器下载，把软件打包压缩放到web目录下
+   1. 安装apache
+   [root@node7 ~]# yum install -y httpd
+   [root@node7 ~]# systemctl start httpd
+   [root@node7 ~]# systemctl enable httpd
+   2. 规划apache web服务器目录和文件
+   /var/www/html/deploy/lastver文件: 用于存储上一个版本号
+   /var/www/html/deploy/livever文件：用于存储当前版本号
+   /var/www/html/deploy/packages目录：用于保存软件的各个版本的压缩包和md5值
+   [root@node7 ~]# mkdir -p /var/www/html/deploy/packages
+   3. 修改jenkins工程
+   构建 -> 增加构建步骤 -> execute shell ->
+   dest=/var/www/html/deploy/packages
+   cp -r myweb-$webver $dest   # 拷贝版本文件到web目录
+   cd $dest
+   rm -rf myweb-$webver/.git   # 删除版本库文件
+   tar czf myweb-$webver.tar.gz myweb-$webver  # 打包软件
+   rm -rf myweb-$webver   # 删除软件目录，因为只保留压缩包即可
+   md5sum myweb-$webver.tar.gz | awk '{print $1}' > myweb-$webver.tar.gz.md5  # 计算压缩包的md5值
+   cd ..
+   [ -f livever ] && cat livever > lastver  # 将livever内容写到lastver
+   echo $webver > livever   # 更新livever
+   4. 修改/var/www/html/deploy属主属组
+   [root@node7 ~]# chown -R jenkins.jenkins /var/www/html/deploy/
+   5. 构建工程，测试。
    ```
 
    
