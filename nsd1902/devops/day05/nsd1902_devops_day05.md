@@ -78,6 +78,20 @@
 
 2. jenkins服务器下载代码
 
+   ```shell
+   # 在jenkins服务器上安装git
+   [root@node7 ~]# yum install -y git
+   
+   # 在jenkins上创建一个自由风格的项目
+     1. Genereral -> This project is parameterized -> 添加参数： git parameter -> name: webver,  Parameter Type: Branch or Tag, Default Value: origin/master
+     2. 源码管理：git -> Repository URL: http://192.168.4.6/devops/myweb.git -> Branch Specifier (blank for 'any'): $webver
+     3. 基础构建已经可以完成，点击保存按钮。
+     4. 构建工程。点击工程左侧的Build with Parameters。默认情况下，软件将会下载到/var/lib/jenkins/workspace目录。 点击1.0版本->开始构建
+     
+   ```
+
+   
+
 
 
 
