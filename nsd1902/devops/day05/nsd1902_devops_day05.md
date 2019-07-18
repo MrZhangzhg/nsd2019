@@ -87,7 +87,13 @@
      2. 源码管理：git -> Repository URL: http://192.168.4.6/devops/myweb.git -> Branch Specifier (blank for 'any'): $webver
      3. 基础构建已经可以完成，点击保存按钮。
      4. 构建工程。点击工程左侧的Build with Parameters。默认情况下，软件将会下载到/var/lib/jenkins/workspace目录。 点击1.0版本->开始构建
-     
+   
+   # 为下载的每个版本创建一个子目录
+     1. 删除jenkins的下载目录
+   [root@node7 ~]# rm -rf /var/lib/jenkins/workspace/build_myweb/
+     2. 修改build_myweb工程。
+        Additional Behaviours -> 新增 -> checkout to a sub-directory: myweb-$webver
+     3. 保存后，重新构建测试
    ```
 
    
