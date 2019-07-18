@@ -46,6 +46,38 @@
 
 
 
+### CI流程
+
+1. 程序员编写代码，并推送到服务器
+
+   ```shell
+   # 程序员创建软件项目
+   [root@node5 ~]# git init myweb
+   初始化空的 Git 版本库于 /root/myweb/.git/
+   [root@node5 ~]# cd myweb
+   [root@node5 myweb]# echo '<h1>my web site</h1>' > index.html
+   [root@node5 myweb]# git add .
+   [root@node5 myweb]# git commit -m "my web 1.0"
+   [root@node5 myweb]# git tag 1.0   # 添加标记，标记为1.0版本
+   [root@node5 myweb]# git tag    # 查看所有标记
+   1.0
+   
+   # 在gitlab上创建名为myweb的项目
+   1. 通过root用户创建
+   2. 项目属于devops组
+   3. 项目是公开的
+   4. 昨天新建的用户成为该项目的主程序员
+   
+   # 程序员将代码上传到gitlab服务器
+   [root@node5 myweb]# git remote rename origin old-origin
+   error: 不能重命名配置小节 'remote.origin' 到 'remote.old-origin'
+   [root@node5 myweb]# git remote add origin git@192.168.4.6:devops/myweb.git
+   [root@node5 myweb]# git push -u origin --all
+   [root@node5 myweb]# git push -u origin --tags   # 推送标记
+   ```
+
+2. jenkins服务器下载代码
+
 
 
 
