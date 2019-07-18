@@ -42,6 +42,7 @@
 - 点击Available选项卡，搜索找到[Localization: Chinese (Simplified)，勾选左侧的复选框，该插件用于中文支持。
 - 点击Install without restart
 - 勾选Restart jenkins... ... 
+- 安装git parameter插件。用于访问git。
 
 
 
