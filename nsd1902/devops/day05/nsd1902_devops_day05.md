@@ -122,7 +122,38 @@
    5. 构建工程，测试。
    ```
 
-   
+
+
+## 应用服务器自动化部署流程
+
+```mermaid
+graph TD
+new{是否有新版本}
+quit(退出)
+down{下载并判断是否损坏}
+err(退出)
+deploy(部署)
+new --否-->quit
+new --是-->down
+down --是-->err
+down --否-->deploy
+```
+
+### 部署应用程序
+
+不要把应用软件直接解压到目标。可以把每个版本的程序都放到deploy目录下，网页主目录是指向某一版本的链接。想要发布哪个版本，只要把链接指向版本目录即可。
+
+/var/www/download: 用于保存下载的软件包
+
+/var/www/deploy：用于保存livever版本文件和解压的软件包
+
+/var/www/html/nsd1902：指向某一版本目录的链接文件
+
+
+
+项目：CI/CD持续集成、持续交付项目
+
+技术点：gitlab / jenkins / python
 
 
 
