@@ -3,8 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>my html2</title>
+    <script>
+        function show_me() {
+            var username = prompt("用户名：");
+            alert("welcome " + username);
+        }
+    </script>
 </head>
 <body>
+<hr>
+<input type="button" onclick="show_me();" value="执行函数">
+<hr>
+
+<form action="">
+    <input type="checkbox">Linux基础
+    <input type="checkbox"><label>network</label>
+    <label><input type="checkbox">service</label>
+    <input type="checkbox" id="pyth"><label for="pyth">python</label><br>
+    <input type="submit" value="提交">
+    <input type="reset" value="重置">
+</form>
+
 <hr>
 <form action="http://www.kuaidi100.com/query" target="_blank">
     <label>运单号：</label><input type="text" name="postid"><br>
