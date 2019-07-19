@@ -59,9 +59,44 @@
 
 3. href的值如果只是#号，将跳转到顶部
 
+## CSS：层叠样式表、级联样式表
 
+### CSS样式表的应用方式
 
+- 内联方式，类似于HTML标记属性。内容和表现形式混在一起，不建议
 
+  ```html
+  <p style="font-weight: bold">这是一个测试</p>
+  ```
+
+- 内部样式，将样式表写在html页面的head标记中
+
+  ```html
+  <head>
+      <meta charset="UTF-8">
+      <title>my css1</title>
+      <style>
+          body {
+              background: silver;
+              color: darkblue;
+          }
+          hr {
+              color: red;
+          }
+      </style>
+  </head>
+  ```
+
+- 外部样式，样式表单独是一个文件，所有的HTML页面都可以使用这个外部样式表文件。外部样式表文件不一定在本地，也可以是一个URL。
+
+  ```html
+  <head>
+      ... ...
+      <link rel="stylesheet" href="static/css/bootstrap.min.css">
+  </head>
+  ```
+
+  
 
 
 
