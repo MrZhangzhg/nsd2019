@@ -26,5 +26,27 @@ h1.c1 {
     font-weight: bold;
 }
 
+#i1 {
+    text-align: right;
+}
+
+.c1, .important, .warning {
+    font-size: 20pt;
+}
+
+a:link {
+    color: purple;
+}
+
+a:hover {
+    font-weight: bold;
+    font-size: 18pt;
+}
+
+a:visited {
+    color: darkgray;
+}
+
+
 
 
