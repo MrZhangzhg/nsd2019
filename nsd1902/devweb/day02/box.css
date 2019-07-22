@@ -1,5 +1,7 @@
 div {
+    margin: 10px;   /*外边距*/
+    padding: 10px;  /*内边距*/
     width: 300px;
     height: 200px;
-    border: 1px solid black;
+    border: 1px solid black;  /*厚度 边框样式 颜色*/
 }
