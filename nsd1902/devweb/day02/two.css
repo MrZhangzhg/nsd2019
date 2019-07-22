@@ -1,0 +1,24 @@
+.container {
+    margin: 0 auto;
+    width: 1000px;
+}
+
+.banner, .footer {
+    height: 80px;
+    background: mediumpurple;
+}
+
+.left {
+    float: left;
+    width: 100px;
+    height: 300px;
+    background: lightgray;
+}
+
+.right {
+    margin-left: 100px;  /*单独设置左边距*/
+    width: 900px;
+    height: 300px;
+    background: lightgreen;
+}
+
