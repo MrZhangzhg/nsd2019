@@ -72,7 +72,13 @@ bootstrap的颜色可以定义成以下几种：
 - 文字都放到label标签中
 - 文本类型的input都需要设置form-control
 
+### 栅格系统
 
+- bootstrap把一行最多分成12列
+- 每个组件，可以设定占多少列
+- 使用时需要一个container容器，其他组件放到container中
+- 每一行都用div.row来表示
+- 其他的组件放到row中
 
 
 
