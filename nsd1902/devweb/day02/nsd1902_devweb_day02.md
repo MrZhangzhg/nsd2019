@@ -66,7 +66,11 @@ bootstrap的颜色可以定义成以下几种：
 - success: 绿
 - muted: 灰
 
+### form表单
 
+- 为了各控件间有良好的间距，需要把它们分别放到form-group中
+- 文字都放到label标签中
+- 文本类型的input都需要设置form-control
 
 
 
