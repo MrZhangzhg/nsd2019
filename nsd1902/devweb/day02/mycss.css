@@ -7,7 +7,24 @@ hr {
     color: red;
 }
 
+h1.c1 {
+    text-align: center;
+}
+
 .c1 {
     color: blue;
     font-weight: bold;
 }
+
+.warning {
+    color: darkgreen;
+    background: darkorange;
+}
+
+.important {
+    color: blue;
+    font-weight: bold;
+}
+
+
+
