@@ -57,7 +57,14 @@ http://bootcss.com  官方中文站
 
 将day01中的static目录拷贝到当前路径即可。static中已经有下载好的bootstrap。
 
+bootstrap的颜色可以定义成以下几种：
 
+- primary: 蓝
+- info: 蓝
+- danger: 红
+- warning: 黄
+- success: 绿
+- muted: 灰
 
 
 
