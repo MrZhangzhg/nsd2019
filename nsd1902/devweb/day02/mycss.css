@@ -1,0 +1,13 @@
+* {
+    font-size: 16pt;
+    font-family: "Times New Roman";
+}
+
+hr {
+    color: red;
+}
+
+.c1 {
+    color: blue;
+    font-weight: bold;
+}
