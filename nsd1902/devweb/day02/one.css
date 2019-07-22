@@ -1,0 +1,13 @@
+.container {
+    margin: 0 auto;   /*四个方向顺序是上右下左*/
+    width: 1000px;
+}
+
+.banner, .footer {
+    height: 80px;
+    background: mediumpurple;
+}
+.main {
+    height: 300px;
+    background: lightgray;
+}
