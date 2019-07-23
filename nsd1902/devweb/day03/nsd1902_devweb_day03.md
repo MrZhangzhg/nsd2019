@@ -313,6 +313,62 @@ def detail(request, question_id):
 </body>
 ```
 
+## ORM
+
+对象关系映射。
+
+- 数据库中的表映射为python中的类class
+- 表中的字段映射为class中的类变量
+- 表中的一行记录映射为class的一个实例
+- 数据库中的数据类型，映射为django的类
+
+### 投票应用需要创建2张表
+
+问题表
+
+| id   | 问题内容                        | 发布时间           |
+| ---- | ------------------------------- | ------------------ |
+| 1    | 期待工资是多少？                | 2019-7-23 17:00:00 |
+| 2    | 你期待以下哪家公司给你发Offer？ | 2019-7-23 15:00:00 |
+
+选项表
+
+| id   | 选项内容     | 票数 | 问题ID |
+| ---- | ------------ | ---- | ------ |
+| 1    | 8000 ~ 10000 | 0    | 1      |
+| 2    | 腾讯         | 0    | 2      |
+| 3    | 小米         | 0    | 2      |
+| 4    | 100000+      | 0    | 1      |
+
+```python
+# polls/models.py
+from django.db import models
+
+# Create your models here.
+
+class Question(models.Model):
+    question_text = models.CharField(max_length=200, unique=True)
+    pub_date = models.DateTimeField()
+
+class Choice(models.Model):
+    choice_text = models.CharField(max_length=200)
+    votes = models.IntegerField(default=0)
+    q = models.ForeignKey(Question)
+```
+
+生成数据库的表
+
+```shell
+(nsd1902) [root@room8pc16 mysite]# python manage.py makemigrations
+(nsd1902) [root@room8pc16 mysite]# python manage.py migrate
+[root@room8pc16 aaa]# mysql -uroot -ptedu.cn
+MariaDB [(none)]> use dj1902;
+MariaDB [dj1902]> show tables;
+MariaDB [dj1902]> desc polls_choice;
+```
+
+
+
 
 
 
