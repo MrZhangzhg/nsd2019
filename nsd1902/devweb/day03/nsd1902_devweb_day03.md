@@ -227,6 +227,31 @@ def index(request):
 (nsd1902) [root@room8pc16 mysite]# python manage.py runseer 0:80
 ```
 
+### 修改函数，返回模板文件
+
+```python
+# 修改函数的返回值，使用render函数返回模板文件
+# polls/views.py
+def index(request):
+    return render(request, 'index.html')
+
+# 创建模板文件
+  # 模板文件的位置：
+    # 项目目录下的templates目录
+    # 应用目录下的templates目录
+# templates/index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票首页</title>
+</head>
+<body>
+<h1>投票首页</h1>
+</body>
+</html>
+```
+
 
 
 
