@@ -6,3 +6,6 @@ from django.shortcuts import render, HttpResponse
 def index(request):
     # return HttpResponse('<h1>polls首页</h1>')
     return render(request, 'index.html')
+
+def detail(request):
+    return render(request, 'detail.html')

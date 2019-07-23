@@ -252,7 +252,40 @@ def index(request):
 </html>
 ```
 
+## 编写问题详情页
 
+1. URL
+
+```python
+# polls/urls.py
+	... ...
+    url(r'^\d+/$', views.detail, name='detail'),
+    ... ...
+```
+
+2. 视图函数
+
+```python
+# polls/views.py   # 追加
+def detail(request):
+    return render(request, 'detail.html')
+```
+
+3. 模板文件
+
+```html
+# templates/detail.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票详情页</title>
+</head>
+<body>
+<h1>投票详情页</h1>
+</body>
+</html>
+```
 
 
 
