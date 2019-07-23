@@ -171,6 +171,37 @@ INSTALLED_APPS = [
 
 
 
+### 授权
+
+项目中有多个应用，每个应用都有很多URL，如果所有的URL都是由项目的urls.py处理，那么这个文件将会变得非常大。程序员在进行维护的时候，也不方便。为了解决这个问题，可以精心设计好每个应用的URL，再把应用的URL交由应用自己维护。
+
+授权以http://x.x.x.x/polls/开头的url都交给polls应用处理。
+
+```shell
+# 在项目的urls.py中实现授权
+# mysite/urls.py
+from django.conf.urls import url, include
+from django.contrib import admin
+
+urlpatterns = [
+    url(r'^admin/', admin.site.urls),
+    # 导入polls目录（术语称作包）中的urls模块
+    url(r'^polls/', include('polls.urls')),
+]
+
+# 创建polls/urls.py
+# vim polls/urls.py
+urlpatterns = []
+```
+
+
+
+
+
+
+
+
+
 
 
 
