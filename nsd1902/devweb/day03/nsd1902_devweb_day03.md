@@ -98,6 +98,48 @@ TIME_ZONE = 'Asia/Shanghai'
 # 0:80   -> 0.0.0.0:80
 ```
 
+### 管理数据库
+
+django后台可以使用各种类型的数据库，默认用的是sqlite数据库，不做任何修改，这个数据库直接可以用。
+
+配置django使用mysql数据库：
+
+```shell
+[root@room8pc16 nsd2019]# mysql -uroot -ptedu.cn
+MariaDB [tedu1902]> CREATE DATABASE dj1902 DEFAULT CHARSET utf8;
+
+# 修改配置文件连接数据库的声明
+# mysite/settings.py
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'dj1902',
+        'USER': 'root',
+        'PASSWORD': 'tedu.cn',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+    }
+}
+
+# 初始化pymysql
+# mysite/__init__.py
+import pymysql
+pymysql.install_as_MySQLdb()
+
+# 生成数据库的表。jdango默认已经集成了很多应用，如用户管理的应用，这些内建的应用也需要把数据保存到数据库。
+(nsd1902) [root@room8pc16 mysite]# python manage.py makemigrations
+(nsd1902) [root@room8pc16 mysite]# python manage.py migrate 
+MariaDB [tedu1902]> use dj1902;
+MariaDB [dj1902]> show tables;   # 查看生成的表
+
+```
+
+
+
+
+
+
+
 
 
 
