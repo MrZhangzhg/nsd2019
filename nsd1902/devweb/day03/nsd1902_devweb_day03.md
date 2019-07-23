@@ -81,6 +81,23 @@ mysite/                   # 项目的根目录
 
 > 注意：测试服务器只能用在开发环境，不要用在生产环境
 
+### 项目基础配置
+
+```shell
+# mysite/settings.py
+DEBUG = True   # 生产环境应该改为False
+ALLOWED_HOSTS = '*'    # 允许所有的客户端访问
+LANGUAGE_CODE = 'zh-hans'
+TIME_ZONE = 'Asia/Shanghai'
+```
+
+启动测试服务器，可以看到中文显示。
+
+```shell
+(nsd1902) [root@room8pc16 mysite]# python manage.py runserver 0:80
+# 0:80   -> 0.0.0.0:80
+```
+
 
 
 
