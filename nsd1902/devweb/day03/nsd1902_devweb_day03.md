@@ -194,6 +194,39 @@ urlpatterns = [
 urlpatterns = []
 ```
 
+### 配置url
+
+访问http://x.x.x.x/polls/（投票首页）时，由index函数处理。
+
+```shell
+# polls/urls.py
+from django.conf.urls import url
+from . import views   # 在当前目录(包)中导入views
+
+urlpatterns = [
+    # 当访问http://x.x.x.x/polls/时，使用views中的index函数进行处理
+    # 给http://x.x.x.x/polls/这个url起个名叫index
+    url(r'^$', views.index, name='index'),
+]
+```
+
+### 编写首页函数
+
+```python
+# polls/views.py
+from django.shortcuts import render, HttpResponse
+
+# 用户发给django的请求，函数必须提供一个参数进行接收
+def index(request):
+    return HttpResponse('<h1>polls首页</h1>')
+```
+
+### 启动测试服务器进行访问测试
+
+```shell
+(nsd1902) [root@room8pc16 mysite]# python manage.py runseer 0:80
+```
+
 
 
 
