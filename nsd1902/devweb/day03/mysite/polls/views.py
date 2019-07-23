@@ -9,3 +9,6 @@ def index(request):
 
 def detail(request):
     return render(request, 'detail.html')
+
+def result(request):
+    return render(request, 'result.html')

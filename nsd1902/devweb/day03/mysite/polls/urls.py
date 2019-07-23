@@ -6,4 +6,5 @@ urlpatterns = [
     # 给http://x.x.x.x/polls/这个url起个名叫index
     url(r'^$', views.index, name='index'),
     url(r'^\d+/$', views.detail, name='detail'),
+    url(r'^\d+/result/$', views.result, name='result'),
 ]
