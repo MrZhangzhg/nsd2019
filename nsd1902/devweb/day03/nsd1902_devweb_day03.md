@@ -50,11 +50,36 @@ t --返回页面-->c
 mypro  
 ```
 
+- 使用pycharm创建
 
+​        File -> New Project -> Django -> 项目名称为mysite(Location最后的文件夹)
 
+项目结构：
 
+```shell
+(nsd1902) [root@room8pc16 day03]# tree mysite/
+mysite/                   # 项目的根目录
+├── manage.py             # 项目的管理文件
+├── mysite                # 项目的配置目录
+│   ├── __init__.py       # 初始化文件
+│   ├── settings.py       # 配置文件
+│   ├── urls.py           # URLConf路由映射文件
+│   └── wsgi.py           # 部署服务器时使用
+└── templates             # 模板网页的目录
 
+2 directories, 5 files
+```
 
+启动测试服务器
+
+```shell
+(nsd1902) [root@room8pc16 day03]# cd mysite/
+(nsd1902) [root@room8pc16 mysite]# python manage.py runserver
+```
+
+访问测试服务器： http://127.0.0.1:8000/
+
+> 注意：测试服务器只能用在开发环境，不要用在生产环境
 
 
 
