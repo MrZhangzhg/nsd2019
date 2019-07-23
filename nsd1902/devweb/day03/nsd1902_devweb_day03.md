@@ -367,7 +367,41 @@ MariaDB [dj1902]> show tables;
 MariaDB [dj1902]> desc polls_choice;
 ```
 
+类和表的映射关系：
 
+- 表名构成：应用名_类名    全部小写
+- 表中字段
+  - 如果类中没有明确谁是主键，将会自动创建名为id的主键
+  - 其他类变量成为表中的字段
+  - 外键字段的名字是： 类变量_id
+
+数据库迁移：将外键字段改名
+
+```python
+# polls/models.py
+class Choice(models.Model):
+    choice_text = models.CharField(max_length=200)
+    votes = models.IntegerField(default=0)
+    question = models.ForeignKey(Question)
+
+(nsd1902) [root@room8pc16 mysite]# python manage.py makemigrations
+(nsd1902) [root@room8pc16 mysite]# python manage.py migrate
+```
+
+### 将模型注册到后台管理界面
+
+```python
+# polls/admin.py
+from django.contrib import admin
+from .models import Question, Choice  # 在当前目录中的models模块导入
+
+# Register your models here.
+
+admin.site.register(Question)
+admin.site.register(Choice)
+
+# 访问后台，添加问题和选项 -> http://x.x.x.x/admin
+```
 
 
 
