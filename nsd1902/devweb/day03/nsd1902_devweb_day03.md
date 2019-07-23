@@ -287,11 +287,31 @@ def detail(request):
 </html>
 ```
 
+## 传递参数
 
+- 在urls.py中，只要把url中要作为参数传递的部分用()分组即可。括号中的数据将会传递给函数，函数可以通过参数进行接收。
 
+```python
+# polls/urls.py
+    url(r'^(\d+)/$', views.detail, name='detail'),
+```
 
+- 函数通过字典的形式，将变量传递给模板
 
+```python
+# polls/views.py
+def detail(request, question_id):
+    return render(request, 'detail.html', {'question_id': question_id})
+```
 
+- 模板文件收到字典时，字典的key是变量名，val是变量值
+
+```html
+# templates/detail.html
+<body>
+<h1>{{ question_id }}号问题投票详情页</h1>
+</body>
+```
 
 
 
