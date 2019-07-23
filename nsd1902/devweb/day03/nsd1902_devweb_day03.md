@@ -131,7 +131,34 @@ pymysql.install_as_MySQLdb()
 (nsd1902) [root@room8pc16 mysite]# python manage.py migrate 
 MariaDB [tedu1902]> use dj1902;
 MariaDB [dj1902]> show tables;   # 查看生成的表
+```
 
+### 创建管理员用户
+
+```shell
+(nsd1902) [root@room8pc16 mysite]# python manage.py createsuperuser
+```
+
+### 访问后台管理页面
+
+http://127.0.0.1/admin
+
+## 创建应用
+
+项目由应用构成。如一个web项目可以有博客的功能、投票功能、发布新闻、留言功能，每个功能都可以写成一个应用。这样做，可以把任务分派给不同的人去做，也可以实现代码重用。
+
+```shell
+# 创建名为polls的投票应用，一个应用对应一个文件夹
+(nsd1902) [root@room8pc16 mysite]# python manage.py startapp polls
+(nsd1902) [root@room8pc16 mysite]# ls
+db.sqlite3  manage.py  mysite  polls  templates
+
+# 将应用集成到项目中
+# mysite/settings.py
+INSTALLED_APPS = [
+    ... ...
+    'polls',
+]
 ```
 
 
