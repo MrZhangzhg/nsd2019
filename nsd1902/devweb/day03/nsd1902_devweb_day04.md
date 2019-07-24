@@ -34,7 +34,7 @@ class Choice(models.Model):
 
 操作数据库
 
-创建问题记录有两种方法：
+### 创建问题记录有两种方法：
 
 - 实例化
 - 在django中，每个class都有一个名为objects的管理器，通过这个管理器创建
@@ -53,7 +53,7 @@ class Choice(models.Model):
 >>> q3 = Question.objects.create(question_text="你打算到哪 个城市找工作？", pub_date="2018-12-1 12:00:00")
 ```
 
-创建选项的三种方法
+### 创建选项的三种方法
 
 - 实例化
 - 通过objects管理器
@@ -71,7 +71,32 @@ class Choice(models.Model):
 >>> c3 = q3.choice_set.create(choice_text='广州')
 ```
 
+### 查询
 
+查询的方法：
+
+- get：要求必须返回一个实例，否则报错
+- filter：返回0到多个实例的查询集
+
+```python
+>>> Question.objects.get(id=1)
+<Question: 你期待的工资是多少？>
+>>> Question.objects.filter(id=1)
+<QuerySet [<Question: 你期待的工资是多少？>]>
+
+>>> q1 = Question.objects.get(id=1)
+>>> q1.question_text
+'你期待的工资是多少？'
+>>> q1.pub_date
+datetime.datetime(2019, 7, 23, 9, 32)
+
+>>> qset1 = Question.objects.filter(id=1)
+>>> len(qset1)
+1
+>>> q2 = qset1[0]   # 取出下标为0的实例
+>>> q2.question_text
+'你期待的工资是多少？'
+```
 
 
 
