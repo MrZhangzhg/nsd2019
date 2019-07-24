@@ -135,6 +135,26 @@ django查询时，使用属性加双下划线的方法进行比较
 >>> Question.objects.filter(id__gt=2).filter(id__lt=4)
 ```
 
+修改和删除
+
+```python
+# 修改前先获取到实例
+>>> q1 = Question.objects.get(id=3)
+>>> q1
+<Question: 散伙饭去哪吃？>
+# 修改就是属性重新赋值
+>>> q1.question_text = ' 散伙饭去什么地方吃？'
+>>> q1.save()
+
+# 删除
+>>> q2 = Question.objects.get(question_text__contains='哪个城市找工作')
+>>> print(q2)
+你打算到哪个城市找工作？
+>>> q2.delete()   # delete后，数据库中已经删除对应的记录
+>>> print(q2)   # 仍然存在q2实例，只不过数据库中没有记录与之对应
+>>> q2.save()   # 再次保存，在表中创建新的记录
+```
+
 
 
 
