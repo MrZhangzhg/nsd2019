@@ -176,9 +176,7 @@ def index(request):
 <h1>投票首页</h1>
 {#<div>{{ questions }}</div>#}
 <ol>
-    {% for question in questions %}
         <li>
-{#        detail是urls.py中为详情页起的名字，它接受一个参数#}
             <a href="{% url 'detail' question.id %}" target="_blank">
                 {{ question.question_text }}
             </a>
@@ -211,13 +209,26 @@ https://docs.djangoproject.com/en/1.11/ref/templates/language/
 {% else %}
     No athletes.
 {% endif %}
-
-
 ```
 
+3. 引入bootstrap
 
+```python
+# 把day02的static目录拷贝到应用目录下
+(nsd1902) [root@room8pc16 mysite]# ls -d polls/static/
+polls/static
 
+# 静态文件目录，通过settings.py的STATICFILES_DIRS设置
+  # 项目目录的static目录
+  # 应用目录的static目录
 
+# 修改index.html，第一行加入以下内容：
+{% load static %}
+# 在index.html的head标签中，加入以下内容：
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+```
 
 
 
