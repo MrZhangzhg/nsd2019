@@ -23,6 +23,37 @@ class Choice(models.Model):
         return "%s=>%s" % (self.question, self.choice_text)
 ```
 
+## django api
+
+打开python shell
+
+```python
+(nsd1902) [root@room8pc16 mysite]# python manage.py shell
+>>> from polls.models import Question, Choice
+```
+
+操作数据库
+
+创建记录有两种方法：
+
+- 实例化
+- 在django中，每个class都有一个名为objects的管理器，通过这个管理器创建
+
+```python
+# 实例化
+>>> q1 = Question(question_text='散伙饭去哪吃？', pub_date='2019-07-24 9:00:00')
+>>> q1.save()
+
+>>> from datetime import datetime
+>>> dt1 = datetime.now()
+>>> q2 = Question(question_text='散伙吃什么？', pub_date=dt1)
+>>> q2.save()
+
+# 通过objects管理器
+>>> q3 = Question.objects.create(question_text="你打算到哪 个城市找工作？", pub_date="2018-12-1 12:00:00")
+
+```
+
 
 
 
