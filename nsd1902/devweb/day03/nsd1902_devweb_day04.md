@@ -34,7 +34,7 @@ class Choice(models.Model):
 
 操作数据库
 
-创建记录有两种方法：
+创建问题记录有两种方法：
 
 - 实例化
 - 在django中，每个class都有一个名为objects的管理器，通过这个管理器创建
@@ -51,10 +51,25 @@ class Choice(models.Model):
 
 # 通过objects管理器
 >>> q3 = Question.objects.create(question_text="你打算到哪 个城市找工作？", pub_date="2018-12-1 12:00:00")
-
 ```
 
+创建选项的三种方法
 
+- 实例化
+- 通过objects管理器
+- 通过问题的choice_set创建选项
+
+```python
+# 实例化
+>>> c1 = Choice(choice_text='北京', question=q3)
+>>> c1.save()
+
+# 通过objects管理器
+>>> c2 = Choice.objects.create(choice_text='上海', question=q3)
+
+# 因为问题和选项存在着一对多的关系，也就是一个问题可以对应多个选项。因为选项类名字是Choice，所以问题实例都有一个choice_set。如果选项类名字是XuanXiang，那么问题实例就有一个xuanxiang_set。choice_set也是一个管理器，它也有和objects一样的方法。
+>>> c3 = q3.choice_set.create(choice_text='广州')
+```
 
 
 
