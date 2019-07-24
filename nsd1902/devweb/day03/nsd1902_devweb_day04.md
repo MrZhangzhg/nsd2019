@@ -1,6 +1,6 @@
 # nsd1902_devweb_day04
 
-修改实体类的声明，以便在后台中显示指定的字符串。
+django官方文档页：https://docs.djangoproject.com/zh-hans/2.2/实体类的声明，以便在后台中显示指定的字符串。
 
 ```python
 from django.db import models
@@ -96,6 +96,31 @@ datetime.datetime(2019, 7, 23, 9, 32)
 >>> q2 = qset1[0]   # 取出下标为0的实例
 >>> q2.question_text
 '你期待的工资是多少？'
+```
+
+查询条件
+
+django查询时，使用属性加双下划线的方法进行比较
+
+```python
+>>> Question.objects.filter(id__exact=1)  # 简写为以下形式
+>>> q1 = Question.objects.get(id=1)
+>>> Question.objects.filter(id__gt=2)   # id > 2
+>>> Question.objects.filter(id__lt=2)   # id < 2
+>>> Question.objects.filter(id__gte=2)  # id >= 2
+>>> Question.objects.filter(id__lte=2)  # id <= 2
+
+# 以 xxx 开头
+>>> Question.objects.filter(question_text__startswith='你期待')
+# 以 XXX 结尾
+>>> Question.objects.filter(question_text__endswith='？')
+# 包含 XXX
+>>> Question.objects.filter(question_text__contains='工作') 
+# 年份是2018
+>>> Question.objects.filter(pub_date__year=2018)
+# 月份是7
+>>> Question.objects.filter(pub_date__month=7)
+
 ```
 
 
