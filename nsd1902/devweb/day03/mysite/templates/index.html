@@ -6,5 +6,11 @@
 </head>
 <body>
 <h1>投票首页</h1>
+{#<div>{{ questions }}</div>#}
+<ol>
+    {% for question in questions %}
+        <li>{{ question.question_text }} {{ question.pub_date }}</li>
+    {% endfor %}
+</ol>
 </body>
 </html>

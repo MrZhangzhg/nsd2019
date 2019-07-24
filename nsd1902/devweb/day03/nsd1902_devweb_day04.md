@@ -143,7 +143,7 @@ django查询时，使用属性加双下划线的方法进行比较
 >>> q1
 <Question: 散伙饭去哪吃？>
 # 修改就是属性重新赋值
->>> q1.question_text = ' 散伙饭去什么地方吃？'
+>>> q1.question_text = '散伙饭去什么地方吃？'
 >>> q1.save()
 
 # 删除
@@ -156,6 +156,20 @@ django查询时，使用属性加双下划线的方法进行比较
 ```
 
 
+
+## 制作投票首页
+
+1. 首页显示所有的问题，所以首页视图函数需要读取model模型，将所有的问题取出。
+
+```python
+# polls/views.py
+from .models import Question
+def index(request):
+    question_set = Question.objects.order_by('-pub_date')
+    return render(request, 'index.html', {'questions': question_set})
+```
+
+2. 修改web页面
 
 
 
