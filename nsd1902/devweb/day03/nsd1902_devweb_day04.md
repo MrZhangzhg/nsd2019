@@ -50,7 +50,7 @@ class Choice(models.Model):
 >>> q2.save()
 
 # 通过objects管理器
->>> q3 = Question.objects.create(question_text="你打算到哪 个城市找工作？", pub_date="2018-12-1 12:00:00")
+>>> q3 = Question.objects.create(question_text="你打算到哪个城市找工作？", pub_date="2018-12-1 12:00:00")
 ```
 
 ### 创建选项的三种方法
@@ -120,8 +120,26 @@ django查询时，使用属性加双下划线的方法进行比较
 >>> Question.objects.filter(pub_date__year=2018)
 # 月份是7
 >>> Question.objects.filter(pub_date__month=7)
-
 ```
+
+取出数据
+
+```python
+# 取出全部数据
+>>> Question.objects.all()   # 返回查询集
+>>> Question.objects.order_by('pub_date')  # 按pub_date升序排列
+>>> Question.objects.order_by('-pub_date') # 按pub_date降序排列
+# 先过滤，再排序
+>>> Question.objects.filter(id__gt=2).order_by('-pub_date') 
+# 在过滤的结果集上继续进行过滤
+>>> Question.objects.filter(id__gt=2).filter(id__lt=4)
+```
+
+
+
+
+
+
 
 
 
