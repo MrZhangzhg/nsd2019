@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from .models import Question
 
 # Create your views here.
@@ -15,3 +15,12 @@ def detail(request, question_id):
 
 def result(request, question_id):
     return render(request, 'result.html', {'question_id': question_id})
+
+def vote(request, question_id):
+    question = Question.objects.get(id=question_id)
+    choice_id = request.POST.get('choice_id')  # 从用户post的表单中取出choice_id
+    choice = question.choice_set.get(id=choice_id)  # 获取选项实例
+    choice.votes += 1
+    choice.save()
+
+    return redirect('result', question_id)  # 重定向到result页面

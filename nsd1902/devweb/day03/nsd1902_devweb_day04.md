@@ -404,11 +404,75 @@ polls/static
 {% endblock %}
 ```
 
+2. 修改视图函数
 
+详情视图，只要把对应ID的问题取出即可
 
+```python
+# polls/views.py
+def detail(request, question_id):
+    question = Question.objects.get(id=question_id)
+    return render(request, 'detail.html', {'question': question})
+```
 
+3. 修改视图函数
 
+```html
+# templates/detail.html
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}投票详情页{% endblock %}
+{% block content %}
+    <h1 class="text-center text-warning">{{ question.id }}号问题投票详情页</h1>
+    <h2>{{ question.question_text }}</h2>
+    <form action="" method="post">
+        {% csrf_token %}
+        {% for choice in question.choice_set.all %}
+            <div class="radio">
+                <label>
+                    <input type="radio" name="choice_id" value="{{ choice.id }}">
+                    {{ choice.choice_text }}
+                </label>
+            </div>
+        {% endfor %}
+        <div class="form-group">
+            <input class="btn btn-primary" type="submit" value="提 交">
+        </div>
+    </form>
+{% endblock %}
+```
 
+## 实现投票功能
+
+在投票详情页，当用户提交表单时，将会把数据post给action对应的URL。
+
+为选项投票就是把选项的票数votes加1，通过函数实现投票功能。在django里，访问一个url就会执行函数。
+
+1. url
+
+```python
+# polls/urls.py
+    url(r'^(\d+)/vote/$', views.vote, name='vote'),
+```
+
+2. 视图函数
+
+```python
+def vote(request, question_id):
+    question = Question.objects.get(id=question_id)
+    choice_id = request.POST.get('choice_id')  # 从用户post的表单中取出choice_id
+    choice = question.choice_set.get(id=choice_id)  # 获取选项实例
+    choice.votes += 1
+    choice.save()
+
+    return redirect('result')  # 重定向到result页面
+```
+
+3. 修改表单的action值
+
+```html
+    <form action="{% url 'vote' question.id %}" method="post">
+```
 
 
 
