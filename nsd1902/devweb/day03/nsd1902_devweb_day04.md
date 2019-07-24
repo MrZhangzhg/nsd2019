@@ -465,7 +465,7 @@ def vote(request, question_id):
     choice.votes += 1
     choice.save()
 
-    return redirect('result')  # 重定向到result页面
+    return redirect('result', question_id)  # 重定向到result页面
 ```
 
 3. 修改表单的action值
@@ -474,7 +474,50 @@ def vote(request, question_id):
     <form action="{% url 'vote' question.id %}" method="post">
 ```
 
+## 完成投票结果页
+
+1. 视图函数
+
+```python
+# polls/views.py
+def result(request, question_id):
+    question = Question.objects.get(id=question_id)
+    return render(request, 'result.html', {'question': question})
+```
+
+2. 修改模板
+
+```html
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}投票结果页{% endblock %}
+{% block content %}
+    <h1 class="text-center text-warning">{{ question.id }}号问题投票结果页</h1>
+    <h2>{{ question.question_text }}</h2>
+    <table class="table table-bordered table-hover table-striped">
+        <thead class="bg-primary text-center">
+            <tr>
+                <td>选项</td>
+                <td>票数</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for choice in question.choice_set.all %}
+                <tr>
+                    <td>{{ choice.choice_text }}</td>
+                    <td>{{ choice.votes }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+```
 
 
 
+附：
+
+前台页面模板：https://coreui.io/
+
+django2 by example: http://www.conyli.cc/django-2-by-example
 
