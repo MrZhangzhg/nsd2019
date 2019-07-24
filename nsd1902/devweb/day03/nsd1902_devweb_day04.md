@@ -304,7 +304,91 @@ polls/static
 </html>
 ```
 
+5. 使用模板继承
 
+制作网页时，多个页面呈现的形式是一样的，可以先创建一个基础模板，把共性内容写到基础模板中。具体的模板文件都继承于基础模板，把个性化内容写到模板文件。
+
+```html
+# templates/base.html   保留各个页面的共性部分，个性部分用block标签代替
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body>
+<div class="container">
+    <div id="linux-carousel" class="carousel slide">
+        <ol class="carousel-indicators">
+            <li class="active" data-target="#linux-carousel" data-slide-to="0"></li>
+            <li data-target="#linux-carousel" data-slide-to="1"></li>
+            <li data-target="#linux-carousel" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="item active">
+                <a href="http://www.sogou.com" target="_blank">
+                    <img src="{% static 'imgs/first.jpg' %}">
+                </a>
+            </div>
+            <div class="item">
+                <img src="{% static 'imgs/second.jpg' %}">
+            </div>
+            <div class="item">
+                <img src="{% static 'imgs/third.jpg' %}">
+            </div>
+        </div>
+        <a href="#linux-carousel" data-slide="prev" class="carousel-control left">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a href="#linux-carousel" data-slide="next" class="carousel-control right">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+    </div>
+    <div class="row h4">
+        <div class="col-sm-12">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+    <div class="row text-center h4">
+        <div class="col-sm-12">
+            <a href="#">达内云计算 nsd1902</a>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script type="text/javascript">
+    $('#linux-carousel').carousel({
+        interval : 3000
+    });
+</script>
+</body>
+</html>
+
+
+# 将index.html中共性部分删除，个性部分写到对应的block中
+# index.html
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}投票首页{% endblock %}
+{% block content %}
+    <h1 class="text-center text-warning">投票首页</h1>
+    <ol>
+        {% for question in questions %}
+            <li>
+                <a href="{% url 'detail' question.id %}" target="_blank">
+                    {{ question.question_text }}
+                </a>
+                {{ question.pub_date }}
+            </li>
+        {% endfor %}
+    </ol>
+{% endblock %}
+```
 
 
 
