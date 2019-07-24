@@ -171,6 +171,50 @@ def index(request):
 
 2. 修改web页面
 
+```html
+<body>
+<h1>投票首页</h1>
+{#<div>{{ questions }}</div>#}
+<ol>
+    {% for question in questions %}
+        <li>
+{#        detail是urls.py中为详情页起的名字，它接受一个参数#}
+            <a href="{% url 'detail' question.id %}" target="_blank">
+                {{ question.question_text }}
+            </a>
+            {{ question.pub_date }}
+        </li>
+    {% endfor %}
+</ol>
+</body>
+```
+
+### 模板语言
+
+https://docs.djangoproject.com/en/1.11/ref/templates/language/
+
+```html
+# 变量通过{{var}}来表示
+
+# for 循环，变量在标签中不需要使用{{}}
+<ul>
+{% for athlete in athlete_list %}
+    <li>{{ athlete.name }}</li>
+{% endfor %}
+</ul>
+
+# 判断
+{% if athlete_list %}
+    Number of athletes: {{ athlete_list|length }}
+{% elif athlete_in_locker_room_list %}
+    Athletes should be out of the locker room soon!
+{% else %}
+    No athletes.
+{% endif %}
+
+
+```
+
 
 
 

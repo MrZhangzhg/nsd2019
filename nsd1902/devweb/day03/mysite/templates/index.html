@@ -9,7 +9,13 @@
 {#<div>{{ questions }}</div>#}
 <ol>
     {% for question in questions %}
-        <li>{{ question.question_text }} {{ question.pub_date }}</li>
+        <li>
+{#        detail是urls.py中为详情页起的名字，它接受一个参数#}
+            <a href="{% url 'detail' question.id %}" target="_blank">
+                {{ question.question_text }}
+            </a>
+            {{ question.pub_date }}
+        </li>
     {% endfor %}
 </ol>
 </body>
