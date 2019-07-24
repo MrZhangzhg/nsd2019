@@ -390,5 +390,27 @@ polls/static
 {% endblock %}
 ```
 
+## 制作详情页
+
+1. 先把模板页继承base.html
+
+```html
+# detail.html
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}投票详情页{% endblock %}
+{% block content %}
+    <h1>{{ question_id }}号问题投票详情页</h1>
+{% endblock %}
+```
+
+
+
+
+
+
+
+
+
 
 
