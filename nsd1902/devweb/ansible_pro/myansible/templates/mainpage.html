@@ -1,10 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Ansible Webadmin</title>
-</head>
-<body>
-<h1>Ansible Webadmin</h1>
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Ansible Webadmin{% endblock %}
+{% block content %}
+    <div class="text-center col-sm-3">
+        <a href="#">
+            <img src="{% static 'imgs/linux.jpg' %}" width="150px"><br>
+            主机信息
+        </a>
+    </div>
+    <div class="text-center col-sm-3">
+        <a href="#">
+            <img src="{% static 'imgs/linux.jpg' %}" width="150px"><br>
+            添加主机
+        </a>
+    </div>
+    <div class="text-center col-sm-3">
+        <a href="#">
+            <img src="{% static 'imgs/linux.jpg' %}" width="150px"><br>
+            添加模块
+        </a>
+    </div>
+    <div class="text-center col-sm-3">
+    <a href="#">
+        <img src="{% static 'imgs/linux.jpg' %}" width="150px"><br>
+        执行任务
+    </a>
+</div>
+{% endblock %}
