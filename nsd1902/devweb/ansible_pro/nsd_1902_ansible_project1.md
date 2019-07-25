@@ -53,7 +53,33 @@ STATICFILES_DIRS = [
 ]
 ```
 
+- 授权
 
+```python
+# myansible/urls.py
+from django.conf.urls import url, include
+from django.contrib import admin
+
+urlpatterns = [
+    url(r'^admin/', admin.site.urls),
+    url(r'^webadmin/', include('webadmin.urls')),
+    url(r'', include('mainpage.urls')),
+]
+
+# mainpage/urls.py
+from django.conf.urls import url
+
+urlpatterns = [
+    
+]
+
+# webadmin.urls.py
+from django.conf.urls import url
+
+urlpatterns = [
+    
+]
+```
 
 
 
