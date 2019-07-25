@@ -11,7 +11,7 @@ class HostGroup(models.Model):
 class Host(models.Model):
     hostname = models.CharField(max_length=100, unique=True)
     ipaddr = models.CharField(max_length=15)
-    group = models.CharField(HostGroup)
+    group = models.ForeignKey(HostGroup)
 
     def __str__(self):
         return '%s=>%s' % (self.group, self.hostname)
