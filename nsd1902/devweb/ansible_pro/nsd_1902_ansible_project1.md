@@ -116,7 +116,7 @@ def mainpage(request):
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Ansible Webadmin<</title>
+    <title>Ansible Webadmin</title>
 </head>
 <body>
 <h1>Ansible Webadmin</h1>
@@ -129,6 +129,93 @@ def mainpage(request):
 ```shell
 (nsd1902) [root@room8pc16 myansible]# python manage.py runserver 0:80
 ```
+
+5. 引入boostrap：将static目录拷贝到项目目录下，并修改网页头部信息
+
+## webadmin应用
+
+### 管理模型
+
+```python
+# webadmin/models.py
+from django.db import models
+
+# Create your models here.
+
+class HostGroup(models.Model):
+    groupname = models.CharField(max_length=100, unique=True)
+    
+    def __str__(self):
+        return self.groupname
+
+class Host(models.Model):
+    hostname = models.CharField(max_length=100, unique=True)
+    ipaddr = models.CharField(max_length=15)
+    group = models.CharField(HostGroup)
+    
+    def __str__(self):
+        return '%s=>%s' % (self.group, self.hostname)
+
+class Module(models.Model):
+    module_name = models.CharField(max_length=100, unique=True)
+    
+    def __str__(self):
+        return self.module_name
+
+class Args(models.Model):
+    arg_text = models.CharField(max_length=100)
+    module = models.ForeignKey(Module)
+    
+    def __str__(self):
+        return '%s=>%s' % (self.module, self.arg_text)
+
+```
+
+生成数据库中的表
+
+```shell
+(nsd1902) [root@room8pc16 myansible]# python manage.py makemigrations
+(nsd1902) [root@room8pc16 myansible]# python manage.py migrate
+```
+
+项目的根目录下的db.sqlite3是数据库文件。sqlite数据库是文件型数据库，一个文件就是一个库。
+
+```shell
+[root@room8pc16 myansible]# sqlite3 db.sqlite3 
+sqlite> .help   # 查看帮助
+sqlite> .table  # 显示所有的表
+sqlite> .schema webadmin_host  # 查看表结构
+sqlite> select * from webadmin_host;
+```
+
+创建管理员用户
+
+```shell
+(nsd1902) [root@room8pc16 myansible]# python manage.py createsuperuser
+```
+
+将模型注册到后台管理界面
+
+```python
+# webadmin/admin.py
+from django.contrib import admin
+from .models import HostGroup, Host, Module, Args
+
+# Register your models here.
+
+for item in [HostGroup, Host, Module, Args]:
+    admin.site.register(item)
+```
+
+登陆到http://x.x.x.x/admin进行管理
+
+
+
+
+
+
+
+
 
 
 
