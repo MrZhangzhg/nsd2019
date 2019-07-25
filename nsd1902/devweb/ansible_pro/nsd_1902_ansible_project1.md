@@ -81,13 +81,54 @@ urlpatterns = [
 ]
 ```
 
+## mainpage应用
 
+1. url
 
+```python
+# mainpage/urls.py
+from django.conf.urls import url
+from . import views
 
+urlpatterns = [
+    url(r'^$', views.mainpage, name='mainpage'),
+]
+```
 
+2. 视图函数
 
+```python
+# mainpage/views.py
+from django.shortcuts import render
 
+# Create your views here.
 
+def mainpage(request):
+    return render(request, 'mainpage.html')
+
+```
+
+3. 模板文件
+
+```html
+# templates/mainpage.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ansible Webadmin<</title>
+</head>
+<body>
+<h1>Ansible Webadmin</h1>
+</body>
+</html>
+```
+
+4. 启动开发服务器，测试首页
+
+```shell
+(nsd1902) [root@room8pc16 myansible]# python manage.py runserver 0:80
+```
 
 
 
