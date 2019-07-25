@@ -22,4 +22,29 @@
             </div>
         </form>
     </div>
+    <hr>
+    <div class="col-sm-12">
+        <table class="table table-hover table-striped table-bordered">
+            <thead class="bg-primary text-center">
+                <tr>
+                    <td>主机组</td>
+                    <td>主机</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for group in groups %}
+                    <tr>
+                        <td>{{ group.groupname }}</td>
+                        <td>
+                            <ul class="list-unstyled">
+                                {% for host in group.host_set.all %}
+                                    <li>{{ host.hostname }}: {{ host.ipaddr }}</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
