@@ -325,3 +325,43 @@ def webadmin_index(request):
 
 5. 验证
 
+### 制作添加主机页
+
+1. URL
+
+```python
+# webadmin/urls.py
+from django.conf.urls import url
+from . import views
+
+urlpatterns = [
+    url(r'^$', views.webadmin_index, name='webadmin_index'),
+    url(r'^addhosts/$', views.add_hosts, name='add_hosts'),
+]
+```
+
+2. 视图函数
+
+```python
+# webadmin/views.py
+from .models import HostGroup
+def add_hosts(request):
+    groups = HostGroup.objects.all()
+    return render(request, 'addhosts.html', {'groups': groups})
+```
+
+3. 模板文件
+
+```html
+# templates/addhosts.html
+
+```
+
+4. 修改mainpage.html中“添加主机”的超链接
+
+```html
+        <a href="{% url 'add_hosts' %}" target="_blank">
+```
+
+
+
