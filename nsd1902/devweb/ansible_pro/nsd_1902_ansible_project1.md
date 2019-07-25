@@ -354,7 +354,56 @@ def add_hosts(request):
 
 ```html
 # templates/addhosts.html
-
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}添加主机/组{% endblock %}
+{% block content %}
+    <div class="col-sm-12">
+        <form action="" method="post" class="form-inline">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>主机组：</label>
+                <input type="text" class="form-control" name="group">
+            </div>
+            <div class="form-group">
+                <label>主机：</label>
+                <input type="text" class="form-control" name="host">
+            </div>
+            <div class="form-group">
+                <label>IP地址：</label>
+                <input type="text" class="form-control" name="ip">
+            </div>
+            <div class="form-group">
+                <input class="btn btn-primary" type="submit" value="提交">
+            </div>
+        </form>
+    </div>
+    <hr>
+    <div class="col-sm-12">
+        <table class="table table-hover table-striped table-bordered">
+            <thead class="bg-primary text-center">
+                <tr>
+                    <td>主机组</td>
+                    <td>主机</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for group in groups %}
+                    <tr>
+                        <td>{{ group.groupname }}</td>
+                        <td>
+                            <ul class="list-unstyled">
+                                {% for host in group.host_set.all %}
+                                    <li>{{ host.hostname }}: {{ host.ipaddr }}</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
 ```
 
 4. 修改mainpage.html中“添加主机”的超链接
@@ -363,5 +412,23 @@ def add_hosts(request):
         <a href="{% url 'add_hosts' %}" target="_blank">
 ```
 
+5. 修改函数，实现添加主机的功能
 
+```python
+# webadmin/views.py
+
+def add_hosts(request):
+    if request.method == 'POST':
+        group = request.POST.get('group').strip()
+        host = request.POST.get('host').strip()
+        ip = request.POST.get('ip').strip()
+        if group:
+            # get_or_create返回元组：(组实例，0/1)
+            g = HostGroup.objects.get_or_create(groupname=group)[0]
+            if host and ip:
+                g.host_set.get_or_create(hostname=host, ipaddr=ip)
+
+    groups = HostGroup.objects.all()
+    return render(request, 'addhosts.html', {'groups': groups})
+```
 
