@@ -282,13 +282,46 @@ if __name__ == '__main__':
 (nsd1902) [root@room8pc16 ansicfg]# ansible all -m ping
 ```
 
+### 制作webadmin应用的首页
 
+1. URL
 
+```python
+# webadmin/urls.py
+from django.conf.urls import url
+from . import views
 
+urlpatterns = [
+    url(r'^$', views.webadmin_index, name='webadmin_index'),
+]
+```
 
+2. 视图函数
 
+```python
+# webadmin/views.py
+from django.shortcuts import render
 
+# Create your views here.
 
+def webadmin_index(request):
+    return render(request, 'webadmin_index.html')
+```
 
+3. 生成模板文件
 
+```shell
+(nsd1902) [root@room8pc16 ansicfg]# ansible all -m setup --tree /tmp/output
+(nsd1902) [root@room8pc16 ansicfg]# ansible-cmdb /tmp/output > ../templates/webadmin_index.html
+```
+
+> 注意：模板文件是静态的，它反映的只是执行命令那个时间点的服务器情况。如果需要获取相对实时的信息，可以把上面的命令放到计划任务中，如每隔2小时执行一次。
+
+4. 修改mainpage.html中“主机信息”的超链接
+
+```html
+        <a href="{% url 'webadmin_index' %}" target="_blank">
+```
+
+5. 验证
 

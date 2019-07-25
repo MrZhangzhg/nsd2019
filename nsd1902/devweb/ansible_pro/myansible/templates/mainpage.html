@@ -3,7 +3,7 @@
 {% block title %}Ansible Webadmin{% endblock %}
 {% block content %}
     <div class="text-center col-sm-3">
-        <a href="#">
+        <a href="{% url 'webadmin_index' %}" target="_blank">
             <img src="{% static 'imgs/linux.jpg' %}" width="150px"><br>
             主机信息
         </a>
