@@ -41,11 +41,25 @@
                 <tbody>
                 {% for module in modules %}
                     <tr>
-                        <td>{{ module.module_name }}</td>
+                        <td>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="mod" value="{{ module.module_name }}">
+                                    {{ module.module_name }}
+                                </label>
+                            </div>
+                        </td>
                         <td>
                             <ul class="list-unstyled">
                                 {% for arg in module.args_set.all %}
-                                    <li>{{ arg.arg_text }}</li>
+                                    <li>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="param" value="{{ arg.arg_text }}">
+                                                {{ arg.arg_text }}
+                                            </label>
+                                        </div>
+                                    </li>
                                 {% endfor %}
                             </ul>
                         </td>
@@ -53,6 +67,9 @@
                 {% endfor %}
             </tbody>
         </table>
+        <div class="form-group text-center">
+            <input class="btn btn-primary" type="submit" value="执 行">
+        </div>
         </form>
     </div>
 {% endblock %}
