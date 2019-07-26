@@ -105,7 +105,21 @@ def add_modules(request):
         <a href="{% url 'add_modules' %}" target="_blank">
 ```
 
+5. 完善函数，实现添加模块和参数的功能
 
+```python
+def add_modules(request):
+    if request.method == 'POST':
+        module = request.POST.get('module').strip()
+        arg_text = request.POST.get('args').strip()
+        if module:
+            m = Module.objects.get_or_create(module_name=module)[0]
+            if arg_text:
+                m.args_set.get_or_create(arg_text=arg_text)
+
+    modules = Module.objects.all()
+    return render(request, 'addmodules.html', {'modules': modules})
+```
 
 
 
