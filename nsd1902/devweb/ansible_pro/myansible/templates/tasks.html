@@ -26,4 +26,29 @@
             </div>
         </form>
     </div>
+    <hr>
+    <div class="col-sm-12">
+        <table class="table table-hover table-striped table-bordered">
+            <thead class="bg-primary text-center">
+                <tr>
+                    <td>模块</td>
+                    <td>参数</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for module in modules %}
+                    <tr>
+                        <td>{{ module.module_name }}</td>
+                        <td>
+                            <ul class="list-unstyled">
+                                {% for arg in module.args_set.all %}
+                                    <li>{{ arg.arg_text }}</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
