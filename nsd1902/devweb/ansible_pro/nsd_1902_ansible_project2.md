@@ -235,3 +235,50 @@ def tasks(request):
 
 5. 修改视图函数，使之真正可以执行任务
 
+
+
+## 删除功能
+
+为参数增加删除功能。在“添加模块”页的参数后面，增加一个“删除”链接。
+
+- 删除选项，是对数据库的操作
+- 操作数据库模型，通过视图函数来完成
+- 访问某个URL，实现调用函数
+
+1. url
+
+```python
+    url(r'^del_arg/(\d+)/$', views.del_arg, name='del_arg'),
+```
+
+2. 视图函数
+
+```python
+def del_arg(request, arg_id):
+    arg = Args.objects.get(id=arg_id)
+    arg.delete()
+    
+    return redirect('addmodules')
+```
+
+3. 修改模板，在参数后面加上删除链接
+
+```html
+<td>
+    <ul class="list-unstyled">
+        {% for arg in module.args_set.all %}
+        <li>
+            <div class="col-sm-9">
+                {{ arg.arg_text }}
+            </div>
+            <div class="col-sm-3">
+                <a href="{% url 'del_arg' arg.id %}">del</a>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</td>
+```
+
+
+
