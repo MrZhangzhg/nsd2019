@@ -153,7 +153,77 @@ def tasks(request):
 {% load static %}
 {% block title %}执行任务{% endblock %}
 {% block content %}
-
+    <div class="col-sm-12">
+        <form action="" method="post">
+            {% csrf_token %}
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#server" data-toggle="tab">主机</a></li>
+                <li><a href="#servergroup" data-toggle="tab">主机组</a></li>
+            </ul>
+            <div class="tab-content" style="margin-top: 5px;">
+                <div id="server" class="tab-pane active fade in">
+                    <div class="form-group">
+                        <select name="host" class="form-control">
+                            <option value="">无</option>
+                            {% for host in hosts %}
+                                <option value="{{ host.ipaddr }}">{{ host.hostname }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div id="servergroup" class="tab-pane fade">
+                    <div class="form-group">
+                        <select name="group" class="form-control">
+                            <option value="">无</option>
+                            {% for group in groups %}
+                                <option value="{{ group.groupname }}">{{ group.groupname }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <table class="table table-hover table-striped table-bordered">
+                <thead class="bg-primary text-center">
+                    <tr>
+                        <td>模块</td>
+                        <td>参数</td>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for module in modules %}
+                    <tr>
+                        <td>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="mod" value="{{ module.module_name }}">
+                                    {{ module.module_name }}
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <ul class="list-unstyled">
+                                {% for arg in module.args_set.all %}
+                                    <li>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="param" value="{{ arg.arg_text }}">
+                                                {{ arg.arg_text }}
+                                            </label>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="form-group text-center">
+            <input class="btn btn-primary" type="submit" value="执 行">
+        </div>
+        </form>
+    </div>
 {% endblock %}
 ```
 
@@ -162,4 +232,6 @@ def tasks(request):
 ```html
     <a href="{% url 'tasks' %}" target="_blank">
 ```
+
+5. 修改视图函数，使之真正可以执行任务
 

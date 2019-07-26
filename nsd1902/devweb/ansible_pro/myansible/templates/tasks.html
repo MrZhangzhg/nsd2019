@@ -3,7 +3,8 @@
 {% block title %}执行任务{% endblock %}
 {% block content %}
     <div class="col-sm-12">
-        <form action="">
+        <form action="" method="post">
+            {% csrf_token %}
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#server" data-toggle="tab">主机</a></li>
                 <li><a href="#servergroup" data-toggle="tab">主机组</a></li>
