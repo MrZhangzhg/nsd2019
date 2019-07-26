@@ -121,5 +121,45 @@ def add_modules(request):
     return render(request, 'addmodules.html', {'modules': modules})
 ```
 
+## 制作执行任务页
 
+1. URL
+
+```python
+from django.conf.urls import url
+from . import views
+
+urlpatterns = [
+    url(r'^$', views.webadmin_index, name='webadmin_index'),
+    url(r'^addhosts/$', views.add_hosts, name='add_hosts'),
+    url(r'^addmodules/$', views.add_modules, name='add_modules'),
+    url(r'^tasks/$', views.tasks, name='tasks'),
+]
+
+```
+
+2. 视图函数
+
+```python
+def tasks(request):
+    return render(request, 'tasks.html')
+```
+
+3. 模板文件
+
+```html
+＃ templates/tasks.html
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}执行任务{% endblock %}
+{% block content %}
+
+{% endblock %}
+```
+
+4. 修改mainpage.html中的超链接
+
+```html
+    <a href="{% url 'tasks' %}" target="_blank">
+```
 

@@ -31,3 +31,6 @@ def add_modules(request):
 
     modules = Module.objects.all()
     return render(request, 'addmodules.html', {'modules': modules})
+
+def tasks(request):
+    return render(request, 'tasks.html')
