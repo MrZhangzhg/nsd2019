@@ -1,21 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}添加主机/组{% endblock %}
+{% block title %}添加模块{% endblock %}
 {% block content %}
     <div class="col-sm-12">
         <form action="" method="post" class="form-inline">
             {% csrf_token %}
             <div class="form-group">
-                <label>主机组：</label>
-                <input type="text" class="form-control" name="group">
+                <label>模块：</label>
+                <input type="text" class="form-control" name="module">
             </div>
             <div class="form-group">
-                <label>主机：</label>
-                <input type="text" class="form-control" name="host">
-            </div>
-            <div class="form-group">
-                <label>IP地址：</label>
-                <input type="text" class="form-control" name="ip">
+                <label>参数：</label>
+                <input type="text" class="form-control" name="args">
             </div>
             <div class="form-group">
                 <input class="btn btn-primary" type="submit" value="提交">
@@ -27,18 +23,18 @@
         <table class="table table-hover table-striped table-bordered">
             <thead class="bg-primary text-center">
                 <tr>
-                    <td>主机组</td>
-                    <td>主机</td>
+                    <td>模块</td>
+                    <td>参数</td>
                 </tr>
             </thead>
             <tbody>
-                {% for group in groups %}
+                {% for module in modules %}
                     <tr>
-                        <td>{{ group.groupname }}</td>
+                        <td>{{ module.module_name }}</td>
                         <td>
                             <ul class="list-unstyled">
-                                {% for host in group.host_set.all %}
-                                    <li>{{ host.hostname }}: {{ host.ipaddr }}</li>
+                                {% for arg in module.args_set.all %}
+                                    <li>{{ arg.arg_text }}</li>
                                 {% endfor %}
                             </ul>
                         </td>

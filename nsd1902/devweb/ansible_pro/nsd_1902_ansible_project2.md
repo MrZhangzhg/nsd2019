@@ -51,7 +51,52 @@ def add_modules(request):
 
 ```html
 # templates/addmodules.html
-
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}添加模块{% endblock %}
+{% block content %}
+    <div class="col-sm-12">
+        <form action="" method="post" class="form-inline">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>模块：</label>
+                <input type="text" class="form-control" name="module">
+            </div>
+            <div class="form-group">
+                <label>参数：</label>
+                <input type="text" class="form-control" name="args">
+            </div>
+            <div class="form-group">
+                <input class="btn btn-primary" type="submit" value="提交">
+            </div>
+        </form>
+    </div>
+    <hr>
+    <div class="col-sm-12">
+        <table class="table table-hover table-striped table-bordered">
+            <thead class="bg-primary text-center">
+                <tr>
+                    <td>模块</td>
+                    <td>参数</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for module in modules %}
+                    <tr>
+                        <td>{{ module.module_name }}</td>
+                        <td>
+                            <ul class="list-unstyled">
+                                {% for arg in module.args_set.all %}
+                                    <li>{{ arg.arg_text }}</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
 ```
 
 4. 修改mainpage.html中“添加主机”的超链接
