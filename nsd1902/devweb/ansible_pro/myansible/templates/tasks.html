@@ -13,6 +13,9 @@
                     <div class="form-group">
                         <select name="host" class="form-control">
                             <option value="">无</option>
+                            {% for host in hosts %}
+                                <option value="{{ host.ipaddr }}">{{ host.hostname }}</option>
+                            {% endfor %}
                         </select>
                     </div>
                 </div>
@@ -20,19 +23,22 @@
                     <div class="form-group">
                         <select name="group" class="form-control">
                             <option value="">无</option>
+                            {% for group in groups %}
+                                <option value="{{ group.groupname }}">{{ group.groupname }}</option>
+                            {% endfor %}
                         </select>
                     </div>
                 </div>
             </div>
             <hr>
             <table class="table table-hover table-striped table-bordered">
-            <thead class="bg-primary text-center">
-                <tr>
-                    <td>模块</td>
-                    <td>参数</td>
-                </tr>
-            </thead>
-            <tbody>
+                <thead class="bg-primary text-center">
+                    <tr>
+                        <td>模块</td>
+                        <td>参数</td>
+                    </tr>
+                </thead>
+                <tbody>
                 {% for module in modules %}
                     <tr>
                         <td>{{ module.module_name }}</td>
