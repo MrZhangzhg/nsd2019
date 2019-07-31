@@ -123,6 +123,105 @@ TypeError: must be str, not int
 110
 ```
 
+## 变量
+
+会变化的量。常量不会变，表示字面本身含义的量不会变。100，'abc'这样的量是字面量，表示看到的字面本身含义。
+
+为什么要用变量：方便，变量可以用有意义的名字。
+
+变量的命名约定：
+
+- 首字符只能是字母或下划线
+- 其他字符可以是字母或下划线或数字
+- 区分大小写
+
+```python
+>>> 2a = 10    # Error
+>>> _a = 5     # OK, 不常用
+>>> abc-1 = 10   # Error
+# 以下的两个变量是不一样的
+>>> a = 10
+>>> A = 100
+```
+
+推荐的命名方法：
+
+- 变量和函数名都用小写字母，如pythonstring
+- 简短，如pystr
+- 有意义
+- 多个单词间用下划线分隔，如py_str
+- 变量用名词，函数用谓词(动词＋名词)，如phone表示变量，用update_phone表示函数
+- 类名采用驼峰形式，如MyClass
+
+### 使用变量
+
+```python
+# 变量使用之前必须先赋值
+>>> print(a)    # a没有定义，所以报名字错误
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'a' is not defined
+
+>>> counter = 0
+# 赋值运算自右向左运算。以下代码含义是将counter的值取出并加1，然后再赋值给变量counter
+>>> counter = counter + 1
+
+# 上面代码可以简写为
+>>> counter += 1
+
+# python之禅
+>>> import this
+Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex.
+……
+美胜丑，明胜暗，简胜繁
+```
+
+### 运算符
+
+#### 算术运算：数学四则运算
+
+```python
+>>> 5 / 3
+1.6666666666666667
+>>> 5 // 3   # 只保留商
+1
+>>> 5 % 3    # 只保留余数
+2
+>>> divmod(5, 3)    # divmod函数可以同时返回商和余数
+(1, 2)
+>>> a, b = divmod(5, 3)   # 商和余数分别保存在a和b中
+>>> a
+1
+>>> b
+2
+>>> 2 ** 3   # 2的3次方
+8
+```
+
+#### 比较运算
+
+```python
+# 比较运算的结果是True或False
+# 字符串比较时，逐个字符进行比较，一旦出现结果就不再继续了。字母按ASCII值比较。
+>>> 'x' > 'abc'
+True
+# 在python中，支持连续比较
+>>> 20 > 15 > 10
+True
+>>> 20 > 10 < 15   # 相当于20 > 10 and 10 < 15
+True
+```
+
+
+
+
+
+
+
+
+
 
 
 
