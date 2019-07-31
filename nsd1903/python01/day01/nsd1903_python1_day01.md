@@ -454,10 +454,46 @@ True
 (10,)
 >>> len(b)
 1
-
 ```
 
+## 字典
 
+字典是无序的，所以不能像字符串那样取下标和切片。
+
+```python
+>>> adict = {'name': 'tom', 'age': 22}
+>>> len(adict)
+2
+
+>>> 'tom' in adict   # 'tom'是字典的key吗？
+False
+
+>>> 'name' in adict   
+True
+>>> adict['name']    # 字典通过key取出value
+'tom'
+
+# 字典的key不能重复，赋值时，key存在则修改val，key不存在则新增
+>>> adict['age'] = 25
+>>> adict
+{'name': 'tom', 'age': 25}
+>>> adict['email'] = 'tom@tedu.cn'
+>>> adict
+{'name': 'tom', 'age': 25, 'email': 'tom@tedu.cn'}
+```
+
+### 数据类型分类
+
+- 按存储模型
+  - 标量：字符串、数字
+  - 容器：列表、元组、字典
+- 按更新模型
+  - 可变：列表、字典
+  - 不可变：字符串、元组、数字
+- 按访问模型：
+  - 直接：数字
+  - 顺序：字符串、列表、元组
+  - 映射：字典
 
 
 
