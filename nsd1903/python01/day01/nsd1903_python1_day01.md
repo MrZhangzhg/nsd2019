@@ -1,5 +1,9 @@
 # nsd1903_python1_day01
 
+http://www.jianshu.com -> python百例
+
+https://www.jianshu.com/p/29e7847f7298  -> vim变成IDE
+
 ## 环境准备
 
 官方站点：http://www.python.org
