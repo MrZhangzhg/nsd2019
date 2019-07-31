@@ -324,10 +324,113 @@ welcome
 greet
 >>> wordlist
 'hello\nwelcome\ngreet'
-
 ```
 
+- 字符串相关操作
 
+```python
+>>> py_str = 'python'
+>>> len(py_str)   # 计算字符串的长度
+6
+>>> py_str[0]   # 取出第一个字符，下标为0
+'p'
+>>> py_str[5]
+'n'
+>>> py_str[6]    # 如果下标超出范围，将会出现错误
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+IndexError: string index out of range
+
+# 下标为负数，表示从右向左取
+>>> py_str[-1]
+'n'
+>>> py_str[-6]
+'p'
+
+# 切片，切取片段
+>>> py_str[2:4]   # 包含起始下标对应的字符，不包含结束下标对应的字符
+'th'
+>>> py_str[2:6]   # 取切片时，下标超出范围不会报错
+'thon'
+>>> py_str[2:6000]
+'thon'
+>>> py_str[2:]   # 结束下标不写，表示取到结尾
+'thon'
+>>> py_str[:2]    # 起始下标不写，表示从开头取
+'py'
+>>> py_str[0:2]
+'py'
+
+>>> py_str[:]    # 从开头取到结尾
+'python'
+>>> py_str[::2]   # 步长值为2
+'pto'
+>>> py_str[1::2]
+'yhn'
+>>> py_str[::-1]   # 步长为负表示自右向左取
+'nohtyp'
+
+# 成员关系着断
+>>> 't' in py_str    # t在字符串中吗？
+True
+>>> 'th' in py_str
+True
+>>> 'to' in py_str   # to虽然在字符串中，但不是连续的，返回False
+False
+>>> 'to' not in py_str   # to不在字符串中吗？
+True
+
+# 字符串通过+实现拼接
+>>> 'hao' + '123'
+'hao123'
+>>> str(123)   # 内建函数str可以把数字转成字符串
+'123'
+>>> 'hao' + str(123)
+'hao123'
+
+# 字符串重复
+>>> '*' * 30
+'******************************'
+>>> '#' * 30
+'##############################'
+>>> 'ab' * 30
+'abababababababababababababababababababababababababababababab'
+```
+
+## 列表
+
+使用[]表示列表。列表是容器类型的，它里面可以存储各种数据。
+
+```python
+>>> alist = [10, 20, 30, 'tom', 'jerry']
+>>> len(alist)
+5
+>>> alist[0]
+10
+>>> alist[-1]
+'jerry'
+>>> 30 in alist
+True
+>>> alist[3:]
+['tom', 'jerry']
+
+# 列表支持修改内容
+>>> alist[2] = 300
+>>> alist
+[10, 20, 300, 'tom', 'jerry']
+
+# 通过append方法，可以向列表追加数据
+>>> alist.append('bob')
+>>> alist
+[10, 20, 300, 'tom', 'jerry', 'bob']
+
+>>> alist * 2
+[10, 20, 300, 'tom', 'jerry', 'bob', 10, 20, 300, 'tom', 'jerry', 'bob']
+
+>>> alist + 100   # 报错，列表不能和数字拼接
+>>> alist + [100]   # 列表拼接
+
+```
 
 
 
