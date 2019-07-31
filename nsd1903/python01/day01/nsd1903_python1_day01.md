@@ -214,7 +214,118 @@ True
 True
 ```
 
+#### 逻辑运算符
 
+```python
+# and两边的表达式都为真，结果才为真
+>>> 10 > 5 and 10 < 20
+True
+
+# or两边的表达式只要一边为真，结果就是真
+>>> 10 > 5 or 10 < 3
+True
+
+# not颠倒真假
+>>> 10 > 5
+True
+>>> not 10 > 5
+False
+>>> 10 < 5
+False
+>>> not 10 < 5
+True
+```
+
+## 数据类型
+
+### 数字
+
+- int整数，没小数点
+- bool，布尔数，True的值是1，False值为0
+- 浮点数，有小数点
+- 复数。为了解决谁的平方是-1，数学家发明了复数
+
+### 整数的表示的方式
+
+```python
+# python默认以10进制输出，没有任何前缀的数字都认为是10进制数
+>>> 23   # 10进制
+23
+>>> 0o23   # 0o开头表示8进制数
+19
+>>> 0O23
+19
+>>> 0x23   # 0x开头表示16进制
+35
+>>> 0X23
+35
+>>> 0b11   # 0b开头表示2进制
+3
+>>> 0B11
+3
+>>> 0x234
+564
+>>> 2 * 16 * 16 + 3 * 16 + 4
+564
+
+# 应用
+>>> import os
+>>> os.chmod('login.py', 755)
+(nsd1903) [root@room8pc16 day01]# ll login.py 
+--wxrw--wt. 1 root root 87 7月  31 11:45 login.py
+>>> os.chmod('login.py', 0o755)  # linux系统权限是8进制数，不是10进制
+(nsd1903) [root@room8pc16 day01]# ll login.py 
+-rwxr-xr-x. 1 root root 87 7月  31 11:45 login.py
+```
+
+### 字符串
+
+- 字符串是用引号引起来的一组字符，单双引号没有任何区别。
+
+```python
+# s1和s2分别用了单又引号，它们表示了完全相同的含义
+>>> s1 = 'hello world'
+>>> s2 = "hello world"
+
+# 将字符串tom赋值给变量name
+>>> name = 'tom'
+# s3中的name就是字面本身含义name
+>>> s3 = "hello name"
+>>> s3
+'hello name'
+
+# s4中的%s用后面变量name的值替换
+>>> s4 = "hello %s" % name
+>>> s4
+'hello tom'
+
+>>> "%s is %s years old" % ('tom', 22)
+'tom is 22 years old'
+```
+
+- python允许使用三引号(三个连续的单引号或双引号)保存字符串的样式
+
+```python
+>>> words = "hello\nwelcome\ngreet"
+>>> print(words)   # 打印时，\n转义为回车
+hello
+welcome
+greet
+>>> words   # 内部存储时，回车保存为\n
+'hello\nwelcome\ngreet'
+
+# 三引号只是在输入时可以保留回车等输入时的样式，但是内部存储没有什么特殊
+>>> wordlist = """hello
+... welcome
+... greet"""
+>>> print(wordlist)
+hello
+welcome
+greet
+>>> wordlist
+'hello\nwelcome\ngreet'
+
+```
 
 
 
