@@ -86,6 +86,39 @@ Hello World!
 - 注释使用＃号，在pycharm中可以按ctrl + /进行注释或取消注释
 - 多个语句在同一行，需要使用分号分隔，但是仍然不推荐。
 
+### 输入输出语句
+
+```python
+# 字符串必须写在引号中，单双引号没有区别
+>>> print('hello world!')
+# 一个print语句中，可以打印多项，123没有引号，表示数字。默认各项间用空格分隔
+>>> print('hao', 123, 'world')
+hao 123 world
+# 输出时，也可以指定各项之间的分隔符
+>>> print('hao', 123, 'world', sep='_')
+hao_123_world
+>>> print('hao', 123, 'world', sep='***')
+hao***123***world
+# 字符串可以使用+拼接 
+>>> print('hello' + 'world')
+helloworld
+
+# 通过input获取键盘输入，input括号中的字符串是屏幕提示符，把用户输入的结果保存在变量num中，num是变量，使用时不用像shell那样加$前缀。
+>>> num = input("number: ")
+number: 100
+>>> num
+'100'
+# 只要通过input读取，都是字符类型，字符不能和数字进行四则运算
+>>> num + 10
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: must be str, not int
+
+# 可以通过int函数把num转换成整数，再和数字进行运算
+>>> int(num) + 10
+110
+```
+
 
 
 
