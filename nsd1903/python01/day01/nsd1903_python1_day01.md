@@ -55,3 +55,40 @@ File -> Settings -> Project: Day01 -> Project Interpreter -> 点右上角的齿�
 
 File -> Settings -> Editor -> font -> size 修改大小
 
+
+
+### python运行方式
+
+- 交互解释器
+
+```python
+[root@room8pc16 devops0101]# source ~/nsd1903/bin/activate
+(nsd1903) [root@room8pc16 devops0101]# python
+>>> print("hello world!")
+>>> exit
+Use exit() or Ctrl-D (i.e. EOF) to exit
+```
+
+- 文件形式
+在pycharm项目名上右击选第四项，可以拷贝到项目的绝对路径
+
+```python
+# vim hi.py
+print("Hello World!")
+(nsd1903) [root@room8pc16 day01]# python hi.py 
+Hello World!
+```
+
+### python语法
+
+- python使用缩进表达代码逻辑，推荐缩进4个空格
+- 有子语句的代码，后面都有冒号
+- 注释使用＃号，在pycharm中可以按ctrl + /进行注释或取消注释
+- 多个语句在同一行，需要使用分号分隔，但是仍然不推荐。
+
+
+
+
+
+
+
