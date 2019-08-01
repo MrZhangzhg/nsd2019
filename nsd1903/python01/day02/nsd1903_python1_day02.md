@@ -65,9 +65,14 @@ while 循环条件:
 
 循环条件为真的时候，执行循环体内代码组。条件为真的情况和if判断一样。
 
+### break和continue
 
+- break：结束循环，循环体中break后续代码不再执行
+- continue：跳过本次循环，循环体中continue后续代码不再执行
 
+### else语句
 
+循环的else语句：当循环被break，else语句不执行，否则执行
 
 
 
