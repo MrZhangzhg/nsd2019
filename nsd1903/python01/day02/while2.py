@@ -10,7 +10,7 @@
 #         continue
 #     else:
 #         result += counter
-
+#######################################
 # result = 0
 # counter = 0
 #
@@ -21,6 +21,7 @@
 #         continue
 #
 #     result += counter
+#######################################
 
 result = 0
 counter = 0
