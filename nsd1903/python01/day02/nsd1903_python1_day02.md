@@ -37,7 +37,24 @@
       语句块n
   ```
 
-  
+随机数模块
+
+```python
+>>> import random
+# random.choice从给定的列表中随机选一项
+>>> random.choice('abcdef')
+'a'
+>>> random.choice('abcdef')
+'c'
+>>> random.choice(['aaa', 'bb', 'cccc', 'ddd'])
+'bb'
+>>> random.choice(['aaa', 'bb', 'cccc', 'ddd'])
+'ddd'
+>>> random.choice(['aaa', 'bb', 'cccc', 'ddd'])
+'ddd'
+```
+
+
 
 
 
