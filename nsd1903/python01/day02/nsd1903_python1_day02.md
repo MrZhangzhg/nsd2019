@@ -76,6 +76,23 @@ while 循环条件:
 
 
 
+## for循环
+
+### range函数
+
+用于生成整数。
+
+```python
+>>> range(10)   # 生成range对象
+range(0, 10)
+>>> list(range(10))   # 转换成列表，只用于查看range能生成的数字
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+>>> for i in range(10):
+...   print(i)
+```
+
+
+
 
 
 
