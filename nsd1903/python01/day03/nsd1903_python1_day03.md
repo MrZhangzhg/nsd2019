@@ -197,6 +197,67 @@ s1 = '    hello world'
 s1 = 'a12bcd89xf2340ll'
 ```
 
+## 模块
+
+- 一个以.py作为结尾的python程序文件就是一个模块
+- 模块的命名要求
+  - 首字符只能是字母或下划线
+  - 其他字符可以是字母、数字、下划线
+  - 区分大小写
+- 模块名是python程序文件名去除.py后前面的部分
+
+```python
+# vim star.py
+"""星星模块
+
+该模块包含了一个全局变和一个函数
+"""
+
+hi = 'Hello World'
+
+def pstar(n=30):
+    "默认打印30个星号"
+    print('*' * n)
+
+# python3
+>>> import star
+>>> help(star)
+>>> star.hi
+'Hello World'
+>>> star.pstar()
+******************************
+```
+
+### 导入模块的方法 
+
+```python
+# 直接导入
+>>> import time
+>>> time.strftime('%Y-%m-%d')
+'2019-08-02'
+
+# 导入多个模块，不推荐
+>>> import sys, os, datetime
+
+# 只导入模块中的某些功能
+>>> from random import randint, choice
+>>> randint(1, 100)
+81
+>>> choice('+-*/')
+'/'
+
+# 导入模块时，为它起别名
+>>> import getpass as gp
+>>> gp.getpass()
+
+```
+
+
+
+
+
+
+
 
 
 
