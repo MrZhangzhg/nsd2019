@@ -78,6 +78,32 @@ b'\x7fELF\x02\x01\x01\x00\x00\x00'
 >>> f.close()  # 关闭文件，数据也会同步到磁盘
 ```
 
+### with语句
+
+使用with打开文件，with语句结束后，文件自动关闭。
+
+```python
+>>> with open('/tmp/passwd') as f:
+...   for line in f:
+...     print(line, end='')
+```
+
+### 移动文件指针
+
+```python
+>>> f = open('/tmp/passwd', 'rb')
+>>> f.tell()   # 返回文件指针位置，从文件开头到文件指针间的偏移量
+0
+>>> f.read(5)
+b'hello'
+>>> f.tell()
+5
+>>> f.seek(0, 0)   # 移动指针到文件开头
+# seek第二个参数是相对位置，0表示开头，1表示当前位置，2表示结尾；第一个参数是偏移量
+>>> f.seek(-6, 2)   # 移动指针到文件结尾前的第6个位置
+>>> f.close()
+```
+
 
 
 
