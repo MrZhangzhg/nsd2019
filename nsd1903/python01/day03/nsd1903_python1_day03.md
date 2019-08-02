@@ -67,6 +67,17 @@ b'\x7fELF\x02\x01\x01\x00\x00\x00'
 >>> f.close()
 ```
 
+### 写文本文件
+
+```python
+>>> f = open('/tmp/passwd', 'w')   # 创建或清空文件
+>>> f.write('hello world!\n')   # \n表示换行
+13    # 表示共写入了13字节
+>>> f.flush()  # 默认数据写到缓存，不会立即同步至磁盘，flush()立即写入磁盘
+>>> f.writelines(['2nd line.\n', '3rd line.\n'])
+>>> f.close()  # 关闭文件，数据也会同步到磁盘
+```
+
 
 
 
