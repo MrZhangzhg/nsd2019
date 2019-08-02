@@ -144,6 +144,20 @@ f2.close()
 - 形参赋值给实参时，认为是变量赋值即可
 - 函数内部的参数、变量都是局部变量，只在函数内可用。
 
+### 位置参数
+
+- 在python中，位置参数保存在sys模块的argv列表中
+- 位置参数都以字符形式传递
+
+```python
+(nsd1903) [root@room8pc16 day03]# cat pos.py 
+import sys
+
+print(sys.argv)
+(nsd1903) [root@room8pc16 day03]# python pos.py hao 123
+['pos.py', 'hao', '123']
+```
+
 
 
 
