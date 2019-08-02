@@ -104,7 +104,25 @@ b'hello'
 >>> f.close()
 ```
 
+练习：拷贝文件
 
+```python
+# 初步实现
+f1 = open('/bin/ls', 'rb')
+f2 = open('/tmp/ls', 'wb')
+
+data = f1.read()
+f2.write(data)
+
+f1.close()
+f2.close()
+```
+
+以上代码存在的问题
+
+- 尽量使用变量，不要直接使用'/bin/ls'这样的直接量
+- 变量名应该有意义，f1和f2这样的名称没有意义
+- 读取数据时，一次将全部内容读入，有可能数据量太大
 
 
 
