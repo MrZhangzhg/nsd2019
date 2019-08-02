@@ -252,6 +252,24 @@ def pstar(n=30):
 
 ```
 
+### 模块的特性
+
+- 每个模块文件都有一个特殊的变量叫\_\_name\_\_
+- 它的值可以是\_\_main\_\_，也可以是模块名
+  - 当模块文件直接运行时，是\_\_main\_\_
+  - 当模块间接运行（被import导入）时是模块名
+
+```python
+(nsd1903) [root@room8pc16 day03]# cat foo.py 
+print(__name__)
+(nsd1903) [root@room8pc16 day03]# cat bar.py 
+import foo
+(nsd1903) [root@room8pc16 day03]# python foo.py 
+__main__
+(nsd1903) [root@room8pc16 day03]# python bar.py
+foo
+```
+
 
 
 
