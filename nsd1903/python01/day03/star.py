@@ -9,3 +9,5 @@ def pstar(n=30):
     "默认打印30个星号"
     print('*' * n)
 
+if __name__ == '__main__':
+    pstar()
