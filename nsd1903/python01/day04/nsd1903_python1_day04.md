@@ -65,6 +65,31 @@ ls: 无法访问abcd: 没有那个文件或目录
 b'uid=0(root) gid=0(root) \xe7\xbb\x84=0(root)\n'
 >>> result.stderr
 b'id: john: no such user\n'
+```
+
+### bytes和str的转换
+
+- 字母a对应的10进制数是97，2进制是0b01100001
+- 一个字节是8位，一个ASCII字符可以用一个字节表示出来
+- 所以bytes类型的数据，一个字节正好能表示成一个ASCII字符时，就显示成字符
+- 汉字使用utf8编码，一个汉字需要占3字节。一个字节表示不出来汉字，所以一个汉字就需要使用三个以\x开头的16进制数表示
+- str类型的字符串是引号括起来的部分
+- bytes类型的字符串，以b''表示
+
+```python
+# bytes类型转成str类型
+>>> result.stdout.decode()
+'uid=0(root) gid=0(root) 组=0(root)\n'
+
+>>> hi = '你好tom'
+>>> hi.encode()   # str => bytes
+b'\xe4\xbd\xa0\xe5\xa5\xbdtom'
+
+>>> data = hi.encode()
+>>> data
+b'\xe4\xbd\xa0\xe5\xa5\xbdtom'
+>>> data.decode()   # bytes => str
+'你好tom'
 
 ```
 
