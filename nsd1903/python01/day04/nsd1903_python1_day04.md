@@ -382,7 +382,20 @@ b'\xd6\xd0\xb9\xfa'
 '0xa'
 >>> '%010d' % 5   # 共10个宽度，不够的用0补齐
 '0000000005'
+```
 
+使用format方法实现字符串格式化
+
+```python
+# 使用{}作为占位符
+>>> '{} is {} years old.'.format('tom', 20)
+'tom is 20 years old.'
+>>> '{1} is {0} years old.'.format(20, 'tom')
+'tom is 20 years old.'
+>>> '{:<10}{:<10}'.format('tom', 20)  # 左对齐
+'tom       20        '
+>>> '{:>10}{:>10}'.format('tom', 20)   # 右对齐
+'       tom        20'
 ```
 
 
