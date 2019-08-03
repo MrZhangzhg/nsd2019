@@ -398,6 +398,55 @@ b'\xd6\xd0\xb9\xfa'
 '       tom        20'
 ```
 
+原始字符串/真实字符串
+
+```python
+>>> win_path = 'c:\temp\new'
+>>> print(win_path)
+c:	emp
+ew
+
+>>> win_path = 'c:\\temp\\new'
+>>> print(win_path)
+c:\temp\new
+
+# 以上写法可以改为原始字符串
+>>> wpath = r'c:\temp\new'
+>>> print(wpath)
+c:\temp\new
+>>> wpath
+'c:\\temp\\new'
+```
+
+字符串方法
+
+```python
+>>> s1 = 'hello world'
+>>> s2 = 'HAO 123'
+>>> s3 = 'hao123'
+>>> s4 = '7298302'
+>>> s5 = '\t  hello world\n'
+>>> s1.center(48)  # 居中，总宽度48
+'                  hello world                   '
+>>> s1.center(48, '*')
+'******************hello world*******************'
+>>> s1.ljust(48, '#')
+'hello world#####################################'
+>>> s1.rjust(48, '#')
+'#####################################hello world'
+>>> s1.upper()
+'HELLO WORLD'
+>>> s2.lower()
+'hao 123'
+>>> s5.strip()   # 去除字符串两端的空白字符
+'hello world'
+>>> s5.rstrip()
+'\t  hello world'
+>>> s5.lstrip()
+'hello world\n'
+
+```
+
 
 
 
