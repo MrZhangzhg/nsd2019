@@ -41,6 +41,31 @@ f2.close()
 
 # chown
 >>> shutil.chown('/tmp/mima', user='bob', group='bob')
+
+# rm -rf 
+>>> shutil.rmtree('/var/tmp/anquan')
+```
+
+## subprocess模块
+
+用于执行系统命令。
+
+```python
+# 在shell环境中执行命令ls ~
+>>> subprocess.run('ls ~', shell=True)
+
+>>> result = subprocess.run('ls abcd', shell=True)
+ls: 无法访问abcd: 没有那个文件或目录
+>>> result.returncode   # returncode就是$?
+2
+
+# 将输出保存到stdout中，将错误保存到stderr中
+>>> result = subprocess.run('id root; id john', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+>>> result.stdout
+b'uid=0(root) gid=0(root) \xe7\xbb\x84=0(root)\n'
+>>> result.stderr
+b'id: john: no such user\n'
+
 ```
 
 
