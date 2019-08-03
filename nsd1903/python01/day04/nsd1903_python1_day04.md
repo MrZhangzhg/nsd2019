@@ -151,16 +151,143 @@ b'\xe4\xbd\xa0\xe5\xa5\xbdtom'
 10
 >>> b
 20
-
 ```
 
+关键字
+
+```python
+>>> import keyword
+>>> keyword.kwlist
+['False', 'None', 'True', 'and', 'as', 'assert', 'break', 'class', 'continue', 'def', 'del', 'elif', 'else', 'except', 'finally', 'for', 'from', 'global', 'if', 'import', 'in', 'is', 'lambda', 'nonlocal', 'not', 'or', 'pass', 'raise', 'return', 'try', 'while', 'with', 'yield']
+```
+
+内建：
+
+python创建的一些函数等。
+
+https://docs.python.org/zh-cn/3/library/functions.html
+
+### python模块布局
+
+```python
+#!/usr/local/bin/python     # 解释器
+"""文档字符串
+
+这是出现在help中的部分"""
+
+import string   # 模块导入
+import time
+
+all_chs = string.ascii_letters + digits   # 全局变量定义
+debug = True
+
+class MyClass:   # 类定义
+    pass
+
+def func1():    # 函数定义
+    pass
+
+if __name__ == '__main__':
+    mc = MyClass()
+    func1()
+```
+
+### 编程思路
+
+- 发呆。思考程序的运行方式（交互？非交互？），运行场景
+- 思考程序有哪些功能，将这些功能写为函数，写出大体框架
+- 编写程序主体。按顺序调用函数
+- 编写函数内容
+
+1. 运行方式
+
+```shell
+# python mkfile.py
+文件名： /etc/hosts
+文件已存在，请重试。
+文件名：/etc/
+文件已存在，请重试。
+文件名：/tmp/abc.txt
+请输入内容，输入end结束输入：
+(end to quit)> hello world.
+(end to quit)> ni hao.
+(end to quit)> exit end
+(end to quit)> end
+# ls /tmp/abc.txt
+abc.txt
+# cat /tmp/abc.txt
+hello world.
+ni hao.
+exit end
+```
+
+2. 编写功能函数
+
+```python
+def get_fname():
 
 
+def get_content():
 
 
+def wfile(fname, content):
+```
+
+3. 程序主体
+
+```python
+def get_fname():
 
 
+def get_content():
 
+
+def wfile(fname, content):
+
+
+if __name__ == '__main__':
+    fname = get_fname()
+    content = get_content()
+    wfile(fname, content)
+```
+
+4. 编写函数内容
+
+```python
+import os
+
+def get_fname():
+    while True:
+        fname = input('文件名: ')
+        # os.path.exists(fname) => 文件已存在返回True
+        if not os.path.exists(fname):
+            break
+        print('文件已存在，请重试')
+
+    return fname
+
+def get_content():
+    content = []
+
+    print('请输入内容，输入end结束输入：')
+    while True:
+        line = input('(end to quit)> ')
+        if line == 'end':
+            break
+        content.append(line + '\n')
+
+    return content
+
+def wfile(fname, content):
+    with open(fname, 'w') as fobj:
+        fobj.writelines(content)
+
+if __name__ == '__main__':
+    fname = get_fname()
+    content = get_content()
+    wfile(fname, content)
+
+```
 
 
 
