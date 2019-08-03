@@ -445,6 +445,69 @@ c:\temp\new
 >>> s5.lstrip()
 'hello world\n'
 
+>>> s1.startswith('h')  # 以h开头吗
+True
+>>> s1.startswith('he')  # 以he开头吗？
+True
+>>> s1.endswith('ab')   # 以ab结尾吗？
+False
+>>> s1.replace('l', 'a')   # 替换l为a
+'heaao worad'
+>>> s1.replace('ll', 'ab')  # 替换ll为ab
+'heabo world'
+>>> s1.split()   # 默认以空格作为分隔符切割
+['hello', 'world']
+>>> 'hello.world.ni.hao'.split('.')   # 将点作为分隔符
+['hello', 'world', 'ni', 'hao']
+>>> '-'.join(['abc', 'hello', 'hao'])  # 用-拼接
+'abc-hello-hao'
+
+>>> from random import choice
+>>> from string import ascii_letters, digits
+>>> all_chs = ascii_letters + digits
+>>> [choice(all_chs)]
+['b']
+>>> [choice(all_chs) for i in range(8)]
+['h', 'n', '4', 'o', 'z', 'A', 'v', 'y']
+>>> ''.join([choice(all_chs) for i in range(8)])
+'Saqo19u0'
+
+>>> s1
+'hello world'
+>>> s1.islower()   # 字符串中的所有字母都是小写吗？
+True
+
+>>> s2
+'HAO 123'
+>>> s2.isupper()   # 字符串中的所有字母都是大写吗？
+True
+>>> s2.isdigit()   # 字符串中的所有字符都是数字吗？
+False
+>>> s4
+'7298302'
+>>> s4.isdigit()
+True
+
+>>> 'Hao'.isalpha()   # 所有的字符都是字母吗？
+True
+>>> 'Hao123'.isalpha()
+False
+>>> 'Hao123'.isalnum()  # 所有的字符都是字母和数字吗？
+True
+
+>>> s4
+'7298302'
+>>> s4.isdigit()
+True
+>>> 
+>>> for ch in s4:
+...   if ch not in '0123456789':
+...     print(False)
+...     break
+... else:
+...   print(True)
+... 
+True
 ```
 
 
