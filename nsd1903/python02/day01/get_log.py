@@ -21,10 +21,19 @@ t12 = time.strptime('2019-05-15 12:00:00', '%Y-%m-%d %H:%M:%S')
 # 初步实现
 # 读取文件的每一行，取出前19个字符，转找成9元组时间对象
 # 如果时间在t9到t12之间，则打印
+# with open('myfile.txt') as fobj:
+#     for line in fobj:
+#         t = time.strptime(line[:19], '%Y-%m-%d %H:%M:%S')
+#         if t9 < t < t12:
+#             print(line, end='')
+##################################
+# 改善代码
+# 初步实现中，文件所有的行都需要读取，但是12点之后的行没有必要
 with open('myfile.txt') as fobj:
     for line in fobj:
         t = time.strptime(line[:19], '%Y-%m-%d %H:%M:%S')
-        if t9 < t < t12:
+        if t > t12:
+            break
+        if t > t9:
             print(line, end='')
-##################################
 
