@@ -1,14 +1,7 @@
 from random import randint, choice
 
-def add(x, y):
-    return x + y
-
-def sub(x, y):
-    return x - y
-
-
 def exam():
-    cmds ={'+': add, '-': sub}
+    cmds ={'+': lambda x, y: x + y, '-': lambda x, y: x - y}
     nums = [randint(1, 100) for i in range(2)]
     nums.sort(reverse=True)  # 降序排列
     op = choice('+-')   # 随机选择加减号
