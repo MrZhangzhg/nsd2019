@@ -76,9 +76,20 @@ session = Session()
 # for emp in qset6:
 #     print(emp.emp_name, emp.email)
 #######################################
-qset7 = session.query(Departments).filter(Departments.dep_id.in_([1, 3]))
-for dep in qset7:
-    print(dep.dep_id, dep.dep_name)
+# qset7 = session.query(Departments).filter(Departments.dep_id.in_([1, 3]))
+# for dep in qset7:
+#     print(dep.dep_id, dep.dep_name)
+#######################################
+# qset8 = session.query(Departments.dep_id, Departments.dep_name)
+# print(qset8)  # qset8是SQL语句
+# print(qset8.all())   # all方法返回列表
+# print(qset8.first())  # first返回all中的第一项
+#######################################
+qset9 = session.query(Departments.dep_id, Departments.dep_name)\
+    .filter(Departments.dep_id==20)
+# one方法要求查询的结果只有一项，0或多项都报错
+print(qset9.one())
+
 
 
 #######################################
