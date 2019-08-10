@@ -61,15 +61,23 @@ session = Session()
 #     print(dep.dep_id, dep.dep_name)
 #######################################
 # 过滤
-qset4 = session.query(Departments).filter(Departments.dep_id>=3)
-for dep in qset4:
-    print(dep.dep_id, dep.dep_name)
-
-print('*' * 30)
-
-qset5 = session.query(Departments).filter(Departments.dep_id>=3)\
-    .filter(Departments.dep_id<6)
-for dep in qset5:
+# qset4 = session.query(Departments).filter(Departments.dep_id>=3)
+# for dep in qset4:
+#     print(dep.dep_id, dep.dep_name)
+#
+# print('*' * 30)
+#
+# qset5 = session.query(Departments).filter(Departments.dep_id>=3)\
+#     .filter(Departments.dep_id<6)
+# for dep in qset5:
+#     print(dep.dep_id, dep.dep_name)
+#######################################
+# qset6 = session.query(Employees).filter(Employees.email.like('%@qq.com'))
+# for emp in qset6:
+#     print(emp.emp_name, emp.email)
+#######################################
+qset7 = session.query(Departments).filter(Departments.dep_id.in_([1, 3]))
+for dep in qset7:
     print(dep.dep_id, dep.dep_name)
 
 
