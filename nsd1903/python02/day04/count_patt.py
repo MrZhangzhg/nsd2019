@@ -20,5 +20,8 @@ if __name__ == '__main__':
     fname = 'access_log'
     ip = '^(\d+\.){3}\d+'  # 192.168.1.15  12345.1.12345678.20
     ip_dict = count_patt(fname, ip)
+    ip_list = list(ip_dict.items())
+    ip_list.sort(key=lambda item: item[-1], reverse=True)
     print(ip_dict)
+    print(ip_list)
 
