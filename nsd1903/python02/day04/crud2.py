@@ -52,12 +52,24 @@ session = Session()
 #     print(dep)
 #######################################
 # 排序
-qset3 = session.query(Departments).order_by(Departments.dep_id)
-for dep in qset3:
+# qset3 = session.query(Departments).order_by(Departments.dep_id)
+# for dep in qset3:
+#     print(dep.dep_id, dep.dep_name)
+# print('*' * 30)
+#
+# for dep in qset3[2:5]:
+#     print(dep.dep_id, dep.dep_name)
+#######################################
+# 过滤
+qset4 = session.query(Departments).filter(Departments.dep_id>=3)
+for dep in qset4:
     print(dep.dep_id, dep.dep_name)
+
 print('*' * 30)
 
-for dep in qset3[2:5]:
+qset5 = session.query(Departments).filter(Departments.dep_id>=3)\
+    .filter(Departments.dep_id<6)
+for dep in qset5:
     print(dep.dep_id, dep.dep_name)
 
 
