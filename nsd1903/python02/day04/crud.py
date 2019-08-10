@@ -28,17 +28,25 @@ cursor = conn.cursor()
 # print(result3)
 #################################
 # 移动游标
-select = "SELECT * FROM departments ORDER BY dep_id"
-cursor.execute(select)
-cursor.scroll(2, mode='absolute')  # 绝对移动，从开头移动2条记录
-result1 = cursor.fetchone()
-print(result1)
-print('*' * 30)
-cursor.scroll(2)   # 相对移动，从当前位置向后移动2个记录
-result2 = cursor.fetchone()
-print(result2)
-
-
+# select = "SELECT * FROM departments ORDER BY dep_id"
+# cursor.execute(select)
+# cursor.scroll(2, mode='absolute')  # 绝对移动，从开头移动2条记录
+# result1 = cursor.fetchone()
+# print(result1)
+# print('*' * 30)
+# cursor.scroll(2)   # 相对移动，从当前位置向后移动2个记录
+# result2 = cursor.fetchone()
+# print(result2)
+#################################
+# 修改
+# update = "UPDATE departments SET dep_name=%s WHERE dep_name=%s"
+# data = ('人力资源部', '人事部')
+# cursor.execute(update, data)
+#################################
+# 删除
+delete = "DELETE FROM departments WHERE dep_id=%s"
+dep = (6,)
+cursor.execute(delete, dep)
 
 
 
