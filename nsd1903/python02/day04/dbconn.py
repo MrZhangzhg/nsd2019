@@ -1,13 +1,18 @@
 from sqlalchemy import create_engine, Column, Integer, String, Date, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
 
 # 创建到数据库的引擎
+
 engine = create_engine(
     # mysql+pymysql://用户:密码@服务器/数据库?参数
     'mysql+pymysql://root:tedu.cn@127.0.0.1/tedu1903?charset=utf8',
     encoding='utf8',
     # echo=True  # 打印日志信息，生产环境下不要启用
 )
+
+# 创建会话类，用于客户端对服务器执行增删改查
+Session = sessionmaker(bind=engine)
 
 # 创建实体类的基类
 Base = declarative_base()
