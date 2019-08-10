@@ -40,8 +40,16 @@ session = Session()
 # )
 # session.add_all([lb, gy, zf, zy, hz, wy])
 #######################################
-
-
+# 查询时，将类作为参数，返回的是实例集合
+qset1 = session.query(Departments)
+# print(qset1)   # qset1是SQL语句，取值时sql语句才会执行，返回结果
+for dep in qset1:
+    print(dep.dep_id, dep.dep_name)
+#######################################
+# 查询时，将类变量作为参数，返回的是元组构成的查询集
+qset2 = session.query(Departments.dep_id, Departments.dep_name)
+for dep in qset2:
+    print(dep)
 
 
 #######################################
