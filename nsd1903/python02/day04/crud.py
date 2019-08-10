@@ -16,16 +16,29 @@ cursor = conn.cursor()
 # cursor.executemany(insert, deps)
 #################################
 # 查询并取出查询结果
-select = "SELECT * FROM departments"
+# select = "SELECT * FROM departments"
+# cursor.execute(select)
+# result1 = cursor.fetchone()  # 取出一个记录
+# print(result1)
+# print('*' * 30)
+# result2 = cursor.fetchmany(2)  # 取出2个记录
+# print(result2)
+# print('*' * 30)
+# result3 = cursor.fetchall()  # 取出全部记录
+# print(result3)
+#################################
+# 移动游标
+select = "SELECT * FROM departments ORDER BY dep_id"
 cursor.execute(select)
-result1 = cursor.fetchone()  # 取出一个记录
+cursor.scroll(2, mode='absolute')  # 绝对移动，从开头移动2条记录
+result1 = cursor.fetchone()
 print(result1)
 print('*' * 30)
-result2 = cursor.fetchmany(2)  # 取出2个记录
+cursor.scroll(2)   # 相对移动，从当前位置向后移动2个记录
+result2 = cursor.fetchone()
 print(result2)
-print('*' * 30)
-result3 = cursor.fetchall()  # 取出全部记录
-print(result3)
+
+
 
 
 
