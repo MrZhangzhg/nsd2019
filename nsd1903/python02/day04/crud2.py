@@ -85,10 +85,26 @@ session = Session()
 # print(qset8.all())   # all方法返回列表
 # print(qset8.first())  # first返回all中的第一项
 #######################################
-qset9 = session.query(Departments.dep_id, Departments.dep_name)\
-    .filter(Departments.dep_id==20)
-# one方法要求查询的结果只有一项，0或多项都报错
-print(qset9.one())
+# qset9 = session.query(Departments.dep_id, Departments.dep_name)\
+#     .filter(Departments.dep_id==20)
+# # one方法要求查询的结果只有一项，0或多项都报错
+# print(qset9.one())
+#######################################
+# 多表查询，默认情况下sqlalchemy会自动根据主外键约束找到对应关系
+# 查询的时候参数先写Employees，join要写Departments，反之亦然
+# qset10 = session.query(Employees.emp_name, Departments.dep_name)\
+#     .join(Departments)
+# print(qset10.all())
+#######################################
+# 修改，只要将实例重新赋值
+# qset11 = session.query(Departments).filter(Departments.dep_name=='人事部')
+# hr = qset11.one()
+# hr.dep_name = '人力资源部'
+#######################################
+# 删除，先找到实例再删除
+qset12 = session.query(Departments).filter(Departments.dep_id==6)
+sales = qset12.one()
+session.delete(sales)
 
 
 
