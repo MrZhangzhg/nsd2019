@@ -61,7 +61,37 @@ wget模块
 >>> wget.download(url)
 # 下载文件到指定目录
 >>> wget.download(url, out='/tmp')
+```
 
+修改请求头，模拟客户端
+
+```python
+>>> from urllib import request
+>>> url = 'https://www.jianshu.com/'
+>>> html = request.urlopen(url)
+urllib.error.HTTPError: HTTP Error 403: Forbidden
+# 简书拒绝了访问，原因是请求头中，浏览器写的是python/urllib
+
+# 改变请求头中浏览器字段为火狐
+>>> headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'}
+>>> r = request.Request(url, headers=headers)  # 建立请求对象
+>>> html = request.urlopen(r)
+>>> html.read()
+```
+
+url只允许一部分ascii字符，如果有其他字符需编码
+
+```python
+>>> url = 'https://www.sogou.com/web?query=利奇马'
+>>> request.urlopen(url)
+UnicodeEncodeError: 'ascii' codec can't encode characters in position 15-17: ordinal not in range(128)
+# 报错原因是url中含有中文
+
+>>> url = 'https://www.sogou.com/web?query=' + request.quote('利奇马')
+>>> url
+'https://www.sogou.com/web?query=%E5%88%A9%E5%A5%87%E9%A9%AC'
+>>> request.urlopen(url)
+<http.client.HTTPResponse object at 0x7f6c77df9550>
 ```
 
 
