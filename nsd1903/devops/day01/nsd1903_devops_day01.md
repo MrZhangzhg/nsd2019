@@ -52,6 +52,18 @@ b' HTML>\n'
 (nsd1903) [root@room8pc16 day01]# eog /tmp/myimg.jpeg
 ```
 
+wget模块
+
+```shell
+(nsd1903) [root@room8pc16 day01]# pip install wget
+>>> import wget
+# 下载文件到当前目录
+>>> wget.download(url)
+# 下载文件到指定目录
+>>> wget.download(url, out='/tmp')
+
+```
+
 
 
 
