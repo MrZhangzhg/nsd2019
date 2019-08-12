@@ -94,6 +94,41 @@ UnicodeEncodeError: 'ascii' codec can't encode characters in position 15-17: ord
 <http.client.HTTPResponse object at 0x7f6c77df9550>
 ```
 
+## paramiko
+
+实现ssh功能。
+
+```shell
+(nsd1903) [root@room8pc16 day01]# pip install zzg_pypkgs/paramiko_pkgs/*
+
+>>> import paramiko
+>>> ssh = paramiko.SSHClient()  # 创建SSHClient实例
+# 当询问是否要接受密钥进，回答yes
+>>> ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+>>> ssh.connect('192.168.4.5', username='root', password='123456', port=22)
+>>> result = ssh.exec_command('id root; id john')
+>>> len(result)
+3
+# 执行命令的返值是元组，元组有3项，分别是输入、输出和错误的类文件对象
+>>> result[1].read()
+b'uid=0(root) gid=0(root) groups=0(root)\n'
+>>> result[2].read()
+b'id: john: no such user\n'
+
+# 执行命令，还可以写成：
+>>> stdin, stdout, stderr = ssh.exec_command('id root; id john')
+>>> out = stdout.read()
+>>> err = stderr.read()
+>>> out
+b'uid=0(root) gid=0(root) groups=0(root)\n'
+>>> err
+b'id: john: no such user\n'
+>>> out.decode()   # 将bytes转为str
+'uid=0(root) gid=0(root) groups=0(root)\n'
+
+>>> ssh.close()  # 关闭连接。
+```
+
 
 
 
