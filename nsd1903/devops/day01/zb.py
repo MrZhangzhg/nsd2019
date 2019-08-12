@@ -13,4 +13,5 @@ else:
     print('子进程，醒了')
     exit()
 
+# watch -n1 ps a
 
