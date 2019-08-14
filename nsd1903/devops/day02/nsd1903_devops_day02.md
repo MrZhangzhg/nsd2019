@@ -43,7 +43,46 @@ b'{"weatherinfo":{"city":"\xe5\x8c\x97\xe4\xba\xac","cityid":"101010100","temp":
 {'weatherinfo': {'city': '北京', 'cityid': '101010100', 'temp': '27.9',WD': '南风', 'WS': '小于3级', 'SD': '28%', 'AP': '1002hPa', 'njd': '暂无WSE': '<3', 'time': '17:55', 'sm': '2.1', 'isRadar': '1', 'Radar': 'JC_RADAR_AZ9010_JB'}}
 ```
 
+## requests模块
 
+- requests是一个HTTP库
+- requests内部采用来urillib3
+- requests将HTTP各种方法提前定义成了函数，使用HTTP的某种方法访问web资源，只要调用相关函数即可
+  - GET：通过浏览器访问网址、点击超链接、搜索表单提交
+  - POST：通过表单提交数据（注册、登陆）
+
+```python
+# 安装 
+(nsd1903) [root@room8pc16 day02]# pip install zzg_pypkgs/requests_pkgs/*
+```
+
+### requests应用
+
+```python
+# 文本内容使用text属性获取
+>>> import requests
+>>> r = requests.get('http://www.163.com')
+>>> r.text
+
+# 非文本bytes类型数据，通过content获取
+>>> url = 'http://image.nmc.cn/product/2019/08/14/STFC/medium/SEVP_NMC_STFC_SFER_ER24_ACHN_L88_P9_20190814070002400.JPG'
+>>> r = requests.get(url)
+>>> with open('/tmp/weather.jpg', 'wb') as fobj:
+...   fobj.write(r.content)
+(nsd1903) [root@room8pc16 day02]# eog /tmp/weather.jpg 
+
+# json数据使用json()方法
+>>> url = 'http://www.weather.com.cn/data/sk/101010100.html'
+>>> url = 'http://www.weather.com.cn/data/sk/101010100.html'
+>>> r = requests.get(url)
+>>> r.json()   # 乱码
+{'weatherinfo': {'city': 'å\x8c\x97äº¬', 'cityid': '101010100', 'temp': '27.9', 'WD': 'å\x8d\x97é£\x8e', 'WS': 'å°\x8fäº\x8e3çº§', 'SD': '28%', 'AP': '1002hPa', 'njd': 'æ\x9a\x82æ\x97\xa0å®\x9eå\x86µ', 'WSE': '<3', 'time': '17:55', 'sm': '2.1', 'isRadar': '1', 'Radar': 'JC_RADAR_AZ9010_JB'}}
+>>> r.encoding   # 查看编码
+'ISO-8859-1'
+>>> r.encoding = 'utf8'   # 改变编码
+>>> r.json()   # 正常显示
+
+```
 
 
 
