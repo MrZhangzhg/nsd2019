@@ -15,7 +15,10 @@ def rcmd(host, user='root', passwd=None, port=22, cmds=None):
     ssh.close()
 
 if __name__ == '__main__':
-    host = '192.168.4.5'
+    hostfile = 'servers.txt'
     password = '123456'
     cmds = 'id root; id jerry'
-    rcmd(host, passwd=password, cmds=cmds)
+    with open(hostfile) as fobj:
+        for line in fobj:
+            ip = line.strip()
+            rcmd(ip, passwd=password, cmds=cmds)
