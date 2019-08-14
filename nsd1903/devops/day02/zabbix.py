@@ -44,17 +44,88 @@ headers = {'Content-Type': 'application/json-rpc'}
 # }
 ####################################
 # 删除id为10257的主机
+# data = {
+#     "jsonrpc": "2.0",
+#     "method": "host.delete",
+#     "params": [
+#         "10257",
+#         # "32"
+#     ],
+#     "auth": "37852e5313817edc8dd5812ddb8064f8",
+#     "id": 1
+# }
+###################################
+# 获取Linux Servers组的ID
+# data = {
+#     "jsonrpc": "2.0",
+#     "method": "hostgroup.get",
+#     "params": {
+#         "output": "extend",
+#         "filter": {
+#             "name": [
+#                 # "Zabbix servers",
+#                 "Linux servers"
+#             ]
+#         }
+#     },
+#     "auth": "37852e5313817edc8dd5812ddb8064f8",
+#     "id": 1
+# }
+# group-id: 2
+###################################
+# 获取Template OS Linux模板ID
+# data = {
+#     "jsonrpc": "2.0",
+#     "method": "template.get",
+#     "params": {
+#         "output": "extend",
+#         "filter": {
+#             "host": [
+#                 "Template OS Linux",
+#                 # "Template OS Windows"
+#             ]
+#         }
+#     },
+#     "auth": "37852e5313817edc8dd5812ddb8064f8",
+#     "id": 1
+# }
+# tid: 10001
+###################################
+# 创建主机nsd1903web1，加入Linux servers组，应用Template OS Linux模板
 data = {
     "jsonrpc": "2.0",
-    "method": "host.delete",
-    "params": [
-        "10257",
-        # "32"
-    ],
+    "method": "host.create",
+    "params": {
+        "host": "nsd1903web1",
+        "interfaces": [
+            {
+                "type": 1,
+                "main": 1,
+                "useip": 1,
+                "ip": "192.168.4.6",
+                "dns": "",
+                "port": "10050"
+            }
+        ],
+        "groups": [
+            {
+                "groupid": "2"
+            }
+        ],
+        "templates": [
+            {
+                "templateid": "10001"
+            }
+        ],
+        "inventory_mode": 0,
+        "inventory": {
+            "macaddress_a": "sfdalsfdaljk",
+            "macaddress_b": "56768"
+        }
+    },
     "auth": "37852e5313817edc8dd5812ddb8064f8",
     "id": 1
 }
-
 
 
 
