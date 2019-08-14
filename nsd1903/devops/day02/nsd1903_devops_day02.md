@@ -91,11 +91,14 @@ b'{"weatherinfo":{"city":"\xe5\x8c\x97\xe4\xba\xac","cityid":"101010100","temp":
 
 
 
+## zabbix编程
 
+- zabbix api url
+  - 将zabbix网站目录解压到/var/www/html/zabbix，
+  - 则api url是http://ip/zabbix/api_jsonrpc.php
+- zabbix官方手册：https://www.zabbix.com/documentation/3.4/zh/manual -> 19. API
 
-
-
-
+API: 应用程序编程接口
 
 
 
