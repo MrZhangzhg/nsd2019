@@ -81,8 +81,13 @@ b'{"weatherinfo":{"city":"\xe5\x8c\x97\xe4\xba\xac","cityid":"101010100","temp":
 'ISO-8859-1'
 >>> r.encoding = 'utf8'   # 改变编码
 >>> r.json()   # 正常显示
-
 ```
+
+### 钉钉机器人
+
+操作说明 ：https://www.jianshu.com/p/a3c62eb71ae3
+
+搜索“钉钉机器人开发文档”  -> https://ding-doc.dingtalk.com/doc#/serverapi2/qf2nxq
 
 
 
