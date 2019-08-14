@@ -1,5 +1,5 @@
 import paramiko
-
+import threading
 
 def rcmd(host, user='root', passwd=None, port=22, cmds=None):
     ssh = paramiko.SSHClient()
@@ -17,8 +17,10 @@ def rcmd(host, user='root', passwd=None, port=22, cmds=None):
 if __name__ == '__main__':
     hostfile = 'servers.txt'
     password = '123456'
-    cmds = 'id root; id jerry'
+    cmds = 'sleep 3; id root'
     with open(hostfile) as fobj:
         for line in fobj:
             ip = line.strip()
-            rcmd(ip, passwd=password, cmds=cmds)
+            # rcmd(ip, passwd=password, cmds=cmds)
+            t = threading.Thread(target=rcmd, args=(ip,), kwargs={'passwd': password, 'cmds': cmds})
+            t.start()  # target(*args, **kwargs)
