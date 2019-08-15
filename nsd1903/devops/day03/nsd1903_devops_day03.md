@@ -49,6 +49,41 @@ node7.tedu.cn
 
 ```shell
 (nsd1903) [root@room8pc16 myansible]# ansible all -m ping 
+(nsd1903) [root@room8pc16 myansible]# ansible-doc -l | grep copy
+(nsd1903) [root@room8pc16 myansible]# ansible-doc copy
+(nsd1903) [root@room8pc16 myansible]# ansible all -m copy -a "src=/etc/hosts dest=/etc/hosts"
+```
+
+### 应用之playbook
+
+```shell
+# 修改vim编辑器，可以支持yaml输入格式
+# vim ~/.vimrc
+autocmd FileType yaml setlocal sw=2 ts=2 et ai
+
+# 上传yum仓库文件
+# 1. 在ansible管理端创建yum文件
+(nsd1903) [root@room8pc16 myansible]# mkdir files
+(nsd1903) [root@room8pc16 myansible]# vim files/server.repo
+[server]
+name=server
+baseurl=ftp://192.168.4.254/centos7.4
+gpgcheck=0
+# 2. 编写playbook
+(nsd1903) [root@room8pc16 myansible]# vim yumrepo.yml
+---
+- name: configure yum
+  hosts: all
+  tasks:
+    - name: upload yum repo file
+      copy:
+        src: files/server.repo
+        dest: /etc/yum.repos.d/
+# 3. 检查语法
+[root@room8pc16 myansible]# ansible-playbook --syntax-check yumrepo.yml 
+
+# 4. 执行playbook
+[root@room8pc16 myansible]# ansible-playbook yumrepo.yml 
 
 ```
 
