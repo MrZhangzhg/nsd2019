@@ -148,9 +148,91 @@ ansible官方文档: https://docs.ansible.com/ansible/2.7/index.html -> 搜索 p
 28
 ```
 
+将yaml文件手工转成python数据类型
 
+- 以"- "开始的行，转成列表项
+- 以"key: val"作为结构的行，转为字典
 
+```python
+[
+    {
+        'name': 'configure webservers',
+        'hosts': 'webservers',
+        'tasks': [
+            {
+                'name': 'install web pkgs',
+                'yum': {
+                    'name': ['httpd', 'php', 'php-mysql'],
+                    'state': 'present'
+                }
+            },
+            {
+                'name': 'enable web service',
+                'service': {
+                    'name': 'httpd',
+                    'state': 'started',
+                    'enabled': 'yes'
+                }
+            }
+        ]
+    },
+    {
+        'name': 'configure dbservers',
+        'hosts': 'dbservers',
+        'tasks': [
+            {},
+            {}
+        ]
+    }
+]
+```
 
+## ansible模块开发
+
+- 自定义的模块可以存放到一个目录后，设置ANSIBLE_LIBRARY环境变量指向它
+
+```shell
+(nsd1903) [root@room8pc16 day03]# mkdir /tmp/mylibs
+(nsd1903) [root@room8pc16 day03]# export ANSIBLE_LIBRARY=/tmp/mylibs
+```
+
+编写模块，用于在远程主机上实现拷贝操作
+
+```python
+# rcopy.py
+"用于在远程主机上进行拷贝操作"
+from ansible.module_utils.basic import AnsibleModule
+import shutil
+
+def main():
+    module = AnsibleModule(
+        argument_spec=dict(
+            yuan=dict(required=True, type='str'),
+            mubiao=dict(required=True, type='str')
+        )
+    )
+    shutil.copy(module.params['yuan'], module.params['mubiao'])
+    module.exit_json(changed=True)
+
+if __name__ == '__main__':
+    main()
+
+# 调用模块，执行拷贝
+(nsd1903) [root@room8pc16 myansible]# ansible dbservers -m rcopy -a "yuan=/etc/passwd mubiao=/tmp/mima"
+
+# 注意，ansible在执行命令时，将会把模块进行配置拷贝到远程主机上执行。远程主机如果没有python3，则不支持中文
+```
+
+模块练习：
+
+- 编写模块download用于下载
+- 有两个参数
+  - url: 定义网络源
+  - dest: 用于定义本机目录
+
+```shell
+# ansible all -m download -a "url=http://xxxx dest=/path/to/file"
+```
 
 
 
