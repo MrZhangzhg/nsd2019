@@ -122,6 +122,12 @@ gpgcheck=0
         state: started
 ```
 
+## ansible编程
+
+ansible官方文档: https://docs.ansible.com/ansible/2.7/index.html -> 搜索 python api。将example中的代码复制，执行。
+
+
+
 
 
 
