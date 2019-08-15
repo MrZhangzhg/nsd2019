@@ -275,6 +275,28 @@ if __name__ == '__main__':
 (nsd1903) [root@room8pc16 myansible]# ansible dbservers -m download -a "url=http://192.168.4.254/server.repo dest=/tmp/"
 ```
 
+### ansible-cmdb插件
+
+该插件可以将收集下来的主机信息显示为web页面。
+
+```shell
+# 收集主机信息，存到/tmp/out目录
+(nsd1903) [root@room8pc16 myansible]# ansible all -m setup --tree /tmp/out/
+# 安装ansible-cmdb
+(nsd1903) [root@room8pc16 myansible]# pip install ansible-cmdb_pkgs/*
+# 生成web页面
+(nsd1903) [root@room8pc16 myansible]# ansible-cmdb /tmp/out/ > /tmp/hosts.html
+# 查看结果
+(nsd1903) [root@room8pc16 myansible]# firefox /tmp/hosts.html &
+
+```
+
+
+
+
+
+
+
 
 
 
