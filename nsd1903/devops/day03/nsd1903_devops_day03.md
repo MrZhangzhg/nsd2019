@@ -84,10 +84,43 @@ gpgcheck=0
 
 # 4. 执行playbook
 [root@room8pc16 myansible]# ansible-playbook yumrepo.yml 
-
 ```
 
+练习：playbook
 
+- web服务器上安装httpd / php / php-myql
+- web服务器启用httpd服务
+- db服务器安装mariadb-server
+- db服务器启动mariadb服务
+
+```yaml
+[root@room8pc16 myansible]# vim lamp.yml
+---
+- name: configure webservers
+  hosts: webservers
+  tasks:
+    - name: install web pkgs
+      yum:
+        name: [httpd, php, php-mysql]
+        state: present
+    - name: enable web service
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+
+- name: configure dbservers
+  hosts: dbservers
+  tasks:
+    - name: install db pkgs
+      yum:
+        name: mariadb-server
+        state: latest
+    - name: enable db service
+      service:
+        name: mariadb
+        state: started
+```
 
 
 
