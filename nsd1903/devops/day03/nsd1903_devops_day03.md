@@ -146,7 +146,6 @@ ansible官方文档: https://docs.ansible.com/ansible/2.7/index.html -> 搜索 p
 15
 >>> p1.z
 28
-
 ```
 
 
