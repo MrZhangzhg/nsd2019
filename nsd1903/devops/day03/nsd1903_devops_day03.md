@@ -126,7 +126,28 @@ gpgcheck=0
 
 ansible官方文档: https://docs.ansible.com/ansible/2.7/index.html -> 搜索 python api。将example中的代码复制，执行。
 
+### 命名的元组
 
+- 本质上还是元组
+- 只是给元组的下标添加了名称
+
+```python
+>>> from collections import namedtuple
+# 创建名为Point的命名元组，它接受3个参数
+>>> Point = namedtuple('Point', ['x', 'y', 'z'])
+>>> p1 = Point(10, 15, 28)
+>>> p1[0]
+10
+>>> p1[1:]
+(15, 28)
+>>> p1.x
+10
+>>> p1.y
+15
+>>> p1.z
+28
+
+```
 
 
 
