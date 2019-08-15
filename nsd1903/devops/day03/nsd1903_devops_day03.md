@@ -223,7 +223,7 @@ if __name__ == '__main__':
 # 注意，ansible在执行命令时，将会把模块进行配置拷贝到远程主机上执行。远程主机如果没有python3，则不支持中文
 ```
 
-模块练习：
+### 模块练习：
 
 - 编写模块download用于下载
 - 有两个参数
@@ -234,9 +234,46 @@ if __name__ == '__main__':
 # ansible all -m download -a "url=http://xxxx dest=/path/to/file"
 ```
 
+1. 编写模块
 
+```python
+# /tmp/mylibs/download.py
+from ansible.module_utils.basic import AnsibleModule
+import wget
 
+def main():
+    module = AnsibleModule(
+        argument_spec=dict(
+            url=dict(required=True, type='str'),
+            dest=dict(required=True, type='str')
+        )
+    )
+    wget.download(module.params['url'], module.params['dest'])
+    module.exit_json(changed=True)
 
+if __name__ == '__main__':
+    main()
+```
+
+2. 在远程主机安装wget模块
+
+```shell
+# 在本地先将wget下载
+[root@room8pc16 tmp]# pip download wget --trusted-host pypi.douban.com
+# 拷贝下载的文件到远程主机
+[root@room8pc16 tmp]# scp wget-3.2.zip node5:/tmp
+# 在远程主机安装wget
+[root@room8pc16 tmp]# ssh node5
+[root@node5 ~]# cd /tmp/
+[root@node5 tmp]# unzip wget-3.2.zip 
+[root@node5 tmp]# cd wget-3.2/
+[root@node5 wget-3.2]# python setup.py install # python包都可以如此安装
+```
+3. 执行下载操作
+
+```shell
+(nsd1903) [root@room8pc16 myansible]# ansible dbservers -m download -a "url=http://192.168.4.254/server.repo dest=/tmp/"
+```
 
 
 
