@@ -324,9 +324,27 @@ Port 2022
 
 创建名为devops的组，类型公开。
 
-创建用户。新建用户时不能设置密码，但是编辑用户界可以。
+创建用户。新建用户时不能设置密码，但是编辑用户界面可以。
 
+创建项目myweb，类型公开，为组devops创建。授权新建用户是其主程序员。
 
+### 配置用户免密上传代码
+
+- 用户在192.168.4.5上可以免密上传代码
+
+```shell
+[root@node5 myweb]# ssh-keygen -t rsa -C "zzg@tedu.cn" -b 4096
+[root@node5 myweb]# cat ~/.ssh/id_rsa.pub 
+# 将公钥内容复制到gitlab用户的SSH密钥中
+
+# 推送代码
+[root@node5 myweb]# git remote rename origin old-origin
+# 出现以下错误可以忽略
+error: 不能重命名配置小节 'remote.origin' 到 'remote.old-origin'
+[root@node5 myweb]# git remote add origin git@192.168.4.6:devops/myweb.git
+[root@node5 myweb]# git push -u origin --all
+[root@node5 myweb]# git push -u origin --tags
+```
 
 
 
