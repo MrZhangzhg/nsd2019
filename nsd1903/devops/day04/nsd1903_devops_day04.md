@@ -240,6 +240,52 @@ index.html  mima
 [root@node5 myweb]# git checkout master
 ```
 
+分支管理
+
+- 默认git有一个分支称作master
+- 用户可以创建自定义的分支
+- git分支在软件开发中常用
+
+```shell
+# 查看所有分支
+[root@node5 myweb]# git branch
+* master
+
+# 创建分支，确保工作区是干净的
+[root@node5 myweb]# git branch b1
+[root@node5 myweb]# git branch
+  b1
+* master   # ＊号表示目前所处分支
+
+# 切换分支
+[root@node5 myweb]# git checkout b1
+切换到分支 'b1'
+[root@node5 myweb]# git branch
+* b1
+  master
+
+# 在当前分支执行提交
+[root@node5 myweb]# cp /etc/motd /etc/redhat-release .
+[root@node5 myweb]# git add .
+[root@node5 myweb]# git commit -m "add motd rh-release"
+
+# 合并分支
+[root@node5 myweb]# git checkout master
+切换到分支 'master'
+[root@node5 myweb]# ls
+index.html  mima
+[root@node5 myweb]# git merge b1
+[root@node5 myweb]# ls
+index.html  mima  motd  redhat-release
+
+# 删除分支
+[root@node5 myweb]# git branch -d b1
+已删除分支 b1（曾为 0639c44）。
+
+```
+
+
+
 
 
 
