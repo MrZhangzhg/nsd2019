@@ -281,10 +281,12 @@ index.html  mima  motd  redhat-release
 # 删除分支
 [root@node5 myweb]# git branch -d b1
 已删除分支 b1（曾为 0639c44）。
-
 ```
 
+## gitlab服务器
 
+- 启动虚拟机，至少4GB内存，安装docker软件
+- 将gitlab_zh.tar导入
 
 
 
