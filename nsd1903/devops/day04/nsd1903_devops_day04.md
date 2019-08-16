@@ -228,7 +228,16 @@ index.html  mima
  1 file changed, 260 deletions(-)
  delete mode 100644 hosts
 [root@node5 myweb]# git status
+```
 
+切换到指定提交位置
+
+```shell
+[root@node5 myweb]# git log   # 查看提交历史
+# 切换到历史提交
+[root@node5 myweb]# git checkout 92385f5778c954d683c5d32537cf41d4da8c07e6
+# 返回到最近的位置
+[root@node5 myweb]# git checkout master
 ```
 
 
