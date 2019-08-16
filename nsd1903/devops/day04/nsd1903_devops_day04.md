@@ -123,6 +123,28 @@ index.html
 A  index.html
 ```
 
+撤出暂存区
+
+```shell
+[root@node5 myweb]# git rm --cached index.html 
+rm 'index.html'
+[root@node5 myweb]# git status -s
+?? index.html
+```
+
+确认至版本库
+
+```shell
+[root@node5 myweb]# git add .
+[root@node5 myweb]# git status -s
+A  index.html
+[root@node5 myweb]# git commit
+[root@node5 myweb]# git status
+# 位于分支 master
+无文件要提交，干净的工作区
+
+```
+
 
 
 
