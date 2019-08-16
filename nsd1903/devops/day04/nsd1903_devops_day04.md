@@ -307,8 +307,24 @@ Port 2022
 启动容器
 
 ```shell
+[root@node6 ~]# docker run -d -h gitlab --name gitlab -p 443:443 -p 80:80 -p 22:22 --restart always -v /srv/gitlab/config:/etc/gitlab -v /srv/gitlab/logs:/var/log/gitlab -v /srv/gitlab/data:/var/opt/gitlab gitlab_zh:latest
 
+# gitlab容器需要的资源比较多，所以需要较长的启动时间
+[root@node6 ~]# docker ps   # 状态显示为healthy时才可用，需要等几分钟
 ```
+
+### 配置gitlab：http://192.168.4.6
+
+- 首次登陆，需要为root用户设置密码。
+
+- gitlab重要的概念
+  - 群组group：对应一个开发团队
+  - 成员member：将用户加入到组中
+  - 项目project：对应软件项目
+
+创建名为devops的组，类型公开。
+
+创建用户。新建用户时不能设置密码，但是编辑用户界可以。
 
 
 
