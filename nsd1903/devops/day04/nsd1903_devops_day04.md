@@ -346,7 +346,29 @@ error: 不能重命名配置小节 'remote.origin' 到 'remote.old-origin'
 [root@node5 myweb]# git push -u origin --tags
 ```
 
+tag标记
 
+```shell
+[root@node5 myweb]# git tag 1.0
+[root@node5 myweb]# cp /etc/selinux/config .
+[root@node5 myweb]# git add .
+[root@node5 myweb]# git commit -m "add selinux config"
+[root@node5 myweb]# git tag 2.0
+[root@node5 myweb]# git tag
+1.0
+2.0
+[root@node5 myweb]# git push
+[root@node5 myweb]# git push --tag
+```
+
+下载代码
+
+- 在web页面上，直接点击下载
+- 命令
+
+```shell
+[root@room8pc16 tmp]# git clone http://192.168.4.6/devops/myweb.git
+```
 
 
 
