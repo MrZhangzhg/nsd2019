@@ -192,6 +192,42 @@ A  index.html
 [root@node5 myweb]# git checkout -- *
 [root@node5 myweb]# ls
 hosts  index.html
+```
+
+改名、删除版本库中文件
+
+```shell
+[root@node5 myweb]# cp /etc/passwd .
+[root@node5 myweb]# git add .
+[root@node5 myweb]# git commit -m "add passwd"
+[root@node5 myweb]# git mv passwd mima
+[root@node5 myweb]# git status
+# 位于分支 master
+# 要提交的变更：
+#   （使用 "git reset HEAD <file>..." 撤出暂存区）
+#
+#	重命名：    passwd -> mima
+#
+[root@node5 myweb]# git commit -m "mv passwd mima"
+[master e84a1ea] mv passwd mima
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename passwd => mima (100%)
+[root@node5 myweb]# git rm hosts
+rm 'hosts'
+[root@node5 myweb]# ls
+index.html  mima
+[root@node5 myweb]# git status
+# 位于分支 master
+# 要提交的变更：
+#   （使用 "git reset HEAD <file>..." 撤出暂存区）
+#
+#	删除：      hosts
+#
+[root@node5 myweb]# git commit -m "rm hosts"
+[master 3c281fc] rm hosts
+ 1 file changed, 260 deletions(-)
+ delete mode 100644 hosts
+[root@node5 myweb]# git status
 
 ```
 
