@@ -288,6 +288,28 @@ index.html  mima  motd  redhat-release
 - 启动虚拟机，至少4GB内存，安装docker软件
 - 将gitlab_zh.tar导入
 
+```shell
+# systemctl start docker
+# systemctl enable docker
+# docker load < gitlab_zh.tar
+```
+
+因为gitlab容器需要用22端口，修改虚拟机的ssh端口
+
+```shell
+[root@node6 ~]# vim /etc/ssh/sshd_config 
+Port 2022
+[root@node6 ~]# systemctl restart sshd
+# 退出登陆再次连接时，需要指定端口号
+[root@room8pc16 phase5]# ssh -p2022 node6
+```
+
+启动容器
+
+```shell
+
+```
+
 
 
 
