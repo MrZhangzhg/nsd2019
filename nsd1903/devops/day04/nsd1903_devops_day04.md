@@ -142,8 +142,64 @@ A  index.html
 [root@node5 myweb]# git status
 # 位于分支 master
 无文件要提交，干净的工作区
+```
+
+修改文件，继续提交
+
+```shell
+[root@node5 myweb]# echo '<h2>2nd version</h2>' >> index.html 
+[root@node5 myweb]# git status
+# 位于分支 master
+# 尚未暂存以备提交的变更：
+#   （使用 "git add <file>..." 更新要提交的内容）
+#   （使用 "git checkout -- <file>..." 丢弃工作区的改动）
+#
+#	修改：      index.html
+#
+修改尚未加入提交（使用 "git add" 和/或 "git commit -a"）
+[root@node5 myweb]# git status -s
+ M index.html
+[root@node5 myweb]# git add .
+[root@node5 myweb]# git commit -m "2nd version"
+[root@node5 myweb]# git status
+# 位于分支 master
+无文件要提交，干净的工作区
+```
+
+删除工作区文件并恢复
+
+```shell
+[root@node5 myweb]# cp /etc/hosts .
+[root@node5 myweb]# git status -s
+?? hosts
+[root@node5 myweb]# git add .
+[root@node5 myweb]# git commit -m "add hosts"
+[master 3145cda] add hosts
+[root@node5 myweb]# git status
+# 位于分支 master
+无文件要提交，干净的工作区
+[root@node5 myweb]# rm -rf *
+[root@node5 myweb]# git status
+# 位于分支 master
+# 尚未暂存以备提交的变更：
+#   （使用 "git add/rm <file>..." 更新要提交的内容）
+#   （使用 "git checkout -- <file>..." 丢弃工作区的改动）
+#
+#	删除：      hosts
+#	删除：      index.html
+#
+修改尚未加入提交（使用 "git add" 和/或 "git commit -a"）
+[root@node5 myweb]# git checkout -- *
+[root@node5 myweb]# ls
+hosts  index.html
 
 ```
+
+
+
+
+
+
 
 
 
