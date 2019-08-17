@@ -63,7 +63,14 @@ app(应用服务器)--拉取-->ci
 
 2. 在gitlab上创建工程，名为myblog，允许用户可以上传
 
+3. 上传代码到gitlab
 
+```shell
+[root@node5 myblog]# git remote rename origin old-origin
+[root@node5 myblog]# git remote add origin git@192.168.4.6:devops/myblog.git
+[root@node5 myblog]# git push -u origin --all
+[root@node5 myblog]# git push -u origin --tags
+```
 
 
 
