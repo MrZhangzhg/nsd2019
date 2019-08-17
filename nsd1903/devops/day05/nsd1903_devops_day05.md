@@ -74,6 +74,29 @@ app(应用服务器)--拉取-->ci
 
 4. jenkins下载代码
 
+5. 修改下载代码到子目录。配置->Additional Behaviours: 新增 checkout to a sub-directory: myblog-${blogver} -> 保存 ->Build with Parameters
+
+6. 修改jenkins工程，实现以下目标
+
+   - 将下地的版本打包，放到apache目录下
+
+     ```shell
+     /var/www/html/deploy/live_ver: 最新版本
+     /var/www/html/deploy/last_ver: 前一版本
+     /var/www/html/deploy/pkgs/:保存打包的软件和相应的md5值
+     ```
+
+```shell
+[root@node7 ~]# yum install -y httpd
+[root@node7 ~]# systemctl start httpd
+[root@node7 ~]# mkdir -p /var/www/html/deploy/pkgs
+[root@node7 ~]# chown -R jenkins.jenkins /var/www/html/deploy/
+```
+
+
+
+
+
 
 
 
