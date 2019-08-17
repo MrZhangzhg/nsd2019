@@ -1,6 +1,7 @@
 import os
 import requests
 import wget
+import hashlib
 
 def has_new_ver(ver_url, ver_fname):
     "有新版本返回True，否则返回False"
@@ -23,6 +24,23 @@ def has_new_ver(ver_url, ver_fname):
 
 def check_app(md5_url, fname):
     "校验软件包，未损坏返回True，损坏返回False"
+    # 计算本地md5值
+    m = hashlib.md5()
+    with open(fname, 'rb') as fobj:
+        while True:
+            data = fobj.read(4096)
+            if not data:
+                break
+            m.update(data)
+
+    # 读取远程md5值
+    r = requests.get(md5_url)
+
+    # 判断
+    if m.hexdigest() == r.text.strip():
+        return True
+    else:
+        return False
 
 def deploy():
     "部署软件：解压、创建链接"
@@ -49,6 +67,7 @@ if __name__ == '__main__':
     app_fname = os.path.join(download_dir, app_fname)
     if not check_app(md5_url, app_fname):
         print('文件已损坏。')
+        os.remove(app_fname)
         exit(2)
 
     # 部署
