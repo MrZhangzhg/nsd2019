@@ -61,7 +61,7 @@ app(应用服务器)--拉取-->ci
 [root@node5 myblog]# git tag 2.0
 ```
 
-2. 在gitlab上创建工程，名为myblog，允许用户可以上传
+2. 在gitlab上创建项目，名为myblog，允许用户可以上传
 
 3. 上传代码到gitlab
 
@@ -72,7 +72,7 @@ app(应用服务器)--拉取-->ci
 [root@node5 myblog]# git push -u origin --tags
 ```
 
-
+4. jenkins下载代码
 
 
 
