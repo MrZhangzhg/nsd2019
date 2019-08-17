@@ -92,3 +92,7 @@ if __name__ == '__main__':
     deploy(app_fname, deploy_dir)
 
     # 更新本地live_ver文件
+    if os.path.exists(ver_fname):
+        os.remove(ver_fname)
+
+    wget.download(ver_url, ver_fname)
