@@ -93,6 +93,21 @@ app(应用服务器)--拉取-->ci
 [root@node7 ~]# chown -R jenkins.jenkins /var/www/html/deploy/
 ```
 
+配置 -> 构建 -> 增加构建步骤 -> execute shell:
+
+```shell
+pkg_dir=/var/www/html/deploy/pkgs
+cp -r myblog-${blogver} $pkg_dir  
+cd $pkg_dir
+rm -rf myblog-${blogver}/.git
+tar czf myblog-${blogver}.tar.gz myblog-${blogver}
+rm -rf myblog-${blogver}
+md5sum myblog-${blogver}.tar.gz |  awk '{print $1}' > myblog-${blogver}.tar.gz.md5
+cd ..
+[ -f live_ver ] && cat live_ver > last_ver
+echo ${blogver} > live_ver
+```
+
 
 
 
