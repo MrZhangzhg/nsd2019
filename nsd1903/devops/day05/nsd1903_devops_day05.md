@@ -44,6 +44,27 @@ app(应用服务器)--拉取-->ci
 
 
 
+完整过程：
+
+1. 程序员编写代码
+
+```shell
+[root@node5 ~]# git init myblog
+[root@node5 ~]# cd myblog/
+[root@node5 myblog]# echo '<h1>My Blog</h1>' > index.html
+[root@node5 myblog]# git add .
+[root@node5 myblog]# git commit -m "blog 1.0"
+[root@node5 myblog]# git tag 1.0
+[root@node5 myblog]# echo 'blog 2.0' >> index.html 
+[root@node5 myblog]# git add .
+[root@node5 myblog]# git commit -m "blog 2.0"
+[root@node5 myblog]# git tag 2.0
+```
+
+2. 在gitlab上创建工程，名为myblog，允许用户可以上传
+
+
+
 
 
 
