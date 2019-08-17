@@ -2,6 +2,7 @@ import os
 import requests
 import wget
 import hashlib
+import tarfile
 
 def has_new_ver(ver_url, ver_fname):
     "有新版本返回True，否则返回False"
@@ -42,15 +43,32 @@ def check_app(md5_url, fname):
     else:
         return False
 
-def deploy():
+def deploy(app_fname, deploy_dir):
     "部署软件：解压、创建链接"
+    # 解压缩
+    tar = tarfile.open(app_fname)
+    tar.extractall(path=deploy_dir)
+    tar.close()
+
+    # 创建链接
+    dest = '/var/www/html/nsd1903'
+    app_dir = os.path.basename(app_fname) # myblog-1.0.tar.gz
+    app_dir = app_dir.replace('.tar.gz', '')  # myblog-1.0
+    app_dir = os.path.join(deploy_dir, app_dir) # 绝对路径
+
+    # 如果链接已经存在，先删除，否则无法再创建
+    if os.path.exists(dest):
+        os.remove(dest)
+
+    os.symlink(app_dir, dest)
+
 
 if __name__ == '__main__':
     # 如果未发现新版本，则退出
-    dep_dir = '/var/www/deploy'
+    deploy_dir = '/var/www/deploy'
     download_dir = '/var/www/download'
     ver_url = 'http://192.168.4.7/deploy/live_ver'
-    ver_fname = os.path.join(dep_dir, 'live_ver')
+    ver_fname = os.path.join(deploy_dir, 'live_ver')
     if not has_new_ver(ver_url, ver_fname):
         print('未发现新版本。')
         exit(1)
@@ -71,6 +89,6 @@ if __name__ == '__main__':
         exit(2)
 
     # 部署
-    deploy()
+    deploy(app_fname, deploy_dir)
 
     # 更新本地live_ver文件
