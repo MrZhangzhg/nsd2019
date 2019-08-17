@@ -32,7 +32,11 @@ app(应用服务器)--拉取-->ci
 
 2. Available选项卡 -> Localization: Chinese (Simplified) / Git Parameter -> 点击Install Without Restart -> 勾选 Restart Jenkins when installation is complete and no jobs are running
 
+### 建立工程
 
+首页 -> 新建Item -> 名称：mytest / 风格：FreeStyle -> This project is parameterized: git parameter / name: mytag / parameter type: Branch or Tag / Default Value: origin/master -> 源码管理: git / http://192.168.4.6/devops/myweb.git / Branches to build: $mytag -> 保存 ->Build with Parameters -> 选择一个tag后点开始构建。
+
+构建出来的内容： /var/lib/jenkins/workspace/下
 
 
 
