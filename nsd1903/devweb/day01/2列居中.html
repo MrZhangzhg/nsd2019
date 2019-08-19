@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>2列居中</title>
+    <style>
+        #container {
+            width: 990px;
+            margin: 0 auto;
+        }
+        #banner, #footer {
+            height: 50px;
+            background: lightgray;
+        }
+        #left {
+            float: left;
+            height: 300px;
+            width: 390px;
+            background: seagreen;
+        }
+        #right {
+            margin-left: 390px;
+            width: 600px;
+            height: 300px;
+            background: darkolivegreen;
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <div id="banner">banner</div>
+    <div id="main">
+        <div id="left">left</div>
+        <div id="right">right</div>
+    </div>
+    <div id="footer">footer</div>
+</div>
+</body>
+</html>
