@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>一列居中</title>
+    <style>
+        #container {
+            width: 990px;     /*宽度990像素*/
+            margin: 0 auto;   /*外边距，上右下左*/
+            border: 1px solid red;  /*1像素的红边框*/
+        }
+        #banner, #footer {
+            background: lightgray;   /*背景色*/
+            height: 50px;            /*div的高度*/
+        }
+        #main {
+            height: 300px;
+            background: lightseagreen;
+        }
+        #footer {
+            text-align: center;   /*居中*/
+            line-height: 50px;    /*行高*/
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <div id="banner">banner</div>
+    <div id="main">main</div>
+    <div id="footer">
+        达内云计算学院 <a href="">nsd1903</a>
+    </div>
+</div>
+</body>
+</html>
