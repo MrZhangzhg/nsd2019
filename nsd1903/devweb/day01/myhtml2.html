@@ -3,15 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <title>myhtml2</title>
+    <script>
+        function clickme() {
+            alert('Hello Wolrd!');
+        }
+    </script>
 </head>
 <body>
 
 <form action="http://www.kuaidi100.com/query" target="_blank">
     <p>单号：<input type="text" name="postid"></p>
     <p>
+        <select name="type">
+            <option value="youzhengguonei">邮政</option>
+            <option value="shentong">申通</option>
+            <option value="yunda">韵达</option>
+        </select>
+    </p>
+    <p><input type="submit" value="查询"></p>
+</form>
+
+
+<hr>
+
+<input type="button" value="执行脚本" onclick="clickme()">
+
+<hr>
+
+<form action="">
+    <label>
+        <input type="checkbox" name="lesson" value="linux">
+        Linux
+    </label>
+    <label>
+        <input type="checkbox" name="lesson" value="py">
+        Python
+    </label>
+    <label>
+        <input type="checkbox" name="lesson" value="shell">
+        Shell
+    </label>
+    <br>
+    <input type="submit">
+</form>
+
+<hr>
+
+<form action="http://www.kuaidi100.com/query" target="_blank">
+    <p>单号：<input type="text" name="postid"></p>
+    <p>
         <input type="radio" name="type" value="youzhengguonei"><label>邮政</label>
-        <input type="radio" name="type" value="shentong"><lable>申通</lable>
-        <input type="radio" name="type" value="yunda"><label>韵达</label>
+
+        <label>
+            <input type="radio" name="type" value="shentong">
+            申通
+        </label>
+
+        <input type="radio" name="type" value="yunda" id="yd">
+        <label for="yd">韵达</label>
     </p>
     <p><input type="submit" value="查询"></p>
 </form>
