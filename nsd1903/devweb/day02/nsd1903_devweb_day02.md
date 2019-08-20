@@ -60,7 +60,12 @@ RGB颜色：
 - 为了更好的间距，将各控制分别放到form-group中
 - 文本类型的控件，class设置为form-control
 
+### 栅格系统
 
+- 实现布局
+- 最外层的div类需要设置为container
+- 栅格系统将屏幕最多分为12列，设置一个div可以占多少列
+- 每个div需要包含在class为row的div中
 
 
 
