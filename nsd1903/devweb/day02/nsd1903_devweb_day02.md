@@ -46,9 +46,19 @@ RGB颜色：
 - 相当于是一个大样式表文件
 - 包含了样式表、js等
 
+### bootstrap的颜色
 
+- primary：首要蓝
+- info: 信息蓝
+- success: 成功绿
+- danger: 危险红
+- warning: 警告黄
+- muted: 柔和灰
 
+### 表单控件
 
+- 为了更好的间距，将各控制分别放到form-group中
+- 文本类型的控件，class设置为form-control
 
 
 
