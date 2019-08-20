@@ -40,5 +40,19 @@ RGB颜色：
   - 边框border
   - 外边距margin
 
+## bootstrap
+
+- twitter公司的开源前端框架
+- 相当于是一个大样式表文件
+- 包含了样式表、js等
+
+
+
+
+
+
+
+
+
 
 
