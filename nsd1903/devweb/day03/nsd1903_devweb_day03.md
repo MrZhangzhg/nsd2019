@@ -219,6 +219,23 @@ def index(request):
     return HttpResponse('<h1>首页</h1>')
 
 3. 访问 http://x.x.x.x./polls/ 测试
+
+4. 将html页面内容中的所有字符都通过HttpResponse返回是不现实的，所以采用返回html文档的方式修改代码
+def index(request):
+    return render(request, 'index.html')
+
+5. 在项目目录下的templates中创建index.html模板文件
+# templates/index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票首页</title>
+</head>
+<body>
+<h1>投票首页</h1>
+</body>
+</html>
 ```
 
 
