@@ -298,6 +298,73 @@ def result(request, question_id):
 </html>
 ```
 
+## 模型设计
+
+ORM：对象关系映射
+
+Object：python的对象
+
+Relationship：关系型数据库
+
+Mapper：映射
+
+数据库表对应python中的class
+
+数据库表的字段对应class中的变量
+
+数据库表中的行（记录）对应class的实例
+
+#### 模型设计
+
+问题表：
+
+| 问题ID | 问题内容 | 发布时间   |
+| ------ | -------- | ---------- |
+| 1      | 工资？   | 2019-6-1   |
+| 2      | 公司？   | 2019-8-3   |
+| 3      | 城市？   | 2018-12-25 |
+
+选项表：
+
+| 选项ID | 选项内容  | 问题ID | 票数 |
+| ------ | --------- | ------ | ---- |
+| 1      | <5000     | 1      | 0    |
+| 2      | 5000-8000 | 1      | 10   |
+| 3      | 华为      | 2      | 20   |
+
+编写models.py
+
+```python
+from django.db import models
+
+class Question(models.Model):  # 父类是固定的
+    question_text = models.CharField(max_length=200)
+    pub_date = models.DateTimeField()
+
+class Choice(models.Model):
+    choice_text = models.CharField(max_length=100)
+    votes = models.IntegerField(default=0)
+    q = models.ForeignKey(Question)
+
+# 说明：
+# 模型没有明确给定主键，django将自动创建一个名为id的字段作为主键
+# 实体类对应的表名，默认是：应用名_类名   全部采用小写字母
+# 外键在数据库表中的名称是：类变量_id
+```
+
+生成表并查看
+
+```shell
+(nsd1903) [root@room8pc16 mysite]# python manage.py makemigrations
+(nsd1903) [root@room8pc16 mysite]# python manage.py migrate
+MariaDB [dj1903]> show tables;
+MariaDB [dj1903]> desc polls_question;
+```
+
+
+
+
+
 
 
 
