@@ -113,6 +113,22 @@ pymysql.install_as_MySQLdb()
 (nsd1903) [root@room8pc16 mysite]# python manage.py runserver 0:80
 ```
 
+## 生成项目缺省的数据库
+
+```shell
+# 首先查看数据库表
+[root@room8pc16 nsd2019]# mysql -uroot -ptedu.cn
+MariaDB [(none)]> USE dj1903;
+MariaDB [dj1903]> show tables;
+
+# 生成表
+(nsd1903) [root@room8pc16 mysite]# python manage.py makemigrations
+(nsd1903) [root@room8pc16 mysite]# python manage.py migrate
+
+# 再次查询数据库表
+MariaDB [dj1903]> show tables;
+```
+
 
 
 
