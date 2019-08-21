@@ -129,7 +129,13 @@ MariaDB [dj1903]> show tables;
 MariaDB [dj1903]> show tables;
 ```
 
+## 创建管理员账号
 
+```shell
+(nsd1903) [root@room8pc16 mysite]# python manage.py createsuperuser
+```
+
+登陆后台： http://127.0.0.1/admin
 
 
 
