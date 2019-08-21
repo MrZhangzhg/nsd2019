@@ -9,4 +9,4 @@ class Question(models.Model):  # 父类是固定的
 class Choice(models.Model):
     choice_text = models.CharField(max_length=100)
     votes = models.IntegerField(default=0)
-    q = models.ForeignKey(Question)
+    question = models.ForeignKey(Question)

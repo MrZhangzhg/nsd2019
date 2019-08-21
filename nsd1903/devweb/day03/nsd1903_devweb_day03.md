@@ -361,6 +361,21 @@ MariaDB [dj1903]> show tables;
 MariaDB [dj1903]> desc polls_question;
 ```
 
+数据迁移：将Choice模型的q改为question，观察数据库表中字段的变化
+
+```shell
+# models.py
+class Choice(models.Model):
+    choice_text = models.CharField(max_length=100)
+    votes = models.IntegerField(default=0)
+    question = models.ForeignKey(Question)
+
+(nsd1903) [root@room8pc16 mysite]# python manage.py makemigrations
+Did you rename choice.q to choice.question (a ForeignKey)? [y/N] y
+(nsd1903) [root@room8pc16 mysite]# python manage.py migrate
+MariaDB [dj1903]> desc polls_choice;
+```
+
 
 
 
