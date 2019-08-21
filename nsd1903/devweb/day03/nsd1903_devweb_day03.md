@@ -269,6 +269,35 @@ def detail(request, question_id):
 4. 访问 http://x.x.x.x/polls/数字 测试
 ```
 
+### 编写投票结果页
+
+```shell
+1. urls.py
+urlpatterns = [
+    # url(路径正则, 调用的函数, 该url的名字)
+    url(r'^$', views.index, name='index'),
+    # (\d+)将会把匹配到的数字作为参数传递给detail函数
+    url(r'^(\d+)/$', views.detail, name='detail'),
+    url(r'^(\d+)/result/$', views.result, name='result'),
+]
+
+2. views.py
+def result(request, question_id):
+    return render(request, 'result.html', {'question_id': question_id})
+
+3. templates/result.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票结果页</title>
+</head>
+<body>
+<h1>{{ question_id }}号问题投票结果页</h1>
+</body>
+</html>
+```
+
 
 
 
