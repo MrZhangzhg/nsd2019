@@ -47,10 +47,29 @@ t --返回页面-->c
 ```
 
 - 通过pycharm创建：File -> New project -> 左边栏选django，Location填写项目路径,最后的目录名为mysite，注意项目解释器要选择正确
+- 通过django自带的测试服务器启动项目
 
+```shell
+(nsd1903) [root@room8pc16 mysite]# python manage.py runserver
+访问： http://127.0.0.1:8000
+```
 
+- 项目文件说明
 
+```shell
+(nsd1903) [root@room8pc16 mysite]# tree .
+.                             # 项目的根目录
+├── db.sqlite3                # 文件型数据库
+├── manage.py                 # 项目管理文件
+├── mysite                    # 项目管理目录
+│   ├── __init__.py           # 项目初始化文件
+│   ├── settings.py           # 配置文件
+│   ├── urls.py               # URLConf路由文件
+│   └── wsgi.py               # 部署时的配置文件
+└── templates                 # 模板目录
+```
 
+- 搭建mariadb服务器
 
 
 
