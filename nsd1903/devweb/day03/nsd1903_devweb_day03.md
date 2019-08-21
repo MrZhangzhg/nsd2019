@@ -162,6 +162,39 @@ INSTALLED_APPS = [
 ]
 ```
 
+## 项目规划
+
+URL规划
+
+```shell
+http://127.0.0.1/polls/: 投票首页，显示所有的投票项
+http://127.0.0.1/polls/1/： 1号问题的投票详情页
+http://127.0.0.1/polls/1/result/： 1号问题的投票结果
+```
+
+URL授权
+
+- 将每个应用都设计出有相应特点的url，如博客都放到/blog/中，论坛都放到/forum/中，投票都放到/polls/中
+- 如果将所有的url与函数的映射关系都放到项目的urls.py中，那么这个文件将会有大量的url
+- 可以将每个应用的url授权给应用管理
+
+```shell
+# vim mysite/urls.py
+from django.conf.urls import url, include
+from django.contrib import admin
+
+urlpatterns = [
+    url(r'^admin/', admin.site.urls),
+    url(r'^polls/', include('polls.urls')),
+]
+
+# vim polls/urls.py
+from django.conf.urls import url
+
+urlpatterns = [
+]
+```
+
 
 
 
