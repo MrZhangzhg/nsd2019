@@ -137,6 +137,37 @@ MariaDB [dj1903]> show tables;
 
 登陆后台： http://127.0.0.1/admin
 
+## 管理应用
+
+- 项目由一到多个应用构成，如首页，博客，论坛，留言，新闻发布，投票
+- 一个应用对应一个目录
+- 应用目录可以创建在任何位置，习惯创建在项目根目录下
+- 一个应用可以部署到多个项目
+
+创建名为polls的应用
+
+```shell
+(nsd1903) [root@room8pc16 mysite]# python manage.py startapp polls
+(nsd1903) [root@room8pc16 mysite]# ls
+db.sqlite3  manage.py  mysite  polls  templates
+```
+
+将应用部署到项目中
+
+```shell
+# vim mysite/settings.py
+INSTALLED_APPS = [
+    ... ...
+    'polls',
+]
+```
+
+
+
+
+
+
+
 
 
 
