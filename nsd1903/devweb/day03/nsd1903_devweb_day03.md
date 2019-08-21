@@ -195,6 +195,32 @@ urlpatterns = [
 ]
 ```
 
+## 编写polls应用
+
+### 编写首页
+
+```shell
+1. 编写url与函数的对应关系
+# polls/urls.py
+from django.conf.urls import url
+from . import views   # 从当前目录中导入views模块
+
+urlpatterns = [
+    # url(路径正则, 调用的函数, 该url的名字)
+    url(r'^$', views.index, name='index'),
+]
+
+2. 编写函数
+# polls/views.py
+from django.shortcuts import render, HttpResponse
+
+def index(request):
+    # django将会把http请求作为参数传递给函数，因此，函数必须至少有一个参数
+    return HttpResponse('<h1>首页</h1>')
+
+3. 访问 http://x.x.x.x./polls/ 测试
+```
+
 
 
 
