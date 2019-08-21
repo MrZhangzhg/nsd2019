@@ -238,6 +238,37 @@ def index(request):
 </html>
 ```
 
+### 编写投票详情页
+
+```shell
+1. urls.py
+urlpatterns = [
+    # url(路径正则, 调用的函数, 该url的名字)
+    url(r'^$', views.index, name='index'),
+    # (\d+)将会把匹配到的数字作为参数传递给detail函数
+    url(r'^(\d+)/$', views.detail, name='detail'),
+]
+
+2. views.py
+def detail(request, question_id):
+    return render(request, 'detail.html', {'question_id': question_id})
+# 字典中的key将作为前台模板的变量，val是变量的值
+
+3. detail.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票详情页</title>
+</head>
+<body>
+<h1>{{ question_id }}号问题投票详情页</h1>
+</body>
+</html>
+
+4. 访问 http://x.x.x.x/polls/数字 测试
+```
+
 
 
 
