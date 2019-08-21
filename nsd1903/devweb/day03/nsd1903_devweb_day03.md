@@ -71,6 +71,48 @@ t --返回页面-->c
 
 - 搭建mariadb服务器
 
+## 配置django
+
+在数据库服务器上创建名为dj1903的数据库
+
+```shell
+[root@room8pc16 devweb]# mysql -uroot -ptedu.cn
+MariaDB [(none)]> CREATE DATABASE dj1903 DEFAULT CHARSET utf8;
+```
+
+配置django
+
+```shell
+# mysite/settings.py
+# BASE_DIR设置了外层mysite是项目的根目录
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ALLOWED_HOSTS = ['*']  # 设置所有的主机均可访问
+DATABASES = {   # 使用mysql数据库
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'dj1903',
+        'USER': 'root',
+        'PASSWORD': 'tedu.cn',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+    }
+}
+LANGUAGE_CODE = 'zh-hans'
+TIME_ZONE = 'Asia/Shanghai'
+USE_TZ = False   # 不使用标准时区
+
+# 在__init__.py中声明将pymysql安装为MySQLdb
+# vimmysite/__init__.py
+import pymysql
+pymysql.install_as_MySQLdb()
+```
+
+启动django服务器监听在0.0.0.0:80
+
+```shell
+(nsd1903) [root@room8pc16 mysite]# python manage.py runserver 0:80
+```
+
 
 
 
