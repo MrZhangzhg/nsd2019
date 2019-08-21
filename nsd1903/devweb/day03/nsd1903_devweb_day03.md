@@ -376,6 +376,31 @@ Did you rename choice.q to choice.question (a ForeignKey)? [y/N] y
 MariaDB [dj1903]> desc polls_choice;
 ```
 
+### 注册模型到后台
+
+```shell
+# polls/admin.py
+from django.contrib import admin
+from .models import Question, Choice
+
+admin.site.register(Question)
+admin.site.register(Choice)
+
+# 访问 http://x.x.x.x/admin/ 添加数据
+```
+
+在后台管理页面添加完问题后，问题显示为“Question object”，通过为模型加入magic方法解决。
+
+```python
+# models.py
+class Question(models.Model):  # 父类是固定的
+    question_text = models.CharField(max_length=200)
+    pub_date = models.DateTimeField()
+
+    def __str__(self):
+        return self.question_text
+```
+
 
 
 
