@@ -27,6 +27,7 @@
 >>> c3 = q1.choice_set.create(choice_text="上海")
 
 # 查询操作也是通过模型的objects管理器实现的
+# 获取所有的问题
 >>> qset1 = Question.objects.all()
 >>> for q in qset1:
 ...   print(q.id, q.question_text, q.pub_date)
@@ -36,6 +37,31 @@
 3 散伙饭在哪吃？ 2019-08-10 18:00:00
 4 你打算到哪个城市找工作？ 2019-08-20 00:00:00
 5 放假出游去哪玩？ 2019-08-15 00:00:00
+
+# get方法只能获取一个实例，0或多个实例都会报错
+>>> q1 = Question.objects.get(question_text="你期待的工资是多少？")
+>>> q1.id
+1
+>>> q1.question_text
+'你期待的工资是多少？'
+>>> q1.pub_date
+datetime.datetime(2019, 8, 21, 17, 26)
+
+# filter方法得到过滤后的集合，可以是0到多项，过滤条件与get的书写方式一样
+>>> Question.objects.filter(id=1)
+<QuerySet [<Question: 你期待的工资是多少？>]>
+>>> Question.objects.filter(id=100)
+<QuerySet []>
+
+
+
+
+
+
+
+
+
+
 
 ```
 
