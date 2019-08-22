@@ -26,6 +26,17 @@
 # 因为Question和Choice有一对多的关系，django为问题实例创建了choice_set管理器，用于找到该问题的所有选项。如选项类名为xuanxiang，那么就是xuanxiang_set。
 >>> c3 = q1.choice_set.create(choice_text="上海")
 
+# 查询操作也是通过模型的objects管理器实现的
+>>> qset1 = Question.objects.all()
+>>> for q in qset1:
+...   print(q.id, q.question_text, q.pub_date)
+... 
+1 你期待的工资是多少？ 2019-08-21 17:26:00
+2 你期待哪家公司给你发Offer？ 2019-08-01 12:00:00
+3 散伙饭在哪吃？ 2019-08-10 18:00:00
+4 你打算到哪个城市找工作？ 2019-08-20 00:00:00
+5 放假出游去哪玩？ 2019-08-15 00:00:00
+
 ```
 
 
