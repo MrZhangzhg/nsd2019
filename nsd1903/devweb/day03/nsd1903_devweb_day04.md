@@ -348,9 +348,45 @@ urlpatterns = [
 # 2. 修改detail.html中的表单，给action填加网址
    <form action="{% url 'vote' question.id %}" method="post">
 
+# 3. 编写vote函数，实现计数功能
+# views.py
+def vote(request, question_id):
+    question = Question.objects.get(id=question_id)
+    # request是用户的请求，POST是请求中的字典，保存着提交数据
+    choice_id = request.POST.get('choice_id')
+    # 通过问题的选项集取出对应的选项实例
+    choice = question.choice_set.get(id=choice_id)
+    choice.votes += 1  # 选项票数加1
+    choice.save()
+    
+    # 使用重定向，url将会变成result的url，如果仍然使用render
+    # 那么url显示的是vote，但是页面是result的页面
+    return redirect('result', question_id)
+```
 
+## 完成结果页
+
+和投票详情页类似，只是在页面中显示的形式不一样。
+
+```shell
+# 1. 修改视图函数
+# views.py
+def result(request, question_id):
+    question = Question.objects.get(id=question_id)
+    return render(request, 'result.html', {'question': question})
+
+# 2. 完成模板
+# result.html
 
 ```
+
+
+
+
+
+
+
+
 
 
 

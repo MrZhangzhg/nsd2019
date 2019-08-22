@@ -29,4 +29,5 @@ def vote(request, question_id):
 
 
 def result(request, question_id):
-    return render(request, 'result.html', {'question_id': question_id})
+    question = Question.objects.get(id=question_id)
+    return render(request, 'result.html', {'question': question})
