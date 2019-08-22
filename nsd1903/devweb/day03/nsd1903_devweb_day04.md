@@ -377,7 +377,25 @@ def result(request, question_id):
 
 # 2. 完成模板
 # result.html
-
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}投票结果页{% endblock %}
+{% block content %}
+    <h1 class="text-center text-warning">{{ question.id }}号问题投票结果页</h1>
+    <table class="table table-hover table-striped h4">
+        <thead class="bg-primary h3">
+            <tr>
+                <td colspan="2">{{ question.question_text }}</td>
+            </tr>
+        </thead>
+        {% for choice in question.choice_set.all %}
+            <tr>
+                <td>{{ choice.choice_text }}</td>
+                <td>{{ choice.votes }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
 ```
 
 
