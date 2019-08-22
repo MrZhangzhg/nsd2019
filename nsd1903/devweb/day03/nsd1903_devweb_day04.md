@@ -66,7 +66,14 @@ datetime.datetime(2019, 8, 21, 17, 26)
 # 发布时间的月份是8月的
 >>> Question.objects.filter(pub_date__month=8)
 
+# 修改模型
+>>> q = Question.objects.get(question_text="你打算到哪个城市找工作？")
+>>> q.question_text = "你计划到哪个城市工作？"
+>>> q.save()
 
+# 删除模型
+>>> q = Question.objects.get(question_text="放假出游去哪玩？")
+>>> q.delete()
 
 
 
