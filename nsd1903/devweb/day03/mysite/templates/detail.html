@@ -3,8 +3,12 @@
 {% block title %}投票详情页{% endblock %}
 {% block content %}
     <h1 class="text-center text-warning">{{ question.id }}号问题投票详情页</h1>
+    <h2>{{ question.question_text }}</h2>
     <div class="h4">
-        {{ question.question_text }}
-        {{ question.choice_set.all }}
+        {% for choice in question.choice_set.all %}
+            <p>
+                {{ choice.choice_text }}
+            </p>
+        {% endfor %}
     </div>
 {% endblock %}
