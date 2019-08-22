@@ -117,8 +117,28 @@ def index(request):
 {% endfor %}
 </body>
 # 说明：{% %}是模板的标签，{{}}表示变量。fooloop.counter是模板语言的循环计数器，记录当前是第几次循环。{% url 'detail' question.id %}，在urls.py中已经为问题详情url命名为detail，这里跳转的就是detail url，这个url接受一个数字参数，表示问题的ID号，所以将question.id传递过去。
-
 ```
+
+### 在模板中引入bootstrap
+
+```shell
+# 默认情况下，django在应用的static目录查找静态文件
+# 将day02中的static拷贝到polls应用目录
+(nsd1903) [root@room8pc16 mysite]# cp -r ../../day02/static polls/
+
+# 在index.html中引入boostrap
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票首页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+```
+
+
 
 
 
