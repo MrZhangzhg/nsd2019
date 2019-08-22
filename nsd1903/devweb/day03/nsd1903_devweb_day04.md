@@ -74,16 +74,34 @@ datetime.datetime(2019, 8, 21, 17, 26)
 # 删除模型
 >>> q = Question.objects.get(question_text="放假出游去哪玩？")
 >>> q.delete()
+```
 
+## 修改视图函数
 
+```python
+一、投票首页
+# 1. 修改index，取出所有的问题，按发布时间降序排列
+# models.py
+from .models import Question
 
+def index(request):
+    # 取出所有问题，根据pub_date降序排列
+    questions = Question.objects.order_by('-pub_date')
+    return render(request, 'index.html', {'questions': questions})
 
-
-
-
-
-
-
+# 2. 修改模板
+# index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票首页</title>
+</head>
+<body>
+<h1>投票首页</h1>
+{{ questions }}
+</body>
+</html>
 
 
 
