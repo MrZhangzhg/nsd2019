@@ -81,7 +81,7 @@ datetime.datetime(2019, 8, 21, 17, 26)
 ```python
 一、投票首页
 # 1. 修改index，取出所有的问题，按发布时间降序排列
-# models.py
+# views.py
 from .models import Question
 
 def index(request):
