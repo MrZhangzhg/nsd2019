@@ -336,6 +336,7 @@ def detail(request, question_id):
 - 投票功能就是将数据库中某一记录的票数加1
 - 通过函数取出选项对应的实例，将实例的votes属性加1
 - 在django中，执行函数通过访问url实现
+- 表单的action是点击提交按钮时访问的url。访问该url时，还会把表单中的数据提交给url
 
 ```shell
 # 1. 创建url用于和投票函数功能关联
