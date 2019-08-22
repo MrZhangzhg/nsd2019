@@ -36,8 +36,9 @@
         </a>
     </div>
 
-    <h1>投票首页</h1>
-    {% for question in questions %}
+    <h1 class="text-warning text-center">投票首页</h1>
+    <div class="h4" style="margin-top: 30px">
+        {% for question in questions %}
         <p>
             {{ forloop.counter }}.
             <a href="{% url 'detail' question.id %}" target="_blank">
@@ -46,6 +47,10 @@
             {{ question.pub_date }}
         </p>
     {% endfor %}
+    </div>
+    <div class="h4 text-center" style="margin-top: 30px">
+        达内云计算学院 <a href="">nsd1903</a>
+    </div>
 </div>
 
 <script src="{% static 'js/jquery.min.js' %}"></script>
