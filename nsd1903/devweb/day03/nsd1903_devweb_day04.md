@@ -103,7 +103,20 @@ def index(request):
 </body>
 </html>
 
-
+# 3. 完善模板，使得question可以按需求显示 
+<body>
+<h1>投票首页</h1>
+{% for question in questions %}
+    <p>
+        {{ forloop.counter }}.
+        <a href="{% url 'detail' question.id %}" target="_blank">
+            {{ question.question_text }}
+        </a>
+        {{ question.pub_date }}
+    </p>
+{% endfor %}
+</body>
+# 说明：{% %}是模板的标签，{{}}表示变量。fooloop.counter是模板语言的循环计数器，记录当前是第几次循环。{% url 'detail' question.id %}，在urls.py中已经为问题详情url命名为detail，这里跳转的就是detail url，这个url接受一个数字参数，表示问题的ID号，所以将question.id传递过去。
 
 ```
 

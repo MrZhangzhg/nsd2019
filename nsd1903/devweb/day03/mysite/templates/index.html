@@ -6,6 +6,14 @@
 </head>
 <body>
 <h1>投票首页</h1>
-{{ questions }}
+{% for question in questions %}
+    <p>
+        {{ forloop.counter }}.
+        <a href="{% url 'detail' question.id %}" target="_blank">
+            {{ question.question_text }}
+        </a>
+        {{ question.pub_date }}
+    </p>
+{% endfor %}
 </body>
 </html>
