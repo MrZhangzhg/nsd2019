@@ -2,5 +2,9 @@
 {% load static %}
 {% block title %}投票详情页{% endblock %}
 {% block content %}
-<h1>{{ question_id }}号问题投票详情页</h1>
+    <h1 class="text-center text-warning">{{ question.id }}号问题投票详情页</h1>
+    <div class="h4">
+        {{ question.question_text }}
+        {{ question.choice_set.all }}
+    </div>
 {% endblock %}

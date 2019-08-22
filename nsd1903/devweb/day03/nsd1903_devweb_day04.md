@@ -211,7 +211,7 @@ def index(request):
 - 基他页面继承基础模板
 
 ```shell
-# 将index.html拷贝一份，改名为base.html。在base.html中将个性内容删除，使用block占位
+# 将index.html拷贝一份，改名为base.html。在base.html中将个性内容删除，使用block占位。title标题替换掉，body的主体h1标签和for循环所在div用block替换。
 # templates/base.html
 {% load static %}
 <!DOCTYPE html>
@@ -267,6 +267,51 @@ def index(request):
 </script>
 </body>
 </html>
+
+# index.html继承base.html，把共性部分删除，个性部分放到相应的block中
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}投票首页{% endblock %}
+{% block content %}
+<h1 class="text-warning text-center">投票首页</h1>
+<div class="h4" style="margin-top: 30px">
+    {% for question in questions %}
+    <p>
+        {{ forloop.counter }}.
+        <a href="{% url 'detail' question.id %}" target="_blank">
+            {{ question.question_text }}
+        </a>
+        {{ question.pub_date }}
+    </p>
+{% endfor %}
+</div>
+{% endblock %}
+
+
+# 测试详情页继承结果, detail.html
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}投票详情页{% endblock %}
+{% block content %}
+<h1>{{ question_id }}号问题投票详情页</h1>
+{% endblock %}
+```
+
+## 完成投票详情页
+
+将某一问题和选项显示出来
+
+```shell
+# 修改视图函数views.py
+def detail(request, question_id):
+    question = Question.objects.get(id=question_id)
+    return render(request, 'detail.html', {'question': question})
+
+# 修改模板文件detail.html
+
+
+
+
 ```
 
 
