@@ -308,14 +308,48 @@ def detail(request, question_id):
     return render(request, 'detail.html', {'question': question})
 
 # 修改模板文件detail.html
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}投票详情页{% endblock %}
+{% block content %}
+    <h1 class="text-center text-warning">{{ question.id }}号问题投票详情页</h1>
+    <h2>{{ question.question_text }}</h2>
+    <div class="h4">
+        <form action="" method="post">
+            {% csrf_token %}
+            {% for choice in question.choice_set.all %}
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="choice_id" value="{{ choice.id }}">
+                        {{ choice.choice_text }}
+                    </label>
+                </div>
+            {% endfor %}
+            <input class="btn btn-primary" type="submit" value="提 交">
+        </form>
+    </div>
+{% endblock %}
+```
 
+## 实现投票功能
 
+- 投票功能就是将数据库中某一记录的票数加1
+- 通过函数取出选项对应的实例，将实例的votes属性加1
+- 在django中，执行函数通过访问url实现
+
+```shell
+# 1. 创建url用于和投票函数功能关联
+# polls/urls.py
+urlpatterns = [
+    ... ...
+    url(r'^(\d+)/vote/$', views.vote, name='vote'),
+]
+# 2. 修改detail.html中的表单，给action填加网址
+   <form action="{% url 'vote' question.id %}" method="post">
 
 
 
 ```
-
-
 
 
 
