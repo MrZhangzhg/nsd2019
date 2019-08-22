@@ -1,0 +1,18 @@
+DNS主从服务器
+PXE服务器批量部署
+王凯：
+网络架构在线升级
+nfs->ceph,单台web--->web集群
+haproxy+keepalived项目
+MySQL主从、MySQL读写分离、MySQL数据分片
+MySQL PXC集群  MySQL MHA集群
+Redis主从哨兵、Redis集群
+分布式Zabbix监控平台
+7层集群--->4\7层集群
+ELK日志分析平台
+Ansible自动化平台
+Kafka消息队列
+Web容器化
+Web迁移+华为云
+Kubernetes云
+Openstack私有云

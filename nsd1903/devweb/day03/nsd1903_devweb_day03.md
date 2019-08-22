@@ -102,7 +102,7 @@ TIME_ZONE = 'Asia/Shanghai'
 USE_TZ = False   # 不使用标准时区
 
 # 在__init__.py中声明将pymysql安装为MySQLdb
-# vimmysite/__init__.py
+# vim mysite/__init__.py
 import pymysql
 pymysql.install_as_MySQLdb()
 ```
