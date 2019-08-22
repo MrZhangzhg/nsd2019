@@ -1,5 +1,7 @@
 # nsd1903_devweb_day04
 
+django在线文档：https://docs.djangoproject.com
+
 ## python shell
 
 通过python shell操作模型
@@ -52,6 +54,21 @@ datetime.datetime(2019, 8, 21, 17, 26)
 <QuerySet [<Question: 你期待的工资是多少？>]>
 >>> Question.objects.filter(id=100)
 <QuerySet []>
+
+# 查询条件：在django中，查询时某一对象的属性不再使用句点表示，而是使用双下划线
+>>> Question.objects.filter(id=1)   # 它是以下的简写
+>>> Question.objects.filter(id__exact=1)
+>>> Question.objects.filter(id__gt=2)   # id > 2
+>>> Question.objects.filter(id__lt=2)   # id < 2
+>>> Question.objects.filter(question_text__contains='工资')  # 包含工资
+# 字符串以“你期待”开头
+>>> Question.objects.filter(question_text__startswith="你期待")
+# 发布时间的月份是8月的
+>>> Question.objects.filter(pub_date__month=8)
+
+
+
+
 
 
 
