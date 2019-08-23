@@ -374,9 +374,33 @@ if __name__ == '__main__':
 (nsd1903) [root@room8pc16 ansi_cfg]# ansible-cmdb /tmp/hinfo/ > ../templates/webadmin/server_info.html
 ```
 
+2. 配置url
 
+```shell
+# webadmin/urls.py
+from django.conf.urls import url
+from . import views
 
+urlpatterns = [
+    url(r'^$', views.index, name='webadmin_index'),
+]
+```
 
+3. 配置视图函数
 
+```shell
+# webadmin/views.py
+from django.shortcuts import render
 
+# Create your views here.
+
+def index(request):
+    return render(request, 'webadmin/server_info.html')
+```
+
+4. 在index/index.html中为“主机信息”添加超链接
+
+```shell
+        <a href="{% url 'webadmin_index' %}" target="_blank">
+```
 
