@@ -44,6 +44,35 @@ STATICFILES_DIRS = [   # 指定静态文件目录还可以使用根目录下的s
 ]
 ```
 
+4. 授权，将应用的URL授权给应用
+
+```shell
+# myansible/urls.py
+from django.conf.urls import url, include
+from django.contrib import admin
+
+urlpatterns = [
+    url(r'^admin/', admin.site.urls),
+    url(r'^webadmin/', include('webadmin.urls')),
+    url(r'', include('index.urls')),  # 匹配任意路径，务必写到最后
+]
+
+# webadmin/urls.py , index/urls.py
+from django.conf.urls import url
+
+urlpatterns = [
+]
+
+```
+
+
+
+
+
+
+
+
+
 
 
 
