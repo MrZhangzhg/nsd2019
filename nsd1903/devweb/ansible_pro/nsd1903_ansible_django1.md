@@ -66,9 +66,48 @@ urlpatterns = [
 
 5. 将static目录拷贝到项目的根目录下
 
+## 编写index应用
 
+1. 配置url
 
+```shell
+from django.conf.urls import url
+from . import views
 
+urlpatterns = [
+    url(r'', views.index, name='index'),
+]
+```
+
+2. 编写index函数
+
+```shell
+from django.shortcuts import render
+
+# Create your views here.
+
+def index(request):
+    return render(request, 'index/index.html')
+```
+
+3. 编写模板
+
+```shell
+# 在项目目录下的templates中创建index和webadmin两个子目录
+# 创建templates/index/index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ansible Webadmin</title>
+</head>
+<body>
+这是一个测试
+</body>
+</html>
+```
+
+4. 访问 http://127.0.0.1/ 测试
 
 
 
