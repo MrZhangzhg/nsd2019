@@ -62,10 +62,9 @@ from django.conf.urls import url
 
 urlpatterns = [
 ]
-
 ```
 
-
+5. 将static目录拷贝到项目的根目录下
 
 
 
