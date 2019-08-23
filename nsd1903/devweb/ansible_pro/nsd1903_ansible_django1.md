@@ -109,7 +109,15 @@ def index(request):
 
 4. 访问 http://127.0.0.1/ 测试
 
+```shell
+(nsd1903) [root@room8pc16 myansible]# python manage.py runserver 0:80
+```
 
+5. 引入bootstrap
+
+```shell
+
+```
 
 
 
