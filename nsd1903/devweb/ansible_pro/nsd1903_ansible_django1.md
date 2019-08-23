@@ -269,6 +269,7 @@ sqlite> .help   # 查看帮助
 sqlite> .tables   # 列出所有的表
 sqlite> .schema webadmin_group   # 查看表结构
 sqlite> .schema webadmin_host
+sqlite> select * from webadmin_group;  # 执行sql语句
 ```
 
 4. 创建超级用户
@@ -291,6 +292,35 @@ for item in [Group, Host, Module, Args]:
 ```
 
 6. 打开http://x.x.x.x/admin在后台查看
+
+7. 在后台管理界面中添加两个组dbservers，另一个是webservers。dbservers中添加主机node5，webservers中添加node7
+
+## 配置ansible
+
+1. 创建ansible的工作环境
+
+```shell
+(nsd1903) [root@room8pc16 myansible]# mkdir ansi_cfg
+(nsd1903) [root@room8pc16 myansible]# vim ansi_cfg/ansible.cfg
+[defaults]
+inventory = dhosts.py
+remote_user = root
+```
+
+2. 创建动态主机清单脚本
+
+```python
+# vim ansi_cfg/dhosts.py
+
+```
+
+
+
+
+
+
+
+
 
 
 
