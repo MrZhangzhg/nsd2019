@@ -363,10 +363,16 @@ if __name__ == '__main__':
 (nsd1903) [root@room8pc16 myansible]# cd ansi_cfg/
 (nsd1903) [root@room8pc16 ansi_cfg]# python dhosts.py 
 (nsd1903) [root@room8pc16 ansi_cfg]# ansible all -m ping
-   
 ```
 
+## 实现“主机信息”页面
 
+1. 获取所有主机信息
+
+```python
+[root@room8pc16 ansi_cfg]# ansible all -m setup --tree /tmp/hinfo/
+(nsd1903) [root@room8pc16 ansi_cfg]# ansible-cmdb /tmp/hinfo/ > ../templates/webadmin/server_info.html
+```
 
 
 
