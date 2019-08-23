@@ -257,8 +257,40 @@ class Args(models.Model):
 2. 生成表
 
 ```shell
-
+(nsd1903) [root@room8pc16 myansible]# python manage.py makemigrations
+(nsd1903) [root@room8pc16 myansible]# python manage.py migrate
 ```
+
+3. 探索数据库
+
+```shell
+(nsd1903) [root@room8pc16 myansible]# sqlite3 db.sqlite3 
+sqlite> .help   # 查看帮助
+sqlite> .tables   # 列出所有的表
+sqlite> .schema webadmin_group   # 查看表结构
+sqlite> .schema webadmin_host
+```
+
+4. 创建超级用户
+
+```shell
+(nsd1903) [root@room8pc16 myansible]# python manage.py createsuperuser
+```
+
+5. 将模型注册到后台
+
+```shell
+# webadmin/admin.py
+from django.contrib import admin
+from .models import Group, Host, Module, Args
+
+# Register your models here.
+
+for item in [Group, Host, Module, Args]:
+    admin.site.register(item)
+```
+
+6. 打开http://x.x.x.x/admin在后台查看
 
 
 
