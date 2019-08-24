@@ -209,12 +209,91 @@ urlpatterns = [
 2. 编写视图函数
 
 ```shell
+# webadmin/views.py
 
 ```
 
+3. 编写模板文件
 
+```shell
+# templates/webadmin/tasks.html
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}执行任务{% endblock %}
+{% block content %}
+    <ul class="nav nav-tabs h4" style="margin-top: 8px">
+        <li class="active"><a href="#server" data-toggle="tab">主机</a></li>
+        <li><a href="#servers" data-toggle="tab">主机组</a></li>
+    </ul>
 
+    <form action="">
+        {% csrf_token %}
+        <div class="tab-content" style="padding: 5px;">
+            <div class="tab-pane active fade in" id="server">
+                <select class="form-control" name="host">
+                    <option value="">无</option>
+                    {% for host in hosts %}
+                        <option value="{{ host.ipaddr }}">
+                            {{ host.hostname }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="tab-pane fade" id="servers">
+                <select class="form-control" name="group">
+                    <option value="">无</option>
+                    {% for group in groups %}
+                        <option value="{{ group.groupname }}">
+                            {{ group.groupname }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <hr>
+        <table class="h4 table table-bordered table-striped table-hover">
+            <thead class="bg-primary text-center">
+                <tr>
+                    <td>模块</td>
+                    <td>参数</td>
+                </tr>
+            </thead>
+            {% for module in modules %}
+            <tr>
+                <td>
+                    <label>
+                        <input type="radio" name="module" value="{{ module.modulename }}">
+                        {{ module.modulename }}
+                    </label>
+                </td>
+                <td>
+                    <ul class="list-unstyled">
+                        {% for args in module.args_set.all %}
+                            <li>
+                                <label>
+                                    <input type="radio" name="args" value="{{ args.args_text }}">
+                                    {{ args.args_text }}
+                                </label>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+        <div class="form-group text-center">
+            <input class="btn btn-primary" type="submit" value="执 行">
+        </div>
+    </form>
+{% endblock %}
+```
 
+4. 修改首页超链接
+
+```shell
+# templates/index/index.html
+        <a href="{% url 'tasks' %}" target="_blank">
+```
 
 
 
