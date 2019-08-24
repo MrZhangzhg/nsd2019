@@ -121,6 +121,21 @@ urlpatterns = [
 2. 视图函数
 
 ```shell
+def add_modules(request):
+    # print(dir(request))  # 打印request所有的属性
+    # print(request.method)  # 打印当前request的方法
+    # print(request.POST)
+    # print(request.GET)
+    if request.method == 'POST':
+        mod = request.POST.get('module').strip()
+        args = request.POST.get('param').strip()
+        if mod:
+            module = Module.objects.get_or_create(modulename=mod)[0]
+            if args:
+                module.args_set.get_or_create(args_text=args)
+
+    modules = Module.objects.all()
+    return render(request, 'webadmin/add_modules.html', {'modules': modules})
 
 ```
 
