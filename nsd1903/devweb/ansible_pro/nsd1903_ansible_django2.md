@@ -103,6 +103,83 @@ def add_hosts(request):
 
 ```
 
+## 编写“添加模块”功能页
+
+1. url
+
+```shell
+# webadmin/urls.py
+from django.conf.urls import url
+from . import views
+
+urlpatterns = [
+    ... ...
+    url(r'^addmodules/$', views.add_modules, name='add_modules'),
+]
+```
+
+2. 视图函数
+
+```shell
+
+```
+
+3. 编写模板文件
+
+```shell
+# templates/webadmin/add_modules.html
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}添加模块{% endblock %}
+{% block content %}
+    <form action="" class="form-inline h4" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>模块：</label>
+            <input type="text" class="form-control" name="module">
+        </div>
+        <div class="form-group">
+            <label>参数：</label>
+            <input type="text" class="form-control" name="param">
+        </div>
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary" value="提 交">
+        </div>
+    </form>
+    <table class="h4 table table-bordered table-striped table-hover">
+        <thead class="bg-primary text-center">
+            <tr>
+                <td>模块</td>
+                <td>参数</td>
+            </tr>
+        </thead>
+        {% for module in modules %}
+            <tr>
+                <td>{{ module.modulename }}</td>
+                <td>
+                    <ul class="list-unstyled">
+                        {% for args in module.args_set.all %}
+                            <li>{{ args.args_text }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
+```
+
+4. 修改首页模板文件超链接
+
+```shell
+# templates/index/index.html
+        <a href="{% url 'add_modules' %}" target="_blank">
+```
+
+
+
+
+
 
 
 
