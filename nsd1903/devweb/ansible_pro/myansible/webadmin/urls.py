@@ -6,4 +6,5 @@ urlpatterns = [
     url(r'^addhosts/$', views.add_hosts, name='add_hosts'),
     url(r'^addmodules/$', views.add_modules, name='add_modules'),
     url(r'^tasks/$', views.tasks, name='tasks'),
+    url(r'^(\d+)/del/$', views.del_args, name='del_args'),
 ]

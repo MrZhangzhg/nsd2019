@@ -357,6 +357,46 @@ def tasks(request):
         <a href="{% url 'tasks' %}" target="_blank">
 ```
 
+## 实现删除参数的功能
+
+- 删除功能是通过函数来实现的
+- 执行函数通过访问url来实现
+- 结论：删除功能需要访问url，通过url关联函数，调用函数作用是删除参数
+
+```shell
+# webadmin/urls.py
+urlpatterns = [
+    url(r'^$', views.index, name='webadmin_index'),
+    url(r'^addhosts/$', views.add_hosts, name='add_hosts'),
+    url(r'^addmodules/$', views.add_modules, name='add_modules'),
+    url(r'^tasks/$', views.tasks, name='tasks'),
+    url(r'^(\d+)/del/$', views.del_args, name='del_args'),
+]
+
+# webadmin/views.py
+def del_args(request, args_id):
+    args = Args.objects.get(id=args_id)
+    args.delete()
+    
+    return redirect('add_modules')
+
+# 修改add_modules.html
+{% for args in module.args_set.all %}
+<li>
+    <div class="col-sm-9">
+    	{{ args.args_text }}
+    </div>
+    <div class="col-sm-3">
+    	<a href="{% url 'del_args' args.id %}">del</a>
+    </div>
+</li>
+{% endfor %}
+```
+
+
+
+
+
 
 
 
