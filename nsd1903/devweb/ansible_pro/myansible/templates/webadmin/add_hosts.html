@@ -20,4 +20,24 @@
             <input type="submit" class="btn btn-primary" value="提 交">
         </div>
     </form>
+    <table class="table table-bordered table-striped table-hover">
+        <thead class="bg-primary text-center">
+            <tr>
+                <td>主机组</td>
+                <td>主机</td>
+            </tr>
+        </thead>
+        {% for group in groups %}
+            <tr>
+                <td>{{ group.groupname }}</td>
+                <td>
+                    <ul class="list-unstyled">
+                        {% for host in group.host_set.all %}
+                            <li>{{ host.hostname }}: {{ host.ipaddr }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
 {% endblock %}
