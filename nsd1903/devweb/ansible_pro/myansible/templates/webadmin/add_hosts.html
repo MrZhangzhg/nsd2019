@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %}添加主机{% endblock %}
 {% block content %}
-    <form action="" class="form-inline">
+    <form action="" class="form-inline h4" method="post">
         {% csrf_token %}
         <div class="form-group">
             <label>主机组：</label>
@@ -20,7 +20,7 @@
             <input type="submit" class="btn btn-primary" value="提 交">
         </div>
     </form>
-    <table class="table table-bordered table-striped table-hover">
+    <table class="h4 table table-bordered table-striped table-hover">
         <thead class="bg-primary text-center">
             <tr>
                 <td>主机组</td>
