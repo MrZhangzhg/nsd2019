@@ -191,6 +191,27 @@ def add_modules(request):
         <a href="{% url 'add_modules' %}" target="_blank">
 ```
 
+## 完成执行任务功能
+
+1. url
+
+```shell
+# webadmin/urls.py
+from django.conf.urls import url
+from . import views
+
+urlpatterns = [
+    ... ...
+    url(r'^tasks/$', views.tasks, name='tasks'),
+]
+```
+
+2. 编写视图函数
+
+```shell
+
+```
+
 
 
 

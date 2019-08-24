@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Group, Module
+from .models import Group, Module, Host
 
 # Create your views here.
 
@@ -37,3 +37,9 @@ def add_modules(request):
     modules = Module.objects.all()
     return render(request, 'webadmin/add_modules.html', {'modules': modules})
 
+def tasks(request):
+    hosts = Host.objects.all()
+    groups = Group.objects.all()
+    modules = Module.objects.all()
+    objs = {'hosts': hosts, 'groups': groups, 'modules': modules}
+    return render(request, 'webadmin/tasks.html', objs)
