@@ -28,6 +28,7 @@ def add_hosts(request):
 
 ```shell
 # templates/webadmin/add_hosts.html
+
 ```
 
 
