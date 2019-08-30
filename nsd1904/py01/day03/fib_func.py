@@ -6,7 +6,9 @@ def gen_fib():
     for i in range(n - 2):
         fib.append(fib[-1] + fib[-2])
 
-    print(fib)
+    return fib
 
-gen_fib()
-gen_fib()
+print(gen_fib())
+nums = gen_fib()
+alist = [i * 2 for i in nums]
+print(alist)
