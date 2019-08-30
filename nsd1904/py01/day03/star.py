@@ -8,4 +8,5 @@ def pstar(n=30):
     "用于打印一行星号"
     print('*' * n)
 
-pstar()
+if __name__ == '__main__':
+    pstar()
