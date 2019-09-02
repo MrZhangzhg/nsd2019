@@ -12,6 +12,8 @@ def view_it():
 
 def show_menu():
     "显示菜单"
+    # 注意，函数后面不要有括号，是把函数放到字典中，不是把函数的执行结果放进去
+    cmds = {'0': push_it, '1': pop_it, '2': view_it}
     prompt = """(0) 压栈
 (1) 出栈
 (2) 查询
@@ -23,15 +25,21 @@ def show_menu():
             print('无效选择，请重试！')
             continue
 
-        if choice == '0':
-            push_it()
-        elif choice == '1':
-            pop_it()
-        elif choice == '2':
-            view_it()
-        else:
+        if choice == '3':
             print('Bye-bye')
             break
+
+        cmds[choice]()
+
+        # if choice == '0':
+        #     push_it()
+        # elif choice == '1':
+        #     pop_it()
+        # elif choice == '2':
+        #     view_it()
+        # else:
+        #     print('Bye-bye')
+        #     break
 
 
 if __name__ == '__main__':
