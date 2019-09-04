@@ -19,5 +19,3 @@ with open(fname) as fobj:
             break
         if t > t9:
             print(line, end='')
-
-
