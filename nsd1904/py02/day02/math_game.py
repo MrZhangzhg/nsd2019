@@ -1,5 +1,22 @@
+from random import randint, choice
+
 def exam():
     "出题，用户作答"
+    nums = [randint(1, 100) for i in range(2)]
+    nums.sort(reverse=True)  # 降序排列
+    op = choice('+-')
+    if op == '+':
+        result = nums[0] + nums[1]
+    else:
+        result = nums[0] - nums[1]
+
+    prompt = '%s %s %s = ' % (nums[0], op, nums[1])
+    answer = int(input(prompt))
+
+    if answer == result:
+        print('不错哟！')
+    else:
+        print('\033[31;1m不对哟！\033[0m')
 
 
 def main():
