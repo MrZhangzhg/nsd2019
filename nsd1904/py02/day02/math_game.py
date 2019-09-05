@@ -11,12 +11,19 @@ def exam():
         result = nums[0] - nums[1]
 
     prompt = '%s %s %s = ' % (nums[0], op, nums[1])
-    answer = int(input(prompt))
+    counter = 0
 
-    if answer == result:
-        print('不错哟！')
-    else:
+    while counter < 3:
+        answer = int(input(prompt))
+
+        if answer == result:
+            print('不错哟！')
+            break
+
         print('\033[31;1m不对哟！\033[0m')
+        counter += 1
+    else:
+        print('%s%s' % (prompt, result))
 
 
 def main():
