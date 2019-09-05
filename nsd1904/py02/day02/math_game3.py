@@ -18,7 +18,11 @@ def exam():
     counter = 0
 
     while counter < 3:
-        answer = int(input(prompt))
+        try:
+            answer = int(input(prompt))
+        except:  # 不填写异常，可以捕获所有异常。不推荐
+            print()
+            continue
 
         if answer == result:
             print('不错哟！')
