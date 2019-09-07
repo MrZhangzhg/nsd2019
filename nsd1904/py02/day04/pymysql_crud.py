@@ -20,16 +20,27 @@ cur = conn.cursor()  # 创建游标，相当于文件对象
 # cur.executemany(insert_dep, deps)
 ###################################
 # 查询
+# select1 = 'SELECT * FROM departments ORDER BY dep_id'
+# cur.execute(select1)
+# result1 = cur.fetchone()  # 取出一项
+# result2 = cur.fetchmany(2)  # 取出2项
+# result3 = cur.fetchall()   # 取出全部
+# print(result1)
+# print('*' * 30)
+# print(result2)
+# print('*' * 30)
+# print(result3)
+###################################
+# 移动游标
 select1 = 'SELECT * FROM departments ORDER BY dep_id'
 cur.execute(select1)
-result1 = cur.fetchone()  # 取出一项
-result2 = cur.fetchmany(2)  # 取出2项
-result3 = cur.fetchall()   # 取出全部
+cur.scroll(2)   # 默认以相对方式移动
+result1 = cur.fetchone()
 print(result1)
 print('*' * 30)
+cur.scroll(0, mode='absolute')
+result2 = cur.fetchone()
 print(result2)
-print('*' * 30)
-print(result3)
 ###################################
 conn.commit()
 cur.close()
