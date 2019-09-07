@@ -32,15 +32,24 @@ cur = conn.cursor()  # 创建游标，相当于文件对象
 # print(result3)
 ###################################
 # 移动游标
-select1 = 'SELECT * FROM departments ORDER BY dep_id'
-cur.execute(select1)
-cur.scroll(2)   # 默认以相对方式移动
-result1 = cur.fetchone()
-print(result1)
-print('*' * 30)
-cur.scroll(0, mode='absolute')
-result2 = cur.fetchone()
-print(result2)
+# select1 = 'SELECT * FROM departments ORDER BY dep_id'
+# cur.execute(select1)
+# cur.scroll(2)   # 默认以相对方式移动
+# result1 = cur.fetchone()
+# print(result1)
+# print('*' * 30)
+# cur.scroll(0, mode='absolute')
+# result2 = cur.fetchone()
+# print(result2)
+###################################
+# 修改
+# update1 = 'UPDATE departments SET dep_name=%s WHERE dep_name=%s'
+# cur.execute(update1, ('人力资源部', '人事部'))
+###################################
+# 删除
+delete1 = 'DELETE FROM departments WHERE dep_id=%s'
+cur.execute(delete1, (6,))
+
 ###################################
 conn.commit()
 cur.close()
