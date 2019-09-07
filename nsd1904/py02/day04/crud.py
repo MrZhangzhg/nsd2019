@@ -42,14 +42,42 @@ session = Session()
 #     print(dep.dep_id, dep.dep_name)
 ##################################
 # 把类变量作为参数，得到是元组的列表
-qset2 = session.query(Employees.emp_name, Employees.email)
-print(qset2.all())  # all方法返回列表
-for item in qset2:
-    print(item)
-
-
-
-
+# qset2 = session.query(Employees.emp_name, Employees.email)
+# print(qset2.all())  # all方法返回所有结果构成的列表
+# for item in qset2:
+#     print(item)
+##################################
+# 排序
+# qset3 = session.query(Departments).order_by(Departments.dep_id)[1:3]
+# for dep in qset3:
+#     print(dep.dep_id, dep.dep_name)
+##################################
+# 过滤，得到的结果有0或多项的列表
+# qset4 = session.query(Departments).filter(Departments.dep_id==3)
+# print(qset4.all())
+# for dep in qset4:
+#     print(dep.dep_id, dep.dep_name)
+##################################
+# 过滤，可以书写多个条件
+# qset5 = session.query(Departments)\
+#     .filter(Departments.dep_id>1, Departments.dep_id<4)
+# for dep in qset5:
+#     print(dep.dep_id, dep.dep_name)
+##################################
+# 模糊查询
+# qset6 = session.query(Employees).filter(Employees.email.like('%@qq.com'))
+# for emp in qset6:
+#     print(emp.emp_name, emp.email)
+##################################
+# qset7 = session.query(Departments).filter(Departments.dep_id.in_([1, 3, 6]))
+# print(qset7.all())  # all返回列表
+# print(qset7.first())   # 返回all列表中的第一项
+# dep = qset7.first()
+# print(dep.dep_id, dep.dep_name)
+##################################
+qset8 = session.query(Departments).filter(Departments.dep_id==3)
+dep = qset8.one() # one要求返回一项，0或多都会报错
+print(dep.dep_id, dep.dep_name)
 ##################################
 session.commit()
 session.close()
