@@ -75,9 +75,27 @@ session = Session()
 # dep = qset7.first()
 # print(dep.dep_id, dep.dep_name)
 ##################################
-qset8 = session.query(Departments).filter(Departments.dep_id==3)
-dep = qset8.one() # one要求返回一项，0或多都会报错
-print(dep.dep_id, dep.dep_name)
+# qset8 = session.query(Departments).filter(Departments.dep_id==3)
+# dep = qset8.one() # one要求返回一项，0或多都会报错
+# print(dep.dep_id, dep.dep_name)
+##################################
+# 多表查询，先写Employees.emp_name，join的参数必须是Departments
+# 如果写先Departments.dep_name，join的参数必须是Employees
+# qset9 = session.query(Employees.emp_name, Departments.dep_name)\
+#     .join(Departments)
+# print(qset9.all())
+##################################
+# 修改，只要进行变量重新赋值即可
+# qset10 = session.query(Departments).filter(Departments.dep_id==1)
+# hr = qset10.one()
+# hr.dep_name = '人力资源部'
+##################################
+# 删除，先取出实例，再调用delete方法
+qset11 = session.query(Departments).filter(Departments.dep_id==6)
+market = qset11.one()
+session.delete(market)
+
+
 ##################################
 session.commit()
 session.close()
