@@ -35,5 +35,21 @@ session = Session()
 # )
 # session.add_all([lb, zgl, gy, zf, zy])
 ##################################
+# 把类作为参数，得到的是实例列表
+# qset1 = session.query(Departments)
+# print(qset1)  # 此时，qset1只是一条sql语句
+# for dep in qset1:
+#     print(dep.dep_id, dep.dep_name)
+##################################
+# 把类变量作为参数，得到是元组的列表
+qset2 = session.query(Employees.emp_name, Employees.email)
+print(qset2.all())  # all方法返回列表
+for item in qset2:
+    print(item)
+
+
+
+
+##################################
 session.commit()
 session.close()
