@@ -12,8 +12,12 @@ conn = pymysql.connect(
 
 cur = conn.cursor()  # 创建游标，相当于文件对象
 ###################################
-
-
+# 添加部门
+insert_dep = 'INSERT INTO departments(dep_id, dep_name) VALUES(%s, %s)'
+hr = [(1, '人事部')]
+deps = [(2, '财务部'), (3, '运维部'), (4, '开发部'), (5, '测试部'), (6, '市场部')]
+cur.executemany(insert_dep, hr)
+cur.executemany(insert_dep, deps)
 ###################################
 conn.commit()
 cur.close()
