@@ -96,6 +96,7 @@ market = qset11.one()
 session.delete(market)
 
 
+
 ##################################
 session.commit()
 session.close()
