@@ -14,4 +14,5 @@ def ping(host):
 if __name__ == '__main__':
     ips = ('172.40.59.%s' % i for i in range(1, 255))
     for ip in ips:
-        ping(ip)
+        t = threading.Thread(target=ping, args=(ip,))
+        t.start()  # target(*args)
