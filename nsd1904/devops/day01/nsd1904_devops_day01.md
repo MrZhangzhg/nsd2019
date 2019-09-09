@@ -63,6 +63,20 @@ b' HTML>\n'
 >>> import wget
 >>> wget.download('https://img02.sogoucdn.com/app/a/100520021/03b4fea0e30924f351a1276baf00e523', '/tmp/girl.jpg')
 (nsd1904) [root@room8pc16 day01]# eog /tmp/girl.jpg 
+```
+
+### 修改请求头
+
+```python
+>>> url = 'http://www.jianshu.com'
+>>> html = request.urlopen(url)   # 403禁止访问
+
+# 修改请求头中的浏览器值，模拟Firefox
+>>> header = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0"}
+>>> r = request.Request(url, headers=header)
+>>> html = request.urlopen(r)
+>>> html.readline()
+b'<!DOCTYPE html>\n'
 
 ```
 
