@@ -77,8 +77,70 @@ b' HTML>\n'
 >>> html = request.urlopen(r)
 >>> html.readline()
 b'<!DOCTYPE html>\n'
-
 ```
+
+## url数据编码
+
+- url中只允许一部分ASCII码字符
+- 其他字符必须经过编码
+
+```python
+>>> url = 'https://www.sogou.com/web?query=中国'
+>>> html = request.urlopen(url)  # 报错
+
+# URL编码
+>>> url = 'https://www.sogou.com/web?query=' + request.quote('中国')
+>>> url
+'https://www.sogou.com/web?query=%E4%B8%AD%E5%9B%BD'
+>>> html = request.urlopen(url)
+>>> html.readline()
+b'<!DOCTYPE HTML>\n'
+```
+
+## paramiko模块
+
+安装
+
+```python
+# 安装方法一：在线安装
+(nsd1904) [root@room8pc16 day01]# pip install paramiko
+# 安装方法二：本地安装
+(nsd1904) [root@room8pc16 day01]# pip install paramiko_pkgs/*
+```
+
+应用
+
+```python
+>>> import paramiko
+# 创建ssh客户端
+>>> ssh = paramiko.SSHClient()
+# 自动接受服务器发来的密钥
+>>> ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+# 连接服务器
+>>> ssh.connect('192.168.4.4', username='root', password='123456')
+# 在远程主机执行命令
+>>> result = ssh.exec_command('id root; id zhangsan')
+# 执行命令后的返回值有3项，分别是输入、输出和错误的类文件对象
+>>> len(result)
+3
+>>> stdin, stdout, stderr = result
+>>> out = stdout.read()
+>>> err = stderr.read()
+>>> out
+b'uid=0(root) gid=0(root) \xe7\xbb\x84=0(root)\n'
+>>> err
+b'id: zhangsan: no such user\n'
+>>> out.decode()   # 把bytes转成str
+'uid=0(root) gid=0(root) 组=0(root)\n'
+# 关闭连接
+>>> ssh.close()
+```
+
+
+
+
+
+
 
 
 
