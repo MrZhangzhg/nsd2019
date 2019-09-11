@@ -66,7 +66,21 @@ HTTP常用方法：
 ...   fobj.write(r.content)   # bytes类型数据通过r.content获取
 (nsd1904) [root@room8pc16 day02]# eog /tmp/g.jpg 
 
+>>> r = requests.get('http://www.163.com')
+>>> r.text   # 文本数据，常用r.text方式取出
+
+>>> url = 'http://www.weather.com.cn/data/zs/101010100.html'
+>>> r = requests.get(url)
+>>> r.encoding   # 显示当前字符编码
+'ISO-8859-1'
+>>> r.encoding = 'utf8'  # 修改字符编码
+>>> r.json()   # 将json字符串转成相应的数据类型
+
 ```
+
+钉钉机器人：https://www.jianshu.com/p/a3c62eb71ae3
+
+搜索钉钉机器人开放平台: https://ding-doc.dingtalk.com/doc#/serverapi2/qf2nxq
 
 
 
