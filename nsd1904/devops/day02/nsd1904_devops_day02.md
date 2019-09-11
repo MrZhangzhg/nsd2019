@@ -42,8 +42,35 @@
 >>> data = html.read()
 >>> json.loads(data)
 {'weatherinfo': {'city': '北京', 'cityid': '101010100', 'temp': '27.9',WD': '南风', 'WS': '小于3级', 'SD': '28%', 'AP': '1002hPa', 'njd': '暂无', 'WSE': '<3', 'time': '17:55', 'sm': '2.1', 'isRadar': '1', 'Radar': 'JC_RADAR_AZ9010_JB'}}
+```
+
+## requests模块
+
+HTTP常用方法：
+
+- GET: 地址栏中输入网址、点击链超接、表单默认的提交行为
+- POST: 表单提交数据
+
+应用：
+
+- 准备请求资源信息
+- 发送请求
+- 获取响应
+
+```python
+(nsd1904) [root@room8pc16 day02]# pip install requests_pkgs/*
+>>> import requests
+>>> url = 'https://img03.sogoucdn.com/app/a/100520021/9287d83fcb221ce7ea1868d2c7713f85'
+>>> r = requests.get(url)   # 将响应信息保存到变量r
+>>> with open('/tmp/g.jpg', 'wb') as fobj:
+...   fobj.write(r.content)   # bytes类型数据通过r.content获取
+(nsd1904) [root@room8pc16 day02]# eog /tmp/g.jpg 
 
 ```
+
+
+
+
 
 
 
