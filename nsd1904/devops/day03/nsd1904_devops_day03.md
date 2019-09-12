@@ -135,6 +135,87 @@ autocmd FileType yaml setlocal sw=2 ts=2 et ai
 
 把python api example中的代码复制、粘贴到文件中，并执行
 
+### 将yml文件手工转成python的数据类型
+
+```shell
+(nsd1904) [root@room8pc16 myansible]# vim lamp.yml
+---
+- name: configure dbservers
+  hosts: dbservers
+  tasks:
+    - name: install mariadb-server
+      yum:
+        name: mariadb-server
+        state: present
+    - name: configure mariadb service
+      service:
+        name: mariadb
+        state: started
+        enabled: yes
+
+- name: configure webservers
+  hosts: webservers
+  tasks:
+    - name: install web pkgs
+      yum:
+        name: [httpd, php, php-mysql]
+        state: latest
+    - name: configure httpd service
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+```
+
+转换为：
+
+```python
+[
+    {
+        'name': 'configure dbservers',
+        'hosts': 'dbservers',
+        'tasks': [
+            {
+                'name': 'install mariadb-server',
+                'yum': {
+                    'name': 'mariadb-server',
+                    'state': 'present'
+                }
+            },
+            {
+                'name': 'configure mariadb service',
+                'service': {
+                    'name': 'mariadb',
+                    'state': 'started',
+                    'enabled': 'yes'
+                }
+            },
+        ]
+    },
+    {
+        'name': 'configure webservers',
+        'hosts': 'webservers',
+        'tasks': {
+            {
+                'name': 'install web pkgs',
+                'yum': {
+                    'name': ['httpd', 'php', 'php-mysql'],
+                	'state': 'latest'
+                }
+            },
+            {
+                'name': 'configure httpd service',
+      			'service': {
+                    'name': 'httpd',
+                    'state': 'started',
+                    'enabled': 'yes'
+                }
+            }
+        }
+    }
+]
+```
+
 
 
 
