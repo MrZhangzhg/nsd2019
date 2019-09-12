@@ -8,8 +8,8 @@ from ansible.executor.task_queue_manager import TaskQueueManager
 import ansible.constants as C
 
 def adhoc(sources=None, hosts=None, module=None, args=None):
-    Options = namedtuple('Options', ['connection', 'module_path', 'forks', 'become', 'become_method', 'become_user', 'check', 'diff'])
-    options = Options(connection='smart', module_path=['/to/mymodules'], forks=10, become=None, become_method=None, become_user=None, check=False, diff=False)
+    Options = namedtuple('Options', ['connection', 'remote_user', 'module_path', 'forks', 'become', 'become_method', 'become_user', 'check', 'diff'])
+    options = Options(connection='smart', remote_user='root', module_path=['/to/mymodules'], forks=10, become=None, become_method=None, become_user=None, check=False, diff=False)
     loader = DataLoader()
     passwords = dict()
     inventory = InventoryManager(loader=loader, sources=sources)
@@ -23,7 +23,7 @@ def adhoc(sources=None, hosts=None, module=None, args=None):
                 dict(action=dict(module='debug', args=dict(msg='{{shell_out.stdout}}')))
              ]
         )
-    
+
     play = Play().load(play_source, variable_manager=variable_manager, loader=loader)
     tqm = None
     try:
