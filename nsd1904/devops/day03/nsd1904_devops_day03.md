@@ -50,7 +50,7 @@ node6.tedu.cn
 
 ```shell
 # 输密码
-(nsd1904) [root@room8pc16 myansible]# ansible all -m ping -k  
+(nsd1904) [root@room8pc16 myansible]# ansible all -m ping -k
 # 免密情况下使用
 (nsd1904) [root@room8pc16 myansible]# ansible all -m ping
 ```
@@ -105,9 +105,39 @@ autocmd FileType yaml setlocal sw=2 ts=2 et ai
 (nsd1904) [root@room8pc16 myansible]# ansible-playbook --syntax-check lamp.yml 
 # 执行playbook
 (nsd1904) [root@room8pc16 myansible]# ansible-playbook lamp.yml 
+```
 
+### 命名元组
+
+- 继承于元组，元组拥有的属性，它都拥有
+- 命名元组的下标有名字
+
+```python
+>>> from collections import namedtuple
+>>> Point = namedtuple('Point', ['x', 'y', 'z'])
+>>> p1 = Point(10, 15, 25)
+>>> p1[0]
+10
+>>> p1[1:]
+(15, 25)
+>>> p1.x
+10
+>>> p1.y
+15
+>>> p1.z
+25
 
 ```
+
+### adhoc临时命令
+
+官网：https://docs.ansible.com/ansible/2.7/index.html ->搜索python api
+
+把python api example中的代码复制、粘贴到文件中，并执行
+
+
+
+
 
 
 
