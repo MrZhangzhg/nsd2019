@@ -216,6 +216,15 @@ autocmd FileType yaml setlocal sw=2 ts=2 et ai
 ]
 ```
 
+## ansible-cmdb
+
+- ansible-cmdb是ansible的一个插件
+- 它可以把收集到的远程主机信息以Web方式呈现
+
+```shell
+(nsd1904) [root@room8pc16 day03]# pip install ansible-cmdb_pkgs/*
+```
+
 
 
 
