@@ -222,8 +222,58 @@ autocmd FileType yaml setlocal sw=2 ts=2 et ai
 - 它可以把收集到的远程主机信息以Web方式呈现
 
 ```shell
+# 安装
 (nsd1904) [root@room8pc16 day03]# pip install ansible-cmdb_pkgs/*
+
+# 收集远程主机的信息
+(nsd1904) [root@room8pc16 myansible]# ansible all -m setup --tree /tmp/nsd1904
+
+# 利用ansible-cmdb生成web页面
+(nsd1904) [root@room8pc16 myansible]# ansible-cmdb /tmp/nsd1904 > /tmp/servers.html
+(nsd1904) [root@room8pc16 myansible]# firefox /tmp/servers.html &
 ```
+
+## 编写自定义模块
+
+通过ANSIBLE_LIBRARY定义ansible搜索模块时，额外的搜索目录：
+
+```shell
+(nsd1904) [root@room8pc16 myansible]# export ANSIBLE_LIBRARY=/tmp/mymodules
+(nsd1904) [root@room8pc16 myansible]# mkdir /tmp/mymodules
+```
+
+编写模块，实现远程主机在本机进行拷贝文件
+
+```python
+# vim /tmp/mymodules/rcopy.py
+from ansible.module_utils.basic import AnsibleModule
+import shutil
+
+def main():
+    module = AnsibleModule(
+        argument_spec=dict(
+            yuan=dict(required=True, type='str'),
+            mubiao=dict(required=True, type='str')
+        )
+    )
+    shutil.copy(module.params['yuan'], module.params['mubiao'])
+    module.exit_json(changed=True)
+    
+if __name__ == '__main__':
+    main()
+
+```
+
+运行测试：
+
+```shell
+(nsd1904) [root@room8pc16 myansible]# ansible webservers -m rcopy -a "yuan=/etc/hosts mubiao=/tmp/zj.txt"
+(nsd1904) [root@room8pc16 myansible]# ansible webservers -a "ls /tmp/zj.txt"
+```
+
+
+
+
 
 
 
