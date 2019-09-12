@@ -273,6 +273,49 @@ if __name__ == '__main__':
 
 
 
+编写download模块
+
+```shell
+# vim /tmp/mymodules/download.py
+from ansible.module_utils.basic import AnsibleModule
+import wget
+
+def main():
+    module = AnsibleModule(
+        argument_spec=dict(
+            url=dict(required=True, type='str'),
+            dest=dict(required=True, type='str')
+        )
+    )
+    wget.download(module.params['url'], module.params['dest'])
+    module.exit_json(changed=True)
+
+if __name__ == '__main__':
+    main()
+
+
+(nsd1904) [root@room8pc16 myansible]# ansible dbservers -m download -a "url=http://192.168.4.254/server.repo dest=/tmp/"
+# 报错，因为远程主机上没有wget模块
+```
+
+在远程主机上安装python模块
+
+```shell
+# 在物理机上下载wget
+(nsd1904) [root@room8pc16 myansible]# pip download wget --trusted-host pypi.douban.com
+# 拷贝软件到远程主机
+(nsd1904) [root@room8pc16 myansible]# scp wget-3.2.zip node4:/root
+# 在远程主机上安装
+[root@node4 ~]# unzip wget-3.2.zip 
+[root@node4 ~]# cd wget-3.2/
+[root@node4 wget-3.2]# python setup.py install
+# 注意，离线安装所有的python包，都是使用此方法
+
+(nsd1904) [root@room8pc16 myansible]# ansible dbservers -m download -a "url=http://192.168.4.254/server.repo dest=/tmp/"
+(nsd1904) [root@room8pc16 myansible]# ansible dbservers -a "ls /tmp/server.repo"
+
+```
+
 
 
 
