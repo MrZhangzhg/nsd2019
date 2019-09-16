@@ -162,6 +162,31 @@ R  hosts -> zhuji
 * b1
   master
 
+# 在分支中提交数据
+[root@node4 myweb]# cp /etc/redhat-release .
+[root@node4 myweb]# git add .
+[root@node4 myweb]# git commit -m "add redhat-release"
+[root@node4 myweb]# ls
+index.html  mima  redhat-release
+
+# 切换回master分支
+[root@node4 myweb]# git checkout master
+切换到分支 'master'
+[root@node4 myweb]# git branch
+  b1
+* master
+[root@node4 myweb]# ls
+index.html  mima
+
+# 将分支汇入主干
+[root@node4 myweb]# git merge b1 -m "merge b1 to master"
+[root@node4 myweb]# ls
+index.html  mima  redhat-release
+
+# 删除分支
+[root@node4 myweb]# git branch -d b1
+[root@node4 myweb]# git branch
+* master
 ```
 
 
