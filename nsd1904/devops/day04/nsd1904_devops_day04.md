@@ -247,6 +247,24 @@ Port 2022
 5. 创建名为myweb的公开类型的项目，为群组创建
 6. 创建用户，将其设置为myweb项目的主程序员。新建用户时，不能为其设置密码；但是，创建好用户后，可以编辑，为其添加密码。
 
+### 使用新建用户上传代码
+
+#### 通过http协议上传
+
+```shell
+[root@node4 ~]# cd ~/myweb/
+[root@node4 myweb]# git remote rename origin old-origin
+# 出现以下错误可忽略
+error: 不能重命名配置小节 'remote.origin' 到 'remote.old-origin'
+[root@node4 myweb]# git remote add origin http://192.168.4.5/devops/myweb.git
+[root@node4 myweb]# git push -u origin --all
+Username for 'http://192.168.4.5': zzg
+Password for 'http://zzg@192.168.4.5': 
+[root@node4 myweb]# git push -u origin --tags
+Username for 'http://192.168.4.5': zzg
+Password for 'http://zzg@192.168.4.5': 
+```
+
 
 
 
