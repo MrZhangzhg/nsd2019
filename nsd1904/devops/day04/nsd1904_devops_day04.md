@@ -265,6 +265,33 @@ Username for 'http://192.168.4.5': zzg
 Password for 'http://zzg@192.168.4.5': 
 ```
 
+#### 通过ssh上传
+
+```shell
+# 生成密钥对
+[root@node4 myweb]# ssh-keygen -t rsa -C "zzg@tedu.cn" -b 4096
+
+# 将公钥拷贝到gitlab服务器用户的ssh密码
+[root@node4 myweb]# cat ~/.ssh/id_rsa.pub 
+
+# 修改本地代码
+[root@node4 myweb]# cp /etc/shadow .
+[root@node4 myweb]# git add .
+[root@node4 myweb]# git commit -m "add shadow"
+
+# 通过ssh推送
+[root@node4 myweb]# git push git@192.168.4.5:devops/myweb.git
+
+# 修改默认推送的方式是ssh
+[root@node4 myweb]# git remote remove origin   # 删除
+[root@node4 myweb]# git remote add origin git@192.168.4.5:devops/myweb.git
+
+[root@node4 myweb]# cp /etc/motd .
+[root@node4 myweb]# git add .
+[root@node4 myweb]# git commit -m "add motd"
+[root@node4 myweb]# git push
+```
+
 
 
 
