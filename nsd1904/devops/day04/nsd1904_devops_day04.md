@@ -202,7 +202,37 @@ a.txt
 无文件要提交，干净的工作区
 ```
 
+### 返回到以前的状态
 
+```shell
+[root@node4 myweb]# git log
+[root@node4 myweb]# git checkout 7582dae74f80eab75cf928ea72dfe9bb5cf70d9c
+# 返回到最新状态
+[root@node4 myweb]# git checkout master
+```
+
+## gitlab服务器
+
+- 准备4GB以上的服务器 node5.tedu.cn
+- 安装docker软件并启动
+- 导入gitlab镜像
+
+### 启动容器
+
+```shell
+# 因为gitlab容器也需要使用22端口，所以将虚拟机ssh端口改为2022
+[root@node5 ~]# vim /etc/ssh/sshd_config 
+Port 2022
+[root@node5 ~]# systemctl restart sshd
+# 重新登陆
+[root@room8pc16 phase5]# ssh node5 -p2022
+
+# 创建并启动容器
+[root@node5 ~]# docker run -d -h gitlab --name gitlab -p 22:22 -p 80:80 -p 443:443 --restart always -v /srv/gitlab/config:/etc/gitlab -v /srv/gitlab/logs:/var/log/gitlab -v /srv/gitlab/data:/var/opt/gitlab gitlab_zh
+
+# 查看状态，启动时间较长，当状态显示healthy时，容器才是可用的
+[root@node5 ~]# docker ps
+```
 
 
 
