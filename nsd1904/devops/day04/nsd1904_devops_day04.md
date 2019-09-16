@@ -130,10 +130,39 @@ R  hosts -> zhuji
 [root@node4 myweb]# git status
 # 位于分支 master
 无文件要提交，干净的工作区
-
 ```
 
+### git分支
 
+- 默认git已有一个名为master的主干分支
+- 编写新的功能、修复bug时，可以创建一个新分支
+- 新分支功能编写完成后，还可以把它汇入主干
+- 创建分支、汇入主干、切换分支等务必保证工作区是干净的
+
+```shell
+# 主干可以继续工作
+[root@node4 myweb]# cp /etc/passwd mima
+[root@node4 myweb]# git add .
+[root@node4 myweb]# git commit -m "add mima"
+
+# 查看分支
+[root@node4 myweb]# git branch
+* master
+
+# 创建分支
+[root@node4 myweb]# git branch b1
+[root@node4 myweb]# git branch
+  b1
+* master    # *号表示，当前牌master分支
+
+# 切换分支
+[root@node4 myweb]# git checkout b1
+切换到分支 'b1'
+[root@node4 myweb]# git branch
+* b1
+  master
+
+```
 
 
 
