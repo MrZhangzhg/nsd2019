@@ -63,6 +63,82 @@ s--git commit-->g(版本库)
 .git  index.html
 ```
 
+### 添加文件到暂存区
+
+```shell
+# 查看状态
+[root@node4 myweb]# git status
+[root@node4 myweb]# git status -s
+?? index.html
+
+# 添加到暂存区
+[root@node4 myweb]# git add .
+[root@node4 myweb]# git status
+[root@node4 myweb]# git status -s
+A  index.html
+
+# 从暂存区撤出文件
+[root@node4 myweb]# git rm --cached index.html 
+[root@node4 myweb]# git status -s
+?? index.html
+```
+
+### 确认至版本库
+
+```shell
+[root@node4 myweb]# git add .
+[root@node4 myweb]# git status -s
+A  index.html
+[root@node4 myweb]# git commit  # 在跳出的vim中写日志
+[root@node4 myweb]# git status
+# 位于分支 master
+无文件要提交，干净的工作区
+
+# 继续提交
+[root@node4 myweb]# cp /etc/hosts .
+[root@node4 myweb]# git status -s
+?? hosts
+[root@node4 myweb]# git add hosts 
+[root@node4 myweb]# git status -s
+A  hosts
+[root@node4 myweb]# git commit -m "add hosts"
+[root@node4 myweb]# git status
+# 位于分支 master
+无文件要提交，干净的工作区
+```
+
+### 文件改名
+
+```shell
+[root@node4 myweb]# git mv hosts zhuji
+[root@node4 myweb]# ls
+[root@node4 myweb]# git status
+[root@node4 myweb]# git status -s
+R  hosts -> zhuji
+[root@node4 myweb]# git commit -m "mv hosts zhuji"
+[root@node4 myweb]# git status
+# 位于分支 master
+无文件要提交，干净的工作区
+```
+
+### 删除文件
+
+```shell
+[root@node4 myweb]# git rm zhuji 
+[root@node4 myweb]# git status
+[root@node4 myweb]# git commit -m "rm zhuji"
+[root@node4 myweb]# git status
+# 位于分支 master
+无文件要提交，干净的工作区
+
+```
+
+
+
+
+
+
+
 
 
 
