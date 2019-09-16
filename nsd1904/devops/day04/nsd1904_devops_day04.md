@@ -25,10 +25,43 @@ CI / CD：持续集成 / 持续交付
 # 查看
 [root@node4 ~]# git config --list
 [root@node4 ~]# cat ~/.gitconfig 
-
 ```
 
+### git的工作区域
 
+- 工作区
+- 暂存区
+- 版本库
+
+```mermaid
+graph LR
+w(工作区)--git add-->s(暂存区)
+s--git commit-->g(版本库)
+```
+
+### 初始化版本库
+
+- 项目之初，直接构建
+
+```shell
+[root@node4 ~]# git init mypro
+初始化空的 Git 版本库于 /root/mypro/.git/
+[root@node4 ~]# cd mypro/
+[root@node4 mypro]# ls -A
+.git
+```
+
+- 已有项目
+
+```shell
+[root@node4 ~]# mkdir myweb
+[root@node4 ~]# cd myweb
+[root@node4 myweb]# echo '<h1>Hello World</h1>' > index.html
+[root@node4 myweb]# git init
+初始化空的 Git 版本库于 /root/myweb/.git/
+[root@node4 myweb]# ls -A
+.git  index.html
+```
 
 
 
