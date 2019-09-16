@@ -189,6 +189,19 @@ index.html  mima  redhat-release
 * master
 ```
 
+### 设置被git排除的文件
+
+```shell
+[root@node4 myweb]# vim .gitignore
+*.swp
+a.txt
+.gitignore
+[root@node4 myweb]# echo 'hello world' > a.txt
+[root@node4 myweb]# git status
+# 位于分支 master
+无文件要提交，干净的工作区
+```
+
 
 
 
