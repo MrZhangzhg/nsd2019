@@ -93,8 +93,13 @@ root登陆 -> 点击扳手图标 - > New Project -> 项目路径：http://192.16
 [root@node4 mysite]# git remote add origin git@192.168.4.5:devops/mysite.git
 [root@node4 mysite]# git push -u origin --all
 [root@node4 mysite]# git push -u origin --tags
-
 ```
+
+### jenkins下载指定版本的软件包
+
+新建Item -> 名称：mysite / Freestyle project -> This project is parameterized : 添加参数 / git parameter / Name: webver / Parameter type: Branch or Tag / Default Value: origin/master -> 源码管理: git /Repository URL:  http://192.168.4.5/devops/mysite.git / Branch to build: $webver -> 保存
+
+
 
 
 
