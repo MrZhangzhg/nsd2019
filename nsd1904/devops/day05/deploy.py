@@ -5,9 +5,25 @@
 3. 如果是完好的包，部署
 """
 
+import os
 import wget
+import requests
 
 def has_new_ver(ver_fname, ver_url):
+    "如果本地没有版本文件，或版本低都返回True"
+    if not os.path.exists(ver_fname):
+        return True
+
+    # 读取本地版本
+    with open(ver_fname) as fobj:
+        local_ver = fobj.read()
+
+    # 本地版本和网上版本进行比较
+    r = requests.get(ver_url)
+    if local_ver != r.text:
+        return True
+    else:
+        return False
 
 
 def check_file(app_fname, md5_url):
