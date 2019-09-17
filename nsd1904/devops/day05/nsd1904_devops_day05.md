@@ -59,6 +59,31 @@ Build with Parameters -> 选择master分支后点击开始构建
 
 
 
+## 程序开发到部署的完整过程
+
+1. 程序员编写代码，并通过git管理
+2. 将代码上传到gitlab服务器
+3. jenkins下载指定版本的软件包
+4. 应用服务器部署软件
+
+### 程序员编写代码
+
+```shell
+[root@node4 ~]# git init mysite
+[root@node4 ~]# cd mysite/
+[root@node4 mysite]# echo '<h1>My Site</h1>' > index.html
+[root@node4 mysite]# git add .
+[root@node4 mysite]# git commit -m "mysite 1.0"
+[root@node4 mysite]# git tag 1.0   # 将当前提交打标记1.0
+
+[root@node4 mysite]# echo '2nd version' >> index.html 
+[root@node4 mysite]# git add .
+[root@node4 mysite]# git commit -m "mysite 2.0"
+[root@node4 mysite]# git tag 2.0
+```
+
+
+
 
 
 
