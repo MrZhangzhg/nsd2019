@@ -99,9 +99,49 @@ root登陆 -> 点击扳手图标 - > New Project -> 项目路径：http://192.16
 
 新建Item -> 名称：mysite / Freestyle project -> This project is parameterized : 添加参数 / git parameter / Name: webver / Parameter type: Branch or Tag / Default Value: origin/master -> 源码管理: git /Repository URL:  http://192.168.4.5/devops/mysite.git / Branch to build: $webver -> 保存
 
+### 完善jenkins任务
 
+1. 下载的相同软件的不同版本，放到不同目录下
+2. 将下载的软件打包
+3. 将压缩包通过http协议共享
+4. 将当前版本和前一版本的版本号写到两个文件中
+5. 计算压缩文件的md5值，供客户端验证用
 
+#### 在jenkins服务器上配置http服务
 
+```shell
+[root@node6 ~]# yum install -y httpd
+[root@node6 ~]# systemctl start httpd
+[root@node6 ~]# systemctl enable httpd
+[root@node6 ~]# mkdir -p /var/www/html/deploy/pkgs
+[root@node6 ~]# chown -R jenkins:jenkins /var/www/html/deploy
+# /var/www/html/deploy/pkgs/: 存储压缩包和它的md5值
+# /var/www/html/deploy/live_ver: 存储当前版本号
+# /var/www/html/deploy/last_ver: 存储前一版本号
+```
+
+#### 修改jenkins工程的配置
+
+点击项目 -> 配置 -> Additional Behaviours -> 新增：Checkout to a sub-directory: mysite-$webver -> 保存并构建测试
+
+点击项目 -> 配置 -> 构建 -> 增加构建步骤 -> Execute shell
+
+```shell
+pkg_dir=/var/www/html/deploy/pkgs
+cp -r mysite-$webver $pkg_dir  # 拷贝目录到web目录下
+cd $pkg_dir
+rm -rf mysite-$webver/.git   # 删除版本库文件
+tar czf mysite-$webver.tar.gz mysite-$webver  # 打包
+rm -rf mysite-$webver   # 保留压缩文件即可，删除原来的目录
+# 计算md5值
+md5sum mysite-$webver.tar.gz | awk '{print $1}' >  \
+mysite-$webver.tar.gz.md5
+cd ..
+[ -f live_ver ] && cat live_ver > last_ver  # 将当前版本写到前一版本
+echo -n $webver > live_ver  # 更新当前版本文件
+```
+
+保存并测试
 
 
 
