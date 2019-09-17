@@ -152,17 +152,9 @@ echo -n $webver > live_ver  # 更新当前版本文件
 ```shell
 /var/www/download/  # 保存下载的压缩包
 /var/www/deploy/    # 保存最新的版本文件和解压后的目录
+/var/www/html/nsd1904  # 指向当前生效版本目录的链接
 ```
 
 
 
-
-
-
-
-
-
-
-
-
-
+简历中的项目：CI/CD应用

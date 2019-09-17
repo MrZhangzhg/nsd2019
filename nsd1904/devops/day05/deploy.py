@@ -9,6 +9,7 @@ import os
 import wget
 import requests
 import hashlib
+import tarfile
 
 def has_new_ver(ver_fname, ver_url):
     "如果本地没有版本文件，或版本低都返回True"
@@ -50,6 +51,26 @@ def check_file(app_fname, md5_url):
 
 
 def deploy(app_fname):
+    "将压缩包解压到deploy_dir目录，并为其创建链接"
+    deploy_dir = '/var/www/deploy'
+    dest = '/var/www/html/nsd1904'
+
+    # 解压
+    tar = tarfile.open(app_fname)
+    tar.extractall(path=deploy_dir)
+    tar.close()
+
+    # 取出解压后文件的绝对路径
+    fname = app_fname.split('/')[-1]
+    app_dir = fname.replace('.tar.gz', '')
+    app_dir = os.path.join(deploy_dir, app_dir)
+
+    # 如果链接文件已经存在，需要将它删除
+    if os.path.exists(dest):
+        os.remove(dest)
+
+    # 创建链接
+    os.symlink(app_dir, dest)
 
 
 if __name__ == '__main__':
@@ -79,3 +100,6 @@ if __name__ == '__main__':
     deploy(app_fname)
 
     # 更新最新版本信息
+    if os.path.exists(ver_fname):
+        os.remove(ver_fname)
+    wget.download(ver_url, ver_fname)
