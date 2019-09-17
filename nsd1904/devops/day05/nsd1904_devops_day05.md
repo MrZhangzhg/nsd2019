@@ -145,6 +145,15 @@ echo -n $webver > live_ver  # 更新当前版本文件
 
 
 
+### 应用服务器发布新版本软件
+
+目录规划
+
+```shell
+/var/www/download/  # 保存下载的压缩包
+/var/www/deploy/    # 保存最新的版本文件和解压后的目录
+```
+
 
 
 
