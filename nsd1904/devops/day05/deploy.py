@@ -41,12 +41,15 @@ if __name__ == '__main__':
         exit(1)
 
     # 如果有新版本软件，则下载
-
-
+    download_dir = '/var/www/download'
+    r = requests.get(ver_url)
+    app_url = 'http://192.168.4.6/deploy/pkgs/mysite-%s.tar.gz' % r.text
+    wget.download(app_url, download_dir)
 
     # 如果下载的软件已损坏，则把它删除，并退出
-    app_fname = ''
-    md5_url = ''
+    app_fname = app_url.split('/')[-1]  # 取出压缩包名
+    app_fname = os.path.join(download_dir, app_fname)  # 拼接绝对路径
+    md5_url = app_url + '.md5'
     if not check_file(app_fname, md5_url):
         print('文件已损坏。')
         exit(2)
