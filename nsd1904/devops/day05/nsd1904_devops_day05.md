@@ -23,6 +23,10 @@ app(应用服务器)--下载-->jen
 [root@node6 ~]# systemctl enable jenkins
 ```
 
+初始化：
+
+访问http://192.168.4.6:8080
+
 
 
 
