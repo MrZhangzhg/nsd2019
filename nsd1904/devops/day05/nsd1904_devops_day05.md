@@ -82,6 +82,20 @@ Build with Parameters -> 选择master分支后点击开始构建
 [root@node4 mysite]# git tag 2.0
 ```
 
+### 在gitlab上创建项目
+
+root登陆 -> 点击扳手图标 - > New Project -> 项目路径：http://192.168.4.5/devops/mysite -> 可见等级：公开 -> 点击左边栏 设置/成员，添加普通用户zzg成为主程序员
+
+### 将代码上传到gitlab服务器
+
+```shell
+[root@node4 mysite]# git remote rename origin old-origin
+[root@node4 mysite]# git remote add origin git@192.168.4.5:devops/mysite.git
+[root@node4 mysite]# git push -u origin --all
+[root@node4 mysite]# git push -u origin --tags
+
+```
+
 
 
 
