@@ -205,7 +205,28 @@ js->javascript脚本
 </form>
 ```
 
+## 五、图片
 
+```html
+<!-- 圆角矩形 -->
+<img class="img-rounded" src="https://img01.sogoucdn.com/app/a/100520021/c0b43a061bdb06f3b983953f41e7e8d0">
+<!-- 圆形 -->
+<img class="img-circle" src="https://img01.sogoucdn.com/app/a/100520021/c0b43a061bdb06f3b983953f41e7e8d0">
+<!-- 支持自动缩放 -->
+<img class="img-thumbnail" src="https://img01.sogoucdn.com/app/a/100520021/c0b43a061bdb06f3b983953f41e7e8d0">
+```
+
+## 六、栅格系统
+
+1. 实现页面布局
+2. 布局时，要求页面所有的元素位于container中
+3. container的直接子元素是row
+4. row中的元素是col-xx-yy
+5. 一个row最多支持12列。其中的col-xx-yy设置为占多少列
+   1. col-lg-3表示大屏幕尺寸下，它占3列
+   2. col-md-4表示中等屏幕尺寸下，它占4列
+   3. col-sm-2表示小屏幕尺寸下，它占6列
+6. 还可以设置自适应屏幕大小
 
 
 
