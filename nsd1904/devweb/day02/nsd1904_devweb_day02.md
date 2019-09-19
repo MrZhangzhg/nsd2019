@@ -155,6 +155,21 @@ js->javascript脚本
 <table class="table table-bordered table-striped table-hover">
 ```
 
+## 三、按钮
+
+```html
+<input type="submit" value="查 询"><br>
+<input class="btn btn-default btn-sm" type="submit" value="查 询"><br>
+<input class="btn btn-primary" type="submit" value="查 询"><br>
+<input class="btn btn-info btn-lg" type="submit" value="查 询"><br>
+<input class="btn btn-warning" type="submit" value="查 询"><br>
+<input class="btn btn-success btn-xs" type="submit" value="查 询"><br>
+<input class="btn btn-danger" type="submit" value="查 询"><br>
+<input class="btn btn-primary btn-block" type="submit" value="查 询"><br>
+<input type="submit" value="查 询"><br>
+<input type="submit" value="查 询"><br>
+```
+
 
 
 
