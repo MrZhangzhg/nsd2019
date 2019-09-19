@@ -170,6 +170,45 @@ js->javascript脚本
 <input type="submit" value="查 询"><br>
 ```
 
+## 四、表单
+
+- 为了有很好的间距，应该把各个控件放到form-group中
+- 每个文本类型的控件，放到form-control中
+
+```html
+<form action="">
+    <div class="form-group">
+        <label>uname: </label><input class="form-control" type="text">
+    </div>
+    <div class="form-group">
+        <label>upass: </label><input class="form-control" type="text">
+    </div>
+    <div class="form-group">
+        <input class="btn btn-primary" type="submit">
+    </div>
+</form>
+```
+
+- 如果希望表单只占一行，只要设置form的class
+
+```html
+<form action="" class="form-inline">
+    <div class="form-group">
+        <label>uname: </label><input class="form-control" type="text">
+    </div>
+    <div class="form-group">
+        <label>upass: </label><input class="form-control" type="text">
+    </div>
+    <div class="form-group">
+        <input class="btn btn-primary" type="submit">
+    </div>
+</form>
+```
+
+
+
+
+
 
 
 
