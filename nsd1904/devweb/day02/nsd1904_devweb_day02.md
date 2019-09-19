@@ -99,6 +99,8 @@ imgs->图片
 js->javascript脚本
 ```
 
+将文件nsd2019/ebooks/web/bootstrap_pdf.tar.gz 解压，可以得到pdf电子书目录。
+
 
 
 
