@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <title>my css</title>
     <style>
-        * {
-            color: darkgray;  /*前景色为深灰*/
-        }
+        /** {*/
+            /*color: darkgray;  !*前景色为深灰*!*/
+        /*}*/
         h1 {
             color: darkgreen;
             text-align: center;   /*文本对齐方式*/
@@ -31,9 +31,21 @@
         .c3 {
             color: blueviolet;
         }
+        a:link {   /*未访问前的样式*/
+            color: orange;
+        }
+        a:hover {    /*鼠标悬停的样式*/
+            font-size: 1.5em;    /*文字大小变为所在元素的1.5倍*/
+        }
+        a:visited {
+            color: gray;    /*访问后(历史记录中存在)的样式*/
+        }
     </style>
 </head>
 <body>
+<p>
+    <a href="http://fanyi.sogou.com">搜狗翻译</a>
+</p>
 <h1>云计算 nsd1904</h1>
 <h2 class="c1">云计算 nsd1904</h2>
 <h2 id="id1">云计算 nsd1904</h2>
