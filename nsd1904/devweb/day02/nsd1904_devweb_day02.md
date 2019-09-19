@@ -39,6 +39,50 @@
   - 边框：border
   - 外边距：margin
 
+## 样式示例：导航栏
+
+```shell
+1. 创建ul
+<ul>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">News</a></li>
+    <li><a href="#">Contact</a></li>
+    <li><a href="#">About</a></li>
+</ul>
+2. 默认的ul拥有内边距、外边距。每个li前面有个项目标识符出现在内边距中。为了一切都自行定义，将这些默认样式清除。
+ul {
+    list-style-type: none;   /*删除标号*/
+    padding: 0;
+    margin: 0;
+}
+3. 将导航栏设置为水平方向
+li {
+	display: inline;
+}
+4. 因为li的宽度与其中的文字有关，为了精确设置，首先将其设置为左浮动
+li {
+	float: left;
+}
+5. 为了能给a标签设置宽度，需要把它转换成块元素
+a {
+    display: block;
+    width: 60px;
+}
+6. 进一步设a标签
+a {
+    text-align: center;   /*文字居中*/
+    background-color: #BEBEBE;   /*背景色*/
+    display: block;   /*将a转为块元素，以便设置宽度*/
+    width: 80px;    /*宽度为80px*/
+    text-decoration: none;   /*取消下划线*/
+    border-bottom: 2px solid #900B09;   /*添加红色下边框*/
+}
+7. 鼠标悬停时，变换背景色
+a:hover {
+	background-color: #900B09;
+}
+```
+
 
 
 
