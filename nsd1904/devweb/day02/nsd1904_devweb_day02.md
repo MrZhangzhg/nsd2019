@@ -228,6 +228,78 @@ js->javascript脚本
    3. col-sm-2表示小屏幕尺寸下，它占6列
 6. 还可以设置自适应屏幕大小
 
+```html
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3 bg-primary col-md-4 col-sm-6">
+            云计算<br>
+            nsd 1904
+        </div>
+        <div class="col-lg-3 bg-danger col-md-4 col-sm-6">
+            云计算<br>
+            nsd 1904
+        </div>
+        <div class="col-lg-3 bg-success col-md-4 col-sm-6">
+            云计算<br>
+            nsd 1904
+        </div>
+        <div class="col-lg-3 bg-warning col-md-4 col-sm-6">
+            云计算<br>
+            nsd 1904
+        </div>
+    </div>
+</div>
+```
+
+## 七、导航
+
+- 水平导航
+
+```html
+<div class="container" style="margin-top: 10px">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#">News</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">About</a></li>
+    </ul>
+</div>
+
+<div class="container" style="margin-top: 10px">
+    <ul class="nav nav-tabs nav-pills">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#">News</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">About</a></li>
+    </ul>
+</div>
+```
+
+- 垂直导航
+
+```html
+<div class="container" style="margin-top: 10px">
+    <div class="row">
+        <div class="col-sm-2">
+            <ul class="nav nav-stacked nav-pills">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">News</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-7 bg-danger">
+            这是中间区域<br>
+            这是中间区域
+        </div>
+        <div class="col-sm-3 bg-warning">
+            这是右边区域<br>
+            这是右边区域
+        </div>
+    </div>
+</div>
+```
+
 
 
 
