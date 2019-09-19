@@ -103,9 +103,57 @@ js->javascript脚本
 
 
 
+## 一、排版样式
 
+- Bootstrap 将全局 font-size 设置为 14px,line-height 行高设置为 1.428(即20px);p段落元素被设置等于 1/2 行高(即 10px);颜色被设置为#333333。
+- 标题元素大小
+  - h1: 36px
+  - h2: 30px
+  - h3: 24px
+  - h4: 18px
+  - h5: 14px
+  - h6: 12px
+- 为了统一，bootstrap还创建了h1到h6 class，样式与标题元素一致
+- 内联文本元素，各种加线条的文本、强调的文本
 
+```html
+<mark>达内云计算 nsd1904</mark>
+<del>达内云计算 nsd1904</del>
+<s>达内云计算 nsd1904</s>
+<ins>达内云计算 nsd1904</ins>
+<u>达内云计算 nsd1904</u>
+<small>达内云计算 nsd1904</small>
+<strong>达内云计算 nsd1904</strong>
+<em>达内云计算 nsd1904</em>
+```
 
+- 对齐方式
+
+```html
+<p class="text-center">达内云计算 nsd1904</p>
+<p class="text-left">达内云计算 nsd1904</p>
+<p class="text-right">达内云计算 nsd1904</p>
+```
+
+- 颜色
+  - danger: 危险红
+  - muted：柔和灰
+  - primary：首要蓝
+  - info：信息蓝
+  - success：成功绿
+  - warning：警告黄
+
+```html
+<p class="text-center text-primary bg-warning">达内云计算 nsd1904</p>
+<p class="text-left text-danger bg-success">达内云计算 nsd1904</p>
+<p class="text-right text-muted bg-info">达内云计算 nsd1904</p>
+```
+
+## 二、表格
+
+```html
+<table class="table table-bordered table-striped table-hover">
+```
 
 
 
