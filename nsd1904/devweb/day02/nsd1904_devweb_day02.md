@@ -83,7 +83,21 @@ a:hover {
 }
 ```
 
+## bootstrap
 
+- twitter公司推出的开源前端web框架
+- 可以简单的理解为它是一个大的样式表文件
+- 中文官方站：https://www.bootcss.com/
+- 准备环境，将nsd1903班devweb/day02/目录的static目录拷贝到工作目录
+
+```shell
+# ls static/
+css  fonts  imgs  js
+css->样式表目录
+fonts->字体
+imgs->图片
+js->javascript脚本
+```
 
 
 
