@@ -217,7 +217,23 @@ def index(request):
     return render(request, 'index.html')
 ```
 
+### 编写html模板文件
 
+```shell
+# templates/index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票首页</title>
+</head>
+<body>
+<h1>投票首页</h1>
+</body>
+</html>
+```
+
+### 测试：访问http://x.x.x.x/polls/
 
 
 
