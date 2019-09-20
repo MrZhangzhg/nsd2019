@@ -118,7 +118,27 @@ pymysql.install_as_MySQLdb()
 (nsd1904) [root@room8pc16 mysite]# python manage.py runserver 0:80
 ```
 
+### 生成数据库中的表
 
+django项目默认集成了很多应用，这些应用需要把数据写入到数据库。
+
+```shell
+(nsd1904) [root@room8pc16 mysite]# python manage.py makemigrations
+(nsd1904) [root@room8pc16 mysite]# python manage.py migrate
+出现的黄色warning忽略
+```
+
+### 创建管理员账号
+
+```shell
+(nsd1904) [root@room8pc16 mysite]# python manage.py createsuperuser
+```
+
+### 访问管理后台
+
+http://x.x.x.x/admin
+
+### 
 
 
 
