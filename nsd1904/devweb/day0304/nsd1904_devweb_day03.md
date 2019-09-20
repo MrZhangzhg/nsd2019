@@ -329,7 +329,61 @@ def result(request, question_id):
 
 ### 访问http://x.x.x.x/polls/数字/result/
 
+## Model模型
 
+### ORM：对象关系映射
+
+- Object：对象
+- Relationship：关系
+- Mapper：映射
+- django的class映射成数据库中的表
+- class中的类变量映射成表中的字段
+- class的实例映射成表中的记录
+- class必须继承于models.Model
+
+### 创建模型
+
+创建两个模型
+
+- Question: 问题、发布时间
+- Choice：选项内容、票数、问题id
+
+```shell
+# polls/models.py
+from django.db import models
+
+# Create your models here.
+class Question(models.Model):
+    question_text = models.CharField(max_length=200, unique=True)
+    pub_date = models.DateTimeField()
+
+class Choice(models.Model):
+    choice_text = models.CharField(max_length=200)
+    votes = models.IntegerField(default=0)
+    q = models.ForeignKey(Question)
+```
+
+### 生成表
+
+```shell
+(nsd1904) [root@room8pc16 mysite]# python manage.py makemigrations
+(nsd1904) [root@room8pc16 mysite]# python manage.py migrate
+```
+
+验证：
+
+```shell
+[root@room8pc16 nsd2019]# mysql -uroot -ptedu.cn
+MariaDB [(none)]> use dj1904;
+MariaDB [dj1904]> show tables;
+polls_choice   /  polls_question
+# 表名的构成：应用名_类名   全部小写字母
+MariaDB [dj1904]> desc polls_question;
+id: class中没有设置主键，django自动创建名为id的主键
+question_text和pub_date字段就是class中的类变量
+MariaDB [dj1904]> desc polls_choice;
+字段与polls_question一样。只是外键名是：类变量_id
+```
 
 
 
