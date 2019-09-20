@@ -262,8 +262,25 @@ def detail(request, question_id):
     # question_id用于接收URL传来的参数
     # 字典的key将成为detail.html模板中的变量名，value成为变量的值
     return render(request, 'detail.html', {'question_id': question_id})
-
 ```
+
+### 编写detail.html模板
+
+```shell
+# templates/detail.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票详情页</title>
+</head>
+<body>
+<h1>{{ question_id }}号问题投票详情</h1>
+</body>
+</html>
+```
+
+### 访问http://x.x.x.x/polls/数字
 
 
 
