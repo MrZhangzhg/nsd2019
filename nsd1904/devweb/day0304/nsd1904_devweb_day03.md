@@ -235,6 +235,36 @@ def index(request):
 
 ### 测试：访问http://x.x.x.x/polls/
 
+## 编写投票详情页
+
+### 编写URL
+
+```shell
+# polls/urls.py
+from django.conf.urls import url
+from . import views   # 相对导入，导入当前目录中的views模块
+
+urlpatterns = [
+    # 正则表达式^$匹配空串，它从http://x.x.x.x/polls/后面开始匹配
+    # 匹配到的URL，将调用views.index函数
+    # name='index'，是给http://x.x.x.x/polls/起的名
+    url(r'^$', views.index, name='index'),
+    # \d+匹配数字，再使用()进行分组，组内的数字将会作为detail的参数
+    url(r'^(\d+)/$', views.detail, name='detail'),
+]
+```
+
+### 编写detail函数
+
+```shell
+# polls/views.py
+def detail(request, question_id):
+    # question_id用于接收URL传来的参数
+    # 字典的key将成为detail.html模板中的变量名，value成为变量的值
+    return render(request, 'detail.html', {'question_id': question_id})
+
+```
+
 
 
 
