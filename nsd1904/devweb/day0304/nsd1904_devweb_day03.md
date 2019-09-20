@@ -138,7 +138,54 @@ django项目默认集成了很多应用，这些应用需要把数据写入到�
 
 http://x.x.x.x/admin
 
-### 
+## 管理应用
+
+- 应用就是功能模块
+- 项目由一到多个应用构成
+- 一个应用对应一个目录，可以应用到多个项目中
+
+### 创建投票应用
+
+```shell
+(nsd1904) [root@room8pc16 mysite]# python manage.py startapp polls
+```
+
+### 把应用集成到项目
+
+```shell
+# mysite/settings.py
+INSTALLED_APPS = [
+    ... ...
+    'polls',
+]
+```
+
+### 投票应用说明
+
+```shell
+http://127.0.0.1:8000/polls/：显示所有的投票问题
+http://127.0.0.1:8000/polls/1/：显示1号问题详情
+http://127.0.0.1:8000/polls/1/result/：显示1号问题的投票结果
+```
+
+### 授权：将应用的url交给应用处理
+
+```shell
+# mysite/urls.py
+from django.conf.urls import url, include
+from django.contrib import admin
+
+urlpatterns = [
+    url(r'^admin/', admin.site.urls),
+    url(r'^polls/', include('polls.urls')),
+]
+
+# vim polls/urls.py
+from django.conf.urls import url
+
+urlpatterns = [
+]
+```
 
 
 
