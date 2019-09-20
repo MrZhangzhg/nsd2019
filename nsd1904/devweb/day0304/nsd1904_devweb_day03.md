@@ -385,13 +385,57 @@ MariaDB [dj1904]> desc polls_choice;
 字段与polls_question一样。只是外键名是：类变量_id
 ```
 
+### 修改模型，将q改为questoin
 
+```shell
+# polls/models.py
+class Choice(models.Model):
+    choice_text = models.CharField(max_length=200)
+    votes = models.IntegerField(default=0)
+    question = models.ForeignKey(Question)
+    
+(nsd1904) [root@room8pc16 mysite]# python manage.py makemigrations
+(nsd1904) [root@room8pc16 mysite]# python manage.py migrate
+MariaDB [dj1904]> desc polls_choice;  # q_id变为question_id
+```
 
+### 把模型注册到管理后台
 
+```shell
+# polls/admin.py
+from django.contrib import admin
+from .models import Question, Choice  # 在当前目录的models中导入模型
 
+# Register your models here.
+admin.site.register(Question)
+admin.site.register(Choice)
+```
 
+访问http://x.x.x.x/admin/可以看到注册进来的模型
 
+### 修改模型
 
+在管理后台添加问题和选项后，看到的问题显示为Question object。将其改为问题内容
 
+```shell
+# polls/models.py
+from django.db import models
 
+# Create your models here.
+class Question(models.Model):
+    question_text = models.CharField(max_length=200, unique=True)
+    pub_date = models.DateTimeField()
+    
+    def __str__(self):
+        return "问题: %s" % self.question_text
 
+class Choice(models.Model):
+    choice_text = models.CharField(max_length=200)
+    votes = models.IntegerField(default=0)
+    question = models.ForeignKey(Question)
+    
+    def __str__(self):
+        return "%s=>%s" % (self.question, self.choice_text)
+
+# 注意，因为只是改变了实例的显示方式，并不涉及数据库的改动，所以不用执行数据库迁移命令了。
+```
