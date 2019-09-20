@@ -282,7 +282,52 @@ def detail(request, question_id):
 
 ### 访问http://x.x.x.x/polls/数字
 
+## 编写投票结果页
 
+### 编写URL
+
+```shell
+# polls/urls.py
+from django.conf.urls import url
+from . import views   # 相对导入，导入当前目录中的views模块
+
+urlpatterns = [
+    # 正则表达式^$匹配空串，它从http://x.x.x.x/polls/后面开始匹配
+    # 匹配到的URL，将调用views.index函数
+    # name='index'，是给http://x.x.x.x/polls/起的名
+    url(r'^$', views.index, name='index'),
+    # \d+匹配数字，再使用()进行分组，组内的数字将会作为detail的参数
+    url(r'^(\d+)/$', views.detail, name='detail'),
+    url(r'^(\d+)/result/$', views.result, name='result'),
+]
+
+```
+
+### 编写result函数
+
+```shell
+# polls/views.py
+def result(request, question_id):
+    return render(request, 'result.html', {'question_id': question_id})
+```
+
+### 编写result.html模板
+
+```shell
+# templates/result.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票结果页</title>
+</head>
+<body>
+<h1>{{ question_id }}号问题投票结果</h1>
+</body>
+</html>
+```
+
+### 访问http://x.x.x.x/polls/数字/result/
 
 
 

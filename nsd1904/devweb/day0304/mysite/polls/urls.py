@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     # \d+匹配数字，再使用()进行分组，组内的数字将会作为detail的参数
     url(r'^(\d+)/$', views.detail, name='detail'),
+    url(r'^(\d+)/result/$', views.result, name='result'),
 ]
