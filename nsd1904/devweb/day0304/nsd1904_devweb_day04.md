@@ -286,7 +286,36 @@ def detail(request, question_id):
 {% endblock %}
 ```
 
+## 完成投票功能
 
+- 投标功能，是把某一投票项的votes字段值加1
+- 实现投票功能，需要调用函数
+- 调用函数是通过访问url来实现的
+
+```shell
+# polls/urls.py
+    url(r'^(\d+)/vote/$', views.vote, name='vote'),
+
+# polls/views.py
+from django.shortcuts import render, redirect
+def vote(request, question_id):
+    # 取出问题
+    question = Question.objects.get(id=question_id)
+    # 通过用户提交的表单，取出用户选择项目的id
+    print(dir(request))   # 在终端上打印request所有属性
+    choice_id = request.POST.get('choice_id')
+    # 通过问题的choice_set管理器取出选项实例
+    choice = question.choice_set.get(id=choice_id)
+    # 修改选项的票数
+    choice.votes += 1
+    choice.save()
+    # 重定向到结果页
+    return redirect('result', question.id)
+
+# 修改detail.html中form表单的action
+        <form action="{% url 'vote' question.id %}" method="post">
+# 投票测试
+```
 
 
 
