@@ -62,6 +62,20 @@ True
 >>> Question.objects.filter(question_text__contains="工资")  # 包含
 >>> Question.objects.filter(question_text__endswith='？')
 
+# 排序
+>>> Question.objects.order_by('pub_date')   # 默认升序排列
+>>> Question.objects.order_by('-pub_date')   # 降序排列
+>>> Question.objects.filter(pub_date__month=9).order_by('-pub_date')
+
+# 修改，实际上就是把实例变量重新赋值
+>>> c1 = Choice.objects.get(choice_text='jd')
+>>> c1.choice_text = "京东"
+>>> c1.save()
+
+# 删除，通过实例的delete方法实现
+>>> c2 = Choice.objects.get(choice_text="Tencent")
+>>> c2.delete()
+
 ```
 
 
