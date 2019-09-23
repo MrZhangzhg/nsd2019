@@ -48,6 +48,20 @@ True
 >>> Question.objects.filter(pub_date__month=9)
 <QuerySet [<Question: 问题: 你期待的工资是多少？>, <Question: 问题: 十一ion: 问题: 你计划哪个城市工作？>]>
 
+# 查询条件的比较也都是通过双下划线来实现的，=是简写：
+>>> Question.objects.get(id=1)  等价于
+>>> Question.objects.filter(id__exact=1)
+
+# 数字其他比较
+>>> Question.objects.filter(id__gt=1)   # >1
+>>> Question.objects.filter(id__gte=1)  # >=1
+>>> Question.objects.filter(id__lt=1)   # <1
+>>> Question.objects.filter(id__lte=1)  # <=1
+
+# 字符串相关查询
+>>> Question.objects.filter(question_text__contains="工资")  # 包含
+>>> Question.objects.filter(question_text__endswith='？')
+
 ```
 
 
