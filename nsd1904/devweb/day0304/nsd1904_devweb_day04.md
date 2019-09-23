@@ -317,6 +317,40 @@ def vote(request, question_id):
 # 投票测试
 ```
 
+## 完成投票结果页
+
+```shell
+# polls/views.py
+def result(request, question_id):
+    question = Question.objects.get(id=question_id)
+    return render(request, 'result.html', {'question': question})
+
+# templates/result.html
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}投票结果页{% endblock %}
+{% block content %}
+    <h1  class="text-center text-warning">{{ question.id }}号问题投票结果</h1>
+    <div class="h4" style="margin: 30px 0">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr class="bg-primary h3">
+                    <td colspan="2">
+                        {{ question.question_text }}
+                    </td>
+                </tr>
+            </thead>
+            {% for choice in question.choice_set.all %}
+                <tr>
+                    <td>{{ choice.choice_text }}</td>
+                    <td>{{ choice.votes }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}
+```
+
 
 
 
