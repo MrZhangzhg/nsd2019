@@ -109,8 +109,132 @@ def index(request):
 # 把day02中的static目录拷贝到polls目录
 (nsd1904) [root@room8pc16 mysite]# cp -r ../../day02/static polls/
 # 修改index.html
+<body>
+<div class="container">
+    <div id="linux-carousel" class="carousel slide">
+        <ol class="carousel-indicators">
+            <li class="active" data-target="#linux-carousel" data-slide-to="0"></li>
+            <li data-target="#linux-carousel" data-slide-to="1"></li>
+            <li data-target="#linux-carousel" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="item active">
+                <a href="http://www.sogou.com" target="_blank">
+                    <img src="{% static 'imgs/first.jpg' %}">
+                </a>
+            </div>
+            <div class="item">
+                <img src="{% static 'imgs/second.jpg' %}">
+            </div>
+            <div class="item">
+                <img src="{% static 'imgs/third.jpg' %}">
+            </div>
+        </div>
+        <a href="#linux-carousel" data-slide="prev" class="carousel-control left">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a href="#linux-carousel" data-slide="next" class="carousel-control right">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+    </div>
+
+    <h1 class="text-center text-warning">投票首页</h1>
+    <div class="h4" style="margin: 30px 0">
+        {% for question in questions %}
+        <div>
+            {{ forloop.counter }}.
+            <a href="{% url 'detail' question.id %}" target="_blank">
+                {{ question.question_text }}
+            </a>
+            {{ question.pub_date }}
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="h4 text-center">
+        达内云计算学院 <a href="#">nsd1904</a>
+    </div>
+</div>
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script type="text/javascript">
+    $('#linux-carousel').carousel({
+        interval : 3000
+    });
+</script>
+</body>
+```
+
+## 使用模板扩展
+
+- 为了方便地实现统一的界面风格，可以使用模板扩展
+- 把各个页面相同的内容放到基础模板中
+- 制作个性化页面的时候，扩展于基础模板
+
+```shell
+# 拷贝index.html，改名为base.html
+# 在base.html中，把个性化内容删除，使用block占位
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body>
+<div class="container">
+    <div id="linux-carousel" class="carousel slide">
+        <ol class="carousel-indicators">
+            <li class="active" data-target="#linux-carousel" data-slide-to="0"></li>
+            <li data-target="#linux-carousel" data-slide-to="1"></li>
+            <li data-target="#linux-carousel" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="item active">
+                <a href="http://www.sogou.com" target="_blank">
+                    <img src="{% static 'imgs/first.jpg' %}">
+                </a>
+            </div>
+            <div class="item">
+                <img src="{% static 'imgs/second.jpg' %}">
+            </div>
+            <div class="item">
+                <img src="{% static 'imgs/third.jpg' %}">
+            </div>
+        </div>
+        <a href="#linux-carousel" data-slide="prev" class="carousel-control left">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a href="#linux-carousel" data-slide="next" class="carousel-control right">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+    </div>
+
+    {% block content %}{% endblock %}
+
+    <div class="h4 text-center">
+        达内云计算学院 <a href="#">nsd1904</a>
+    </div>
+</div>
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script type="text/javascript">
+    $('#linux-carousel').carousel({
+        interval : 3000
+    });
+</script>
+</body>
+</html>
+
+# 修改index.html，把共性内容删除，个性内容放到block中
 
 ```
+
+
 
 
 
