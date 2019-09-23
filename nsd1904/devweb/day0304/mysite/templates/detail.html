@@ -2,10 +2,22 @@
 {% load static %}
 {% block title %}投票详情页{% endblock %}
 {% block content %}
-    <h1>{{ question.id }}号问题投票详情</h1>
-    {{ question.question_text }}
-    {{ question.choice_set.all }}
-    {% for choice in question.choice_set.all %}
-        {{ choice.choice_text }}
-    {% endfor %}
+    <h1  class="text-center text-warning">{{ question.id }}号问题投票详情</h1>
+    <h2>{{ question.question_text }}</h2>
+    <div class="h4" style="margin: 30px 0">
+        <form action="" method="post">
+            {% csrf_token %}
+            {% for choice in question.choice_set.all %}
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="choice_id" value="{{ choice.id }}">
+                        {{ choice.choice_text }}
+                    </label>
+                </div>
+            {% endfor %}
+            <div class="form-group">
+                <input class="btn btn-primary" type="submit" value="提 交">
+            </div>
+        </form>
+    </div>
 {% endblock %}

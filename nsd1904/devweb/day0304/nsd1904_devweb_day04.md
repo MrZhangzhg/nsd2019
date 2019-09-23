@@ -231,8 +231,64 @@ def index(request):
 </html>
 
 # 修改index.html，把共性内容删除，个性内容放到block中
-
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}投票首页{% endblock %}
+{% block content %}
+    <h1 class="text-center text-warning">投票首页</h1>
+    <div class="h4" style="margin: 30px 0">
+        {% for question in questions %}
+        <div>
+            {{ forloop.counter }}.
+            <a href="{% url 'detail' question.id %}" target="_blank">
+                {{ question.question_text }}
+            </a>
+            {{ question.pub_date }}
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
 ```
+
+## 完成投票详情页
+
+```shell
+# polls/views.py
+def detail(request, question_id):
+    question = Question.objects.get(id=question_id)
+    return render(request, 'detail.html', {'question': question})
+    
+# 修改模板文件templates/detail.html
+# 说明，{% csrf_token %}是django防止跨站攻击所必须的，没有此项，提交时将会出现403错误
+# form表单的method设置为post，默认是get
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}投票详情页{% endblock %}
+{% block content %}
+    <h1  class="text-center text-warning">{{ question.id }}号问题投票详情</h1>
+    <h2>{{ question.question_text }}</h2>
+    <div class="h4" style="margin: 30px 0">
+        <form action="" method="post">
+            {% csrf_token %}
+            {% for choice in question.choice_set.all %}
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="choice_id" value="{{ choice.id }}">
+                        {{ choice.choice_text }}
+                    </label>
+                </div>
+            {% endfor %}
+            <div class="form-group">
+                <input class="btn btn-primary" type="submit" value="提 交">
+            </div>
+        </form>
+    </div>
+{% endblock %}
+```
+
+
+
+
 
 
 
