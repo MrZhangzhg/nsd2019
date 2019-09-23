@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>投票详情页</title>
-</head>
-<body>
-<h1>{{ question_id }}号问题投票详情</h1>
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}投票详情页{% endblock %}
+{% block content %}
+    <h1>{{ question.id }}号问题投票详情</h1>
+    {{ question.question_text }}
+    {{ question.choice_set.all }}
+    {% for choice in question.choice_set.all %}
+        {{ choice.choice_text }}
+    {% endfor %}
+{% endblock %}
