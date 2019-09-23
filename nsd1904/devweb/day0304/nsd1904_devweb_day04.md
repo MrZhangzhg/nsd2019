@@ -23,6 +23,31 @@
 # 问题和选项存在一对多的关系，一个问题可以有很多选项。每个问题的实例都有一个名为choice_set的管理器，通过它，可以创建选项。如果选项模型名为XuanXiang，那么问题的管理器就叫xuanxiang_set
 >>> c3 = q2.choice_set.create(choice_text="jd")
 
+# 查询：get必须只返回一个结果
+>>> q1 = Question.objects.get(id=1)
+>>> q1
+<Question: 问题: 你期待的工资是多少？>
+
+# 查询：all返回所有实例构成的实例列表
+>>> Question.objects.all()
+
+# 查询：filter返回0到多个实例构成的列表
+>>> Question.objects.filter(id=10)
+<QuerySet []>
+
+# get和filter都采用相同的条件，只是返回值不一样。条件的书写方式使用双下划线来表示属性或方法，而不是句点
+>>> s1 = 'Hello World'
+>>> s1.startswith('He')
+True
+>>> Question.objects.filter(question_text__startswith="你")
+
+>>> from datetime import datetime
+>>> t = datetime.now()
+>>> t.month
+9
+>>> Question.objects.filter(pub_date__month=9)
+<QuerySet [<Question: 问题: 你期待的工资是多少？>, <Question: 问题: 十一ion: 问题: 你计划哪个城市工作？>]>
+
 ```
 
 
