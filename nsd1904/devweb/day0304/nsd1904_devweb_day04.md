@@ -103,6 +103,15 @@ def index(request):
 </body>
 ```
 
+## 引入bootstrap
+
+```shell
+# 把day02中的static目录拷贝到polls目录
+(nsd1904) [root@room8pc16 mysite]# cp -r ../../day02/static polls/
+# 修改index.html
+
+```
+
 
 
 
