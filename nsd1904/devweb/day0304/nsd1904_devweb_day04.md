@@ -75,7 +75,32 @@ True
 # 删除，通过实例的delete方法实现
 >>> c2 = Choice.objects.get(choice_text="Tencent")
 >>> c2.delete()
+```
 
+## 修改投票首页
+
+```shell
+# polls/views.py
+from .models import Question
+def index(request):
+    questions = Question.objects.order_by('-pub_date')
+    return render(request, 'index.html', {'questions': questions})
+
+# templates/index.html
+# {{ forloop.counter }}是循环内部变量，记录的是第几次循环
+# {% url %}是模板语法，表示url的名称，detail接收一个参数，所以要把question.id传过去
+<body>
+<h1>投票首页</h1>
+{% for question in questions %}
+<div>
+    {{ forloop.counter }}.
+    <a href="{% url 'detail' question.id %}" target="_blank">
+        {{ question.question_text }}
+    </a>
+    {{ question.pub_date }}
+</div>
+{% endfor %}
+</body>
 ```
 
 

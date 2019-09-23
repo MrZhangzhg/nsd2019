@@ -1,10 +1,12 @@
 from django.shortcuts import render
+from .models import Question
 
 # Create your views here.
 def index(request):
     # 用户的请求将会作为第一个参数传给函数，需要使用变量接收
+    questions = Question.objects.order_by('-pub_date')
     # render将会找到模板文件，发送给用户
-    return render(request, 'index.html')
+    return render(request, 'index.html', {'questions': questions})
 
 def detail(request, question_id):
     # question_id用于接收URL传来的参数
