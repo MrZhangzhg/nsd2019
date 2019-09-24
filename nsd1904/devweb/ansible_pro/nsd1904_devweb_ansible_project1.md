@@ -165,3 +165,79 @@ Ansible Webadmin
 {% endblock %}
 ```
 
+## 编写webadmin应用
+
+1. 编写模型Model
+
+```shell
+# webadmin/models.py
+from django.db import models
+
+class HostGroup(models.Model):
+    groupname = models.CharField(max_length=50, unique=True)
+    
+    def __str__(self):
+        return self.groupname
+
+class Host(models.Model):
+    hostname = models.CharField(max_length=50)
+    ipaddr = models.CharField(max_length=15)
+    group = models.ForeignKey(HostGroup)
+    
+    def __str__(self):
+        return "%s=>%s: %s" % (self.group, self.hostname, self.ipaddr)
+
+class Module(models.Model):
+    modulename = models.CharField(max_length=50, unique=True)
+    
+    def __str__(self):
+        return self.modulename
+
+class Argument(models.Model):
+    arg_text = models.CharField(max_length=200)
+    module = models.ForeignKey(Module)
+    
+    def __str__(self):
+        return "%s=>%s" % (self.module, self.arg_text)
+```
+
+2. 生成表
+
+```shell
+(nsd1904) [root@room8pc16 myansible]# python manage.py makemigrations
+(nsd1904) [root@room8pc16 myansible]# python manage.py migrate
+```
+
+3. 查看表结构
+
+```shell
+# sqlite数据库是文件型数据库，一个文件就是一个库
+(nsd1904) [root@room8pc16 myansible]# sqlite3 db.sqlite3 
+sqlite> .help    # 查看帮助
+sqlite> .tables   # 相当于show tables
+sqlite> .schema webadmin_host   # 相当于desc webadmin_host
+sqlite> SELECT * from auth_user;   # sql语句
+```
+
+4. 创建管理员
+
+```shell
+(nsd1904) [root@room8pc16 myansible]# python manage.py createsuperuser
+```
+
+5. 将模型注册到后台
+
+```shell
+# webadmin/admin.py
+from django.contrib import admin
+from .models import HostGroup, Host, Module, Argument
+
+# Register your models here.
+for item in [HostGroup, Host, Module, Argument]:
+    admin.site.register(item)
+```
+
+6. 登陆后台，添加主机、组。http://127.0.0.1/admin/
+
+
+
