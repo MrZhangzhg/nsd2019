@@ -413,7 +413,11 @@ def add_hosts(request):
 
 5. 测试
 
+6. 修改模板文件
 
+```shell
+
+```
 
 
 

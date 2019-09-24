@@ -2,5 +2,35 @@
 {% load static %}
 {% block title %}添加主机{% endblock %}
 {% block content %}
-{{ groups }}
+    <div class="row h4">
+        <div class="col-sm-12">
+            <form action="" class="form-inline" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label>主机组：</label>
+                    <input class="form-control" type="text" name="group">
+                </div>
+                <div class="form-group">
+                    <label>主机：</label>
+                    <input class="form-control" type="text" name="host">
+                </div>
+                <div class="form-group">
+                    <label>IP地址：</label>
+                    <input class="form-control" type="text" name="ip">
+                </div>
+                <div class="form-group">
+                    <input class="btn btn-primary" type="submit" value="提 交">
+                </div>
+            </form>
+        </div>
+    </div>
+    <hr>
+    <table class="table table-bordered table-hover table-striped h4">
+        <thead>
+            <tr class="bg-primary text-center">
+                <td>主机组</td>
+                <td>主机</td>
+            </tr>
+        </thead>
+    </table>
 {% endblock %}
