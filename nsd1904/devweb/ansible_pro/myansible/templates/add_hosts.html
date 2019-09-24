@@ -32,5 +32,19 @@
                 <td>主机</td>
             </tr>
         </thead>
+        {% for group in groups %}
+            <tr>
+                <td>{{ group }}</td>
+                <td>
+                    <ul class="list-unstyled">
+                        {% for host in group.host_set.all %}
+                            <li>
+                                {{ host.hostname }}:{{ host.ipaddr }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
     </table>
 {% endblock %}
