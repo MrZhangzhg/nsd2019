@@ -368,3 +368,54 @@ def index(request):
 
 4. 在首页上点击“主机信息”进行测试
 
+### 实现添加主机页面
+
+1. url
+
+```shell
+# webadmin/urls.py
+	url(r'^addhosts/$', views.add_hosts, name='add_hosts'),
+```
+
+2. 视图函数
+
+```shell
+# webadmin/views.py
+from django.shortcuts import render
+from .models import HostGroup
+
+# Create your views here.
+def index(request):
+    return render(request, 'polls_index.html')
+
+def add_hosts(request):
+    groups = HostGroup.objects.all()
+    return render(request, 'add_hosts.html', {'groups': groups})
+```
+
+3. 模板文件
+
+```shell
+# templates/add_hosts.html
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}添加主机{% endblock %}
+{% block content %}
+{{ groups }}
+{% endblock %}
+```
+
+4. 修改templates/index.html中“添加主机”的超链接
+
+```shell
+        <a href="{% url 'add_hosts' %}" target="_blank">
+```
+
+5. 测试
+
+
+
+
+
+
+
