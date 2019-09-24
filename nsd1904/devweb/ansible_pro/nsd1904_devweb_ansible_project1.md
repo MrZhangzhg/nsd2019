@@ -316,17 +316,55 @@ if __name__ == '__main__':
 # ansible all --list-hosts
 ```
 
+4. 远程主机需要配置免密登陆
 
+5. 收集远程主机信息
 
+```shell
+[root@room8pc16 ansi_cfg]# ansible all -m setup --tree /tmp/out
+```
 
+6. 生成网页文件
 
+```shell
+(nsd1904) [root@room8pc16 ansi_cfg]# ansible-cmdb /tmp/out/ > ../templates/polls_index.html
+```
 
+### 实现webadmin首页，即主机信息页
 
+1. url
 
+```shell
+# webadmin/urls.py
+from django.conf.urls import url
+from . import views
 
+urlpatterns = [
+    url(r'', views.index, name='polls_index'),
+]
+```
 
+2. 视图函数
 
+```shell
+# webadmin/views.py
+from django.shortcuts import render
 
+# Create your views here.
+def index(request):
+    return render(request, 'polls_index.html')
+```
 
+3. 修改templates/index.html中“主机信息”的链接
 
+```shell
+<div class="col-sm-3">
+    <a href="{% url 'polls_index' %}" target="_blank">
+        <img src="{% static 'imgs/linux.jpg' %}" width="150px"><br>
+        主机信息
+    </a>
+</div>
+```
+
+4. 在首页上点击“主机信息”进行测试
 
