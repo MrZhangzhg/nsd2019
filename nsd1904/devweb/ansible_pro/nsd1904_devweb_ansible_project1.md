@@ -127,5 +127,41 @@ Ansible Webadmin
 </html>
 ```
 
+5. 实现模板继承
 
+```shell
+# 拷贝前一个项目的base.html到templates目录
+# 修改templates/index.html
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Ansible Webadmin{% endblock %}
+{% block content %}
+<div class="row text-center h4" style="margin-bottom: 50px">
+    <div class="col-sm-3">
+        <a href="#">
+            <img src="{% static 'imgs/linux.jpg' %}" width="150px"><br>
+            主机信息
+        </a>
+    </div>
+    <div class="col-sm-3">
+        <a href="#">
+            <img src="{% static 'imgs/linux.jpg' %}" width="150px"><br>
+            添加主机
+        </a>
+    </div>
+    <div class="col-sm-3">
+        <a href="#">
+            <img src="{% static 'imgs/linux.jpg' %}" width="150px"><br>
+            添加模块
+        </a>
+    </div>
+    <div class="col-sm-3">
+        <a href="#">
+            <img src="{% static 'imgs/linux.jpg' %}" width="150px"><br>
+            执行任务
+        </a>
+    </div>
+</div>
+{% endblock %}
+```
 
