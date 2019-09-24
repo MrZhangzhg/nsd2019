@@ -273,10 +273,10 @@ remote_user = root
 # chmod +x dhosts.py
 # vim dhosts.py
 #!/root/nsd1904/bin/python
-#!/root/nsd1904/bin/python
 from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+import json
 
 engin = create_engine(
     'sqlite:////var/ftp/nsd2019/nsd1904/devweb/ansible_pro/myansible/db.sqlite3',
@@ -299,12 +299,22 @@ class Host(Base):
 
 if __name__ == '__main__':
     session = Session()
+    result = {}
     qset = session.query(HostGroup.groupname, Host.ipaddr).join(Host)
-    print(qset.all())
-
+    # print(qset.all())
+    for group, ip in qset:
+        if group not in result:
+            result[group] = {}  # {'dbservers': {}}
+            result[group]['hosts'] = []  # {'dbservers': {'hosts': []}}
+        result[group]['hosts'].append(ip)
+    print(json.dumps(result))   # 输出要求是json格式，而不是字典
 ```
 
+3. 测试
 
+```shell
+# ansible all --list-hosts
+```
 
 
 
