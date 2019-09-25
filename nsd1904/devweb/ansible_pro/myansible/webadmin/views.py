@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import HostGroup, Module, Host
+from .adhoc2 import adhoc
 
 # Create your views here.
 def index(request):
@@ -32,11 +33,23 @@ def add_modules(request):
     return render(request, 'add_modules.html', {'modules': modules})
 
 def tasks(request):
+    if request.method == 'POST':
+        ip = request.POST.get('ip')
+        group = request.POST.get('group')
+        module = request.POST.get('mod')
+        args = request.POST.get('args')
+        if ip:  # 如果ip非空，执行目标设定为主机
+            dest = ip
+        elif group:  # 如果ip为空，group不为空，执行目标设定为组
+            dest = group
+        else:
+            dest = None
+
+        if dest:  # 如果执行目标非空，才执行任务
+            adhoc(sources=['ansi_cfg/dhosts.py'], hosts=dest, module=module, args=args)
+
     groups = HostGroup.objects.all()
     hosts = Host.objects.all()
     modules = Module.objects.all()
     context = {'hosts': hosts, 'groups': groups, 'modules': modules}
     return render(request, 'tasks.html', context)
-
-
-

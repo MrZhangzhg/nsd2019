@@ -199,5 +199,44 @@ def tasks(request):
 {% endblock %}
 ```
 
+6. 完善tasks函数，使之可以执行任务
+
+```shell
+# 将ansible课程部分的adhoc2.py拷贝到webadmin目录
+# cp ../../../devops/day03/adhoc2.py webadmin/
+# webadmin/tasks.py
+from .adhoc2 import adhoc
+
+def tasks(request):
+    if request.method == 'POST':
+        ip = request.POST.get('ip')
+        group = request.POST.get('group')
+        module = request.POST.get('mod')
+        args = request.POST.get('args')
+        if ip:  # 如果ip非空，执行目标设定为主机
+            dest = ip
+        elif group:  # 如果ip为空，group不为空，执行目标设定为组
+            dest = group
+        else:
+            dest = None
+
+        if dest:  # 如果执行目标非空，才执行任务
+            adhoc(sources=['ansi_cfg/dhosts.py'], hosts=dest, module=module, args=args)
+
+    groups = HostGroup.objects.all()
+    hosts = Host.objects.all()
+    modules = Module.objects.all()
+    context = {'hosts': hosts, 'groups': groups, 'modules': modules}
+    return render(request, 'tasks.html', context)
+```
+
+
+
+
+
+
+
+
+
 
 
