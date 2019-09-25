@@ -126,7 +126,78 @@ def tasks(request):
         <a href="{% url 'tasks' %}" target="_blank">
 ```
 
+5. 完善模板
 
+```shell
+# templates/tasks.html
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}执行任务{% endblock %}
+{% block content %}
+    <ul class="nav nav-tabs h4">
+        <li class="active"><a href="#server" data-toggle="tab">主机</a></li>
+        <li><a href="#server-group" data-toggle="tab">主机组</a></li>
+    </ul>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="tab-content" style="margin-top: 10px">
+            <div class="tab-pane active fade in form-group" id="server">
+                <select class="form-control" name="ip">
+                    <option value="">无</option>
+                    {% for host in hosts %}
+                        <option value="{{ host.ipaddr }}">{{ host.hostname }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="tab-pane fade form-group" id="server-group">
+                <select class="form-control" name="group">
+                    <option value="">无</option>
+                    {% for group in groups %}
+                        <option value="{{ group.groupname }}">{{ group.groupname }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <table class="table table-bordered table-hover table-striped h4">
+            <thead>
+                <tr class="bg-primary text-center">
+                    <td>模块</td>
+                    <td>参数</td>
+                </tr>
+            </thead>
+            {% for module in modules %}
+                <tr>
+                    <td>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="mod" value="{{ module.modulename }}">
+                                {{ module.modulename }}
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <ul class="list-unstyled">
+                            {% for param in module.argument_set.all %}
+                                <li>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="args" value="{{ param.arg_text }}">
+                                            {{ param.arg_text }}
+                                        </label>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        <div class="form-group text-center">
+            <input class="btn btn-primary" type="submit" value="执 行">
+        </div>
+    </form>
+{% endblock %}
+```
 
 
 

@@ -26,8 +26,42 @@
                 </select>
             </div>
         </div>
-        <table>
-            
+        <table class="table table-bordered table-hover table-striped h4">
+            <thead>
+                <tr class="bg-primary text-center">
+                    <td>模块</td>
+                    <td>参数</td>
+                </tr>
+            </thead>
+            {% for module in modules %}
+                <tr>
+                    <td>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="mod" value="{{ module.modulename }}">
+                                {{ module.modulename }}
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <ul class="list-unstyled">
+                            {% for param in module.argument_set.all %}
+                                <li>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="args" value="{{ param.arg_text }}">
+                                            {{ param.arg_text }}
+                                        </label>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
         </table>
+        <div class="form-group text-center">
+            <input class="btn btn-primary" type="submit" value="执 行">
+        </div>
     </form>
 {% endblock %}
