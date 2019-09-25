@@ -6,11 +6,28 @@
         <li class="active"><a href="#server" data-toggle="tab">主机</a></li>
         <li><a href="#server-group" data-toggle="tab">主机组</a></li>
     </ul>
-    <div class="tab-content">
-        <div class="tab-pane active fade in" id="server">这是主机div</div>
-        <div class="tab-pane fade" id="server-group">这是主机组div</div>
-    </div>
-    {{ groups }}
-    {{ hosts }}
-    {{ modules }}
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="tab-content" style="margin-top: 10px">
+            <div class="tab-pane active fade in form-group" id="server">
+                <select class="form-control" name="ip">
+                    <option value="">无</option>
+                    {% for host in hosts %}
+                        <option value="{{ host.ipaddr }}">{{ host.hostname }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="tab-pane fade form-group" id="server-group">
+                <select class="form-control" name="group">
+                    <option value="">无</option>
+                    {% for group in groups %}
+                        <option value="{{ group.groupname }}">{{ group.groupname }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <table>
+            
+        </table>
+    </form>
 {% endblock %}
