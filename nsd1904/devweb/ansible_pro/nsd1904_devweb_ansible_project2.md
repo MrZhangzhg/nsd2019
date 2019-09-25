@@ -6,7 +6,7 @@
 
 ```shell
 # webadmin/urls.py
-    url(r'addmodules/$', views.add_modules, name='add_modules'),
+    url(r'^addmodules/$', views.add_modules, name='add_modules'),
 ```
 
 2. 视图函数
@@ -84,3 +84,49 @@ def add_modules(request):
 ```
 
 5. 测试
+
+## 编写“执行任务”页面
+
+1. url
+
+```shell
+# webadmin/urls.py
+    url(r'^tasks/$', views.tasks, name='tasks'),
+```
+
+2. 视图函数
+
+```shell
+# webadmin/views.py
+def tasks(request):
+    groups = HostGroup.objects.all()
+    hosts = Host.objects.all()
+    modules = Module.objects.all()
+    context = {'hosts': hosts, 'groups': groups, 'modules': modules}
+    return render(request, 'tasks.html', context)
+```
+
+3. 模板
+
+```shell
+# templates/tasks.html
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}执行任务{% endblock %}
+{% block content %}
+    {{ groups }}
+    {{ hosts }}
+    {{ modules }}
+{% endblock %}
+```
+
+4. 修改templates/index.html中“执行任务”的超链接
+
+```shell
+        <a href="{% url 'tasks' %}" target="_blank">
+```
+
+
+
+
+
