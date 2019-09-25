@@ -230,6 +230,88 @@ def tasks(request):
     return render(request, 'tasks.html', context)
 ```
 
+## 添加删除参数功能
+
+1. 在“添加模块”的页面中，在参数后面加上del超链接
+2. 点击超链接，就会访问一个url
+3. url与函数相关联
+4. 调用函数，作用是删除参数
+5. 函数最后重定向到当前URL
+
+```shell
+# webadmin/urls.py
+    url(r'^del_arg/(\d+)/$', views.del_arg, name='del_arg'),
+
+# templates/add_modulues.html，在参数后面加上del的超链接
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}添加模块{% endblock %}
+{% block content %}
+    <div class="row h4">
+        <div class="col-sm-12">
+            <form action="" class="form-inline" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label>模块：</label>
+                    <input class="form-control" type="text" name="mod">
+                </div>
+                <div class="form-group">
+                    <label>参数：</label>
+                    <input class="form-control" type="text" name="param">
+                </div>
+                <div class="form-group">
+                    <input class="btn btn-primary" type="submit" value="提 交">
+                </div>
+            </form>
+        </div>
+    </div>
+    <hr>
+    <table class="table table-bordered table-hover table-striped h4">
+        <thead>
+            <tr class="bg-primary text-center">
+                <td>模块</td>
+                <td>参数</td>
+            </tr>
+        </thead>
+        {% for module in modules %}
+            <tr>
+                <td>{{ module.modulename }}</td>
+                <td>
+                    <ul class="list-unstyled">
+                        {% for arg in module.argument_set.all %}
+                            <li>
+                                <div class="col-sm-9">
+                                    {{ arg.arg_text }}
+                                </div>
+                                <div class="col-sm-3">
+                                    <a href="{% url 'del_arg' arg.id %}">
+                                        del
+                                    </a>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
+
+
+# webadmin/views.py
+from django.shortcuts import render, redirect
+from .models import HostGroup, Module, Host, Argument
+
+def del_arg(request, arg_id):
+    argument = Argument.objects.get(id=arg_id)
+    argument.delete()
+    return redirect('add_modules')
+```
+
+
+
+
+
 
 
 
