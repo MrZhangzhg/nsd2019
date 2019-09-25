@@ -13,9 +13,17 @@
 
 ```shell
 # webadmin/views.py
-def add_modules(requests):
+def add_modules(request):
+    if request.method == 'POST':
+        mod_name = request.POST.get('mod').strip()
+        arg = request.POST.get('param').strip()
+        if mod_name:
+            module = Module.objects.get_or_create(modulename=mod_name)[0]
+            if arg:
+                module.argument_set.get_or_create(arg_text=arg)
+
     modules = Module.objects.all()
-    return render(requests, 'add_modules.html', {'modules': modules})
+    return render(request, 'add_modules.html', {'modules': modules})
 ```
 
 3. 模板
