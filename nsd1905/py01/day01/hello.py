@@ -13,7 +13,8 @@
 # print('Hao', 123, sep='---')   # 指定输出各项之间，用---分隔
 # print('Hello' + 'World')  # 字符串拼接，使用+
 
-uname = input('username: ')
-print(uname)
+# uname = input('username: ')
+# print(uname)
 
-
+a = 10
+print(a)
