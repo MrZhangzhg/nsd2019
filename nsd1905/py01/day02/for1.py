@@ -3,17 +3,25 @@ alist = [10, 20, 30]
 atuple = ('bob', 'alice')
 adict = {'name': 'tom', 'age': 22}
 
-for ch in s1:
-    print(ch)
+# for ch in s1:
+#     print(ch)
+#
+# for i in alist:
+#     print(i)
+#
+# for name in atuple:
+#     print(name)
+#
+# for key in adict:
+#     print(key, adict[key])
 
-for i in alist:
-    print(i)
+result = 0
+for i in range(1, 10000001):
+    result += i
+print(result)
 
-for name in atuple:
-    print(name)
 
-for key in adict:
-    print(key, adict[key])
+
 
 
 
