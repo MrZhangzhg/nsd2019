@@ -18,3 +18,4 @@ elif [player, computer] in win_list:
     print('\033[31;44;1mYou WIN!!!\033[0m')
 else:
     print('\033[31;43;1mYou LOSE!!!\033[0m')
+ 
