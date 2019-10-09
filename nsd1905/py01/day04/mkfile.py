@@ -25,8 +25,11 @@ def get_content():
 
 def wfile(fname, content):
     '将内容content写入文件fname'
+    with open(fname, 'w') as fobj:
+        fobj.writelines(content)
 
 if __name__ == '__main__':
     fname = get_fname()
     content = get_content()
+    content = ['%s\n' % line for line in content]
     wfile(fname, content)
