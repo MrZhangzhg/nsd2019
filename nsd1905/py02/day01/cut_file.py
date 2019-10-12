@@ -21,4 +21,3 @@ with open('mylog.txt') as fobj:
             break
         if t > t9:
             print(line, end='')
-        
