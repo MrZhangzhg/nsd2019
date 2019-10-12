@@ -15,4 +15,3 @@ if __name__ == '__main__':
         print('错误:', e)
 
     set_info2('牛老师', 200)
-
