@@ -24,12 +24,23 @@ def exam():
         result = nums[0] - nums[1]
 
     # 用户答题
-    prompt = '%s %s %s = ' % (nums[0], op, nums[1])
-    answer = int(input(prompt))
-    if answer == result:
-        print('太棒了！！！')
-    else:
+    counter = 0
+    while counter < 3:
+        prompt = '%s %s %s = ' % (nums[0], op, nums[1])
+        try:
+            answer = int(input(prompt))
+        except:  # 不写异常，可以捕获所有异常，不推荐
+            print()
+            continue
+
+        if answer == result:
+            print('太棒了！！！')
+            break
+
         print('不对哟！')
+        counter += 1
+    else:
+        print('%s%s' % (prompt, result))
 
 def main():
     while 1:
