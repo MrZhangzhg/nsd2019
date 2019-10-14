@@ -8,24 +8,29 @@
 # if __name__ == '__main__':
 #     func1()
 
-from random import randint
+# from random import randint
+#
+# def func1(x):
+#     return True if x % 2 == 1 else False
+#
+# if __name__ == '__main__':
+#     nums = [randint(1, 100) for i in range(10)]
+#     print(nums)
+#     result = filter(func1, nums)
+#     print(list(result))
+#     result2 = filter(lambda x: True if x % 2 == 1 else False, nums)
+#     print(list(result2))
 
-def func1(x):
-    return True if x % 2 == 1 else False
+
+def func1(s):
+    return s + '.com'
 
 if __name__ == '__main__':
-    nums = [randint(1, 100) for i in range(10)]
-    print(nums)
-    result = filter(func1, nums)
+    alist = ['qq', 'sohu', '163']
+    result = map(func1, alist)
     print(list(result))
-    result2 = filter(lambda x: True if x % 2 == 1 else False, nums)
+    result2 = map(lambda s: s + '.com', alist)
     print(list(result2))
-
-
-
-
-
-
 
 
 
