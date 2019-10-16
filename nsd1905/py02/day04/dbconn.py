@@ -7,7 +7,7 @@ engine = create_engine(
     # mysql+pymysql://用户:密码@服务器/数据库?选项
     'mysql+pymysql://root:tedu.cn@127.0.0.1/tedu1905?charset=utf8',
     encoding='utf8',
-    echo=True  # 显示调试信息，生产环境下不要设置
+    # echo=True  # 显示调试信息，生产环境下不要设置
 )
 # 创建连接数据库的会话类
 Session = sessionmaker(bind=engine)
