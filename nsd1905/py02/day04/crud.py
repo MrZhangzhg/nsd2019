@@ -75,9 +75,38 @@ session = Session()
 #     print(emp.emp_name, emp.dep_id)
 #######################################
 # 查询不在1、2号部门有哪些人
-qset9 = session.query(Employees).filter(~Employees.dep_id.in_([1, 2]))
-for emp in qset9:
-    print(emp.emp_name, emp.dep_id)
+# qset9 = session.query(Employees).filter(~Employees.dep_id.in_([1, 2]))
+# for emp in qset9:
+#     print(emp.emp_name, emp.dep_id)
+#######################################
+# 多表查询。因为两张表有主外键约束关系，所以查询时，它们自动匹配
+# query中先写Employees，join时就写Departments
+# qset10 = session.query(Employees.emp_name, Departments.dep_name)\
+#     .join(Departments)
+# for data in qset10:
+#     print(data)
+#######################################
+# all返回满足条件的列表
+# first返回all中的第一个结果
+# qset11 = session.query(Departments)
+# print(qset11.all())
+# print('*' * 30)
+# print(qset11.first())
+# d1 = qset11.all()[0]
+# print(d1.dep_name)
+# d2 = qset11.first()
+# print(d2.dep_name)
+#######################################
+# 修改
+# qset12 = session.query(Departments).filter(Departments.dep_name=='人事部')
+# hr = qset12.first()
+# hr.dep_name = '人力资源部'
+#######################################
+# 删除
+qset13 = session.query(Departments).filter(Departments.dep_id==6)
+sales = qset13.first()
+session.delete(sales)
+
 
 
 # 如果对数据库有改动，需要确认
