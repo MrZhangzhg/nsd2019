@@ -41,9 +41,43 @@ session = Session()
 #     print(dep.dep_id, dep.dep_name)
 #######################################
 # 查询，查询的参数是类变量，返回的是由变量构成的元组列表
-qset2 = session.query(Employees.emp_name, Employees.email)
-print(qset2.all())
-
+# qset2 = session.query(Employees.emp_name, Employees.email)
+# print(qset2.all())
+#######################################
+# 排序
+# qset3 = session.query(Departments).order_by(Departments.dep_id)
+# for dep in qset3:
+#     print(dep.dep_id, dep.dep_name)
+#######################################
+# 取切片
+# qset4 = session.query(Departments).order_by(Departments.dep_id)[2:4]
+# for dep in qset4:
+#     print(dep.dep_id, dep.dep_name)
+#######################################
+# 过滤
+# qset5 = session.query(Departments).filter(Departments.dep_id>3)
+# for dep in qset5:
+#     print(dep.dep_id, dep.dep_name)
+# 过滤的结果，还可以继续过滤
+# qset6 = session.query(Departments).filter(Departments.dep_id>3)\
+#     .filter(Departments.dep_id<6)
+# for dep in qset6:
+#     print(dep.dep_id, dep.dep_name)
+#######################################
+# 查询tedu.cn作为结尾的邮箱
+# qset7 = session.query(Employees).filter(Employees.email.like('%tedu.cn'))
+# for emp in qset7:
+#     print(emp.emp_name, emp.email)
+#######################################
+# 查询1、2号部门有哪些人
+# qset8 = session.query(Employees).filter(Employees.dep_id.in_([1, 2]))
+# for emp in qset8:
+#     print(emp.emp_name, emp.dep_id)
+#######################################
+# 查询不在1、2号部门有哪些人
+qset9 = session.query(Employees).filter(~Employees.dep_id.in_([1, 2]))
+for emp in qset9:
+    print(emp.emp_name, emp.dep_id)
 
 
 # 如果对数据库有改动，需要确认
