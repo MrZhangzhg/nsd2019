@@ -21,3 +21,6 @@ if __name__ == '__main__':
     result2 = count_patt(fname, br)
     print(result1)
     print(result2)
+    result3 = list(result1.items())
+    result3.sort(key=lambda seq: seq[-1], reverse=True)
+    print(result3)
