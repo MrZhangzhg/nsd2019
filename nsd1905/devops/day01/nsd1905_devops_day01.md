@@ -38,6 +38,15 @@ b'<!--[if IE'
 >>> html.readlines()
 ```
 
+如果只是下载，可以使用wget模块
+
+```python
+(nsd1905) [root@room8pc16 day01]# pip install wget
+>>> import wget
+>>> wget.download('https://img03.sogoucdn.com/app/a/100520021/1457d48c913eb448c5c5cabfaf799cf3', '/tmp/ttt.jpg')
+
+```
+
 
 
 
