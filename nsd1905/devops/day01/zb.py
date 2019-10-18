@@ -12,6 +12,3 @@ else:
     print('child')
     time.sleep(10)
     print('child done')
-
-
-
