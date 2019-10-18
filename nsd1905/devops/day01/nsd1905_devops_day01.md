@@ -23,5 +23,30 @@ os.fork()的返回值是数字，这个数字在父进程中是非0值（子进�
   - 主线程仅用于生成工作线程
   - 工作线程负责具体的工作
 
+## urllib模块
+
+- 主要用于http和ftp协议
+- 它包括四个子模块：request、error、parse、robotparse
+
+```python
+>>> from urllib import request
+>>> html = request.urlopen('http://www.163.com')
+>>> html.readline()
+b' <!DOCTYPE HTML>\n'
+>>> html.read(10)
+b'<!--[if IE'
+>>> html.readlines()
+```
+
+
+
+
+
+
+
+
+
+
+
 
 
