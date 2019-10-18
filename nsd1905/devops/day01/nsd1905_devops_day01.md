@@ -61,7 +61,47 @@ b'<!--[if IE'
 >>> html.read()
 ```
 
+url编码
 
+url只允许一部分ascii字符，不允许的字符，使用时，必须先编码
+
+```python
+>>> url = 'https://www.sogou.com/web?query=国庆'
+>>> html = request.urlopen(url)   # 报错
+
+>>> url = 'https://www.sogou.com/web?query=' + request.quote('国庆')
+>>> url
+'https://www.sogou.com/web?query=%E5%9B%BD%E5%BA%86'
+>>> html = request.urlopen(url)
+```
+
+## paramiko
+
+- 实现了ssh协议
+- 可以实现ssh远程控制
+- 还可以实现sftp功能
+
+```python
+(nsd1905) [root@room8pc16 ~]# pip install zzg_pypkgs/paramiko_pkgs/*
+>>> import paramiko
+>>> ssh = paramiko.SSHClient()  # 创建实例
+# 相当于是在询问是否接受服务器主机密钥时，自动回答yes
+>>> ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+>>> ssh.connect('192.168.4.11', username='root', password='123456')
+# 执行命令的返回值，是一个元组。元组中有三项，分别是输入、输出和错误的类文件对象
+>>> stdin, stdout, stderr = ssh.exec_command('id root; id zhangsan')
+# 获取输出和错误的内容
+>>> out = stdout.read()
+>>> err = stderr.read()
+>>> out
+b'uid=0(root) gid=0(root) \xe7\xbb\x84=0(root)\n'
+>>> err
+b'id: zhangsan: no such user\n'
+>>> out.decode()
+'uid=0(root) gid=0(root) 组=0(root)\n'
+# 关闭连接
+>>> ssh.close()
+```
 
 
 
