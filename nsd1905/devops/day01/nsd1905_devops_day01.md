@@ -47,6 +47,20 @@ b'<!--[if IE'
 
 ```
 
+修改请求头
+
+```python
+# 直接访问jianshu网站
+>>> html = request.urlopen('http://www.jianshu.com')  # 报错
+# 因为jianshu的服务器有反爬虫措施，在请求头里发现客户端不是常规则的浏览器则拒绝
+# http协议的请求头通过User-Agent设置客户端浏览器
+>>> headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'}
+# 构建一个请求对象，修改头部信息
+>>> r = request.Request('http://www.jianshu.com', headers=headers)
+>>> html = request.urlopen(r)
+>>> html.read()
+```
+
 
 
 
