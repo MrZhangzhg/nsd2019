@@ -67,6 +67,20 @@ b'{"weatherinfo":{"city":"\xe5\x8c\x97\xe4\xba\xac","cityid":"101010100","temp":
 >>> r = requests.get('http://www.163.com')
 >>> r.text   # 查看文本内容用text属性
 
+>>> r = requests.get('https://img02.sogoucdn.com/app/a/100520021/8448941d79bb0542d65d3c8ca3f62bc0')
+>>> r.content   # 查看bytes类型数据
+>>> with open('/tmp/cat.gif', 'wb') as fobj:
+...   fobj.write(r.content)
+
+>>> r = requests.get('http://www.weather.com.cn/data/zs/101010100.html')
+>>> r.json()  # json格式，使用r.json()方法。
+# 如果查看时有乱码，首先查看字符集
+>>> r.encoding
+'ISO-8859-1'
+>>> r.encoding = 'utf8'   # 修改字符集
+>>> r.json()   # 再次查看，正常
+
+
 ```
 
 
