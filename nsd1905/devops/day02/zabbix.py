@@ -42,16 +42,87 @@ headers = {'Content-Type': 'application/json-rpc'}
 # }
 ###############################################
 # 删除主机
+# data = {
+#     "jsonrpc": "2.0",
+#     "method": "host.delete",
+#     "params": [
+#         "10260",
+#         # "32"
+#     ],
+#     "auth": "b6ffc95ac791b368d9ba12d45f2c2edb",
+#     "id": 1
+# }
+###############################################
+# 获取组, 'groupid': '2'
+# data = {
+#     "jsonrpc": "2.0",
+#     "method": "hostgroup.get",
+#     "params": {
+#         "output": "extend",
+#         "filter": {
+#             "name": [
+#                 # "Zabbix servers",
+#                 "Linux servers"
+#             ]
+#         }
+#     },
+#     "auth": "b6ffc95ac791b368d9ba12d45f2c2edb",
+#     "id": 1
+# }
+###############################################
+# 获取模板，'templateid': '10001'
+# data = {
+#     "jsonrpc": "2.0",
+#     "method": "template.get",
+#     "params": {
+#         "output": "extend",
+#         "filter": {
+#             "host": [
+#                 "Template OS Linux",
+#                 # "Template OS Windows"
+#             ]
+#         }
+#     },
+#     "auth": "b6ffc95ac791b368d9ba12d45f2c2edb",
+#     "id": 1
+# }
+###############################################
+# 创建主机
 data = {
     "jsonrpc": "2.0",
-    "method": "host.delete",
-    "params": [
-        "10260",
-        # "32"
-    ],
+    "method": "host.create",
+    "params": {
+        "host": "nsd1905web1",  # 主机名
+        "interfaces": [  # zabbix agent接口配置
+            {
+                "type": 1,
+                "main": 1,
+                "useip": 1,
+                "ip": "192.168.4.11",
+                "dns": "",
+                "port": "10050"
+            }
+        ],
+        "groups": [
+            {
+                "groupid": "2"
+            }
+        ],
+        "templates": [
+            {
+                "templateid": "10001"
+            }
+        ],
+        "inventory_mode": 0,  # 资产清单
+        "inventory": {
+            "macaddress_a": "qwertyu",
+            "macaddress_b": "56768"
+        }
+    },
     "auth": "b6ffc95ac791b368d9ba12d45f2c2edb",
     "id": 1
 }
+
 
 
 ###############################################

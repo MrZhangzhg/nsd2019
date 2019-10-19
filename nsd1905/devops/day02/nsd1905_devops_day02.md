@@ -112,6 +112,10 @@ http://www.kuaidi100.com/query?type=zhongtong&postid=75302716462400
 - 钉钉机器人，就是创建一个群聊，在群聊中添加机器人
 - 机器人会对应一个URL，只要访问该URL，并将相应的数据提交，就可以让机器人在群里发消息
 
+搜索“钉钉机器人 开放平台”，找到钉钉机器人的官方手册：
+
+https://ding-doc.dingtalk.com/doc#/serverapi2/qf2nxq
+
 
 
 
