@@ -106,3 +106,17 @@ https://www.sogou.com/web?query=linux+python&_asf=www.sogou.com&_ast=&w=01019900
 http://www.kuaidi100.com/query?type=zhongtong&postid=75302716462400
 ```
 
+### 钉钉机器人
+
+- 钉钉是阿里巴巴开发的类似于微信的即时通信软件
+- 钉钉机器人，就是创建一个群聊，在群聊中添加机器人
+- 机器人会对应一个URL，只要访问该URL，并将相应的数据提交，就可以让机器人在群里发消息
+
+
+
+
+
+
+
+
+
