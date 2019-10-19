@@ -80,10 +80,29 @@ b'{"weatherinfo":{"city":"\xe5\x8c\x97\xe4\xba\xac","cityid":"101010100","temp":
 >>> r.encoding = 'utf8'   # 修改字符集
 >>> r.json()   # 再次查看，正常
 
+# 修改请求头
+>>> r = requests.get('http://www.jianshu.com')
+>>> r.text   # 内容是403 forbidden
 
+>>> header = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'}
+>>> r = requests.get('http://www.jianshu.com', headers=header)
+>>> r.text   # 正常的内容
 ```
 
+url分析：
 
+https://www.sogou.com/web?query=linux+python&_asf=www.sogou.com&_ast=&w=01019900
 
+以上URL，？左边是URL，？右边是传给该URL的参数。动态网站，一般一个URL对应一个函数，函数还可以接收参数。如以上网址对应的函数可以是：search(query, asf, ast,w)
 
+```python
+# 查快递
+>>> url = 'http://www.kuaidi100.com/query'  # 快递100提供的API
+# 接受的参数type是快递公司名字，postid是单号。由快递100提供
+>>> param = {'type': 'zhongtong', 'postid': '75302716462400'}
+>>> r = requests.get(url, params=param)
+>>> r.json()
+# 以上内容也可以在浏览器中访问：
+http://www.kuaidi100.com/query?type=zhongtong&postid=75302716462400
+```
 
