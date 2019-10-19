@@ -14,7 +14,7 @@ def send_mail(msg, subject, sender, receivers, host, passwd):
     smtp = smtplib.SMTP()
     smtp.connect(host)  # 连接服务器
     # smtp.starttls()  # 类似于https，如果需要安全连接，打开此注释
-    smtp.login(sender, passwd)  # 登陆
+    smtp.login(sender, passwd)  # 登陆，密码填你的授权码
     smtp.sendmail(sender, receivers, message.as_bytes())
     smtp.close()  # 关闭连接
 
