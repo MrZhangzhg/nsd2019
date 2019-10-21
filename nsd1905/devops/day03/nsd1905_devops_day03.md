@@ -43,6 +43,12 @@ node6: 192.168.4.6
 # 测试到远程主机的通信
 (nsd1905) [root@room8pc16 myansible]# ansible all -m ping
 
+# 配置vim，使编写yaml文件时，更方便
+(nsd1905) [root@room8pc16 day01]# vim ~/.vimrc 
+autocmd FileType yaml setlocal sw=2 ts=2 et ai
+
+# 编写playbook，完成对web服务器和db服务器的配置
+
 ```
 
 
