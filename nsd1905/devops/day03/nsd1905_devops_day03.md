@@ -47,9 +47,65 @@ node6: 192.168.4.6
 (nsd1905) [root@room8pc16 day01]# vim ~/.vimrc 
 autocmd FileType yaml setlocal sw=2 ts=2 et ai
 
-# 编写playbook，完成对web服务器和db服务器的配置
+# 通过ansible配置远程服务器的yum
+(nsd1905) [root@room8pc16 myansible]# vim yum.yml
+---
+- name: configure yum repo
+  hosts: all
+  tasks:
+    - name: make yum client config
+      yum_repository:
+        file: server
+        name: server
+        description: centos 7.4 repo
+        baseurl: ftp://192.168.4.254/centos7.4
+        enabled: yes
+        gpgcheck: no
+(nsd1905) [root@room8pc16 myansible]# ansible-playbook --syntax-check yum.yml 
+(nsd1905) [root@room8pc16 myansible]# ansible-playbook yum.yml 
 
+
+# 编写playbook，完成对web服务器和db服务器的配置
+# webservers上安装httpd、php、php-mysql并启动服务
+# dbservers上安装mariadb-server并启动服务
+(nsd1905) [root@room8pc16 myansible]# vim lamp.yml
+---
+- name: config webservers
+  hosts: webservers
+  tasks:
+    - name: install web pkgs
+      yum:
+        name:
+          - httpd
+          - php
+          - php-mysql
+        state: present
+
+    - name: config web service
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+
+- name: config dbservers
+  hosts: dbservers
+  tasks:
+    - name:
+      yum:
+        name: mariadb-server
+        state: present
+
+    - name: config db service
+      service:
+        name: mariadb
+        state: started
+        enabled: yes
+(nsd1905) [root@room8pc16 myansible]# ansible-playbook lamp.yml
 ```
+
+## ansible编程
+
+找到ansible的官方手册：https://docs.ansible.com/ -> ansible documentation -> 2.7 -> 搜索python api。将python api页面中的example拷贝过来。
 
 
 
