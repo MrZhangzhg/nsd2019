@@ -109,6 +109,30 @@ autocmd FileType yaml setlocal sw=2 ts=2 et ai
 
 
 
+### 命名元组
+
+- 本质上还是元组
+- 为元组的下标起名
+
+```python
+>>> from collections import namedtuple
+>>> Point = namedtuple('Point', ('x', 'y', 'z'))
+>>> p1 = Point(5, 10, 20)
+>>> type(p1)
+<class '__main__.Point'>
+>>> p1[0]
+5
+>>> p1[1:]
+(10, 20)
+>>> p1.x
+5
+>>> p1.y
+10
+>>> p1.z
+20
+
+```
+
 
 
 
