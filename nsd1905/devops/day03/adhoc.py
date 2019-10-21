@@ -18,7 +18,8 @@ options = Options(connection='smart', module_path=['/to/mymodules'], forks=10, b
 # ansible会用到各种各样的文件，如json、yaml、ini等
 # 这些文件的内容需要转成python的数据类型，Dataloader自动进行转换
 loader = DataLoader() # Takes care of finding and reading yaml, json and ini files
-passwords = dict(vault_pass='secret')
+# 各种密码
+passwords = dict(vault_pass='123')
 
 # create inventory, use path to host config file as source or hosts in a comma separated string
 inventory = InventoryManager(loader=loader, sources='localhost,')

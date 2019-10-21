@@ -19,7 +19,7 @@
 - name: config dbservers
   hosts: dbservers
   tasks:
-    - name:
+    - name: install db server
       yum:
         name: mariadb-server
         state: present

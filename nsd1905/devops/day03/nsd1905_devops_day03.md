@@ -134,6 +134,55 @@ autocmd FileType yaml setlocal sw=2 ts=2 et ai
 
 ### 将playbook转换成python数据类型
 
+将lamp.yml转成python数据类型
+
+```python
+[
+    {
+        name: config webservers,
+        hosts: webservers,
+        tasks: [
+            {
+                name: install web pkgs,
+                yum: {
+                    name: [httpd, php, php-mysql],
+                    state: present
+                }
+            },
+            {
+                name: config web service,
+                service: {
+                    name: httpd,
+                    state: started,
+                    enabled: yes
+                }
+            },
+        ]
+    },
+    {
+        name: config dbservers,
+        hosts: dbservers,
+        tasks: [
+            {
+                name: install db server,
+                yum: {
+                    name: mariadb-server,
+                    state: present
+                }
+            },
+            {
+                name: config db service,
+                service: {
+                    name: mariadb,
+                    state: started,
+                    enabled: yes
+                }
+            }
+        ]
+    },
+]
+```
+
 
 
 
