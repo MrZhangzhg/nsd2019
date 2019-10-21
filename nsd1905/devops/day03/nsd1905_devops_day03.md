@@ -183,7 +183,77 @@ autocmd FileType yaml setlocal sw=2 ts=2 et ai
 ]
 ```
 
+## 编写ansible模块
 
+- 创建自定义模块目录
+- 设置Ansible查找模块的环境变量
+
+```python
+(nsd1905) [root@room8pc16 day03]# mkdir /tmp/mymodules
+(nsd1905) [root@room8pc16 day03]# export ANSIBLE_LIBRARY=/tmp/mymodules
+```
+
+编写模块，模块用于在远程主机上将一个文件拷贝到其他位置
+
+```python
+(nsd1905) [root@room8pc16 day03]# vim /tmp/mymodules/rcopy.py 
+#!/root/nsd1905/bin/python
+import shutil
+from ansible.module_utils.basic import AnsibleModule
+
+def main():
+    module = AnsibleModule(
+        argument_spec=dict(
+            yuan=dict(required=True, type='str'),
+            mubiao=dict(required=True, type='str')
+        )
+    )
+    shutil.copy(module.params['yuan'], module.params['mubiao'])
+    module.exit_json(changed=True)
+
+if __name__ == '__main__':
+    main()
+
+# 执行任务
+(nsd1905) [root@room8pc16 myansible]# ansible webservers -m rcopy -a "yuan=/etc/hosts mubiao=/tmp/zhuji.txt"
+```
+
+编写实现下载功能的模块
+
+在目标主机上安装python软件包
+
+```shell
+[root@node4 ~]# unzip wget-3.2.zip 
+[root@node4 ~]# cd wget-3.2/
+[root@node4 wget-3.2]# python setup.py install
+
+```
+
+
+
+```python
+(nsd1905) [root@room8pc16 myansible]# vim /tmp/mymodules/download.py 
+#!/root/nsd1905/bin/python
+import wget
+from ansible.module_utils.basic import AnsibleModule
+
+
+def main():
+    module = AnsibleModule(
+        argument_spec=dict(
+            url=dict(required=True, type='str'),
+            dest=dict(required=True, type='str')
+        )
+    )
+    wget.download(module.params['url'], module.params['dest'])
+    module.exit_json(changed=True)
+
+if __name__ == '__main__':
+    main()
+
+    
+(nsd1905) [root@room8pc16 myansible]# ansible dbservers -m download -a "url=http://192.168.4.254/zabbix.png dest=/tmp/"
+```
 
 
 
