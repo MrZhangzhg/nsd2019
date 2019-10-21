@@ -15,25 +15,25 @@ def adhoc(sources=None, hosts=None, module=None, args=None):
     inventory = InventoryManager(loader=loader, sources=sources)
     variable_manager = VariableManager(loader=loader, inventory=inventory)
     play_source = dict(
-            name="Ansible Play",
-            hosts=hosts,
-            gather_facts='no',
-            tasks=[
-                dict(action=dict(module=module, args=args), register='shell_out'),
-                dict(action=dict(module='debug', args=dict(msg='{{shell_out.stdout}}')))
-             ]
-        )
+        name="Ansible Play",
+        hosts=hosts,
+        gather_facts='no',
+        tasks=[
+            dict(action=dict(module=module, args=args), register='shell_out'),
+            dict(action=dict(module='debug', args=dict(msg='{{shell_out.stdout}}')))
+        ]
+    )
     play = Play().load(play_source, variable_manager=variable_manager, loader=loader)
 
     tqm = None
     try:
         tqm = TaskQueueManager(
-                  inventory=inventory,
-                  variable_manager=variable_manager,
-                  loader=loader,
-                  options=options,
-                  passwords=passwords,
-              )
+            inventory=inventory,
+            variable_manager=variable_manager,
+            loader=loader,
+            options=options,
+            passwords=passwords,
+        )
         result = tqm.run(play)
     finally:
         if tqm is not None:
