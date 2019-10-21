@@ -8,10 +8,15 @@ from ansible.executor.task_queue_manager import TaskQueueManager
 import ansible.constants as C
 
 # since API is constructed for CLI it expects certain options to always be set, named tuple 'fakes' the args parsing options object
+# 配置ansible执行过程中所用到的参数
+# connection是连接类型，有三种选项:
+# local表示本地执行；ssh表示通过ssh连接后执行; smart表示自动选择
 Options = namedtuple('Options', ['connection', 'module_path', 'forks', 'become', 'become_method', 'become_user', 'check', 'diff'])
-options = Options(connection='local', module_path=['/to/mymodules'], forks=10, become=None, become_method=None, become_user=None, check=False, diff=False)
+options = Options(connection='smart', module_path=['/to/mymodules'], forks=10, become=None, become_method=None, become_user=None, check=False, diff=False)
 
 # initialize needed objects
+# ansible会用到各种各样的文件，如json、yaml、ini等
+# 这些文件的内容需要转成python的数据类型，Dataloader自动进行转换
 loader = DataLoader() # Takes care of finding and reading yaml, json and ini files
 passwords = dict(vault_pass='secret')
 

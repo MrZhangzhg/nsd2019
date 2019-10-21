@@ -130,8 +130,9 @@ autocmd FileType yaml setlocal sw=2 ts=2 et ai
 10
 >>> p1.z
 20
-
 ```
+
+### 将playbook转换成python数据类型
 
 
 
