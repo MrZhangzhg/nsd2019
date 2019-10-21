@@ -255,6 +255,18 @@ if __name__ == '__main__':
 (nsd1905) [root@room8pc16 myansible]# ansible dbservers -m download -a "url=http://192.168.4.254/zabbix.png dest=/tmp/"
 ```
 
+ansible-cmdb：将ansible收集到的主机信息以web方式呈现
+
+```python
+# 安装
+(nsd1905) [root@room8pc16 ~]# pip install zzg_pypkgs/ansible-cmdb_pkgs/*
+# 通过setup模块收集远程主机信息，保存到/tmp/info
+(nsd1905) [root@room8pc16 myansible]# ansible all -m setup --tree /tmp/info
+# 使用ansible-cmdb分析输出内容，并生成web页
+(nsd1905) [root@room8pc16 myansible]# ansible-cmdb /tmp/info/ > /tmp/hosts.html
+
+```
+
 
 
 
