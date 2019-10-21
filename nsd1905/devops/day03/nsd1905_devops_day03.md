@@ -32,6 +32,16 @@ node6: 192.168.4.6
 > do
 > ssh-copy-id root@192.168.4.$i
 > done
+配置名称解析
+(nsd1905) [root@room8pc16 day01]# for i in {1..254}
+> do
+> echo -e "192.168.4.$i\tnode$i.tedu.cn\tnode$i" >> /etc/hosts
+> done
+收集主机密钥
+(nsd1905) [root@room8pc16 day01]# ssh-keyscan node{4..6} node{4..6}.tedu.cn 192.168.4.{4..6} >> ~/.ssh/known_hosts 
+
+# 测试到远程主机的通信
+(nsd1905) [root@room8pc16 myansible]# ansible all -m ping
 
 ```
 
