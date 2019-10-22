@@ -213,6 +213,24 @@ nsd1812          nsd1904  nsd1907  README.md
 * b1
   master
 
+# 修改分支内容
+[root@node4 myweb]# cp /etc/passwd mima
+[root@node4 myweb]# git add .
+[root@node4 myweb]# git commit -m "add mima"
+[root@node4 myweb]# ls
+index.html  mima
+
+# 切换回master分支
+[root@node4 myweb]# git checkout master
+切换到分支 'master'
+[root@node4 myweb]# ls
+index.html
+
+# 将分支汇入主干
+[root@node4 myweb]# git merge b1 -m "merge b1 to master"
+[root@node4 myweb]# ls
+index.html  mima
+
 ```
 
 
