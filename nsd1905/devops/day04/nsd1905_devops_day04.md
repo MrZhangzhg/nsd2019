@@ -320,14 +320,39 @@ Password for 'http://zzg@192.168.4.5':
 [root@node4 myweb]# git push -u origin --tags
 Username for 'http://192.168.4.5': zzg
 Password for 'http://zzg@192.168.4.5': 
-
 ```
 
+使用ssh推送代码
 
+```shell
+[root@node4 myweb]# ssh-keygen -t rsa -C "zzg@tedu.cn" -b 4096
+[root@node4 myweb]# cat ~/.ssh/id_rsa.pub 
+```
 
+在web页面上点右上角用户的设置，再点击左边栏的ssh密钥，将公钥拷贝到公钥文本框
 
+```shell
+# 查看remote方式
+[root@node4 myweb]# git remote show origin
+* 远程 origin
+  获取地址：http://192.168.4.5/devops/myweb.git
+  推送地址：http://192.168.4.5/devops/myweb.git
+  HEAD分支：master
+  远程分支：
+    master 已跟踪
+  为 'git pull' 配置的本地分支：
+    master 与远程 master 合并
+  为 'git push' 配置的本地引用：
+    master 推送至 master (最新)
+# 更换上传代码的方式
+[root@node4 myweb]# git remote remove origin
+[root@node4 myweb]# git remote add origin git@192.168.4.5:devops/myweb.git
+[root@node4 myweb]# git remote show origin
 
-
-
-
+# 推送测试
+[root@node4 myweb]# echo '<h2>new line</h2>' >> index.html 
+[root@node4 myweb]# git add .
+[root@node4 myweb]# git commit -m "modify index.html"
+[root@node4 myweb]# git push
+```
 
