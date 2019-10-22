@@ -257,10 +257,36 @@ mytest/*
 [root@node4 myweb]# git status
 # 位于分支 master
 无文件要提交，干净的工作区
+```
+
+## gitlab服务器
+
+- 准备一台内存4G以上的虚拟机
+- 在虚拟机上安装docker并启动服务
+- 将gitlab镜像导入
+
+```shell
+# 设置docker为开机启动，并立即启动
+[root@node5 images]# systemctl enable docker --now
+# 导入镜像
+[root@node5 images]# docker load < gitlab_zh.tar
 
 ```
 
+gitlab配置
 
+```shell
+# 因为容器也需要22端口，将容器所在的宿主机SSH服务修改端口
+[root@node5 images]# vim /etc/ssh/sshd_config 
+Port 2022
+[root@node5 images]# systemctl restart sshd
+[root@room8pc16 pub]# ssh -p2022 node5
+# 启动容器
+[root@node5 ~]# docker run -d -h gitlab --name gitlab -p 443:443 -p 80:80 -p 22:22 --restart always -v /srv/gitlab/config:/etc/gitlab -v /srv/gitlab/logs:/var/log/gitlab -v /srv/gitlab/data:/var/opt/gitlab gitlab_zh:latest 
+# gitlab容器需要资源较多，所以要等几分钟才能正常使用
+[root@node5 ~]# docker ps   # 状态为healthy时才可用
+
+```
 
 
 
