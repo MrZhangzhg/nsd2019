@@ -231,6 +231,33 @@ index.html
 [root@node4 myweb]# ls
 index.html  mima
 
+# 删除分支
+[root@node4 myweb]# git branch -d b1
+[root@node4 myweb]# git branch
+* master
+
+# 可以在工作区下创建一个.gitignore的文件，包含所有的不需要commit到版本库中的内容
+[root@node4 myweb]# echo 'hhhhh' > a.txt
+[root@node4 myweb]# mkdir mytest
+[root@node4 myweb]# cp /etc/shadow mytest/
+[root@node4 myweb]# git status
+# 位于分支 master
+# 未跟踪的文件:
+#   （使用 "git add <file>..." 以包含要提交的内容）
+#
+#	.mima.swp
+#	a.txt
+#	mytest/
+提交为空，但是存在尚未跟踪的文件（使用 "git add" 建立跟踪）
+[root@node4 myweb]# vim .gitignore
+*.swp
+a.txt
+mytest/*
+.gitignore
+[root@node4 myweb]# git status
+# 位于分支 master
+无文件要提交，干净的工作区
+
 ```
 
 
