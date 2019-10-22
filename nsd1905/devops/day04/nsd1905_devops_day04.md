@@ -156,6 +156,23 @@ hosts  index.html
 [root@node4 myweb]# ls
 index.html
 
+# 在暂存区恢复已删除的文件
+[root@room8pc16 nsd2019]# ls
+ansible_project  nsd1902  nsd1905  nsd1908    review
+ebooks           nsd1903  nsd1906  ppts       software
+nsd1812          nsd1904  nsd1907  README.md
+(nsd1905) [root@room8pc16 nsd2019]# du -sh .
+171M	
+(nsd1905) [root@room8pc16 nsd2019]# rm -rf *
+(nsd1905) [root@room8pc16 nsd2019]# du -sh .
+76M	
+(nsd1905) [root@room8pc16 nsd2019]# git status | more
+(nsd1905) [root@room8pc16 nsd2019]# git checkout -- *
+(nsd1905) [root@room8pc16 nsd2019]# ls
+ansible_project  nsd1902  nsd1905  nsd1908    review
+ebooks           nsd1903  nsd1906  ppts       software
+nsd1812          nsd1904  nsd1907  README.md
+
 ```
 
 
