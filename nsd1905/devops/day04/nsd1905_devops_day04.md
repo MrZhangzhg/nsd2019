@@ -71,6 +71,91 @@ index.html
 [root@node4 myweb]# ls -A
 .git  index.html
 
+# 查看状态
+[root@node4 myweb]# git status
+# 位于分支 master
+#
+# 初始提交
+#
+# 未跟踪的文件:
+#   （使用 "git add <file>..." 以包含要提交的内容）
+#
+#	index.html
+提交为空，但是存在尚未跟踪的文件（使用 "git add" 建立跟踪）
+[root@node4 myweb]# git status -s
+?? index.html
+
+# 添加跟踪
+[root@node4 myweb]# git add .
+[root@node4 myweb]# git status
+# 位于分支 master
+#
+# 初始提交
+#
+# 要提交的变更：
+#   （使用 "git rm --cached <file>..." 撤出暂存区）
+#
+#	新文件：    index.html
+#
+[root@node4 myweb]# git status -s
+A  index.html
+
+# 将文件撤出暂存区
+[root@node4 myweb]# git rm --cached index.html
+rm 'index.html'
+[root@node4 myweb]# git status -s
+?? index.html
+
+# 确认至版本库
+[root@node4 myweb]# git add index.html 
+[root@node4 myweb]# git status -s
+A  index.html
+[root@node4 myweb]# git commit  ＃ 跳出vim输入说明，如果直接存盘退出将不会提交
+[root@node4 myweb]# cp /etc/hosts .
+[root@node4 myweb]# git add .
+[root@node4 myweb]# git status -s
+A  hosts
+A  index.html
+[root@node4 myweb]# git commit -m "init"
+[master（根提交） c6f4c9e] init
+ 2 files changed, 3 insertions(+)
+ create mode 100644 hosts
+ create mode 100644 index.html
+[root@node4 myweb]# git status
+# 位于分支 master
+无文件要提交，干净的工作区
+
+# 删除文件
+# 查看版本库中存在的文件
+[root@node4 myweb]# git ls-files
+hosts
+index.html
+[root@node4 myweb]# git rm hosts
+rm 'hosts'
+[root@node4 myweb]# ls
+index.html
+[root@node4 myweb]# git commit -m "rm hosts"
+
+# 查看所有的提交
+[root@node4 myweb]# git log
+commit c6f4c9e13bd001258ede7ea4354c96e0a129d743
+Author: zzg <zzg@tedu.cn>
+Date:   Tue Oct 22 10:52:23 2019 +0800
+
+    init
+
+# 返回到init提交时的状态
+[root@node4 myweb]# git checkout c6f4c9e13bd001258ede7ea4354c96e0a129d743
+[root@node4 myweb]# ls
+hosts  index.html
+
+# 返回到最新的master状态
+[root@node4 myweb]# git checkout master
+之前的 HEAD 位置是 c6f4c9e... init
+切换到分支 'master'
+[root@node4 myweb]# ls
+index.html
+
 ```
 
 
