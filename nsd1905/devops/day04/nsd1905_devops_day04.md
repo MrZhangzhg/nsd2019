@@ -285,8 +285,45 @@ Port 2022
 [root@node5 ~]# docker run -d -h gitlab --name gitlab -p 443:443 -p 80:80 -p 22:22 --restart always -v /srv/gitlab/config:/etc/gitlab -v /srv/gitlab/logs:/var/log/gitlab -v /srv/gitlab/data:/var/opt/gitlab gitlab_zh:latest 
 # gitlab容器需要资源较多，所以要等几分钟才能正常使用
 [root@node5 ~]# docker ps   # 状态为healthy时才可用
+```
+
+### gitlab中重要的概念
+
+- 群组group：对应一个开发团队
+- 项目project：对应软件项目
+- 成员member：对应用户，将用户加入到组中
+
+练习：
+
+- 创建名为devops的组
+- 创建自己的账户，如zzg，账户加入到devops组中
+- 创建项目myweb，授权zzg是项目的主程序员
+
+
+
+使用http协议，将本地软件项目推送到服务器
+
+```shell
+[root@node4 myweb]# cd ~/myweb/   # 切换到项目目录
+# 查看远程仓库，当前没有远程仓库，所以输出为空
+[root@node4 myweb]# git remote
+# 关联远程仓库URL，为其起一个简短的名字，叫origin
+[root@node4 myweb]# git remote add origin http://192.168.4.5/devops/myweb.git
+[root@node4 myweb]# git remote  # 查看远程仓库
+origin
+# 推送本地代码到远程仓库，需要输入用户名和密码
+[root@node4 myweb]# git push -u origin --all
+[root@node4 myweb]# git push -u origin --all
+Username for 'http://192.168.4.5': zzg
+Password for 'http://zzg@192.168.4.5': 
+# 推送tag标记到远程仓库
+[root@node4 myweb]# git push -u origin --tags
+Username for 'http://192.168.4.5': zzg
+Password for 'http://zzg@192.168.4.5': 
 
 ```
+
+
 
 
 
