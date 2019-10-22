@@ -173,6 +173,20 @@ ansible_project  nsd1902  nsd1905  nsd1908    review
 ebooks           nsd1903  nsd1906  ppts       software
 nsd1812          nsd1904  nsd1907  README.md
 
+# tag管理。可以给某一次提交打标记，如用于版本号
+[root@node4 myweb]# git tag 1.0  # 将当前commit标记为1.0
+[root@node4 myweb]# git tag   # 查看所有的tag
+1.0
+[root@node4 myweb]# echo '<h2>hello world</h2>' >> index.html 
+[root@node4 myweb]# git add .
+[root@node4 myweb]# git commit -m "modify index"
+[master b0420ee] modify index
+ 1 file changed, 1 insertion(+)
+[root@node4 myweb]# git tag 2.0  # 将当前commit标记为2.0
+[root@node4 myweb]# git tag
+1.0
+2.0
+
 ```
 
 
