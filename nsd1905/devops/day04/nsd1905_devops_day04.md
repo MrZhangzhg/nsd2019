@@ -16,6 +16,8 @@ j(jenkins)--拉取-->g
 a(应用服务器)--下载-->j
 ```
 
+git书籍推荐：《pro git》
+
 ## 程序员在自己的机器上编写代码，并通过git管理
 
 ```shell
@@ -186,10 +188,32 @@ nsd1812          nsd1904  nsd1907  README.md
 [root@node4 myweb]# git tag
 1.0
 2.0
-
 ```
 
+分支管理
 
+- git中默认有一个名为master的主干分支
+- 还可以创建自定义的分支
+
+```shell
+# 查看分支
+[root@node4 myweb]# git branch
+* master
+[root@node4 myweb]# git status   # 创建分支前，应该确保工作区是干净的
+# 位于分支 master
+无文件要提交，干净的工作区
+[root@node4 myweb]# git branch b1  # 创建名为b1的分支
+[root@node4 myweb]# git branch  # 查看分支
+  b1
+* master   # ＊号表示当前所在分支
+# 切换分支
+[root@node4 myweb]# git checkout b1   # 切换分支
+切换到分支 'b1'
+[root@node4 myweb]# git branch
+* b1
+  master
+
+```
 
 
 
