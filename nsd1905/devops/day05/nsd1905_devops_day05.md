@@ -112,3 +112,11 @@ echo $webver > live_ver
 
 
 
+7. 编写CD程序
+
+   /var/www/download/: 存储下载的软件包
+
+   /var/www/deploy/： 存储最新版本文件和解压目录
+
+   /var/www/html/nsd1905：指向发布软件目录的链接
+
