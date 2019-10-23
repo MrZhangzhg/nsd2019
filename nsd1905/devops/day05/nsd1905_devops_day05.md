@@ -50,10 +50,16 @@ jenkins首页 -> manage jenkins -> manage plugins -> Advance选项卡 -> update 
 [root@node4 website]# git add .
 [root@node4 website]# git commit -m "web site 2.0"
 [root@node4 website]# git tag 2.0
-
 ```
 
+2. 在gitlab上创建项目website，项目类型为公开的，zzg用户是项目的主程序员。
+3. 上传代码到gitlab
 
+```shell
+[root@node4 website]# git remote add origin git@192.168.4.5:devops/website.git
+[root@node4 website]# git push -u origin --all
+[root@node4 website]# git push -u origin --tags
+```
 
 
 
