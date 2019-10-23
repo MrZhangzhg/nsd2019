@@ -36,6 +36,25 @@ jenkins首页 -> manage jenkins -> manage plugins -> Advance选项卡 -> update 
 
 
 
+## CI/CD流程
+
+1. 程序员编写代码
+
+```shell
+[root@node4 ~]# git init website
+[root@node4 website]# echo '<h1>My Web Site</h1>' > index.html
+[root@node4 website]# git add .
+[root@node4 website]# git commit -m 'web site 1.0'
+[root@node4 website]# git tag 1.0
+[root@node4 website]# echo '<h2>web site 2.0</h2>' >> index.html
+[root@node4 website]# git add .
+[root@node4 website]# git commit -m "web site 2.0"
+[root@node4 website]# git tag 2.0
+
+```
+
+
+
 
 
 
