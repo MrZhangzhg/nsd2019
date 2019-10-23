@@ -1,5 +1,6 @@
 import os
 import requests
+import wget
 
 
 def has_new_ver(ver_fname, ver_url):
@@ -21,7 +22,7 @@ def has_new_ver(ver_fname, ver_url):
         return False
 
 
-def check_app():
+def check_app(app_fname, md5_url):
     '用于校验软件包是否完好，完好返回True'
 
 
@@ -38,9 +39,17 @@ if __name__ == '__main__':
         exit(1)
 
     # 下载新版本软件包
+    r = requests.get(ver_url)
+    ver = r.text.strip()  # 去除文件结尾的\n
+    app_url = 'http://192.168.4.6/deploy/pkgs/website-%s.tar.gz' % ver
+    download_dir = '/var/www/download'
+    wget.download(app_url, download_dir)
 
     # 校验软件包是否完好，软件包已损坏的话，删除损坏的包，退出
-    if not check_app():
+    md5_url = app_url + '.md5'
+    app_fname = app_url.split('/')[-1]
+    app_fname = os.path.join(download_dir, app_fname)
+    if not check_app(app_fname, md5_url):
         print('文件已损坏。')
         exit(2)
 
