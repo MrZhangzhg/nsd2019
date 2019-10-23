@@ -61,7 +61,19 @@ jenkins首页 -> manage jenkins -> manage plugins -> Advance选项卡 -> update 
 [root@node4 website]# git push -u origin --tags
 ```
 
+4. 构建jenkins工程
 
+在jenkins服务器上安装git
+
+```shell
+[root@node6 ~]# yum install -y git
+```
+
+首页 -> 新建Item -> website / Freestyle project -> 勾选This project is parameterized -> Git Parameter:  Name: webver, Parameter Type: Branch or Tag, Default Value: origin/master -> 源码管理：Git / Repository URL: http://192.168.4.5/devops/website.git / Branches to build: $webver
+
+5. 下载代码
+
+执行jenkins的任务，将会把代码下载到/var/lib/jenkins/workspace/目录下。
 
 
 
