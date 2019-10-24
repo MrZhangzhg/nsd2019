@@ -5,6 +5,89 @@
     <title>my form</title>
 </head>
 <body>
+
+<form action="">
+    <textarea name="t1" id="t1" cols="30" rows="10"></textarea>
+</form>
+
+<hr>
+
+<form action="http://www.kuaidi100.com/query" target="_blank">
+    单号：<input type="text" name="postid"> <br>
+    公司：
+    <select name="type">
+        <option value="zhongtong">中通</option>
+        <option value="yunda">韵达</option>
+        <option value="shentong">申通</option>
+    </select>
+    <br>
+    <input type="submit" value="查询">
+</form>
+
+<hr>
+
+<form action="">
+    <label>
+        <input type="checkbox" name="lesson">
+        Linux
+    </label>
+    <label>
+        <input type="checkbox" name="lesson">
+        Network
+    </label>
+    <label>
+        <input type="checkbox" name="lesson">
+        Shell
+    </label>
+    <label>
+        <input type="checkbox" name="lesson">
+        Python
+    </label>
+</form>
+
+<hr>
+
+<form action="http://www.kuaidi100.com/query" target="_blank">
+    单号：<input type="text" name="postid"> <br>
+    公司：<br>
+    <label>
+        <input type="radio" name="type" value="zhongtong">
+        中通
+    </label>
+    <input type="radio" name="type" value="yunda" id="yd">
+    <label for="yd">韵达</label>
+    <input type="radio" name="type" value="shentong"><label>申通</label><br>
+    <input type="submit" value="查询">
+    <input type="reset">
+</form>
+
+<hr>
+
+<form action="http://www.kuaidi100.com/query" target="_blank">
+    单号：<input type="text" name="postid"> <br>
+    公司：<br>
+    <input type="radio" name="type" value="zhongtong"><label>中通</label>
+    <input type="radio" name="type" value="yunda"><label>韵达</label>
+    <input type="radio" name="type" value="shentong"><label>申通</label><br>
+    <input type="submit" value="查询">
+</form>
+
+<hr>
+
+<form action="http://www.kuaidi100.com/query" target="_blank">
+    单号：<input type="text" name="postid"> <br>
+    公司：<input type="text" name="type"> <br>
+    <input type="submit" value="查询">
+</form>
+
+<!--
+<form action="">
+    uname: <input type="text" placeholder="用户名"><br>
+    upass: <input type="password" placeholder="密码"><br>
+    <input type="submit" value="登陆">
+</form>
+
+<hr>
 <form action="https://www.sogou.com/web" target="_blank">
     <input type="text" name="query">
     <input type="submit" value="搜狗搜索">
@@ -19,5 +102,7 @@
     <input type="text" name="wd">
     <input type="submit" value="百度搜索">
 </form>
+-->
+
 </body>
 </html>
