@@ -8,22 +8,43 @@
             width: 1000px;
             margin: 0 auto;
         }
+        ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+        li {
+            float: left;  /*横排*/
+        }
+        a {
+            display: block;  /*将a标签改为块级元素，否则无法设置宽度*/
+            text-decoration: none;  /*取消下划线*/
+            width: 166px;
+            background-color: #BEBEBE;
+            height: 25px;
+            line-height: 25px;
+            text-align: center;
+            font-weight: bold;
+            border-bottom: 2px solid red;
+            color: white;
+        }
+        a:hover {
+            background-color: red;
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="banner">
         <ul>
-            <li>HOME</li>
-            <li>NEWS</li>
-            <li>LINUX</li>
-            <li>SHELL</li>
-            <li>PYTHON</li>
-            <li>DATABASE</li>
+            <li><a href="#">HOME</a></li>
+            <li><a href="#">NEWS</a></li>
+            <li><a href="#">LINUX</a></li>
+            <li><a href="#">SHELL</a></li>
+            <li><a href="#">PYTHON</a></li>
+            <li><a href="#">DATABASE</a></li>
         </ul>
     </div>
-    <div></div>
-    <div></div>
 </div>
 </body>
 </html>
