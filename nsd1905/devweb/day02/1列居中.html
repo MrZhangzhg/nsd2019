@@ -4,17 +4,28 @@
     <meta charset="UTF-8">
     <title>一列居中</title>
     <style>
-        .content {
+        .container {
             width: 1000px;
             margin: 0 auto;
+        }
+        .banner {
+            height: 100px;
+            background-color: #43abbc;
+        }
+        .content {
+            height: 500px;
+            background-image: url("https://i04piccdn.sogoucdn.com/7f87b18f5f205100");
+            /*background-repeat: repeat-x;*/
+            /*background-repeat: repeat-y;*/
+            /*background-repeat: no-repeat;*/
         }
     </style>
 </head>
 <body>
-<div class="content">
-    <div>banner</div>
-    <div>main</div>
-    <div>footer</div>
+<div class="container">
+    <div class="banner">banner</div>
+    <div class="content">main</div>
+    <div class="footer">footer</div>
 </div>
 </body>
 </html>
