@@ -4,17 +4,76 @@
     <meta charset="UTF-8">
     <title>my css</title>
     <style>
+        /*
         * {
             color: #636363;
+        }
+        */
+        h1 {
+            color: blue;
+        }
+        .c1 {
+            font-size: 20px;
+        }
+
+        .c3 {
+            font-size: 20px;
+            color: orange;
+        }
+        .c2 {
+            color: red;
+        }
+        p.c4 {
+            text-decoration: underline;
+        }
+        p .c4 {
+            font-weight: bold;
+        }
+        #i1 {
+            text-align: center;
+        }
+        .c1, .c2, #i1 {
+            border: 2px dashed green;
+        }
+        a:link {
+            color: darkblue;  /*访问前的样式*/
+        }
+        a:hover {
+            font-size: 1.2em;  /*鼠标悬停时字号为原来的1.2倍*/
+        }
+        a:visited {
+            color: darkgray;   /*访问后的样式*/
+        }
+        .c5 {
+            height: 300px;
+            width: 500px;
+            /*background-color: mediumblue;*/
+            /*background-color: rgb(128, 128, 128);*/
+            /*background-color: #55CC99;*/
+            /*background-color: #5C9;*/
+            background-color: #43abbc;
         }
     </style>
 </head>
 <body>
+
+<div class="c5"></div>
+
+<a href="http://fanyi.sogou.com" target="_blank">搜狗翻译</a>
+
+<p id="i1">达内云计算 nsd1905</p>
+<p class="c4">python linux shell</p>
+<p>python <span class="c4">linux</span> shell</p>
+<div class="c4">python linux shell</div>
+
+<hr>
 <h1>达内云计算 nsd1905</h1>
 <h2>达内云计算 nsd1905</h2>
-<p>达内云计算 nsd1905</p>
-<p>达内云计算 nsd1905</p>
-<div>达内云计算 nsd1905</div>
-<div>达内云计算 nsd1905</div>
+<p class="c1">达内云计算 nsd1905</p>
+<p class="c2">达内云计算 nsd1905</p>
+<div class="c1">达内云计算 nsd1905</div>
+<div class="c3">达内云计算 nsd1905</div>
+<div class="c3 c2">达内云计算 nsd1905</div>
+
 </body>
 </html>
