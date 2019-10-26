@@ -150,7 +150,59 @@ def index(request):
     # 用户发起请求，请求的内容将会作为函数的第一个参数，所以函数至少需要有一个参数
     return render(request, 'index.html')
 
+# 编写模板文件
+# templates/index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票首页</title>
+</head>
+<body>
+<div class="container">
+    <h1>投票首页</h1>
+</div>
+</body>
+</html>
+```
 
+制作投票详情页
+
+```shell
+# polls/urls.py
+from django.conf.urls import url
+# from polls import views
+from . import views
+
+urlpatterns = [
+    # 访问首页时，使用views.index函数响应，该url的名字是index
+    url(r'^$', views.index, name='index'),
+    # \d+匹配数字，为其添加()，匹配到的数字将会成detail的参数
+    url(r'^(\d+)/$', views.detail, name='detail'),
+]
+
+# 编写函数
+# polls/views.py
+def detail(request, question_id):
+    # question_id用于接收url传过来的参数
+    # 字典将传递给detail.html，detail.html将其作为变量使用，字典的key
+    # 是变量名，字典的value是变量值
+    return render(request, 'detail.html', {'question_id': question_id})
+
+# 模板文件
+# templates/detail.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票详情页</title>
+</head>
+<body>
+<div class="container">
+    <h1>{{ question_id }}号问题的投票详情页</h1>
+</div>
+</body>
+</html>
 ```
 
 
