@@ -128,6 +128,31 @@ urlpatterns = []
 
 ```
 
+创建投票首页
+
+```python
+# 编写url, polls/urls.py
+from django.conf.urls import url
+# from polls import views
+from . import views
+
+urlpatterns = [
+    # 访问首页时，使用views.index函数响应，该url的名字是index
+    url(r'^$', views.index, name='index'),
+]
+
+# 编写视图函数
+# polls/views.py
+from django.shortcuts import render
+
+# Create your views here.
+def index(request):
+    # 用户发起请求，请求的内容将会作为函数的第一个参数，所以函数至少需要有一个参数
+    return render(request, 'index.html')
+
+
+```
+
 
 
 
