@@ -295,6 +295,39 @@ class Choice(models.Model):
 (nsd1905) [root@room8pc16 mysite]# python manage.py makemigrations
 Did you rename choice.q to choice.question (a ForeignKey)? [y/N] y
 (nsd1905) [root@room8pc16 mysite]# python manage.py migrate
+```
+
+将模型加入到管理后台
+
+```python
+# polls/admin.py
+from django.contrib import admin
+# from polls.models import Question, Choice
+from .models import Question, Choice
+
+# Register your models here.
+admin.site.register(Question)
+admin.site.register(Choice)
+
+# 访问127.0.0.1:8000/admin，在后台添加几个问题和选项
+# 添加的问题页面上所有的问题显示的都是Question Object。解决办法如下：
+from django.db import models
+
+# Create your models here.
+class Question(models.Model):
+    question_text = models.CharField(max_length=200, unique=True)
+    pub_date = models.DateTimeField()
+    
+    def __str__(self):
+        return "问题: %s" % self.question_text
+
+class Choice(models.Model):
+    choice_text = models.CharField(max_length=200)
+    votes = models.IntegerField(default=0)
+    question = models.ForeignKey(Question)
+    
+    def __str__(self):
+        return "%s=>%s" % (self.question, self.choice_text)
 
 ```
 
