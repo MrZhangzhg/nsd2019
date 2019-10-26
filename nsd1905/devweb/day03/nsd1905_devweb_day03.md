@@ -55,6 +55,11 @@ File -> New Project -> 左窗格选择django，右窗格填写项目目录的路
 # 3. 启动开发服务器
 (nsd1905) [root@room8pc16 mysite]# python manage.py runserver
 # 4. 打开浏览器访问测试：http://127.0.0.1:8000
+# 5. 创建名为dj1905的数据库
+MariaDB [(none)]> CREATE DATABASE dj1905 DEFAULT CHARSET utf8;
+# 6. 修改配置
+# mysite/setting.py
+
 ```
 
 
