@@ -59,8 +59,78 @@ File -> New Project -> 左窗格选择django，右窗格填写项目目录的路
 MariaDB [(none)]> CREATE DATABASE dj1905 DEFAULT CHARSET utf8;
 # 6. 修改配置
 # mysite/setting.py
+ALLOWED_HOSTS = ['*']  # 允许所有的客户端访问
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'dj1905',
+        'USER': 'root',
+        'PASSWORD': 'tedu.cn',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+    }
+}
+LANGUAGE_CODE = 'zh-hans'
+TIME_ZONE = 'Asia/Shanghai'
+USE_TZ = False
+# 7. 声明使用的数据库连接方式
+# mysite/__init__.py
+import pymysql
+pymysql.install_as_MySQLdb()
+# 8. 重启开发服务器
+# 9. 生成django所需的数据库表
+(nsd1905) [root@room8pc16 mysite]# python manage.py makemigrations
+(nsd1905) [root@room8pc16 mysite]# python manage.py migrate
+# 10. 创建管理员用户
+(nsd1905) [root@room8pc16 mysite]# python manage.py createsuperuser
+Username (leave blank to use 'root'): admin
+Email address: admin@tedu.cn
+Password: 
+Password (again): 
+Superuser created successfully.
+# 11. 访问管理后台 http://127.0.0.1:8000/admin
+```
+
+### 创建应用
+
+应用对应一个个的功能模块。
+
+创建一个投票应用。
+
+http://127.0.0.1/polls/: 投票首页，列出所有的投票问题
+
+http://127.0.0.1/polls/1/：1号问题的详情，可以在该页面进行投票
+
+http://127.0.0.1/polls/1/result/：1号问题的投票结果。可以看到各选项的票数
+
+```python
+# 创建投票应用
+(nsd1905) [root@room8pc16 mysite]# python manage.py startapp polls
+(nsd1905) [root@room8pc16 mysite]# ls
+db.sqlite3  manage.py  mysite  polls  templates
+# 在mysite项目的配置文件中，集成投票应用
+INSTALLED_APPS = [
+    ...略...
+    'polls',
+]
+# 授权，将投票应用的URL交给投票应用处理
+from django.conf.urls import url, include
+from django.contrib import admin
+
+urlpatterns = [
+    url(r'^admin/', admin.site.urls),
+    url(r'^polls/', include('polls.urls')),
+]
+# 创建polls/urls.py
+from django.conf.urls import url
+
+urlpatterns = []
 
 ```
+
+
+
+
 
 
 
