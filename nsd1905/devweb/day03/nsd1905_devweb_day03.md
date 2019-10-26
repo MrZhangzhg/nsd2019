@@ -240,9 +240,44 @@ def result(request, question_id):
 </html>
 ```
 
+ORM
+
+- Object：对象，对应django模型中的class
+- Relationship：关系，对应关系型数据库
+- Mapping：映射
+- 一个class对应数据库中的一张表
+- 表中的字段与class中的类变量对应
+- 数据库中的数据类型也与django模型中的类映射
+- 表中的每个记录都与class的实例对应
+
+规划数据表
+
+问题表：id、问题内容、发布时间
+
+选项表：id、选项内容、票数、问题ID
+
+创建模型
+
+```python
+# polls/models.py
+from django.db import models
+
+# Create your models here.
+class Question(models.Model):
+    question_text = models.CharField(max_length=200, unique=True)
+    pub_date = models.DateTimeField()
+
+# 生成表
+(nsd1905) [root@room8pc16 mysite]# python manage.py makemigrations
+(nsd1905) [root@room8pc16 mysite]# python manage.py migrate
+# 分析表
+MariaDB [dj1905]> show tables;
+polls_question  # 表名的构成都是小写字母：应用名_类名
+MariaDB [dj1905]> desc polls_question;
+# 表的字段采用的是类变量名。类中没有声明主键，django将自动创建名为id的主键。
 
 
-
+```
 
 
 
