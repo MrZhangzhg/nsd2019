@@ -205,6 +205,41 @@ def detail(request, question_id):
 </html>
 ```
 
+制作投票结果页
+
+```python
+# polls/urls.py
+from django.conf.urls import url
+# from polls import views
+from . import views
+
+urlpatterns = [
+    # 访问首页时，使用views.index函数响应，该url的名字是index
+    url(r'^$', views.index, name='index'),
+    # \d+匹配数字，为其添加()，匹配到的数字将会成detail的参数
+    url(r'^(\d+)/$', views.detail, name='detail'),
+    url(r'^(\d+)/result/$', views.result, name='result'),
+]
+
+# polls/views.py
+def result(request, question_id):
+    return render(request, 'result.html', {'question_id': question_id})
+
+# templates/result.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票结果页</title>
+</head>
+<body>
+<div class="container">
+    <h1>{{ question_id }}号问题的投票结果</h1>
+</div>
+</body>
+</html>
+```
+
 
 
 

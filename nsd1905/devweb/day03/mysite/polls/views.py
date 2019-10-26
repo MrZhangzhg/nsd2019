@@ -10,3 +10,7 @@ def detail(request, question_id):
     # 字典将传递给detail.html，detail.html将其作为变量使用，字典的key
     # 是变量名，字典的value是变量值
     return render(request, 'detail.html', {'question_id': question_id})
+
+def result(request, question_id):
+    return render(request, 'result.html', {'question_id': question_id})
+
