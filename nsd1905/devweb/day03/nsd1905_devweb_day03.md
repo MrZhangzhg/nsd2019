@@ -276,6 +276,25 @@ polls_question  # 表名的构成都是小写字母：应用名_类名
 MariaDB [dj1905]> desc polls_question;
 # 表的字段采用的是类变量名。类中没有声明主键，django将自动创建名为id的主键。
 
+# 继续编写choice模型, polls/models.py
+class Choice(models.Model):
+    choice_text = models.CharField(max_length=200)
+    votes = models.IntegerField(default=0)
+    q = models.ForeignKey(Question)
+
+# 生成表
+(nsd1905) [root@room8pc16 mysite]# python manage.py makemigrations
+(nsd1905) [root@room8pc16 mysite]# python manage.py migrate
+# 观察数据库中表plls_choice的字段，外键字段名为q_id。该名称是相应的类变量加上_id得来。如果类变量名为question，那么表中外键字段名就会是question_id
+# 表迁移，将Choice中字段名q改为question
+# polls/models.py
+class Choice(models.Model):
+    choice_text = models.CharField(max_length=200)
+    votes = models.IntegerField(default=0)
+    question = models.ForeignKey(Question)
+(nsd1905) [root@room8pc16 mysite]# python manage.py makemigrations
+Did you rename choice.q to choice.question (a ForeignKey)? [y/N] y
+(nsd1905) [root@room8pc16 mysite]# python manage.py migrate
 
 ```
 
