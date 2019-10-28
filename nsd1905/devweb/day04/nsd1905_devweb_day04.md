@@ -56,6 +56,18 @@ datetime.datetime(2019, 10, 26, 16, 49)
 第一份工作，你期待的工资是多少？ 2019-10-26 16:49:00
 你计划去哪个城市工作？ 2019-10-01 12:00:00
 
+# get方法取出一个实例，如果多于一个实例或是0个，都报错
+>>> Question.objects.get(id=10)  # 没有取到，报错
+>>> Question.objects.get(id__lt=10)  # id小于10的，有4项，报错
+>>> Question.objects.get(id=1)
+<Question: 问题: 第一份工作，你期待的工资是多少？>
+
+# filter方法取出实例列表，列表长度不限
+>>> Question.objects.filter(id__lt=10)
+<QuerySet [<Question: 问题: 第一份工作，你期待的工资是多少？>, <Questio>, <Question: 问题: 你期待哪个公司给你发Offer？>, <Question: 问题: 毕业聚餐去哪里？>]>
+>>> Question.objects.filter(id__gt=10)
+<QuerySet []>
+
 ```
 
 
