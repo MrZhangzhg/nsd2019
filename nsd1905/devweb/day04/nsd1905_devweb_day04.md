@@ -120,6 +120,37 @@ def index(request):
 (nsd1905) [root@room8pc16 mysite]# python manage.py runserver 0:80
 
 # 修改模板文件，将问题逐一展示
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票首页</title>
+</head>
+<body>
+<div class="container">
+    <div class="content">
+        <h1>投票首页</h1>
+        <ol>
+            {% for question in questions %}
+                <li>
+                    <a href="{% url 'detail' question.id %}" target="_blank">
+                        {{ question.question_text }}
+                    </a>
+                    {{ question.pub_date }}
+                </li>
+            {% endfor %}
+        </ol>
+    </div>
+    <div>
+        达内云计算学院 NSD1905
+    </div>
+</div>
+</body>
+</html>
+
+# 引入bootstrap
+# django默认到应用的static目录下寻找静态文件
+(nsd1905) [root@room8pc16 mysite]# cp -r ../../day02/static polls/
 
 ```
 
