@@ -119,6 +119,8 @@ def index(request):
 # 启动开发服务器，测试。开发服务器运行在0.0.0.0:80。注意，如果不是管理员，不能使用小于1024的端口。
 (nsd1905) [root@room8pc16 mysite]# python manage.py runserver 0:80
 
+# 修改模板文件，将问题逐一展示
+
 ```
 
 
