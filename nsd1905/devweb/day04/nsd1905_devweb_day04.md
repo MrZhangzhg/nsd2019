@@ -87,6 +87,37 @@ datetime.datetime(2019, 10, 26, 16, 49)
 # 删除
 >>> q2 = Question.objects.get(question_text='毕业聚餐去哪里？')
 >>> q2.delete()
+```
+
+## 完善首页，将所有的问题取出，发往前台页面
+
+```python
+# polls/views.py
+from django.shortcuts import render
+from .models import Question
+
+def index(request):
+    questions = Question.objects.order_by('-pub_date')
+    return render(request, 'index.html', {'questions': questions})
+
+# templates/index.html  # 显示问题
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票首页</title>
+</head>
+<body>
+<div class="container">
+    <div class="content">
+        <h1>投票首页</h1>
+        {{ questions }}
+    </div>
+</div>
+</body>
+</html>
+# 启动开发服务器，测试。开发服务器运行在0.0.0.0:80。注意，如果不是管理员，不能使用小于1024的端口。
+(nsd1905) [root@room8pc16 mysite]# python manage.py runserver 0:80
 
 ```
 
