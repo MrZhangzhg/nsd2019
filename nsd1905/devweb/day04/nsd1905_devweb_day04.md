@@ -80,6 +80,14 @@ datetime.datetime(2019, 10, 26, 16, 49)
 # question_text.startswith('你')
 >>> Question.objects.filter(question_text__startswith='你')
 
+# 修改
+>>> q1 = Question.objects.get(question_text='你期待哪个公司给你发Offer ？')
+>>> q1.question_text = '你心仪的公司是哪一家？'
+>>> q1.save()
+# 删除
+>>> q2 = Question.objects.get(question_text='毕业聚餐去哪里？')
+>>> q2.delete()
+
 ```
 
 
