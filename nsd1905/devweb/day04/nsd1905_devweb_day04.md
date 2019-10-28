@@ -37,6 +37,25 @@ datetime.datetime(2019, 10, 26, 16, 49)
 ...   print(q.question_text, q.pub_date)
 ... 
 
+# 排序，默认是升序排列
+>>> qset2 = Question.objects.order_by('pub_date')
+>>> for q in qset2:
+...   print(q.question_text, q.pub_date)
+... 
+你计划去哪个城市工作？ 2019-10-01 12:00:00
+第一份工作，你期待的工资是多少？ 2019-10-26 16:49:00
+你期待哪个公司给你发Offer？ 2019-10-28 00:00:00
+毕业聚餐去哪里？ 2019-10-28 10:00:00
+# 降序排列
+>>> qset3 = Question.objects.order_by('-pub_date')
+>>> for q in qset3:
+...   print(q.question_text, q.pub_date)
+... 
+毕业聚餐去哪里？ 2019-10-28 10:00:00
+你期待哪个公司给你发Offer？ 2019-10-28 00:00:00
+第一份工作，你期待的工资是多少？ 2019-10-26 16:49:00
+你计划去哪个城市工作？ 2019-10-01 12:00:00
+
 ```
 
 
