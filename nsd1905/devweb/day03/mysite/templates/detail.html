@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>投票详情页</title>
-</head>
-<body>
-<div class="container">
+{% extends 'basic.html' %}
+{% load static %}
+{% block title %}投票详情页{% endblock %}
+{% block content %}
     <h1>{{ question_id }}号问题的投票详情页</h1>
-</div>
-</body>
-</html>
+{% endblock %}
