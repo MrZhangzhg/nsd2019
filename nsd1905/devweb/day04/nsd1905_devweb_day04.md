@@ -68,6 +68,18 @@ datetime.datetime(2019, 10, 26, 16, 49)
 >>> Question.objects.filter(id__gt=10)
 <QuerySet []>
 
+# 过滤条件。在django中使用的方式是:属性__条件=值
+>>> Question.objects.filter(id=1)  # 是以下方式的简写
+>>> Question.objects.filter(id__exact=1)
+>>> Question.objects.filter(id__gt=1)  # id>1
+>>> Question.objects.filter(id__lt=3)  # id<3
+>>> Question.objects.filter(id__lte=3) # id<=3
+>>> Question.objects.filter(id__gte=1) # id>=1
+>>> Question.objects.filter(pub_date__year=2019)# pub_date.year=2019
+>>> Question.objects.filter(pub_date__day=28) # pub_date.day=28
+# question_text.startswith('你')
+>>> Question.objects.filter(question_text__startswith='你')
+
 ```
 
 
