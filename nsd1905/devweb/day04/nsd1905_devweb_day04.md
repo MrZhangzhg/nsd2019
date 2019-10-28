@@ -21,6 +21,22 @@
 # 添加选项，方法三：每个问题的实例都有一个名为choice_set的管理器，通过它，可以反向创建选项实例。管理器的名字构成：选项class名_set，全部小写字母。如果选项class是XuanXiang，那么问题实例的管理器名，就叫xuanxiang_set
 >>> c3 = q1.choice_set.create(choice_text='达内')
 
+# 查询所有的问题,返回所有问题实例的列表
+>>> qset1 = Question.objects.all()
+>>> qset1
+>>> qset1[0]
+<Question: 问题: 第一份工作，你期待的工资是多少？>
+>>> q1 = qset1[0]
+>>> q1.question_text
+'第一份工作，你期待的工资是多少？'
+>>> q1.pub_date
+datetime.datetime(2019, 10, 26, 16, 49)
+>>> q1.id  # 没有在模型中声明主键，django自动添加名为id的主键
+1
+>>> for q in qset1:
+...   print(q.question_text, q.pub_date)
+... 
+
 ```
 
 
