@@ -361,6 +361,41 @@ def vote(request, question_id):
 
 # 在detail.html中，修改form表单的action
         <form action="{% url 'vote' question.id %}" method="post">
+```
+
+### 制作投票结果页
+
+```python
+# polls/views.py
+def result(request, question_id):
+    # 取出问题，发往模板
+    question = Question.objects.get(id=question_id)
+    return render(request, 'result.html', {'question': question})
+
+# templates/result.html
+{% extends 'basic.html' %}
+{% load static %}
+{% block title %}投票结果页{% endblock %}
+{% block content %}
+    <div class="content h4">
+        <h1 class="text-center text-warning">
+            {{ question.id }}号问题的投票结果
+        </h1>
+        <table class="table table-striped table-hover">
+            <thead class="bg-primary">
+                <tr>
+                    <td colspan="2">{{ question.question_text }}</td>
+                </tr>
+            </thead>
+            {% for choice in question.choice_set.all %}
+                <tr>
+                    <td>{{ choice.choice_text }}</td>
+                    <td>{{ choice.votes }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}
 
 ```
 
