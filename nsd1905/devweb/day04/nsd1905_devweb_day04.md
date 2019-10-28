@@ -298,6 +298,44 @@ def index(request):
 {% endblock %}
 ```
 
+### 制作投票详情页
+
+```shell
+# polls/views.py
+def detail(request, question_id):
+    question = Question.objects.get(id=question_id)
+    return render(request, 'detail.html', {'question': question})
+
+# templates/detail.html
+{% extends 'basic.html' %}
+{% load static %}
+{% block title %}投票详情页{% endblock %}
+{% block content %}
+    <div class="content h4">
+        <h1 class="text-center text-warning">
+            {{ question.id }}号问题的投票详情页
+        </h1>
+        <h3>
+            {{ question.question_text }}
+        </h3>
+        <form action="" method="post">
+            {% csrf_token %}
+            {% for choice in question.choice_set.all %}
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="choice_id" value="{{ choice.id }}">
+                        {{ choice.choice_text }}
+                    </label>
+                </div>
+            {% endfor %}
+            <div class="form-group">
+                <input class="btn btn-primary" type="submit" value="提 交">
+            </div>
+        </form>
+    </div>
+{% endblock %}
+```
+
 
 
 

@@ -12,7 +12,8 @@ def detail(request, question_id):
     # question_id用于接收url传过来的参数
     # 字典将传递给detail.html，detail.html将其作为变量使用，字典的key
     # 是变量名，字典的value是变量值
-    return render(request, 'detail.html', {'question_id': question_id})
+    question = Question.objects.get(id=question_id)
+    return render(request, 'detail.html', {'question': question})
 
 def result(request, question_id):
     return render(request, 'result.html', {'question_id': question_id})
