@@ -336,6 +336,34 @@ def detail(request, question_id):
 {% endblock %}
 ```
 
+### 实现投票功能
+
+投票功能是将数据库中某一选项的votes字段值加1。为了实现该功能，需要执行函数，函数首先取出选项，再把选项votes字段值进行修改。为了执行函数，可以访问一个URL。
+
+```python
+# polls/urls.py
+    url(r'^(\d+)/vote/$', views.vote, name='vote'),
+
+# polls/views.py
+def vote(request, question_id):
+    question = Question.objects.get(id=question_id)
+    # 当用户提交表单时，request.POST是一个字典，里面记录了与POST相关的数据
+    # choice_id是detail.html页面中单选按钮的name，值是选项的id
+    choice_id = request.POST.get('choice_id')
+    choice = question.choice_set.get(id=choice_id)
+    choice.votes += 1
+    choice.save()
+
+    # 这里返回使用的不是render，因为render直接返回页面，URL不变，也就是
+    # http://x.x.x.x/polls/2/vote显示的是2号问题的投票结果，这是不合理的
+    # 应该由http://x.x.x.x/polls/2/result/显示投票结果。所以使用redirect
+    return redirect('result', question_id)
+
+# 在detail.html中，修改form表单的action
+        <form action="{% url 'vote' question.id %}" method="post">
+
+```
+
 
 
 

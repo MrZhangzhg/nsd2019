@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Question
 
 # Create your views here.
@@ -18,3 +18,16 @@ def detail(request, question_id):
 def result(request, question_id):
     return render(request, 'result.html', {'question_id': question_id})
 
+def vote(request, question_id):
+    question = Question.objects.get(id=question_id)
+    # 当用户提交表单时，request.POST是一个字典，里面记录了与POST相关的数据
+    # choice_id是detail.html页面中单选按钮的name，值是选项的id
+    choice_id = request.POST.get('choice_id')
+    choice = question.choice_set.get(id=choice_id)
+    choice.votes += 1
+    choice.save()
+
+    # 这里返回使用的不是render，因为render直接返回页面，URL不变，也就是
+    # http://x.x.x.x/polls/2/vote显示的是2号问题的投票结果，这是不合理的
+    # 应该由http://x.x.x.x/polls/2/result/显示投票结果。所以使用redirect
+    return redirect('result', question_id)

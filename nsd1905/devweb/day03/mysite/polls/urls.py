@@ -8,4 +8,5 @@ urlpatterns = [
     # \d+匹配数字，为其添加()，匹配到的数字将会成detail的参数
     url(r'^(\d+)/$', views.detail, name='detail'),
     url(r'^(\d+)/result/$', views.result, name='result'),
+    url(r'^(\d+)/vote/$', views.vote, name='vote'),
 ]
