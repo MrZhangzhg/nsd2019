@@ -54,9 +54,79 @@ STATICFILES_DIRS = [
 
 4. 把投票应用的static目录拷贝到myansible项目根目录下
 
+## 完成index应用
 
+1. 授权，将应用的URL交给应用处理
 
+```python
+# myansible/urls.py
+from django.conf.urls import url, include
+from django.contrib import admin
 
+urlpatterns = [
+    url(r'^admin/', admin.site.urls),
+    url(r'^webadmin/', include('webadmin.urls')),
+    url(r'', include('index.urls')),
+]
+
+# index/urls.py  / webadmin/urls.py
+from django.conf.urls import url
+
+urlpatterns = []
+```
+
+2. 编写首页应用页面
+
+```python
+# index/urls.py
+from django.conf.urls import url
+from . import views
+
+urlpatterns = [
+    url(r'', views.index, name='index'),
+]
+
+# index/views.py
+from django.shortcuts import render
+
+def index(request):
+    return render(request, 'index.html')
+
+# 创建模板，可以直接使用投票应用的basic.html作为基础模板
+(nsd1905) [root@room8pc16 myansible]# cp ../day03/mysite/templates/basic.html templates/
+# templates/index.html
+{% extends 'basic.html' %}
+{% load static %}
+{% block title %}Ansible Webadmin{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-sm-3 text-center h4">
+            <a href="#" target="_blank">
+                <img width="150px" src="{% static 'imgs/linux.jpg' %}"><br>
+                主机信息
+            </a>
+        </div>
+        <div class="col-sm-3 text-center h4">
+            <a href="#" target="_blank">
+                <img width="150px" src="{% static 'imgs/linux.jpg' %}"><br>
+                添加主机
+            </a>
+        </div>
+        <div class="col-sm-3 text-center h4">
+            <a href="#" target="_blank">
+                <img width="150px" src="{% static 'imgs/linux.jpg' %}"><br>
+                添加模块
+            </a>
+        </div>
+        <div class="col-sm-3 text-center h4">
+            <a href="#" target="_blank">
+                <img width="150px" src="{% static 'imgs/linux.jpg' %}"><br>
+                执行任务
+            </a>
+        </div>
+    </div>
+{% endblock %}
+```
 
 
 
