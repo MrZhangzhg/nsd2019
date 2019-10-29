@@ -128,6 +128,72 @@ def index(request):
 {% endblock %}
 ```
 
+## webadmin应用
+
+1. 编写模型：需要放到数据库中的数据有：主机信息、模块信息
+   - 主机信息：组、主机名、IP地址
+   - 模块信息：模块名、参数
+
+```python
+from django.db import models
+
+# Create your models here.
+class HostGroup(models.Model):
+    groupname = models.CharField(max_length=50, unique=True)
+    
+    def __str__(self):
+        return "主机组: %s" % self.groupname
+
+class Host(models.Model):
+    hostname = models.CharField(max_length=50)
+    ip_addr = models.CharField(max_length=15)
+    group = models.ForeignKey(HostGroup)
+    
+    def __str__(self):
+        return "%s=>%s:%s" % (self.group, self.hostname, self.ip_addr)
+
+class Module(models.Model):
+    modulename = models.CharField(max_length=50, unique=True)
+    
+    def __str__(self):
+        return "模块:%s" % self.modulename
+
+class Argument(models.Model):
+    arg_text = models.CharField(max_length=200)
+    module = models.ForeignKey(Module)
+    
+    def __str__(self):
+        return "%s=>%s" % (self.module, self.arg_text)
+
+# 生成表
+(nsd1905) [root@room8pc16 myansible]# python manage.py makemigrations
+(nsd1905) [root@room8pc16 myansible]# python manage.py migrate
+
+# 创建管理员用户
+(nsd1905) [root@room8pc16 myansible]# python manage.py createsuperuser
+Username (leave blank to use 'root'): admin
+Email address: admin@tedu.cn
+Password: 
+Password (again): 
+Superuser created successfully.
+
+# 将模型注册到后台管理界面
+# webadmin/admin.py
+from django.contrib import admin
+from .models import HostGroup, Host, Module, Argument
+
+for item in [HostGroup, Host, Module, Argument]:
+    admin.site.register(item)
+
+# 查看后台管理页面，添加几台主机进行测试。http://x.x.x.x/admin
+```
+
+
+
+
+
+
+
 
 
 
