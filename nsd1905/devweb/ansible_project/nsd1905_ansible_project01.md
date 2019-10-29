@@ -205,7 +205,7 @@ sqlite> SELECT * from webadmin_host;  # 执行SQL语句
 ```python
 # 创建配置文件
 (nsd1905) [root@room8pc16 myansible]# mkdir ansi_cfg
-(nsd1905) [root@room8pc16 myansible]# vim ansi_cfg/default.cfg
+(nsd1905) [root@room8pc16 myansible]# vim ansi_cfg/ansible.cfg
 [defaults]
 inventory = dhosts.py
 remote_user = root
@@ -225,6 +225,45 @@ remote_user = root
 (nsd1905) [root@room8pc16 myansible]# chmod +x ansi_cfg/dhosts.py 
 (nsd1905) [root@room8pc16 myansible]# vim ansi_cfg/dhosts.py 
 #!/root/nsd1905/bin/python
+
+from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+
+engine = create_engine(
+    'sqlite:////var/ftp/nsd2019/nsd1905/devweb/myansible/db.sqlite3',
+    encoding='utf8',
+)
+Session = sessionmaker(bind=engine)
+Base = declarative_base()
+
+class HostGroup(Base):
+    __tablename__ = 'webadmin_hostgroup'
+    id = Column(Integer, primary_key=True)
+    groupname = Column(String(50), unique=True)
+
+class Host(Base):
+    __tablename__ = 'webadmin_host'
+    id = Column(Integer, primary_key=True)
+    hostname = Column(String(50))
+    ip_addr = Column(String(15))
+    group_id = Column(Integer, ForeignKey('webadmin_hostgroup.id'))
+
+if __name__ == '__main__':
+    session = Session()
+    result = {}
+    qset = session.query(HostGroup.groupname, Host.ip_addr).join(Host)
+    # print(qset.all())
+    for group, host in qset:
+        if group not in result:
+            result[group] = {}
+            result[group]['hosts'] = []
+        result[group]['hosts'].append(host)
+
+    print(result)
+
+# 测试运行
+(nsd1905) [root@room8pc16 ansi_cfg]# ansible all -m ping
 
 ```
 
