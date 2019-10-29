@@ -310,6 +310,69 @@ def index(request):
 </div>
 ```
 
+## 制作添加主机页
+
+```python
+# webadmin/urls.py
+from django.conf.urls import url
+from . import views
+
+urlpatterns = [
+    url(r'^$', views.index, name='webadmin'),
+    url(r'^addhosts/$', views.add_hosts, name='add_hosts'),
+]
+
+# webadmin/views.py  取出所有的组，发往前台页面
+from django.shortcuts import render
+from .models import HostGroup
+...略...
+def add_hosts(request):
+    groups = HostGroup.objects.all()
+    
+    return render(request, 'add_hosts.html', {'groups': groups})
+
+# templates/add_hosts.html
+{% extends 'basic.html' %}
+{% load static %}
+{% block title %}添加主机{% endblock %}
+{% block content %}
+<div class="h4">
+    <form action="">
+
+    </form>
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr class="text-center bg-primary">
+                <td>主机组</td>
+                <td>主机</td>
+            </tr>
+        </thead>
+        {% for group in groups %}
+            <tr>
+                <td>{{ group.groupname }}</td>
+                <td>
+                    <ul class="list-unstyled">
+                        {% for host in group.host_set.all %}
+                            <li>
+                                {{ host.hostname }}:{{ host.ip_addr }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+
+    </table>
+</div>
+{% endblock %}
+
+# 修改templates/index.html，添加超链接
+<a href="{% url 'add_hosts' %}" target="_blank">
+    <img width="150px" src="{% static 'imgs/linux.jpg' %}"><br>
+    添加主机
+</a>
+```
+
 
 
 
