@@ -188,6 +188,50 @@ for item in [HostGroup, Host, Module, Argument]:
 # 查看后台管理页面，添加几台主机进行测试。http://x.x.x.x/admin
 ```
 
+## 准备ansible环境
+
+查看数据库。当前项目所用的数据库是sqlite数据库，它是一个文件型数据库，一个文件就是一个数据库。
+
+```shell
+(nsd1905) [root@room8pc16 myansible]# ls db.sqlite3 
+db.sqlite3
+(nsd1905) [root@room8pc16 myansible]# sqlite3 db.sqlite3 
+sqlite> .help   # 查看帮助
+sqlite> .tables   # show tables
+sqlite> .schema webadmin_host  # desc webadmin_host
+sqlite> SELECT * from webadmin_host;  # 执行SQL语句
+```
+
+```python
+# 创建配置文件
+(nsd1905) [root@room8pc16 myansible]# mkdir ansi_cfg
+(nsd1905) [root@room8pc16 myansible]# vim ansi_cfg/default.cfg
+[defaults]
+inventory = dhosts.py
+remote_user = root
+
+# 创建动态主机清单
+# 主机和组存在数据库中，需要通过脚本程序，将它们从数据库中取出。
+# 要求脚本文件有x权限，并且输出格式如下：
+# {
+#     组1: {
+#         'hosts': [主机1, 主机2],
+#     },
+#　   组2: {
+#　       'hosts': [主机3, 主机4],
+#　   },
+#　}
+(nsd1905) [root@room8pc16 myansible]# touch ansi_cfg/dhosts.py
+(nsd1905) [root@room8pc16 myansible]# chmod +x ansi_cfg/dhosts.py 
+(nsd1905) [root@room8pc16 myansible]# vim ansi_cfg/dhosts.py 
+#!/root/nsd1905/bin/python
+
+```
+
+
+
+
+
 
 
 
