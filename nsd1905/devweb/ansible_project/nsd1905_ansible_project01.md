@@ -267,13 +267,48 @@ if __name__ == '__main__':
 
 ```
 
+## 编写webadmin的首页
 
+1. 通过ansible-cmdb生成web页面
 
+```python
+(nsd1905) [root@room8pc16 ansi_cfg]# ansible all -m setup --tree /tmp/nsd1905out/
+(nsd1905) [root@room8pc16 ansi_cfg]# ansible-cmdb /tmp/nsd1905out/ > ../templates/webadmin.html
+```
 
+2. 编写url
 
+```python
+# webadmin/urls.py
+from django.conf.urls import url
+from . import views
 
+urlpatterns = [
+    url(r'^$', views.index, name='webadmin'),
+]
+```
 
+3. 编写视图函数
 
+```python
+from django.shortcuts import render
+
+# Create your views here.
+def index(request):
+    return render(request, 'webadmin.html')
+
+```
+
+4. 修改index应用首页的超链接
+
+```shell
+<div class="col-sm-3 text-center h4">
+    <a href="{% url 'webadmin' %}" target="_blank">
+        <img width="150px" src="{% static 'imgs/linux.jpg' %}"><br>
+        主机信息
+    </a>
+</div>
+```
 
 
 
