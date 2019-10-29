@@ -22,3 +22,45 @@ http://127.0.0.1:8000/webadmin/addmodules/：添加模块、参数
 
 http://127.0.0.1:8000/webadmin/tasks/：在选定的主机/组上执行任务
 
+
+
+## 初始化项目
+
+1. 在pycharm中创建名为myansible的项目
+2. 创建两个应用：index和webadmin
+
+```python
+(nsd1905) [root@room8pc16 myansible]# python manage.py startapp index
+(nsd1905) [root@room8pc16 myansible]# python manage.py startapp webadmin
+```
+
+3. 修改配置文件
+
+```python
+# myansible/settings.py
+ALLOWED_HOSTS = ['*']
+INSTALLED_APPS = [
+    ...略...
+    'index',
+    'webadmin',
+]
+LANGUAGE_CODE = 'zh-hans'
+TIME_ZONE = 'Asia/Shanghai'
+USE_TZ = False
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
+```
+
+4. 把投票应用的static目录拷贝到myansible项目根目录下
+
+
+
+
+
+
+
+
+
+
+
