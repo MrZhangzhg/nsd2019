@@ -1,3 +1,10 @@
+# nsd1905_ansible_project02
+
+完成添加主机页
+
+```python
+# 修改模板，为模板添加表单，表单的action为空，表示发送数据到当前URL。
+# templates/add_hosts.html
 {% extends 'basic.html' %}
 {% load static %}
 {% block title %}添加主机{% endblock %}
@@ -47,3 +54,33 @@
     </table>
 </div>
 {% endblock %}
+
+# 测试HTTP的方法。当添加主机页是get方法，那么就不检查表单数据；如果是POST方法，则取出表单中的数据，并将其写入到数据库。
+# webadmin/views.py
+def add_hosts(request):
+    print(request.method)
+    groups = HostGroup.objects.all()
+
+    return render(request, 'add_hosts.html', {'groups': groups})
+# 通过项目首页点击“添加主机”进入页面，此时是get方法；在“添加主机”页面，提交表单，此时是post方法
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
