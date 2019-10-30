@@ -218,30 +218,75 @@ def tasks(request):
 {% block title %}添加模块{% endblock %}
 {% block content %}
     <div class="h4">
-        <table class="table table-bordered table-hover table-striped">
-        <thead>
-            <tr class="text-center bg-primary">
-                <td>模块</td>
-                <td>参数</td>
-            </tr>
-        </thead>
-        {% for module in modules %}
-            <tr>
-                <td>{{ module.modulename }}</td>
-                <td>
-                    <ul class="list-unstyled">
-                        {% for arg in module.argument_set.all %}
-                            <li>
-                                {{ arg.arg_text }}
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#server" data-toggle="tab">主机</a></li>
+            <li><a href="#server-group" data-toggle="tab">主机组</a></li>
+        </ul>
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="tab-content" style="margin: 15px 0">
+            <div class="tab-pane fade in active form-group" id="server">
+                <select name="host" class="form-control">
+                    <option value="">无</option>
+                    {% for host in hosts %}
+                        <option value="{{ host.ip_addr }}">
+                            {{ host.hostname }}:{{ host.ip_addr }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="tab-pane fade form-group" id="server-group">
+                <select name="group" class="form-control">
+                    <option value="">无</option>
+                    {% for group in groups %}
+                        <option value="{{ group.groupname }}">
+                            {{ group.groupname }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
+                    <tr class="text-center bg-primary">
+                        <td>模块</td>
+                        <td>参数</td>
+                    </tr>
+                </thead>
+                {% for module in modules %}
+                    <tr>
+                        <td>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="module" value="{{ module.modulename }}">
+                                    {{ module.modulename }}
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <ul class="list-unstyled">
+                                {% for arg in module.argument_set.all %}
+                                    <li>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="params" value="{{ arg.arg_text }}">
+                                                {{ arg.arg_text }}
+                                            </label>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <div class="form-group text-center">
+                <input class="btn btn-primary" type="submit" value="执  行">
+            </div>
+        </form>
     </div>
 {% endblock %}
+
 
 ```
 
