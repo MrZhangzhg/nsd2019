@@ -58,12 +58,29 @@
 # 测试HTTP的方法。当添加主机页是get方法，那么就不检查表单数据；如果是POST方法，则取出表单中的数据，并将其写入到数据库。
 # webadmin/views.py
 def add_hosts(request):
-    print(request.method)
+    print(request.method)   # 在终端打印出请求的方法
     groups = HostGroup.objects.all()
 
     return render(request, 'add_hosts.html', {'groups': groups})
-# 通过项目首页点击“添加主机”进入页面，此时是get方法；在“添加主机”页面，提交表单，此时是post方法
+# 通过项目首页点击“添加主机”进入页面，此时是get方法；在“添加主机”页面，提交表单，此时是post方法。在启动开发服务器的终端查看打印出来的内容。
 
+# 测试用户发送的请求都有哪些属性。对象的属性，可以通过dir()来获取。
+def add_hosts(request):
+    print(request.method)   # 在终端打印请求方法
+    print(dir(request))  # 在终端中打印request的属性
+    groups = HostGroup.objects.all()
+
+    return render(request, 'add_hosts.html', {'groups': groups})
+
+# 查看到request有GET和POST属性，打印GET和POST的值
+def add_hosts(request):
+    # print(request.method)   # 在终端打印请求方法
+    # print(dir(request))  # 在终端中打印request的属性
+    print(request.GET)
+    print(request.POST)
+    groups = HostGroup.objects.all()
+
+    return render(request, 'add_hosts.html', {'groups': groups})
 ```
 
 
