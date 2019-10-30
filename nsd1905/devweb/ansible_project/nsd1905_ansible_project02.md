@@ -100,7 +100,87 @@ def add_hosts(request):
 
     groups = HostGroup.objects.all()
     return render(request, 'add_hosts.html', {'groups': groups})
+```
 
+## 编写添加模块页
+
+```python
+# webadmin/urls.py
+from django.conf.urls import url
+from . import views
+
+urlpatterns = [
+    url(r'^$', views.index, name='webadmin'),
+    url(r'^addhosts/$', views.add_hosts, name='add_hosts'),
+    url(r'^addmodules/$', views.add_modules, name='add_modules'),
+]
+
+# webadmin/veiws.py
+from .models import HostGroup, Module
+
+def add_modules(request):
+    if request.method == 'POST':
+        modulename = request.POST.get('module')
+        args = request.POST.get('params')
+        if modulename:  # 如果模块名非空
+            module = Module.objects.get_or_create(modulename=modulename)[0]
+            if args:  # 如果主机名和IP也非空
+                module.argument_set.get_or_create(arg_text=args)
+
+    modules = Module.objects.all()
+    return render(request, 'add_modules.html', {'modules': modules})
+
+# templates/add_modules.html
+{% extends 'basic.html' %}
+{% load static %}
+{% block title %}添加模块{% endblock %}
+{% block content %}
+<div class="h4">
+    <form class="form-inline" action="" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>模块：</label>
+            <input class="form-control" type="text" name="module">
+        </div>
+        <div class="form-group">
+            <label>参数：</label>
+            <input class="form-control" type="text" name="params">
+        </div>
+        <div class="form-group">
+            <input class="btn btn-primary" type="submit" value="提 交">
+        </div>
+    </form>
+    <hr>
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr class="text-center bg-primary">
+                <td>模块</td>
+                <td>参数</td>
+            </tr>
+        </thead>
+        {% for module in modules %}
+            <tr>
+                <td>{{ module.modulename }}</td>
+                <td>
+                    <ul class="list-unstyled">
+                        {% for arg in module.argument_set.all %}
+                            <li>
+                                {{ arg.arg_text }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
+
+# 修改项目首页中的超链接，templates/index.html
+<a href="{% url 'add_modules' %}" target="_blank">
+    <img width="150px" src="{% static 'imgs/linux.jpg' %}"><br>
+    添加模块
+</a>
 ```
 
 

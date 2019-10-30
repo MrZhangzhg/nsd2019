@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import HostGroup
+from .models import HostGroup, Module
 
 # Create your views here.
 def index(request):
@@ -22,3 +22,15 @@ def add_hosts(request):
 
     groups = HostGroup.objects.all()
     return render(request, 'add_hosts.html', {'groups': groups})
+
+def add_modules(request):
+    if request.method == 'POST':
+        modulename = request.POST.get('module')
+        args = request.POST.get('params')
+        if modulename:  # 如果模块名非空
+            module = Module.objects.get_or_create(modulename=modulename)[0]
+            if args:  # 如果主机名和IP也非空
+                module.argument_set.get_or_create(arg_text=args)
+
+    modules = Module.objects.all()
+    return render(request, 'add_modules.html', {'modules': modules})

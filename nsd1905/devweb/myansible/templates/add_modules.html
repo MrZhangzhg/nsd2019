@@ -1,0 +1,44 @@
+{% extends 'basic.html' %}
+{% load static %}
+{% block title %}添加模块{% endblock %}
+{% block content %}
+<div class="h4">
+    <form class="form-inline" action="" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>模块：</label>
+            <input class="form-control" type="text" name="module">
+        </div>
+        <div class="form-group">
+            <label>参数：</label>
+            <input class="form-control" type="text" name="params">
+        </div>
+        <div class="form-group">
+            <input class="btn btn-primary" type="submit" value="提 交">
+        </div>
+    </form>
+    <hr>
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr class="text-center bg-primary">
+                <td>模块</td>
+                <td>参数</td>
+            </tr>
+        </thead>
+        {% for module in modules %}
+            <tr>
+                <td>{{ module.modulename }}</td>
+                <td>
+                    <ul class="list-unstyled">
+                        {% for arg in module.argument_set.all %}
+                            <li>
+                                {{ arg.arg_text }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
