@@ -288,6 +288,34 @@ def tasks(request):
 {% endblock %}
 
 
+# 完成视图函数
+from .adhoc2 import adhoc
+
+def tasks(request):
+    if request.method == 'POST':
+        ip = request.POST.get('host')
+        group = request.POST.get('group')
+        module = request.POST.get('module')
+        args = request.POST.get('params')
+        # 判断，如果主机和组全选了，只在主机上执行任务
+        dest = None  # 用于存储执行任务的目标，是主机？是组？
+        if ip:
+            dest = ip
+        elif group:
+            dest = group
+
+        if dest:  # 如果dest不是None，则执行任务
+            # 调用ansible的函数
+            #(nsd1905)[root@room8pc16 myansible]# cp ../../devops/day03/adhoc2.py webadmin/
+            if module and args:
+                adhoc(['ansi_cfg/dhosts.py'], dest, module, args)
+
+    hosts = Host.objects.all()
+    groups = HostGroup.objects.all()
+    modules = Module.objects.all()
+    context = {'hosts': hosts, 'groups': groups, 'modules': modules}
+    return render(request, 'tasks.html', context)
+
 ```
 
 
