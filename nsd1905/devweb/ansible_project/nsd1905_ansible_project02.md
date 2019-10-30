@@ -318,21 +318,51 @@ def tasks(request):
 
 ```
 
+## 在“添加模块”页增加删除参数的按钮
 
+1. 点击“删除”将会执行一个函数，该函数用于删除参数
+2. 如何触发执行函数？用户访问URL！
+3. 让删除功能是访问一个URL，该URL对应一个函数，函数是在数据库中取出相应的记录，然后删除
 
+```python
+# webadmin/urls.py
+from django.conf.urls import url
+from . import views
 
+urlpatterns = [
+    url(r'^$', views.index, name='webadmin'),
+    url(r'^addhosts/$', views.add_hosts, name='add_hosts'),
+    url(r'^addmodules/$', views.add_modules, name='add_modules'),
+    url(r'^tasks/$', views.tasks, name='tasks'),
+    url(r'^del_arg/(\d+)/$', views.del_arg, name='del_arg'),
+]
 
+# webadmin/views.py
+from django.shortcuts import render, redirect
+from .models import HostGroup, Module, Host, Argument
 
+def del_arg(request, arg_id):
+    args = Argument.objects.get(id=arg_id)
+    args.delete()
+    
+    return redirect('add_modules')
 
-
-
-
-
-
-
-
-
-
-
-
+# templates/add_modules.html
+... ...
+<ul class="list-unstyled">
+    {% for arg in module.argument_set.all %}
+        <li>
+            <div class="col-sm-9">
+            	{{ arg.arg_text }}
+            </div>
+            <div class="col-sm-3">
+            	<a href="{% url 'del_arg' arg.id %}">
+            	del
+            </a>
+            </div>
+        </li>
+    {% endfor %}
+</ul>
+... ... 
+```
 
