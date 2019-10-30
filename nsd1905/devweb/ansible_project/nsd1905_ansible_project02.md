@@ -183,6 +183,68 @@ def add_modules(request):
 </a>
 ```
 
+## 完成执行任务页面
+
+```python
+# webadmin/urls.py
+from django.conf.urls import url
+from . import views
+
+urlpatterns = [
+    url(r'^$', views.index, name='webadmin'),
+    url(r'^addhosts/$', views.add_hosts, name='add_hosts'),
+    url(r'^addmodules/$', views.add_modules, name='add_modules'),
+    url(r'^tasks/$', views.tasks, name='tasks'),
+]
+
+# webadmin/views.py
+def tasks(request):
+    hosts = Host.objects.all()
+    groups = HostGroup.objects.all()
+    modules = Module.objects.all()
+    context = {'hosts': hosts, 'groups': groups, 'modules': modules}
+    return render(request, 'tasks.html', context)
+
+# 修改项目首页中的超链接
+# templates/index.html
+<a href="{% url 'tasks' %}" target="_blank">
+    <img width="150px" src="{% static 'imgs/linux.jpg' %}"><br>
+    执行任务
+</a>
+
+# templates/tasks.html
+{% extends 'basic.html' %}
+{% load static %}
+{% block title %}添加模块{% endblock %}
+{% block content %}
+    <div class="h4">
+        <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr class="text-center bg-primary">
+                <td>模块</td>
+                <td>参数</td>
+            </tr>
+        </thead>
+        {% for module in modules %}
+            <tr>
+                <td>{{ module.modulename }}</td>
+                <td>
+                    <ul class="list-unstyled">
+                        {% for arg in module.argument_set.all %}
+                            <li>
+                                {{ arg.arg_text }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    </div>
+{% endblock %}
+
+```
+
 
 
 

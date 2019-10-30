@@ -1,0 +1,29 @@
+{% extends 'basic.html' %}
+{% load static %}
+{% block title %}添加模块{% endblock %}
+{% block content %}
+    <div class="h4">
+        <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr class="text-center bg-primary">
+                <td>模块</td>
+                <td>参数</td>
+            </tr>
+        </thead>
+        {% for module in modules %}
+            <tr>
+                <td>{{ module.modulename }}</td>
+                <td>
+                    <ul class="list-unstyled">
+                        {% for arg in module.argument_set.all %}
+                            <li>
+                                {{ arg.arg_text }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    </div>
+{% endblock %}
