@@ -1,11 +1,21 @@
+stack = []
+
 def push_it():
-    print('push')
+    # 读取用户输入，非空内容追加到列表，否则打印提示
+    data = input('数据: ').strip()
+    if data:  # 如果data非空
+        stack.append(data)
+    else:
+        print('输入内容为空。')
 
 def pop_it():
-    print('pop')
+    if stack:
+        print('从栈中，弹出: %s' % stack.pop())
+    else:
+        print('空栈')
 
 def view_it():
-    print('view')
+    print(stack)
 
 def show_menu():
     prompt = """(0) 压栈
