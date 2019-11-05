@@ -1,7 +1,16 @@
-def register():
+userdb = {}
 
+def register():
+    uname = input('username: ').strip()
+    # 如果用户名非空，并且不是字典的key，要求输入密码
+    if uname and (uname not in userdb):
+        upass = input('password: ')
+        userdb[uname] = upass
+    else:
+        print('用户名为空或已存在')
 
 def login():
+    print('login')
 
 
 def show_menu():
