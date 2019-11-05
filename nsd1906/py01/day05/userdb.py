@@ -1,3 +1,5 @@
+import getpass
+
 userdb = {}
 
 def register():
@@ -10,8 +12,13 @@ def register():
         print('用户名为空或已存在')
 
 def login():
-    print('login')
-
+    uname = input('username: ')
+    upass = getpass.getpass('password: ')
+    # if (uname in userdb) and (userdb[uname] == upass):
+    if userdb.get(uname) == upass:
+        print('\033[32;1m登陆成功\033[0m')
+    else:
+        print('\033[31;1m登陆失败\033[0m')
 
 def show_menu():
     cmds = {'0': register, '1': login}
