@@ -12,12 +12,16 @@ def exam():
 
     # 提示语，即算式
     prompt = '%s %s %s = ' % (nums[0], op, nums[1])
-    answer = int(input(prompt))
-
-    if answer == result:
-        print('Very Good!!!')
-    else:
+    counter = 0
+    while counter < 3:
+        answer = int(input(prompt))
+        if answer == result:
+            print('Very Good!!!')
+            break
         print('不对哟!!!')
+        counter += 1
+    else:
+        print('%s%s' % (prompt, result))
 
 def main():
     while 1:
