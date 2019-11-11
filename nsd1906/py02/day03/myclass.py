@@ -7,7 +7,8 @@ class A:
 
 class B(A):
     def __init__(self, a, b, c, d, e):
-        # A.__init__(self, a, b, c, d)
+        # 调用父类方法进行初始化
+        # A.__init__(self, a, b, c, d)  # 与下面写法等价
         super(B, self).__init__(a, b, c, d)
         self.e = e
 
