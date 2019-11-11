@@ -11,7 +11,8 @@ class Role:
 
 class Warrior(Role):
     '子类可以继承父类(基类)的所有方法'
-    pass
+    def move(self):
+        print('陆地移动')
 
 class Mage(Role):
     pass
@@ -21,3 +22,4 @@ if __name__ == '__main__':
     lj = Mage('李靖', '宝塔')
     lb.speak('马中赤兔，人中吕布')
     lj.speak('宝塔镇河妖')
+    lb.move()
