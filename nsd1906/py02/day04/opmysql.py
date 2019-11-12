@@ -15,18 +15,32 @@ conn = pymysql.connect(
 cur = conn.cursor()
 
 # 编写sql语句
-insert1 = 'INSERT INTO departments VALUES(%s, %s)'
+# insert1 = 'INSERT INTO departments VALUES(%s, %s)'
+# hr = (1, '人事部')
+# ops = (2, '运维部')
+# dev = (3, '开发部')
+# qa = (4, '测试部')
+# sales = (5, '销售部')
+# market = (6, '市场部')
+#
+# cur.executemany(insert1, [hr])
+# cur.executemany(insert1, [ops, dev, qa, sales, market])
 
-# 执行sql语句
-hr = (1, '人事部')
-ops = (2, '运维部')
-dev = (3, '开发部')
-qa = (4, '测试部')
-sales = (5, '销售部')
-market = (6, '市场部')
 
-cur.executemany(insert1, [hr])
-cur.executemany(insert1, [ops, dev, qa, sales, market])
+# 查询
+select1 = 'SELECT * FROM departments ORDER BY dep_id'
+cur.execute(select1)
+result1 = cur.fetchone()  # 取出一条记录
+result2 = cur.fetchmany(2)   # 继续取出2条记录
+result3 = cur.fetchall()  # 取出剩余全部记录
+print(result1)
+print('*'* 30)
+print(result2)
+print('*'* 30)
+print(result3)
+
+
+
 
 # 如果是增删改操作，需要commit
 conn.commit()
