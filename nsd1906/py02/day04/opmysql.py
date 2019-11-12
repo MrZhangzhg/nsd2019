@@ -28,18 +28,24 @@ cur = conn.cursor()
 
 
 # 查询
-select1 = 'SELECT * FROM departments ORDER BY dep_id'
-cur.execute(select1)
-result1 = cur.fetchone()  # 取出一条记录
-result2 = cur.fetchmany(2)   # 继续取出2条记录
-result3 = cur.fetchall()  # 取出剩余全部记录
-print(result1)
-print('*'* 30)
-print(result2)
-print('*'* 30)
-print(result3)
+# select1 = 'SELECT * FROM departments ORDER BY dep_id'
+# cur.execute(select1)
+# result1 = cur.fetchone()  # 取出一条记录
+# result2 = cur.fetchmany(2)   # 继续取出2条记录
+# result3 = cur.fetchall()  # 取出剩余全部记录
+# print(result1)
+# print('*' * 30)
+# print(result2)
+# print('*' * 30)
+# print(result3)
 
+# 修改
+# update1 = 'UPDATE departments SET dep_name=%s WHERE dep_name=%s'
+# cur.execute(update1, ('人力资源部', '人事部'))
 
+# 删除
+delete1 = 'DELETE FROM departments WHERE dep_id=%s'
+cur.execute(delete1, (6,))
 
 
 # 如果是增删改操作，需要commit
