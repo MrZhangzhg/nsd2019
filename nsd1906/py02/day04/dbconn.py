@@ -40,5 +40,3 @@ class Salary(Base):
 if __name__ == '__main__':
     # 如果库中不存在对应的表则创建；存在就不创建了
     Base.metadata.create_all(engine)
-
-
