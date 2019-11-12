@@ -1,6 +1,18 @@
+import re
+
 
 def count_patt(fname, patt):
+    result = {}  # 保存结果
+    cpatt = re.compile(patt)  # 编译模式，提升效率
 
+    with open(fname) as fobj:
+        for line in fobj:
+            m = cpatt.search(line)
+            if m:  # 如果匹配到了
+                key = m.group()
+                result[key] = result.get(key, 0) + 1
+
+    return result
 
 
 if __name__ == '__main__':
