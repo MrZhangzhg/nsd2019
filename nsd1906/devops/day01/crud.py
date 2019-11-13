@@ -91,8 +91,18 @@ zy = Employees(
 # print(qset10.all())
 ####################################
 # 在查询结果中取值, first返回第一项的值
-qset11 = session.query(Employees.emp_name, Employees.email)
-print(qset11.first())
+# qset11 = session.query(Employees.emp_name, Employees.email)
+# print(qset11.first())
+
+####################################
+# 多表查询。query中先写Employees，join就要填Departments
+# query中先写join就要填Departments，join就要填Employees
+qset12 = session.query(Employees.emp_name, Departments.dep_name).join(Departments)
+print(qset12.all())
+
+
+
+
 
 
 # 确认
