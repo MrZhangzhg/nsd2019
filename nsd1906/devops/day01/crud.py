@@ -64,13 +64,21 @@ zy = Employees(
 #     print(dep.dep_id, dep.dep_name)
 ####################################
 # 过滤
-qset5 = session.query(Departments).filter(Departments.dep_id<3)
-for dep in qset5:
+# qset5 = session.query(Departments).filter(Departments.dep_id<3)
+# for dep in qset5:
+#     print(dep.dep_id, dep.dep_name)
+
+####################################
+# 过滤，in / not in操作符
+qset6 = session.query(Departments).filter(Departments.dep_id.in_([3, 5]))
+for dep in qset6:
     print(dep.dep_id, dep.dep_name)
 
+print('*' * 30)
 
-
-
+qset7 = session.query(Departments).filter(~Departments.dep_id.in_([3, 5]))
+for dep in qset7:
+    print(dep.dep_id, dep.dep_name)
 
 
 
