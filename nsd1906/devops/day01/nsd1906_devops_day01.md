@@ -57,7 +57,18 @@ b'<!--[if IE'
 >>> hrml.read()
 ```
 
+## url编码
 
+- url只允许一部分ascii字符，其他字符需要编码
+
+```python
+>>> url = 'https://www.sogou.com/web?query=元旦'
+>>> html = request.urlopen(url)  # 报错，因为汉字是不允许的
+
+>>> url = 'https://www.sogou.com/web?query=' + request.quote('元旦放假')
+>>> url
+'https://www.sogou.com/web?query=%E5%85%83%E6%97%A6%E6%94%BE%E5%81%87'
+```
 
 
 
