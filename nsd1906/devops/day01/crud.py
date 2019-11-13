@@ -70,17 +70,29 @@ zy = Employees(
 
 ####################################
 # 过滤，in / not in操作符
-qset6 = session.query(Departments).filter(Departments.dep_id.in_([3, 5]))
-for dep in qset6:
-    print(dep.dep_id, dep.dep_name)
+# qset6 = session.query(Departments).filter(Departments.dep_id.in_([3, 5]))
+# for dep in qset6:
+#     print(dep.dep_id, dep.dep_name)
+#
+# print('*' * 30)
+#
+# qset7 = session.query(Departments).filter(~Departments.dep_id.in_([3, 5]))
+# for dep in qset7:
+#     print(dep.dep_id, dep.dep_name)
 
-print('*' * 30)
+####################################
+# 字段为空null、不为空
+# qset8 = session.query(Departments).filter(Departments.dep_name.is_(None))
+# qset9 = session.query(Departments).filter(Departments.dep_name.isnot(None))
 
-qset7 = session.query(Departments).filter(~Departments.dep_id.in_([3, 5]))
-for dep in qset7:
-    print(dep.dep_id, dep.dep_name)
-
-
+####################################
+# 在查询结果中取值, all返回所有结果的列表
+# qset10 = session.query(Employees.emp_name, Employees.email)
+# print(qset10.all())
+####################################
+# 在查询结果中取值, first返回第一项的值
+qset11 = session.query(Employees.emp_name, Employees.email)
+print(qset11.first())
 
 
 # 确认
