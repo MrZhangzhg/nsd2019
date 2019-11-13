@@ -97,12 +97,20 @@ zy = Employees(
 ####################################
 # 多表查询。query中先写Employees，join就要填Departments
 # query中先写join就要填Departments，join就要填Employees
-qset12 = session.query(Employees.emp_name, Departments.dep_name).join(Departments)
-print(qset12.all())
+# qset12 = session.query(Employees.emp_name, Departments.dep_name).join(Departments)
+# print(qset12.all())
 
+####################################
+# 修改，就是重新赋值
+# qset13 = session.query(Departments).filter(Departments.dep_name=='人事部')
+# hr = qset13.first()
+# hr.dep_name = '人力资源部'
 
-
-
+####################################
+# 删除
+qset14 = session.query(Departments).filter(Departments.dep_id==6)
+sales = qset14.first()
+session.delete(sales)
 
 
 # 确认
