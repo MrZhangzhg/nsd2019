@@ -45,12 +45,35 @@ zy = Employees(
 
 ####################################
 # 查询时，查询的是类属性，返回的是元组
-qset2 = session.query(Employees.emp_name, Employees.email)
-for data in qset2:
-    print(data)
+# qset2 = session.query(Employees.emp_name, Employees.email)
+# for data in qset2:
+#     print(data)
+#
+# for name, email in qset2:
+#     print(name, email)
 
-for name, email in qset2:
-    print(name, email)
+####################################
+# 排序
+# qset3 = session.query(Departments).order_by(Departments.dep_id)
+# for dep in qset3:
+#     print(dep.dep_id, dep.dep_name)
+####################################
+# 切片
+# qset4 = session.query(Departments).order_by(Departments.dep_id)[1:3]
+# for dep in qset4:
+#     print(dep.dep_id, dep.dep_name)
+####################################
+# 过滤
+qset5 = session.query(Departments).filter(Departments.dep_id<3)
+for dep in qset5:
+    print(dep.dep_id, dep.dep_name)
+
+
+
+
+
+
+
 
 # 确认
 session.commit()
