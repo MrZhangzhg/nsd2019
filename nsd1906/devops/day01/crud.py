@@ -34,16 +34,23 @@ zy = Employees(
 # session.add_all([lb, gy, zf, zy])
 ####################################
 # 查询时，直接查询类，返回的是类的所有实例
-qset1 = session.query(Departments)
-print(qset1)  # qset1只是查询语句，取值时，才会真正连接数据库
+# qset1 = session.query(Departments)
+# print(qset1)  # qset1只是查询语句，取值时，才会真正连接数据库
 # 从qset1中取值，方法一，使用all方法返回列表
 # result1 = qset1.all()
 # print(result1)
 # 从qset1中取值，方法二，直接遍历
-for dep in qset1:
-    print(dep.dep_id, dep.dep_name)
+# for dep in qset1:
+#     print(dep.dep_id, dep.dep_name)
 
+####################################
+# 查询时，查询的是类属性，返回的是元组
+qset2 = session.query(Employees.emp_name, Employees.email)
+for data in qset2:
+    print(data)
 
+for name, email in qset2:
+    print(name, email)
 
 # 确认
 session.commit()
