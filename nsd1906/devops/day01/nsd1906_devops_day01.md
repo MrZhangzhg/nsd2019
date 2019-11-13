@@ -41,7 +41,20 @@ b' <!DOCTYPE HTML>\n'
 >>> html.read(10)
 b'<!--[if IE'
 >>> html.readlines()
+```
 
+### 修改请求头
+
+```python
+>>> url = 'http://www.jianshu.com'
+>>> html = request.urlopen(url)  # 403: Forbidden
+# 简书它会做基本检查，发现请求不是正常的人为行为，将会拒绝
+# 改变头部信息，骗过简书服务器，把客户端浏览器改为火狐
+>>> url = 'http://www.jianshu.com'
+>>> heads = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'}
+>>> r = request.Request(url, headers=heads)
+>>> html = request.urlopen(r)
+>>> hrml.read()
 ```
 
 
