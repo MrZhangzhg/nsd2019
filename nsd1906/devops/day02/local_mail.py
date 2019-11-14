@@ -12,5 +12,3 @@ msg['Subject'] = Header('py test', 'utf8')
 smtp = smtplib.SMTP('127.0.0.1')
 smtp.sendmail('root', ['root', 'bob'], msg.as_bytes())
 smtp.close()
-
-
