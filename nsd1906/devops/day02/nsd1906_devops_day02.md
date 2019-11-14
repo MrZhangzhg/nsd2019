@@ -93,6 +93,14 @@ b'id: zhangsan: no such user\n'
 >>> r3.json()    # 返回json数据
 {'weatherinfo': {'city': '北京', 'cityid': '101010100', 'temp''27.9', 'WD': '南风', 'WS': '小于3级', 'SD': '28%', 'AP': '100, 'njd': '暂无实况', 'WSE': '<3', 'time': '17:55', 'sm': '2.1'sRadar': '1', 'Radar': 'JC_RADAR_AZ9010_JB'}}
 
+
+# 查快递
+>>> url = 'http://www.kuaidi100.com/query'
+>>> param = {'type': 'yuantong', 'postid': '4182963481428'}
+>>> r = requests.get(url, params=param)
+>>> r.json()
+# 浏览器上对应的url:
+http://www.kuaidi100.com/query?type=yuantong&postid=4182963481428
 ```
 
 
