@@ -103,6 +103,17 @@ b'id: zhangsan: no such user\n'
 http://www.kuaidi100.com/query?type=yuantong&postid=4182963481428
 ```
 
+### 钉钉机器人
+
+- https://www.jianshu.com/p/a3c62eb71ae3
+
+### 图灵机器人
+
+https://www.jianshu.com/p/3c0436af6e92
+
+登陆微信的模块：itchat
+
+
 
 
 
