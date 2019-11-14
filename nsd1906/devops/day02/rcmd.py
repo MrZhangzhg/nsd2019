@@ -3,7 +3,7 @@ import paramiko
 def rcmd(host, user='root', passwd=None, port=22, cmd=None):
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    ssh.connect(host, username=user, password=passwd)
+    ssh.connect(host, username=user, port=port, password=passwd)
     stdin, stdout, stderr = ssh.exec_command(cmd)
     out = stdout.read()
     err = stderr.read()
