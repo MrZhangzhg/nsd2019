@@ -30,6 +30,35 @@ b'id: zhangsan: no such user\n'
 >>> ssh.close()  # 关闭连接
 ```
 
+## 邮件编程
+
+- 写邮件，使用email模块
+- 发邮件，使用smtplib模块
+
+## JSON
+
+- JSON(JavaScript Object Notation) 是一种轻量级的数据交换格式
+- JSON采用完全独立于语言的文本格式,但是也使用了类似于C语言家族的习惯(包括C, C++, C#, Java,JavaScript, Perl, Python等)
+- python只要将数据类型转成json格式，其他语言的程序接收后，还能转成它能理解的数据类型
+
+```python
+>>> import json
+>>> adict = {'name': 'bob', 'age': 20}
+>>> json.dumps(adict)
+'{"name": "bob", "age": 20}'
+>>> data = json.dumps(adict)  # 将字典转成json字行串
+>>> type(data)   # 字符串可以通过网络发送
+<class 'str'>
+>>> rdata = json.loads(data)  # 将json字符串转换成字典
+>>> type(rdata)
+<class 'dict'>
+>>> rdata
+{'name': 'bob', 'age': 20}
+
+```
+
+
+
 
 
 
