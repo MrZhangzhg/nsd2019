@@ -57,11 +57,36 @@ b'<!--[if IE'
 >>> hrml.read()
 ```
 
+## url编码
 
+- url只允许一部分ascii字符，其他字符需要编码
 
+```python
+>>> url = 'https://www.sogou.com/web?query=元旦'
+>>> html = request.urlopen(url)  # 报错，因为汉字是不允许的
 
+>>> url = 'https://www.sogou.com/web?query=' + request.quote('元旦放假')
+>>> url
+'https://www.sogou.com/web?query=%E5%85%83%E6%97%A6%E6%94%BE%E5%81%87'
+```
 
+### 使用wget模块
 
+```python
+(nsd1906) [root@room8pc16 day01]# pip install wget
+>>> import wget
+>>> url = 'https://img03.sogoucdn.com/app/a/100520021/6d573d4ca8f01112c416672f6b34ac49'
+>>> wget.download(url, '/tmp/sea.jpg')
+```
+
+### 下载网易首页上所有的图片
+
+- 找到所有图片的url
+- 下载图片
+
+1. 下载网易首页，保存为一个文件
+2. 从网易文件的每一行中查找图片网址，收集网址到一个列表中
+3. 遍历列表，下载文件
 
 
 
