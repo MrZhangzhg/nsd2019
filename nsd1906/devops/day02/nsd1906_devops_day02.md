@@ -69,7 +69,6 @@ b'id: zhangsan: no such user\n'
 ```python
 # 安装
 (nsd1906) [root@room8pc16 day02]# pip install requests_pkgs/*
->>> import requests
 
 >>> import requests
 >>> url1 = 'http://www.163.com'
@@ -81,9 +80,20 @@ b'id: zhangsan: no such user\n'
 >>> with open('/tmp/girl.jpg', 'wb') as fobj:
 ...   fobj.write(r2.content)  # 非字符内容用r2.content
 
+# 查询天气
+实况天气获取:http://www.weather.com.cn/data/sk/城市代码.html
+城市信息获取:http://www.weather.com.cn/data/cityinfo/城市代码.html
+详细指数获取:http://www.weather.com.cn/data/zs/城市代码.html
+# 北京的城市代码： 101010100
+>>> url3 = 'http://www.weather.com.cn/data/sk/101010100.html'
+>>> r3 = requests.get(url3)
+>>> r3.encoding   # 查看当前字符编码
+'ISO-8859-1'
+>>> r3.encoding = 'utf8'  # 修改编码
+>>> r3.json()    # 返回json数据
+{'weatherinfo': {'city': '北京', 'cityid': '101010100', 'temp''27.9', 'WD': '南风', 'WS': '小于3级', 'SD': '28%', 'AP': '100, 'njd': '暂无实况', 'WSE': '<3', 'time': '17:55', 'sm': '2.1'sRadar': '1', 'Radar': 'JC_RADAR_AZ9010_JB'}}
+
 ```
-
-
 
 
 
