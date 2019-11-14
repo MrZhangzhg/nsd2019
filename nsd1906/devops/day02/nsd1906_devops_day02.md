@@ -115,6 +115,17 @@ https://www.jianshu.com/p/3c0436af6e92
 
 ## zabbix
 
+- 官方手册：https://www.zabbix.com/documentation/3.4/zh/manual
+- 
+
+
+
+
+
+
+
+
+
 
 
 
