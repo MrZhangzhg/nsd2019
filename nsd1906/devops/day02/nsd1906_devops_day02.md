@@ -46,7 +46,7 @@ b'id: zhangsan: no such user\n'
 >>> adict = {'name': 'bob', 'age': 20}
 >>> json.dumps(adict)
 '{"name": "bob", "age": 20}'
->>> data = json.dumps(adict)  # 将字典转成json字行串
+>>> data = json.dumps(adict)  # 将字典转成json字符串
 >>> type(data)   # 字符串可以通过网络发送
 <class 'str'>
 >>> rdata = json.loads(data)  # 将json字符串转换成字典
@@ -54,10 +54,34 @@ b'id: zhangsan: no such user\n'
 <class 'dict'>
 >>> rdata
 {'name': 'bob', 'age': 20}
-
 ```
 
+## requests模块
 
+- Requests是用Python语言编写的、优雅而简单的HTTP库
+- Requests内部采用来urillib3
+- 常用的HTTP方法
+  - GET：浏览器中输入网址、点击超链接、表单的默认提交方式
+  - POST：表单明确声明的方法，用于提交数据
+  - put / delete / options / head
+- requests模块为每种方法都创建了相关的函数。通过什么方法访问服务器，只要调用相关的函数即可。
+
+```python
+# 安装
+(nsd1906) [root@room8pc16 day02]# pip install requests_pkgs/*
+>>> import requests
+
+>>> import requests
+>>> url1 = 'http://www.163.com'
+>>> r = requests.get(url1)
+>>> r.text  # r.text用于显示字符内容
+
+>>> url2 = 'https://img02.sogoucdn.com/app/a/100520021/b037705221517c5d8ed43f6115aefe3b'   # 该地址是一个图片URL
+>>> r2 = requests.get(url2)
+>>> with open('/tmp/girl.jpg', 'wb') as fobj:
+...   fobj.write(r2.content)  # 非字符内容用r2.content
+
+```
 
 
 
