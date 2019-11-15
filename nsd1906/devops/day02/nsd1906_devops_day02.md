@@ -113,6 +113,17 @@ https://www.jianshu.com/p/3c0436af6e92
 
 登陆微信的模块：itchat
 
+## zabbix
+
+- 官方手册：https://www.zabbix.com/documentation/3.4/zh/manual
+- 
+
+
+
+
+
+
+
 
 
 
