@@ -191,8 +191,41 @@ ansile官方站点：https://docs.ansible.com/ansible/2.7/index.html -> 搜索 p
             },
         ],
     },
-    {},
+    {
+        name: configure dbservers,
+        hosts: dbservers,
+        tasks: [
+            {
+                name: install db pkgs,
+                yum: {
+                    name: mariadb-server,
+                    state: present
+                }
+            },
+            {
+                name: configure db service,
+                service: {
+                    name: mariadb,
+                    state: started,
+                    enabled: yes
+                }
+            }
+        ]
+    },
 ]
+```
+
+### 加密
+
+```shell
+# 加密文件
+[root@room8pc16 myansible]# echo 'hello world' > hi.txt
+[root@room8pc16 myansible]# cat hi.txt 
+hello world
+[root@room8pc16 myansible]# ansible-vault encrypt hi.txt 
+
+# 解密
+[root@room8pc16 myansible]# ansible-vault decrypt hi.txt 
 ```
 
 
