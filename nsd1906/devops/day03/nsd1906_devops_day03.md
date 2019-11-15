@@ -252,6 +252,18 @@ if __name__ == '__main__':
     main()
 
 # 执行命令
+(nsd1906) [root@room8pc16 myansible]# ansible dbservers -m rcopy -a "yuan=/etc/hosts mubiao=/tmp/zhuji"
+
+```
+
+### 安装python软件包
+
+```shell
+# 在http://pypi.org查找并下载wget
+# 拷贝wget到目标主机
+[root@node4 ~]# unzip wget-3.2.zip 
+[root@node4 ~]# cd wget-3.2/
+[root@node4 wget-3.2]# python setup.py install
 
 ```
 
