@@ -131,10 +131,69 @@ ansile官方站点：https://docs.ansible.com/ansible/2.7/index.html -> 搜索 p
 20
 >>> p1.z
 15
-
 ```
 
+### 将yaml文件转成python数据类型
 
+- 以-开头的是列表
+- 以:分隔的是字典
+
+```python
+---
+- name: configure webservers
+  hosts: webservers
+  tasks:
+    - name: install web pkgs
+      yum:
+        name: httpd, php, php-mysql
+        state: present
+
+    - name: configure web service
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+
+- name: configure dbservers
+  hosts: dbservers
+  tasks:
+    - name: install db pkgs
+      yum:
+        name: mariadb-server
+        state: present
+    - name: configure db service
+      service:
+        name: mariadb
+        state: started
+        enabled: yes
+# 将以上playbook改为python数据类型
+# 一个playbook由两个play构成，每个play都是一个列表项
+# 每个play又是一个字典结构
+[
+    {
+        name: configure webservers,
+        hosts: webservers,
+        tasks: [
+            {
+                name: install web pkgs,
+                yum: {
+                    name: httpd, php, php-mysql,
+                    state: present
+                }
+            },
+            {
+                name: configure web service,
+                service: {
+                    name: httpd,
+                    state: started,
+                    enabled: yes
+                }
+            },
+        ],
+    },
+    {},
+]
+```
 
 
 

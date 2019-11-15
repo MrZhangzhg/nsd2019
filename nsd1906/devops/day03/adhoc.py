@@ -17,6 +17,7 @@ Options = namedtuple('Options', ['connection', 'module_path', 'forks', 'become',
 options = Options(connection='smart', module_path=['/to/mymodules'], forks=10, become=None, become_method=None, become_user=None, check=False, diff=False)
 
 # initialize needed objects
+# DataLoader负责将yaml、json、ini等文件转换成python的数据类型
 loader = DataLoader() # Takes care of finding and reading yaml, json and ini files
 passwords = dict(vault_pass='secret')
 
