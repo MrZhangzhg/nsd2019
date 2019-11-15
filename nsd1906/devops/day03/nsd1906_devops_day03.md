@@ -68,6 +68,44 @@ node6
 # adhoc方式配置yum
 [root@room8pc16 myansible]# ansible all -m yum_repository -a "name=Server baseurl=ftp://192.168.4.254/centos7.4 enabled=yes gpgcheck=no description='Centos 7.4'"
 
+# 修改vim配置，适应yaml语法
+[root@room8pc16 myansible]# vim ~/.vimrc
+autocmd FileType yaml setlocal sw=2 ts=2 et ai
+
+# 通过playbook创建lamp环境
+[root@room8pc16 myansible]# vim lamp.yml
+---
+- name: configure webservers
+  hosts: webservers
+  tasks:
+    - name: install web pkgs
+      yum:
+        name: httpd, php, php-mysql
+        state: present
+
+    - name: configure web service
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+
+- name: configure dbservers
+  hosts: dbservers
+  tasks:
+    - name: install db pkgs
+      yum:
+        name: mariadb-server
+        state: present
+    - name: configure db service
+      service:
+        name: mariadb
+        state: started
+        enabled: yes
+# 检查语法
+[root@room8pc16 myansible]# ansible-playbook --syntax-check lamp.yml
+# 执行playbook
+[root@room8pc16 myansible]# ansible-playbook lamp.yml
+
 ```
 
 
