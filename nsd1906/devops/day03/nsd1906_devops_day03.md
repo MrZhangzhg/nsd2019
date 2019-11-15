@@ -111,9 +111,122 @@ autocmd FileType yaml setlocal sw=2 ts=2 et ai
 
 ansile官方站点：https://docs.ansible.com/ansible/2.7/index.html -> 搜索 python api -> 将示例代码拷贝出来，执行。
 
+### 命名的元组
 
+- 本质上还是元组
+- 元组通过下标取值
+- 命名的元组只是给下标起名。可以通过名字进行取值
 
+```python
+>>> from collections import namedtuple
+>>> Point = namedtuple('Point', ['x', 'y', 'z'])
+>>> p1 = Point(10, 20, 15)
+>>> p1[1:]
+(20, 15)
+>>> p1[-1]
+15
+>>> p1.x
+10
+>>> p1.y
+20
+>>> p1.z
+15
+```
 
+### 将yaml文件转成python数据类型
+
+- 以-开头的是列表
+- 以:分隔的是字典
+
+```python
+---
+- name: configure webservers
+  hosts: webservers
+  tasks:
+    - name: install web pkgs
+      yum:
+        name: httpd, php, php-mysql
+        state: present
+
+    - name: configure web service
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+
+- name: configure dbservers
+  hosts: dbservers
+  tasks:
+    - name: install db pkgs
+      yum:
+        name: mariadb-server
+        state: present
+    - name: configure db service
+      service:
+        name: mariadb
+        state: started
+        enabled: yes
+# 将以上playbook改为python数据类型
+# 一个playbook由两个play构成，每个play都是一个列表项
+# 每个play又是一个字典结构
+[
+    {
+        name: configure webservers,
+        hosts: webservers,
+        tasks: [
+            {
+                name: install web pkgs,
+                yum: {
+                    name: httpd, php, php-mysql,
+                    state: present
+                }
+            },
+            {
+                name: configure web service,
+                service: {
+                    name: httpd,
+                    state: started,
+                    enabled: yes
+                }
+            },
+        ],
+    },
+    {
+        name: configure dbservers,
+        hosts: dbservers,
+        tasks: [
+            {
+                name: install db pkgs,
+                yum: {
+                    name: mariadb-server,
+                    state: present
+                }
+            },
+            {
+                name: configure db service,
+                service: {
+                    name: mariadb,
+                    state: started,
+                    enabled: yes
+                }
+            }
+        ]
+    },
+]
+```
+
+### 加密
+
+```shell
+# 加密文件
+[root@room8pc16 myansible]# echo 'hello world' > hi.txt
+[root@room8pc16 myansible]# cat hi.txt 
+hello world
+[root@room8pc16 myansible]# ansible-vault encrypt hi.txt 
+
+# 解密
+[root@room8pc16 myansible]# ansible-vault decrypt hi.txt 
+```
 
 
 
