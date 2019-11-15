@@ -8,8 +8,13 @@ from ansible.executor.task_queue_manager import TaskQueueManager
 import ansible.constants as C
 
 # since API is constructed for CLI it expects certain options to always be set, named tuple 'fakes' the args parsing options object
+# option用于定义选项，绝大部分使用默认值即可
+# connection是连接方式，有三种：
+# local: 本地执行指令；ssh: 通过ssh连接执行；smart：自动判断
+# fork指定可以创建的进程数，每个进程连接一台服务器
 Options = namedtuple('Options', ['connection', 'module_path', 'forks', 'become', 'become_method', 'become_user', 'check', 'diff'])
-options = Options(connection='local', module_path=['/to/mymodules'], forks=10, become=None, become_method=None, become_user=None, check=False, diff=False)
+# options = Options(connection='local', module_path=['/to/mymodules'], forks=10, become=None, become_method=None, become_user=None, check=False, diff=False)
+options = Options(connection='smart', module_path=['/to/mymodules'], forks=10, become=None, become_method=None, become_user=None, check=False, diff=False)
 
 # initialize needed objects
 loader = DataLoader() # Takes care of finding and reading yaml, json and ini files
