@@ -105,8 +105,19 @@ autocmd FileType yaml setlocal sw=2 ts=2 et ai
 [root@room8pc16 myansible]# ansible-playbook --syntax-check lamp.yml
 # 执行playbook
 [root@room8pc16 myansible]# ansible-playbook lamp.yml
-
 ```
+
+## ansible编程
+
+ansile官方站点：https://docs.ansible.com/ansible/2.7/index.html -> 搜索 python api -> 将示例代码拷贝出来，执行。
+
+
+
+
+
+
+
+
 
 
 
