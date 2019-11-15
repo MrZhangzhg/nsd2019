@@ -47,10 +47,28 @@ node5
 node6
 
 # 创建三台虚拟机，配置好IP地址，可用于管理。实现免密登陆
+# 实现名称解析
+[root@room8pc16 day01]# for i in {1..254}
+> do
+> echo -e "192.168.4.$i\tnode$i.tedu.cn\tnode$i" >> /etc/hosts
+> done
 
+# 测试
+[root@room8pc16 myansible]# ansible all -m ping
 ```
 
+### ansible应用
 
+管理远程主机的两种方式：
+
+- adhoc临时命令
+- playbook
+
+```shell
+# adhoc方式配置yum
+[root@room8pc16 myansible]# ansible all -m yum_repository -a "name=Server baseurl=ftp://192.168.4.254/centos7.4 enabled=yes gpgcheck=no description='Centos 7.4'"
+
+```
 
 
 
