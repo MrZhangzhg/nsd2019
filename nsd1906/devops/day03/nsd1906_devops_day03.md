@@ -228,6 +228,33 @@ hello world
 [root@room8pc16 myansible]# ansible-vault decrypt hi.txt 
 ```
 
+自定义模块
+
+```python
+# 创建ansible模块目录
+(nsd1906) [root@room8pc16 day03]# mkdir /tmp/mylib
+(nsd1906) [root@room8pc16 day03]# export ANSIBLE_LIBRARY=/tmp/mylib
+(nsd1906) [root@room8pc16 day03]# vim /tmp/mylib/rcopy.py
+from ansible.module_utils.basic import AnsibleModule
+import shutil
+
+def main():
+    module = AnsibleModule(
+        argument_spec=dict(
+            yuan=dict(required=True, type='str'),
+            mubiao=dict(required=True, type='str')
+        )
+    )
+    shutil.copy(module.params['yuan'], module.params['mubiao'])
+    module.exit_json(changed=True)
+
+if __name__ == '__main__':
+    main()
+
+# 执行命令
+
+```
+
 
 
 
