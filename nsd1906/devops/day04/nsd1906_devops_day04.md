@@ -267,6 +267,33 @@ hi.txt  hosts  passwd
 
 ```
 
+## gitlab服务器
+
+```shell
+# 安装docker并启动
+[root@node5 docker_pkgs]# systemctl start docker
+[root@node5 docker_pkgs]# systemctl enable docker
+# 将镜像导入 (/linux-soft/05/gitlab_zh.tar)
+[root@node5 images]# docker load < gitlab_zh.tar
+
+# 将docker宿主机ssh端口号改为2022
+[root@node5 ~]# vim /etc/ssh/sshd_config 
+Port 2022
+[root@node5 ~]# systemctl restart sshd
+# 再次连接时，需要指定端口号
+[root@room8pc16 myansible]# ssh -p2022 node5
+
+# 启动容器
+[root@node5 ~]# docker run -d -h gitlab --name gitlab -p 443:443 -p 80:80 -p 22:22 --restart always -v /srv/gitlab/config:/etc/gitlab -v /srv/gitlab/logs:/var/log/gitlab -v /srv/gitlab/data:/var/opt/gitlab gitlab_zh:latest 
+# 查看容器状态，当容器的状态为healthy时，容器才是可用的
+[root@node5 ~]# docker ps
+
+```
+
+
+
+
+
 
 
 
