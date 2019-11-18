@@ -64,7 +64,36 @@ core.editor=vim
 
 ```
 
+### git的重要工作区域
 
+- 工作区：编写代码的工作目录
+- 暂存区：.git/index，工作区和版本库之间的缓冲地带
+- 版本库：工作区中的.git目录
+
+```mermaid
+graph LR
+w(工作区)--git add-->s(暂存区)
+s--git commit-->g(版本库)
+```
+
+### git应用
+
+```shell
+# 创建版本库，方法一：编写项目之初创建
+[root@node4 ~]# git init mytest
+初始化空的 Git 版本库于 /root/mytest/.git/
+[root@node4 ~]# ls -A mytest/
+.git
+# 创建版本库，方法二：在已存在的项目中创建版本库
+[root@node4 ~]# mkdir myweb
+[root@node4 ~]# cd myweb
+[root@node4 myweb]# echo '<h1>Hello World</h1>' > index.html
+[root@node4 myweb]# git init
+初始化空的 Git 版本库于 /root/myweb/.git/
+[root@node4 myweb]# ls -A
+.git  index.html
+
+```
 
 
 
