@@ -37,10 +37,32 @@ zhangsan	ALL=(ALL)		NOPASSWD: ALL
 # 生成web页面
 (nsd1906) [root@room8pc16 myansible]# ansible-cmdb /tmp/nsd1906out > /tmp/hosts.html
 (nsd1906) [root@room8pc16 myansible]# firefox /tmp/hosts.html &
-
 ```
 
+## git
 
+- 它是一个分布式的软件版控制系统
+
+```shell
+# 安装
+[root@node4 ~]# yum install -y git
+# 配置基本信息
+[root@node4 ~]# git config --global user.name "Mr.Zhang"
+[root@node4 ~]# git config --global user.email "zzg@tedu.cn"
+[root@node4 ~]# git config --global core.editor vim
+# 查看信息
+[root@node4 ~]# git config --list 
+user.name=Mr.Zhang
+user.email=zzg@tedu.cn
+core.editor=vim
+[root@node4 ~]# cat ~/.gitconfig 
+[user]
+	name = Mr.Zhang
+	email = zzg@tedu.cn
+[core]
+	editor = vim
+
+```
 
 
 
