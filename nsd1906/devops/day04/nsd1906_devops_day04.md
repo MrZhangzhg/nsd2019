@@ -149,6 +149,29 @@ hosts
 [root@node4 myweb]# git status -s
 A  index.html
 
+# 确认文件至版本库
+[root@node4 myweb]# git commit   # 跳出vim写日志，如果为空白日志，则终止提交
+[root@node4 myweb]# git commit -m "init data"
+[root@node4 myweb]# git status 
+# 位于分支 master
+无文件要提交，干净的工作区
+
+# 删除工作区的文件，并恢复
+[root@node4 myweb]# rm -f index.html 
+[root@node4 myweb]# git status
+# 位于分支 master
+# 尚未暂存以备提交的变更：
+#   （使用 "git add/rm <file>..." 更新要提交的内容）
+#   （使用 "git checkout -- <file>..." 丢弃工作区的改动）
+#
+#	删除：      index.html
+#
+修改尚未加入提交（使用 "git add" 和/或 "git commit -a"）
+[root@node4 myweb]# git checkout -- index.html
+[root@node4 myweb]# ls
+hosts  index.html
+
+
 ```
 
 
