@@ -198,8 +198,138 @@ hosts  index.html
 切换到分支 'master'
 [root@node4 myweb]# ls
 hosts
+```
+
+### git tag标记
+
+- tag可以为某一次提交设置标记
+- 如将某一次提交设置为软件的版本号
+
+```shell
+# 查看tag
+[root@node4 myweb]# git tag
+# 为某一次提交设置tag标记
+[root@node4 myweb]# git tag 1.0
+[root@node4 myweb]# git tag
+1.0
+```
+
+### 分支管理
+
+```shell
+# 创建分支
+[root@node4 myweb]# git branch b1
+# 查看分支
+[root@node4 myweb]# git branch
+  b1
+* master     # 当前处于master分支
+
+# 在master分支上编写代码并提交
+[root@node4 myweb]# cp /etc/passwd .
+[root@node4 myweb]# git add .
+[root@node4 myweb]# git commit -m 'add passwd'
+
+# 切换到b1分支
+[root@node4 myweb]# ls
+hosts  passwd
+[root@node4 myweb]# git checkout b1
+切换到分支 'b1'
+[root@node4 myweb]# ls
+hosts
+
+# 在b1分支上提交代码
+[root@node4 myweb]# echo 'ni hao' > hi.txt
+[root@node4 myweb]# ls
+hi.txt  hosts
+[root@node4 myweb]# git add .
+[root@node4 myweb]# git commit -m 'create hi.txt'
+
+# 切换回master
+[root@node4 myweb]# git checkout master
+切换到分支 'master'
+[root@node4 myweb]# ls 
+hosts  passwd
+
+# 合并分支，将b1汇入主干
+[root@node4 myweb]# git branch 
+  b1
+* master
+[root@node4 myweb]# git merge b1  # 在跳出的vim中写入日志
+[root@node4 myweb]# ls
+hi.txt  hosts  passwd
+
+# 分支不再需要时，可以将其删除
+[root@node4 myweb]# git help branch   # 查看branch帮助
+[root@node4 myweb]# git branch -d b1
+已删除分支 b1（曾为 6fe2b7e）。
+[root@node4 myweb]# git branch 
+* master
 
 ```
+
+## gitlab服务器
+
+```shell
+# 安装docker并启动
+[root@node5 docker_pkgs]# systemctl start docker
+[root@node5 docker_pkgs]# systemctl enable docker
+# 将镜像导入 (/linux-soft/05/gitlab_zh.tar)
+[root@node5 images]# docker load < gitlab_zh.tar
+
+# 将docker宿主机ssh端口号改为2022
+[root@node5 ~]# vim /etc/ssh/sshd_config 
+Port 2022
+[root@node5 ~]# systemctl restart sshd
+# 再次连接时，需要指定端口号
+[root@room8pc16 myansible]# ssh -p2022 node5
+
+# 启动容器
+[root@node5 ~]# docker run -d -h gitlab --name gitlab -p 443:443 -p 80:80 -p 22:22 --restart always -v /srv/gitlab/config:/etc/gitlab -v /srv/gitlab/logs:/var/log/gitlab -v /srv/gitlab/data:/var/opt/gitlab gitlab_zh:latest 
+# 查看容器状态，当容器的状态为healthy时，容器才是可用的
+[root@node5 ~]# docker ps
+```
+
+### gitlab应用
+
+1. 登陆服务器http://x.x.x.x，设置root密码
+2. gitlab中重要的概念
+   1. 群组group：对应一个开发团队
+   2. 用户、成员member：对应用户帐户，可以将用户加入到组或项目
+   3. 项目：对应软件项目
+
+创建名为devops的组，类型为公开
+
+创建一个用户账号，新建用户时，不能设置密码。创建完成后，可以再编辑，以设置密码。
+
+创建项目：为devops组创建项目，项目名为myweb，类型为公开。
+
+ 	为项目授权：点击项目左边栏的设置。将前一步创建的普通用户加入项目，成为主程序员。
+
+
+
+切换为普通用户，上传代码
+
+- 新用户首次登陆时，需要改密码
+- 点击项目，因为项目是空的，它将提示你如何操作
+  - 创建新版本库：适用于你本地没有任何文件
+  - 已存在的文件夹：适用于你已经创建了基目目录，但是没有执行过git init实现初始化
+  - 已存在的 Git 版本库：适用于你已经使用git管理的项目目录
+
+```shell
+[root@node4 ~]# cd myweb/
+# 创建仓库，该仓库与一个gitlab项目的url关联
+[root@node4 myweb]# git remote add origin http://192.168.4.5/devops/myweb.git
+# 推送本地代码到gitlab
+[root@node4 myweb]# git push -u origin --all
+Username for 'http://192.168.4.5': zzg
+Password for 'http://zzg@192.168.4.5': 
+# 推送tag到gitlab
+[root@node4 myweb]# git push -u origin --tags
+Username for 'http://192.168.4.5': zzg
+Password for 'http://zzg@192.168.4.5': 
+```
+
+
 
 
 
