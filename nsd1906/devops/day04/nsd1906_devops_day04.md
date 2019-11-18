@@ -327,11 +327,47 @@ Password for 'http://zzg@192.168.4.5':
 [root@node4 myweb]# git push -u origin --tags
 Username for 'http://192.168.4.5': zzg
 Password for 'http://zzg@192.168.4.5': 
+
+# 如果在add时，有输入错误，可以把它删掉
+[root@node4 myweb]# git remote remove origin
+
 ```
 
+### 通过ssh免密上传代码
 
+1. 点击页面右上角用户->设置
+2. 把你的公钥复制到“SSH密钥” （左边栏->ssh密钥）
 
+```shell
+[root@node4 myweb]# ssh-keygen -t rsa -C "zzg@tedu.cn" -b 4096
+[root@node4 myweb]# cat ~/.ssh/id_rsa.pub 
+```
 
+3. 通过ssh上传代码
+
+```shell
+# 将http的方式删除
+[root@node4 myweb]# git remote remove origin
+# 更新上传方式为ssh
+[root@node4 myweb]# git remote add origin git@192.168.4.5:devops/myweb.git
+# 上传代码
+[root@node4 myweb]# echo 'how are you?' > aaa.html
+[root@node4 myweb]# git add .
+[root@node4 myweb]# git commit -m 'create aaa.html'
+[root@node4 myweb]# git push
+
+# 通过http下载
+[root@node4 myweb]# cd /tmp/
+[root@node4 tmp]# git clone http://192.168.4.5/devops/myweb.git
+[root@node4 tmp]# ls -A myweb/
+aaa.html  .git  hi.txt  passwd
+
+# 同步代码
+[root@node4 tmp]# cd myweb/
+[root@node4 myweb]# git pull
+Already up-to-date.
+
+```
 
 
 
