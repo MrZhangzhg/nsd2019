@@ -93,6 +93,53 @@ s--git commit-->g(版本库)
 [root@node4 myweb]# ls -A
 .git  index.html
 
+# 大多数的操作都可以通过git status得到提示
+[root@node4 myweb]# git status
+# 位于分支 master
+#
+# 初始提交
+#
+# 未跟踪的文件:
+#   （使用 "git add <file>..." 以包含要提交的内容）
+#
+#	index.html
+提交为空，但是存在尚未跟踪的文件（使用 "git add" 建立跟踪）
+
+[root@node4 myweb]# git status -s
+?? index.html   # ??表示当前文件的状态未知
+
+# 提交数据到暂存区
+[root@node4 myweb]# cp /etc/hosts .
+[root@node4 myweb]# git add index.html
+[root@node4 myweb]# git status
+# 位于分支 master
+#
+# 初始提交
+#
+# 要提交的变更：
+#   （使用 "git rm --cached <file>..." 撤出暂存区）
+#
+#	新文件：    index.html
+#
+# 未跟踪的文件:
+#   （使用 "git add <file>..." 以包含要提交的内容）
+#
+#	hosts
+[root@node4 myweb]# git status -s
+A  index.html   # A表示新增
+?? hosts
+[root@node4 myweb]# git add .
+[root@node4 myweb]# git status -s
+A  hosts
+A  index.html
+
+# 从暂存区撤出hosts
+[root@node4 myweb]# git rm --cached hosts
+rm 'hosts'
+[root@node4 myweb]# git status -s
+A  index.html
+?? hosts
+
 ```
 
 
