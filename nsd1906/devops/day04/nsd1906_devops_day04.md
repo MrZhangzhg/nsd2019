@@ -198,6 +198,20 @@ hosts  index.html
 切换到分支 'master'
 [root@node4 myweb]# ls
 hosts
+```
+
+### git tag标记
+
+- tag可以为某一次提交设置标记
+- 如将某一次提交设置为软件的版本号
+
+```shell
+# 查看tag
+[root@node4 myweb]# git tag
+# 为某一次提交设置tag标记
+[root@node4 myweb]# git tag 1.0
+[root@node4 myweb]# git tag
+1.0
 
 ```
 
