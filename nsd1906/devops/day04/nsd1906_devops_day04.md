@@ -171,6 +171,33 @@ A  index.html
 [root@node4 myweb]# ls
 hosts  index.html
 
+# 删除文件
+[root@node4 myweb]# git ls-files   # 查看版本库中的文件
+index.html
+[root@node4 myweb]# git rm index.html  # 删除文件
+rm 'index.html'
+[root@node4 myweb]# git status
+# 位于分支 master
+# 要提交的变更：
+#   （使用 "git reset HEAD <file>..." 撤出暂存区）
+#
+#	删除：      index.html
+#
+[root@node4 myweb]# git commit -m 'rm index.html'
+[root@node4 myweb]# git status 
+# 位于分支 master
+无文件要提交，干净的工作区
+
+# 切换到某一版本的状态
+[root@node4 myweb]# git log   # 查看日志
+[root@node4 myweb]# git checkout efc9ec25d8a85cdb62d9863819c34a6be4cb80ad
+[root@node4 myweb]# ls
+hosts  index.html
+[root@node4 myweb]# git checkout master   # 回到最新状态
+之前的 HEAD 位置是 efc9ec2... init data
+切换到分支 'master'
+[root@node4 myweb]# ls
+hosts
 
 ```
 
