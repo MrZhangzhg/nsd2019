@@ -212,6 +212,30 @@ hosts
 [root@node4 myweb]# git tag 1.0
 [root@node4 myweb]# git tag
 1.0
+```
+
+### 分支管理
+
+```shell
+# 创建分支
+[root@node4 myweb]# git branch b1
+# 查看分支
+[root@node4 myweb]# git branch
+  b1
+* master     # 当前处于master分支
+
+# 在master分支上编写代码并提交
+[root@node4 myweb]# cp /etc/passwd .
+[root@node4 myweb]# git add .
+[root@node4 myweb]# git commit -m 'add passwd'
+
+# 切换到b1分支
+[root@node4 myweb]# ls
+hosts  passwd
+[root@node4 myweb]# git checkout b1
+切换到分支 'b1'
+[root@node4 myweb]# ls
+hosts
 
 ```
 
