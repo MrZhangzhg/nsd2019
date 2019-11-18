@@ -140,6 +140,15 @@ rm 'hosts'
 A  index.html
 ?? hosts
 
+# 创建.gitignore，忽略不需要加入到版本库的文件
+[root@node4 myweb]# echo hosts >> .gitignore
+[root@node4 myweb]# echo .gitignore >> .gitignore
+[root@node4 myweb]# cat .gitignore 
+hosts
+.gitignore
+[root@node4 myweb]# git status -s
+A  index.html
+
 ```
 
 
