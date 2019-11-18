@@ -237,6 +237,27 @@ hosts  passwd
 [root@node4 myweb]# ls
 hosts
 
+# 在b1分支上提交代码
+[root@node4 myweb]# echo 'ni hao' > hi.txt
+[root@node4 myweb]# ls
+hi.txt  hosts
+[root@node4 myweb]# git add .
+[root@node4 myweb]# git commit -m 'create hi.txt'
+
+# 切换回master
+[root@node4 myweb]# git checkout master
+切换到分支 'master'
+[root@node4 myweb]# ls 
+hosts  passwd
+
+# 合并分支，将b1汇入主干
+[root@node4 myweb]# git branch 
+  b1
+* master
+[root@node4 myweb]# git merge b1  # 在跳出的vim中写入日志
+[root@node4 myweb]# ls
+hi.txt  hosts  passwd
+
 ```
 
 
