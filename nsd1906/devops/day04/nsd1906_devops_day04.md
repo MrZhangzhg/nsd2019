@@ -258,6 +258,13 @@ hosts  passwd
 [root@node4 myweb]# ls
 hi.txt  hosts  passwd
 
+# 分支不再需要时，可以将其删除
+[root@node4 myweb]# git help branch   # 查看branch帮助
+[root@node4 myweb]# git branch -d b1
+已删除分支 b1（曾为 6fe2b7e）。
+[root@node4 myweb]# git branch 
+* master
+
 ```
 
 
