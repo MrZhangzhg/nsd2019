@@ -129,7 +129,11 @@ echo $webver > live_ver
 
 
 
+## 自动部署
 
+- /var/www/download：保存下载的压缩包
+- /var/www/deploy：保存live_ver文件和解压目录
+- /var/www/html/nsd1906：指向发布的应用目录
 
 
 
