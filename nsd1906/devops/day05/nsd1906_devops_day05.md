@@ -41,6 +41,16 @@ a3(应用服务器)--下载-->j
 
 页面右上角admin -> configure -> password -> Save
 
+### 安装插件
+
+#### 改为国内镜像站点安装插件
+
+首页 -> Manage Jenkins -> Manage Plugins -> Advanced -> Update Site: https://mirrors.tuna.tsinghua.edu.cn/jenkins/ -> Submit
+
+#### 安装插件
+
+Available -> 按ctrl + f搜索 -> 选中Localization: Chinese (Simplified)和Git Parameter -> Install without restart -> 勾选Restart Jenkins when installation is complete and no jobs are running
+
 
 
 
