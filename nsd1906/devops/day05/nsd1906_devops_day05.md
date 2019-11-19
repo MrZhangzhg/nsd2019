@@ -137,7 +137,12 @@ echo $webver > live_ver
 
 
 
+### 回滚思路
 
+- 取出last_ver版本号，赋值给ver
+- 构建本地目录'/var/www/deploy/website-%s' % ver
+- 把/var/www/html/nsd1906删除
+- 创建软链接
 
 
 
