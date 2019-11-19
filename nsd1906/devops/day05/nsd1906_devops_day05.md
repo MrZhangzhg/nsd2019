@@ -53,7 +53,23 @@ Available -> 按ctrl + f搜索 -> 选中Localization: Chinese (Simplified)和Git
 
 
 
+## CI/CD流程
 
+1. 程序员在自己的电脑上编写代码
+
+```shell
+[root@node4 ~]# git init website
+[root@node4 ~]# cd website
+[root@node4 website]# echo '<h1>my site</h1>' > index.html
+[root@node4 website]# git add .
+[root@node4 website]# git commit -m 'my site 1.0'
+[root@node4 website]# git tag 1.0
+[root@node4 website]# echo '<h2>my site 2.0</h2>'>> index.html 
+[root@node4 website]# git add .
+[root@node4 website]# git commit -m 'my site 2.0'
+[root@node4 website]# git tag 2.0
+
+```
 
 
 
