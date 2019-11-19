@@ -2,6 +2,7 @@ import wget
 import os
 import requests
 import hashlib
+import tarfile
 
 def has_new_ver(ver_url, ver_fname):
     '有新版本返回True，否则返回False'
@@ -19,7 +20,6 @@ def has_new_ver(ver_url, ver_fname):
         return True
     else:
         return False
-
 
 def file_ok(md5_url, fname):
     '如果文件已损坏返回False，否则返回True'
@@ -39,8 +39,27 @@ def file_ok(md5_url, fname):
     else:
         return False
 
-def deploy():
+def deploy(app_fname):
     '部署软件'
+    deploy_dir = '/var/www/deploy'
+    dest = '/var/www/html/nsd1906'
+    # 解压
+    tar = tarfile.open(app_fname)
+    tar.extractall(path=deploy_dir)
+    tar.close()
+
+    # 取出软件目录名
+    app_dir = app_fname.split('/')[-1]
+    app_dir = app_dir.replace('.tar.gz', '')
+    app_dir = os.path.join(deploy_dir, app_dir)
+
+    # 如果目标链接文件已存在，先删除
+    if os.path.exists(dest):
+        os.remove(dest)
+
+    # 创建软链接
+    os.symlink(app_dir, dest)
+
 
 if __name__ == '__main__':
     # 判断是否有新版本，没有则退出
@@ -67,7 +86,10 @@ if __name__ == '__main__':
         exit(2)
 
     # 部署软件
-    deploy()
+    deploy(app_fname)
 
     # 更新live_ver文件的版本
+    if os.path.exists(ver_fname):
+        os.remove(ver_fname)
 
+    wget.download(ver_url, ver_fname)
