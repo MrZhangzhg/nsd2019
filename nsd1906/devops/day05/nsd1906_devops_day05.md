@@ -94,7 +94,7 @@ Build with Parameters -> 选择相关的tag进行构建。构建完成的内容�
 
 5. 修改工程。将程序下载到子目录中。配置 -> 源码管理 -> Additional Behaviours=> Checkout to a sub-direcotry:  website-$webver -> 保存后构建测试
 
-6. 修改工程：
+6. 修改工程：配置 -> 构建 -> 增加构建步骤 -> execute shell
    1. 将软件目录拷贝到/var/www/html/deploy/pkgs
    2. 将软件目录下的.git隐藏目录删除
    3. 将软件目录打包，便于下载
@@ -108,7 +108,23 @@ Build with Parameters -> 选择相关的tag进行构建。构建完成的内容�
 [root@node6 ~]# systemctl enable httpd
 [root@node6 ~]# mkdir -p /var/www/html/deploy/pkgs
 [root@node6 ~]# chown -R jenkins.jenkins /var/www/html/deploy
+```
 
+execute shell中添写的脚本代码：
+
+```shell
+deploy_dir=/var/www/html/deploy/pkgs  # 定义变量
+cp -r website-$webver $deploy_dir  # 拷贝软件目录到web目录
+cd $deploy_dir   # 切换到web目录
+rm -rf website-$webver/.git  # 删除版本库文件
+tar czf website-$webver.tar.gz website-$webver   # 打包压缩
+rm -rf website-$webver   # 删除软件目录，只保留压缩包
+# 计算压缩包的md5值
+md5sum website-$webver.tar.gz | awk '{print $1}' > website-$webver.tar.gz.md5
+# 生成last_ver和live_ver文件
+cd ..
+[ -f live_ver ] && cat live_ver > last_ver
+echo $webver > live_ver
 ```
 
 
