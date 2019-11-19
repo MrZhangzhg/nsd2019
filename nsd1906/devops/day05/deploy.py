@@ -1,7 +1,24 @@
 import wget
+import os
+import requests
 
 def has_new_ver(ver_url, ver_fname):
     '有新版本返回True，否则返回False'
+    # 如果本地没有版本文件，则为True
+    if not os.path.isfile(ver_fname):
+        return True
+
+    # 取出本地版本
+    with open(ver_fname) as fobj:
+        local_ver = fobj.read()
+
+    # 本地版本与网上版本比较，如果不一致返回True
+    r = requests.get(ver_url)
+    if local_ver != r.text:
+        return True
+    else:
+        return False
+
 
 def file_ok():
     '如果文件已损坏返回False，否则返回True'
@@ -31,4 +48,4 @@ if __name__ == '__main__':
     deploy()
 
     # 更新live_ver文件的版本
-    
+
