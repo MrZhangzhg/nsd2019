@@ -53,13 +53,42 @@ Available -> 按ctrl + f搜索 -> 选中Localization: Chinese (Simplified)和Git
 
 
 
+## CI/CD流程
 
+1. 程序员在自己的电脑上编写代码
 
+```shell
+[root@node4 ~]# git init website
+[root@node4 ~]# cd website
+[root@node4 website]# echo '<h1>my site</h1>' > index.html
+[root@node4 website]# git add .
+[root@node4 website]# git commit -m 'my site 1.0'
+[root@node4 website]# git tag 1.0
+[root@node4 website]# echo '<h2>my site 2.0</h2>'>> index.html 
+[root@node4 website]# git add .
+[root@node4 website]# git commit -m 'my site 2.0'
+[root@node4 website]# git tag 2.0
+```
 
+2. 管理员在gitlab上创建名为website的项目，类型为公开，为组创建。添加昨天创建的普通用户为该项目的主程序员。
+3. 程序员上传代码到gitlab服务器
 
+```shell
+[root@node4 website]# git remote add origin git@192.168.4.5:devops/website.git
+[root@node4 website]# git push -u origin --all
+[root@node4 website]# git push -u origin --tags
+```
 
+4. 配置jenkins下载代码
 
+```shell
+# 在jenkins服务器上安装git
+[root@node6 ~]# yum install -y git
+```
 
+新建Item -> 任务名：website / Freestyle project -> 勾选This project is parameterized -> 添加参数 -> Git Parameter => Name: webver / Parameter Type: Branch or Tag  / Default Value: origin/master -> 源码管理 => Git => Repository URL: http://192.168.4.5/devops/website.git / Branches to build：$webver -> 保存
 
+构建：
 
+Build with Parameters -> 选择相关的tag进行构建。构建完成的内容自动放到了/var/lib/jenkins/workspace目录
 
