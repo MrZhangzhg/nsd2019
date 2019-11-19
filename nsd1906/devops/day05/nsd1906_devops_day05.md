@@ -68,10 +68,10 @@ Available -> 按ctrl + f搜索 -> 选中Localization: Chinese (Simplified)和Git
 [root@node4 website]# git add .
 [root@node4 website]# git commit -m 'my site 2.0'
 [root@node4 website]# git tag 2.0
-
 ```
 
-
+2. 管理员在gitlab上创建名为website的项目，类型为公开，为组创建。添加昨天创建的普通用户为该项目的主程序员。
+3. 
 
 
 
