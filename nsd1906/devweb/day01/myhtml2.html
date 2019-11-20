@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>my html 2</title>
+</head>
+<body>
+<form action="">
+    <textarea name="comment" cols="30" rows="10"></textarea>
+    <br>
+    <input type="submit" value="提 交">
+</form>
+
+
+
+<form action="">
+    你所学过的课程有：<br>
+    <label>
+        <input type="checkbox" name="lesson" value="sh"> shell
+    </label>
+    <label>
+        <input type="checkbox" name="lesson" value="py"> python
+    </label>
+    <label>
+        <input type="checkbox" name="lesson" value="linux"> linux
+    </label>
+    <label>
+        <input type="checkbox" name="lesson" value="db"> database
+    </label>
+    <br>
+    <input type="submit">
+</form>
+
+
+<hr>
+<form action="http://www.kuaidi100.com/query" target="_blank">
+    单号: <input type="text" name="postid"><br>
+    <select name="type">
+        <option value="youzhengguonei">邮政</option>
+        <option value="yuantong">圆通</option>
+        <option value="shentong">申通</option>
+    </select>
+    <br>
+    <input type="submit" value="查询">
+</form>
+<hr>
+
+<form action="http://www.kuaidi100.com/query" target="_blank">
+    单号: <input type="text" name="postid"><br>
+    <label>
+        <input name="type" type="radio" value="youzhengguonei">
+        邮政
+    </label>
+    <input id="yuantong" name="type" type="radio" value="yuantong">
+    <label for="yuantong">圆通</label>
+    <input name="type" type="radio" value="shentong"><label>申通</label>
+    <br>
+    <input type="submit" value="查询">
+</form>
+<hr>
+<form action="http://www.kuaidi100.com/query" target="_blank">
+    单号: <input type="text" name="postid"><br>
+    <input name="type" type="radio" value="youzhengguonei"><label>邮政</label>
+    <input name="type" type="radio" value="yuantong"><label>圆通</label>
+    <input name="type" type="radio" value="shentong"><label>申通</label>
+    <br>
+    <input type="submit" value="查询">
+</form>
+<hr>
+<form action="http://www.kuaidi100.com/query" target="_blank">
+    快递公司: <input type="text" name="type"><br>
+    单号: <input type="text" name="postid"><br>
+    <input type="submit" value="查询">
+</form>
+
+<hr>
+<form action="">
+    uname: <input type="text" placeholder="username"><br>
+    upass: <input type="password" placeholder="password"><br>
+    <input type="submit" value="登陆">
+    <input type="reset" value="重置">
+</form>
+<hr>
+<form action="https://www.sogou.com/web" target="_blank">
+    <input type="text" name="query">
+    <input type="submit" value="搜狗搜索">
+</form>
+<hr>
+<form action="http://cn.bing.com/search" target="_blank">
+    <input type="text" name="q">
+    <input type="submit" value="必应搜索">
+</form>
+<hr>
+<form action="https://www.baidu.com/s" target="_blank">
+    <input type="text" name="wd">
+    <input type="submit" value="百度搜索">
+</form>
+<!--
+<ul>
+    <li>
+        Python
+        <ul>
+            <li>
+                <a href="#">判断</a>
+            </li>
+            <li>
+                <a href="#">循环</a>
+            </li>
+            <li>
+                <a href="#">函数</a>
+            </li>
+        </ul>
+    </li>
+    <li>html</li>
+    <li>shell</li>
+    <li>css</li>
+    <li>javascript</li>
+</ul>
+<hr>
+<ol type="I" start="6">
+    <li>Python</li>
+    <li>html</li>
+    <li>shell</li>
+    <li>css</li>
+    <li>javascript</li>
+</ol>
+<ol type="A">
+    <li>Python</li>
+    <li>html</li>
+    <li>shell</li>
+    <li>css</li>
+    <li>javascript</li>
+</ol>
+<ol type="a" start="3">
+    <li>Python</li>
+    <li>html</li>
+    <li>shell</li>
+    <li>css</li>
+    <li>javascript</li>
+</ol>
+<ol start="6">
+    <li>Python</li>
+    <li>html</li>
+    <li>shell</li>
+    <li>css</li>
+    <li>javascript</li>
+</ol>
+<hr>
+<ul type="square">
+    <li>Python</li>
+    <li>html</li>
+    <li>shell</li>
+    <li>css</li>
+    <li>javascript</li>
+</ul>
+<ul type="circle">
+    <li>Python</li>
+    <li>html</li>
+    <li>shell</li>
+    <li>css</li>
+    <li>javascript</li>
+</ul>
+<ul>
+    <li>Python</li>
+    <li>html</li>
+    <li>shell</li>
+    <li>css</li>
+    <li>javascript</li>
+</ul>
+<hr>
+<table border="1px" width="400px">
+    <thead>
+        <tr>
+            <th>阶段</th>
+            <th>内容</th>
+            <th>讲师</th>
+        </tr>
+    </thead>
+    <tr>
+        <td>一</td>
+        <td>Linux</td>
+        <td>牛</td>
+    </tr>
+    <tr>
+        <td>二</td>
+        <td>Network</td>
+        <td>王</td>
+    </tr>
+    <tr>
+        <td>三</td>
+        <td>Database</td>
+        <td>庞</td>
+    </tr>
+    <tr>
+        <td>四</td>
+        <td>Operations</td>
+        <td>丁</td>
+    </tr>
+    <tr>
+        <td rowspan="2">1</td>
+        <td colspan="2">1</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>1</td>
+    </tr>
+</table>
+-->
+</body>
+</html>
