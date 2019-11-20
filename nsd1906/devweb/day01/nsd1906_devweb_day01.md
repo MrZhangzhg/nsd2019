@@ -26,5 +26,24 @@ web后台：python、php、java等
   - head可以设置一些属性以及title
   - 出现在浏览器窗口中的内容写到body中
 
+- 标记还可以嵌套
+- 注释采用：\<!--    --\>
+
+## URL：统一资源定位符
+
+w3school: https://www.w3school.com.cn/
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
