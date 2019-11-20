@@ -61,15 +61,9 @@ w3school: https://www.w3school.com.cn/
 <link rel="stylesheet" href="http://mat1.xxxxxxxxxxxxxxx
 ```
 
-
-
-
-
-
-
-
-
-
-
-
+- 也叫级联式表，简称样式表
+- 样式表的类型
+  - 内联样式，与标签属性一样，直接应用在标签上。不推荐
+  - 内部样式，将样式统一写在head标签中
+  - 外部样式，将样式集中放在一个样式表文件中
 
