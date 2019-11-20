@@ -37,6 +37,30 @@ w3school: https://www.w3school.com.cn/
 
 ## CSS：层叠样式表
 
+例：
+
+```python
+# 下载腾讯首页
+>>> import wget
+>>> wget.download('http://www.qq.com', '/tmp/qq.html')
+# firefox打开文件时，发现乱码
+(nsd1906) [root@room8pc16 day01]# firefox /tmp/qq.html 
+# 查看文件类型，发现它其实是gzip压缩文件
+(nsd1906) [root@room8pc16 day01]# file /tmp/qq.html 
+/tmp/qq.html: gzip compressed data, from Unix
+# 解压
+(nsd1906) [root@room8pc16 day01]# mv /tmp/qq.html /tmp/qq.html.gz
+(nsd1906) [root@room8pc16 day01]# gzip -d /tmp/qq.html.gz
+(nsd1906) [root@room8pc16 day01]# ls /tmp/qq.html 
+/tmp/qq.html
+(nsd1906) [root@room8pc16 day01]# file /tmp/qq.html
+(nsd1906) [root@room8pc16 day01]# firefox /tmp/qq.html
+
+# 修改样式表说明
+[root@room8pc16 myansible]# vim /tmp/qq.html # 样式表路径加上http:
+<link rel="stylesheet" href="http://mat1.xxxxxxxxxxxxxxx
+```
+
 
 
 
