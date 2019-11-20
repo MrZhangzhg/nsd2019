@@ -22,7 +22,9 @@ web后台：python、php、java等
   - 块级元素：至少要占一行，如h1-h6，p、div、ul、ol
   - 行内元素：不产生换行，如span、i、b等
 
-
+- html是根标记，它一般包括两个直接子元素head和body
+  - head可以设置一些属性以及title
+  - 出现在浏览器窗口中的内容写到body中
 
 
 
