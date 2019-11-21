@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>导航栏</title>
+    <style>
+        .container {
+            width: 1002px;
+            margin: 20px auto;
+        }
+        ul {
+            list-style-type: none;  /*去除列表前的圆点*/
+            margin: 0;
+            padding: 0;
+        }
+        li {
+            float: left;   /*水平排列*/
+        }
+        a {
+            width: 167px;   /*设置宽度*/
+            display: block;  /*将a标签转为块元素，否则宽度不生效*/
+            font-weight: bold;  /*加粗*/
+            text-decoration: none;  /*取消下划线*/
+            background-color: #BEBEBE;  /*背景色*/
+            line-height: 30px;    /*行高*/
+            border-bottom: 2px #900B09 solid;  /*2像素下边框*/
+            text-align: center;  /*居中*/
+            color: white;
+        }
+        a:hover {
+            background-color: #900B09;  /*鼠标悬停时的颜色*/
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="nav">
+        <ul>
+            <li><a href="#">PYTHON</a></li>
+            <li><a href="#">HTML</a></li>
+            <li><a href="#">CSS</a></li>
+            <li><a href="#">JAVASCRIPT</a></li>
+            <li><a href="#">SHELL</a></li>
+            <li><a href="#">DATABASE</a></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
