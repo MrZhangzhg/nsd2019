@@ -93,11 +93,33 @@ MariaDB [dj1906]> show tables;
 # 创建管理员用户
 (nsd1906) [root@room8pc16 mysite]# python manage.py createsuperuser
 
+# django自带后台:http://127.0.0.1/admin
 ```
 
+### 创建应用
 
+- 一个项目由很多功能构成，如新闻、博客、论坛等
+- 每个功能都是一个功能模块，可以由不同的人来开发
+- 项目拆分成应用模块，简化开发过程
+- 应用将来还可以直接集成到其他项目
 
+### 投票应用
 
+- http://127.0.0.1:8000/polls/：投票首页，列出所有的投票问题
+- http://127.0.0.1:8000/polls/1/：投票详情页，用于投票
+- http://127.0.0.1:8000/polls/1/result/：投票结果页，显示每个选项的票数
+
+```shell
+# 创建名为polls的应用。
+# 一个应用对应一个目录，创建polls应用，将出现polls目录
+(nsd1906) [root@room8pc16 mysite]# python manage.py startapp polls
+# 创建了应用，仅仅是出现了一个目录，还需要把它真正的集成到项目
+# mysite/settings.py
+INSTALLED_APPS = [
+    ... ...
+    'polls',
+]
+```
 
 
 
