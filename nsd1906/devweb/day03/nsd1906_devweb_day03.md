@@ -51,6 +51,47 @@ mytest
 
 # django项目最终需要放到nginx或apache上对外提供服务。但量，为了程序员编程上的方便，django提供了一个测试服务器，以便看到实时的效果。注意：测试服务器不应该用在生产环境。
 
+# 启动测试服务器
+(nsd1906) [root@room8pc16 mysite]# python manage.py runserver
+
+# 创建数据库
+[root@room8pc16 ~]# mysql -uroot -ptedu.cn
+MariaDB [(none)]> CREATE DATABASE dj1906 DEFAULT CHARSET UTF8;
+
+# 修改配置
+# mysite/setting.py
+ALLOWED_HOSTS = ['*']   # 允许所有的客户端访问
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'dj1906',
+        'USER': 'root',
+        'PASSWORD': 'tedu.cn',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+    }
+}
+LANGUAGE_CODE = 'zh-hans'
+TIME_ZONE = 'Asia/Shanghai'
+USE_TZ = False
+
+# 初始化数据库模块
+# mysite/__init__.py
+import pymysql
+
+pymysql.install_as_MySQLdb()
+
+
+# 重新运行测试服务器，监听在0.0.0.0的80端口。注意：如果不是root，不能监听1024以下端口
+(nsd1906) [root@room8pc16 mysite]# python manage.py runserver 0:80
+
+# django项目默认集成了一些应用，这些应用需要把数据写到数据库。
+# 初始化数据库
+(nsd1906) [root@room8pc16 mysite]# python manage.py makemigrations
+(nsd1906) [root@room8pc16 mysite]# python manage.py migrate
+MariaDB [dj1906]> show tables;
+# 创建管理员用户
+(nsd1906) [root@room8pc16 mysite]# python manage.py createsuperuser
 
 ```
 
