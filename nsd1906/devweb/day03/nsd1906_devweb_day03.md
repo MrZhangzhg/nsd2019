@@ -85,6 +85,14 @@ pymysql.install_as_MySQLdb()
 # 重新运行测试服务器，监听在0.0.0.0的80端口。注意：如果不是root，不能监听1024以下端口
 (nsd1906) [root@room8pc16 mysite]# python manage.py runserver 0:80
 
+# django项目默认集成了一些应用，这些应用需要把数据写到数据库。
+# 初始化数据库
+(nsd1906) [root@room8pc16 mysite]# python manage.py makemigrations
+(nsd1906) [root@room8pc16 mysite]# python manage.py migrate
+MariaDB [dj1906]> show tables;
+# 创建管理员用户
+(nsd1906) [root@room8pc16 mysite]# python manage.py createsuperuser
+
 ```
 
 
