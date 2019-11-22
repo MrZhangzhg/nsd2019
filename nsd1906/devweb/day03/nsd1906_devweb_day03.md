@@ -292,6 +292,17 @@ Did you rename choice.q to choice.question (a ForeignKey)? [y/N] y
 (nsd1906) [root@room8pc16 mysite]# python manage.py migrate
 MariaDB [dj1906]> desc polls_choice;
 
+
+# 注册模型到管理后台
+# polls/admin.py
+from django.contrib import admin
+# 在当前目录下的models模块中导入模型
+from .models import Question, Choice
+
+# Register your models here.
+admin.site.register(Question)
+admin.site.register(Choice)
+
 ```
 
 
