@@ -232,7 +232,41 @@ def result(request, question_id):
 </html>
 ```
 
+## 数据库模型
 
+- ORM
+  - Object对象
+  - Relationship关系
+  - Mapper映射
+- 数据库中的表与class相关联
+- class中的类变量与表的字段关联
+- 数据库中的数据类型与django的一些类关联
+- 表的记录与class的实例关联
+
+### 投票应用的数据字段
+
+- 字段：问题、选项、选项票数
+- 创建两个模型
+  - 问题：问题id，问题内容，发布时间
+  - 选项：选项id，选项内容，选项票数，问题id
+
+```python
+# 创建实体类
+# polls/models.py
+from django.db import models
+
+# Create your models here.
+class Question(models.Model):
+    '实体类必须是models.Model的子类'
+    question_text = models.CharField(max_length=200, unique=True)
+    pub_date = models.DateTimeField()
+
+class Choice(models.Model):
+    choice_text = models.CharField(max_length=200)
+    votes = models.IntegerField(default=0)
+    q = models.ForeignKey(Question)
+
+```
 
 
 
