@@ -266,6 +266,18 @@ class Choice(models.Model):
     votes = models.IntegerField(default=0)
     q = models.ForeignKey(Question)
 
+    
+# 在数据库中生成表
+(nsd1906) [root@room8pc16 mysite]# python manage.py makemigrations
+(nsd1906) [root@room8pc16 mysite]# python manage.py migrate
+MariaDB [dj1906]> show tables;  # 查看表
+| polls_choice               |
+| polls_question             |
+# 说明：表名的构成：应用名_class名      全部小写
+MariaDB [dj1906]> desc polls_question;   # 查看表结构
+# 说明：模型声明中，没有明确声明主键，django自动创建名为id的主键字段
+MariaDB [dj1906]> desc polls_choice;   # 查看表结构
+# 说明：Choice模型，q是外键，django自动为它加上_id成为外键字段
 ```
 
 
