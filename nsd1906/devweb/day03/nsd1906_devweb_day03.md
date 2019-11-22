@@ -25,6 +25,35 @@ t--响应-->c
 (nsd1906) [root@room8pc16 day03]# pip install django==1.11.6
 ```
 
+## 配置
+
+```shell
+# 创建项目，方法一：直接使用django的命令
+(nsd1906) [root@room8pc16 day03]# django-admin startproject mytest
+(nsd1906) [root@room8pc16 day03]# ls
+mytest
+
+# 创建项目，方法一：使用pycharm创建。推荐
+# File -> New Project -> 左窗格选django，右窗格填写位置
+
+# django默认的目录结构
+(nsd1906) [root@room8pc16 mysite]# pwd
+/var/ftp/nsd2019/nsd1906/devweb/day03/mysite  # 项目的根路径
+(nsd1906) [root@room8pc16 mysite]# tree .
+.
+├── manage.py         # 项目管理文件
+├── mysite            # 项目配置目录
+│   ├── __init__.py   # 项目的初始化文件
+│   ├── settings.py   # 项目的配置文件
+│   ├── urls.py       # 路由文件URLConf
+│   └── wsgi.py       # 部署django到web服务器的配置文件
+└── templates         # 模板目录
+
+# django项目最终需要放到nginx或apache上对外提供服务。但量，为了程序员编程上的方便，django提供了一个测试服务器，以便看到实时的效果。注意：测试服务器不应该用在生产环境。
+
+
+```
+
 
 
 
