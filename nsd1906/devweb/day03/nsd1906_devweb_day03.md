@@ -178,6 +178,34 @@ def index(request):
 </html>
 ```
 
+### 编写投票详情页
+
+```python
+# polls/urls.py
+urlpatterns = [
+    ... ...
+    # 将\d+用()括起来，它匹配的内容，将会作为detail的参数
+    url(r'^(\d+)/$', views.detail, name='detail'),
+]
+
+# polls/views.py
+def detail(request, question_id):
+    # 字典的内容将会成为模板文件的变量，字典的key是变量名，val是变量值
+    return render(request, 'detail.html', {'question_id': question_id})
+
+# templates/detail.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票详情</title>
+</head>
+<body>
+<h1>{{ question_id }}号问题投票详情</h1>
+</body>
+</html>
+```
+
 
 
 

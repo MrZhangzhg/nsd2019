@@ -7,4 +7,6 @@ def index(request):
     # render负责找寻模板文件发送给用户
     return render(request, 'index.html')
 
-
+def detail(request, question_id):
+    # 字典的内容将会成为模板文件的变量，字典的key是变量名，val是变量值
+    return render(request, 'detail.html', {'question_id': question_id})
