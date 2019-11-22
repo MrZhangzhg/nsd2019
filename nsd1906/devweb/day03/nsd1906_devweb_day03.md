@@ -137,6 +137,47 @@ from django.conf.urls import url
 urlpatterns = []
 ```
 
+### 编写投票首页
+
+```python
+# 定义url
+# polls/urls.py
+from django.conf.urls import url
+# from polls import views   # 也可以用下面的形式
+from . import views   # 从当前目录(包)导入views模块
+
+urlpatterns = [
+    # url从http://x.x.x.x/polls/后面开始匹配
+    # 访问投票首页时，使用views.index函数响应
+    # 为该url(http://x.x.x.x/polls/)起名为index
+    url(r'^$', views.index, name='index'),
+]
+
+# 编写index函数
+# polls/views.py
+from django.shortcuts import render
+
+# Create your views here.
+def index(request):
+    # 用户发起的请求将会作为第一个参数传给函数
+    # 所以函数至少要定义一个参数来接收用户的请求
+    # render负责找寻模板文件发送给用户
+    return render(request, 'index.html')
+
+# 编写模板文件
+# templates/index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票首页</title>
+</head>
+<body>
+<h1>投票首页</h1>
+</body>
+</html>
+```
+
 
 
 
