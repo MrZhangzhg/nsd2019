@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     # 将\d+用()括起来，它匹配的内容，将会作为detail的参数
     url(r'^(\d+)/$', views.detail, name='detail'),
+    url(r'^(\d+)/result/$', views.result, name='result'),
 ]

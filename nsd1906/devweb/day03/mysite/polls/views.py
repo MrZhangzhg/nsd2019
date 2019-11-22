@@ -10,3 +10,7 @@ def index(request):
 def detail(request, question_id):
     # 字典的内容将会成为模板文件的变量，字典的key是变量名，val是变量值
     return render(request, 'detail.html', {'question_id': question_id})
+
+def result(request, question_id):
+    return render(request, 'result.html', {'question_id': question_id})
+
