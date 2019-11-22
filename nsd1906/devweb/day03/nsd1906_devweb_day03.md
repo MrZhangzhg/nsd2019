@@ -292,6 +292,100 @@ Did you rename choice.q to choice.question (a ForeignKey)? [y/N] y
 (nsd1906) [root@room8pc16 mysite]# python manage.py migrate
 MariaDB [dj1906]> desc polls_choice;
 
+
+# 注册模型到管理后台
+# polls/admin.py
+from django.contrib import admin
+# 在当前目录下的models模块中导入模型
+from .models import Question, Choice
+
+# Register your models here.
+admin.site.register(Question)
+admin.site.register(Choice)
+
+
+# 在后台管理界面创建问题，显示的是Question object；创建选项，显示的是Choice object。下面修复它：
+# polls/models.py
+class Question(models.Model):
+    '实体类必须是models.Model的子类'
+    question_text = models.CharField(max_length=200, unique=True)
+    pub_date = models.DateTimeField()
+    
+    def __str__(self):
+        return '问题:%s' % self.question_text
+
+class Choice(models.Model):
+    choice_text = models.CharField(max_length=200)
+    votes = models.IntegerField(default=0)
+    question = models.ForeignKey(Question)
+    
+    def __str__(self):
+        return '%s=>选项:%s' % (self.question, self.choice_text)
+
+```
+
+## 引入bootstrap
+
+```shell
+# 拷贝第二天的static目录到polls目录（django默认会在应用的static目录下查找静态文件）
+(nsd1906) [root@room8pc16 mysite]# cp -r ../../day02/static/ polls/
+
+# templates/index.html
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票首页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body>
+<div class="container">
+    <div id="linux-carousel" class="carousel slide">
+        <ol class="carousel-indicators">
+            <li class="active" data-target="#linux-carousel" data-slide-to="0"></li>
+            <li data-target="#linux-carousel" data-slide-to="1"></li>
+            <li data-target="#linux-carousel" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="item active">
+                <a href="http://www.sogou.com" target="_blank">
+                    <img src="{% static 'imgs/first.jpg' %}">
+                </a>
+            </div>
+            <div class="item">
+                <img src="{% static 'imgs/second.jpg' %}">
+            </div>
+            <div class="item">
+                <img src="{% static 'imgs/third.jpg' %}">
+            </div>
+        </div>
+        <a href="#linux-carousel" data-slide="prev" class="carousel-control left">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a href="#linux-carousel" data-slide="next" class="carousel-control right">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+    </div>
+    <div>
+        <h1 class="text-center text-warning">投票首页</h1>
+
+    </div>
+    <div class="h4 text-center">
+        达内云计算 <a href="#">nsd1906</a>
+    </div>
+</div>
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script type="text/javascript">
+    $('#linux-carousel').carousel({
+        interval : 3000
+    });
+</script>
+</body>
+</html>
 ```
 
 
