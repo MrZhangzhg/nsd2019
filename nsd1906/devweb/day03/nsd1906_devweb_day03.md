@@ -119,11 +119,166 @@ INSTALLED_APPS = [
     ... ...
     'polls',
 ]
+
+# 授权，应用的url交给应用处理。将以/polls/开头的url都交给polls应用。
+# mysite/urls.py
+from django.conf.urls import url, include
+from django.contrib import admin
+
+urlpatterns = [
+	# 正则匹配时，从http://x.x.x.x/后面开始算起
+    url(r'^admin/', admin.site.urls),
+	url(r'^polls/', include('polls.urls')),
+]
+
+# polls/urls.py
+from django.conf.urls import url
+
+urlpatterns = []
 ```
 
+### 编写投票首页
 
+```python
+# 定义url
+# polls/urls.py
+from django.conf.urls import url
+# from polls import views   # 也可以用下面的形式
+from . import views   # 从当前目录(包)导入views模块
 
+urlpatterns = [
+    # url从http://x.x.x.x/polls/后面开始匹配
+    # 访问投票首页时，使用views.index函数响应
+    # 为该url(http://x.x.x.x/polls/)起名为index
+    url(r'^$', views.index, name='index'),
+]
 
+# 编写index函数
+# polls/views.py
+from django.shortcuts import render
+
+# Create your views here.
+def index(request):
+    # 用户发起的请求将会作为第一个参数传给函数
+    # 所以函数至少要定义一个参数来接收用户的请求
+    # render负责找寻模板文件发送给用户
+    return render(request, 'index.html')
+
+# 编写模板文件
+# templates/index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票首页</title>
+</head>
+<body>
+<h1>投票首页</h1>
+</body>
+</html>
+```
+
+### 编写投票详情页
+
+```python
+# polls/urls.py
+urlpatterns = [
+    ... ...
+    # 将\d+用()括起来，它匹配的内容，将会作为detail的参数
+    url(r'^(\d+)/$', views.detail, name='detail'),
+]
+
+# polls/views.py
+def detail(request, question_id):
+    # 字典的内容将会成为模板文件的变量，字典的key是变量名，val是变量值
+    return render(request, 'detail.html', {'question_id': question_id})
+
+# templates/detail.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票详情</title>
+</head>
+<body>
+<h1>{{ question_id }}号问题投票详情</h1>
+</body>
+</html>
+```
+
+### 编写投票结果页
+
+```python
+# polls/urls.py
+urlpatterns = [
+    ... ...
+    url(r'^(\d+)/result/$', views.result, name='result'),
+]
+
+# polls/views.py
+def result(request, question_id):
+    return render(request, 'result.html', {'question_id': question_id})
+
+# templates/result.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票结果</title>
+</head>
+<body>
+<h1>{{ question_id }}号问题投票结果</h1>
+</body>
+</html>
+```
+
+## 数据库模型
+
+- ORM
+  - Object对象
+  - Relationship关系
+  - Mapper映射
+- 数据库中的表与class相关联
+- class中的类变量与表的字段关联
+- 数据库中的数据类型与django的一些类关联
+- 表的记录与class的实例关联
+
+### 投票应用的数据字段
+
+- 字段：问题、选项、选项票数
+- 创建两个模型
+  - 问题：问题id，问题内容，发布时间
+  - 选项：选项id，选项内容，选项票数，问题id
+
+```python
+# 创建实体类
+# polls/models.py
+from django.db import models
+
+# Create your models here.
+class Question(models.Model):
+    '实体类必须是models.Model的子类'
+    question_text = models.CharField(max_length=200, unique=True)
+    pub_date = models.DateTimeField()
+
+class Choice(models.Model):
+    choice_text = models.CharField(max_length=200)
+    votes = models.IntegerField(default=0)
+    q = models.ForeignKey(Question)
+
+    
+# 在数据库中生成表
+(nsd1906) [root@room8pc16 mysite]# python manage.py makemigrations
+(nsd1906) [root@room8pc16 mysite]# python manage.py migrate
+MariaDB [dj1906]> show tables;  # 查看表
+| polls_choice               |
+| polls_question             |
+# 说明：表名的构成：应用名_class名      全部小写
+MariaDB [dj1906]> desc polls_question;   # 查看表结构
+# 说明：模型声明中，没有明确声明主键，django自动创建名为id的主键字段
+MariaDB [dj1906]> desc polls_choice;   # 查看表结构
+# 说明：Choice模型，q是外键，django自动为它加上_id成为外键字段
+```
 
 
 
