@@ -7,7 +7,7 @@
     </h1>
     <h2>{{ question.question_text }}</h2>
     <div class="h4">
-        <form action="" method="post">
+        <form action="{% url 'vote' question.id %}" method="post">
             {% comment %}csrf_token是安全选项，必须设置{% endcomment %}
             {% csrf_token %}
             {% for choice in question.choice_set.all %}
