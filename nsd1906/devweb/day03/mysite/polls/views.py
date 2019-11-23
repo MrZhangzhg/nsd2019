@@ -16,7 +16,8 @@ def detail(request, question_id):
     return render(request, 'detail.html', {'question': question})
 
 def result(request, question_id):
-    return render(request, 'result.html', {'question_id': question_id})
+    question = Question.objects.get(id=question_id)
+    return render(request, 'result.html', {'question': question})
 
 def vote(request, question_id):
     # 取出问题
