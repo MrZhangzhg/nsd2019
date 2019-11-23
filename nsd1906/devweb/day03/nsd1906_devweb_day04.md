@@ -68,6 +68,16 @@ True
 >>> Question.objects.filter(question_text__startswith='你')
 <QuerySet [<Question: 问题:你期待哪家公司给你发Offer？>, <Question: 问题：你打算到哪个城市找工作？>]>
 
+
+# 修改问题，只要将问题实例取出，重新赋值即可
+>>> q = Question.objects.get(question_text='你期待哪家公司给你发Offer？')
+>>> q.question_text = '你心仪的公司是哪家？'
+>>> q.save()
+
+# 删除，将问题实例取出，调用删除方法
+>>> q = Question.objects.get(question_text='散伙饭去哪吃？')
+>>> q.delete()
+
 ```
 
 
