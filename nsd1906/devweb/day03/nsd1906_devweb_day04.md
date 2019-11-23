@@ -277,6 +277,38 @@ def index(request):
 {% endblock %}
 ```
 
+## 完成投票详情页
+
+通过问题取出所有的选项：
+
+```python
+(nsd1906) [root@room8pc16 mysite]# python manage.py shell
+>>> from polls.models import Question
+>>> q1 = Question.objects.get(id=1)
+>>> q1
+<Question: 问题:第一份工作，你期待的工资是多少？>
+# 问题实例有一个名为choice_set的选项集，它也是一个管理器，可以通过这个管理器管理该问题的选项
+>>> q1.choice_set.all()
+>>> q1.choice_set.order_by('id')
+
+```
+
+
+
+```python
+# 取出某一问题的实例，交给模板处理
+# polls/views.py
+def detail(request, question_id):
+    # 在数据库中取出具体的问题
+    question = Question.objects.get(id=question_id)
+    # 字典的内容将会成为模板文件的变量，字典的key是变量名，val是变量值
+    return render(request, 'detail.html', {'question': question})
+
+# 修改模板
+# templates/detail.html
+
+```
+
 
 
 
