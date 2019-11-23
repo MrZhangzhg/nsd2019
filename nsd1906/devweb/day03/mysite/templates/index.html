@@ -37,7 +37,12 @@
     </div>
     <div>
         <h1 class="text-center text-warning">投票首页</h1>
-
+        <div class="h4">
+            {% for question in questions %}
+                {{ question.question_text }}
+                {{ question.pub_date }}
+            {% endfor %}
+        </div>
     </div>
     <div class="h4 text-center">
         达内云计算 <a href="#">nsd1906</a>
