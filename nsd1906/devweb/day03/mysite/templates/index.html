@@ -38,10 +38,15 @@
     <div>
         <h1 class="text-center text-warning">投票首页</h1>
         <div class="h4">
-            {% for question in questions %}
-                {{ question.question_text }}
-                {{ question.pub_date }}
-            {% endfor %}
+            <ol>
+                {% for question in questions %}
+                    <li>
+                        {{ question.question_text }}
+                        {{ question.pub_date }}
+                    </li>
+                {% endfor %}
+            </ol>
+
         </div>
     </div>
     <div class="h4 text-center">
