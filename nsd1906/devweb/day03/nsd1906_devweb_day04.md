@@ -375,12 +375,32 @@ def result(request, question_id):
     question = Question.objects.get(id=question_id)
     return render(request, 'result.html', {'question': question})
 
-# 
+# templates/result.html
+{% extends 'basic.html' %}
+{% load static %}
+{% block title %}投票结果{% endblock %}
+{% block content %}
+    <h1 class="text-center text-warning">
+        {{ question.id }}号问题投票结果
+    </h1>
+    <h2>{{ question.question_text }}</h2>
+    <table class="table table-striped table-hover h4">
+        <thead class="bg-primary">
+            <tr>
+                <th>选项</th>
+                <th>票数</th>
+            </tr>
+        </thead>
+        {% for choice in question.choice_set.all %}
+            <tr>
+                <td>{{ choice.choice_text }}</td>
+                <td>{{ choice.votes }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <h5>
+        <a href="{% url 'index' %}">返回首页</a>
+    </h5>
+{% endblock %}
 ```
-
-
-
-
-
-
 
