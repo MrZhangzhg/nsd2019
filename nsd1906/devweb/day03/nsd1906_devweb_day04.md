@@ -28,6 +28,19 @@
 # 创建选项，方法三：通过问题创建选项。问题和选项有一对多关系，一个问题有多个选项。每个问题的实例都有一个管理器，通过这个管理器可以创建选项。选项的class名叫Choice，那么管理器就叫choice_set；如果选项的class叫XuanXiang，那么管理器叫xuanxiang_set。
 >>> c3 = q2.choice_set.get_or_create(choice_text='成都')[0]
 
+
+# 查询
+# 取出所有的问题，返回所有问题实例构成的列表
+>>> Question.objects.all()
+# 取出所有的问题，按发布时间升序排列
+>>> Question.objects.order_by('pub_date')
+# 取出所有的问题，按发布时间降序排列
+>>> Question.objects.order_by('-pub_date')
+>>> for q in Question.objects.order_by('-pub_date'):
+...   print(q.pub_date, q.question_text)
+
+# 通过get取出满足条件的实例，如果结果不是一项则报错
+
 ```
 
 
