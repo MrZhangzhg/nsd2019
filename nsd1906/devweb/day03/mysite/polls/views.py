@@ -10,8 +10,10 @@ def index(request):
     return render(request, 'index.html', {'questions': questions})
 
 def detail(request, question_id):
+    # 在数据库中取出具体的问题
+    question = Question.objects.get(id=question_id)
     # 字典的内容将会成为模板文件的变量，字典的key是变量名，val是变量值
-    return render(request, 'detail.html', {'question_id': question_id})
+    return render(request, 'detail.html', {'question': question})
 
 def result(request, question_id):
     return render(request, 'result.html', {'question_id': question_id})
