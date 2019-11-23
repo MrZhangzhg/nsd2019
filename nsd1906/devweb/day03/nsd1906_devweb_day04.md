@@ -306,10 +306,77 @@ def detail(request, question_id):
 
 # 修改模板
 # templates/detail.html
+{% extends 'basic.html' %}
+{% load static %}
+{% block title %}投票详情{% endblock %}
+{% block content %}
+    <h1 class="text-center text-warning">
+        {{ question.id }}号问题投票详情
+    </h1>
+    <h2>{{ question.question_text }}</h2>
+    <div class="h4">
+        <form action="{% url 'vote' question.id %}" method="post">
+            {% comment %}csrf_token是安全选项，必须设置{% endcomment %}
+            {% csrf_token %}
+            {% for choice in question.choice_set.all %}
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="choice_id" value="{{ choice.id }}">
+                        {{ choice.choice_text }}
+                    </label>
+                </div>
+            {% endfor %}
+            <div class="form-group">
+                <input class="btn btn-primary" type="submit" value="提 交">
+            </div>
+        </form>
+    </div>
+{% endblock %}
+```
+
+## 实现投票功能
+
+- 投票功能应该是执行一个函数，该函数能够把选项的votes字段加1
+- 在django中访问某一url将会调用相关函数
+- 所以，要想实现投票功能，应该在detail页面中，提交表单时，提交到一个url，该url调用相关函数。函数用于在数据库中找到选项，把选项的votes字段值加1.
+
+```python
+# polls/urls.py
+urlpatterns = [
+    ... ...
+    url(r'^(\d+)/vote/$', views.vote, name='vote'),
+]
+
+# polls/views.py
+from django.shortcuts import render, redirect
+
+def vote(request, question_id):
+    # 取出问题
+    question = Question.objects.get(id=question_id)
+    # request是用户的请求，它有很多属性，客户端提交的数据保存到了
+    # request.POST字典中，choice_id是表单的属性
+    choice_id = request.POST.get('choice_id')
+    # 通过问题取出选项实例
+    choice = question.choice_set.get(id=choice_id)
+    # 将选项的votes属性值加1
+    choice.votes += 1
+    choice.save()
+    # 投票结束后，跳转到投票结果页
+    return redirect('result', question.id)
 
 ```
 
+## 完成投票结果页
 
+```python
+# 修改函数，取出问题
+# polls/views.py
+def result(request, question_id):
+    question = Question.objects.get(id=question_id)
+    return render(request, 'result.html', {'question': question})
+
+# 
+```
 
 
 
