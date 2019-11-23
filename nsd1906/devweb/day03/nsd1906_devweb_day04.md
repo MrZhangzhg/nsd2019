@@ -167,7 +167,115 @@ def index(request):
 </html>
 ```
 
+## 模板继承
 
+- 为了使得各个页面拥有一致的风格，可以采用模板继承的方法
+- 创建一个基础模板，把共性内容写到基础模板中。把个性内容，使用block占位
+- 具体的每个web页面，都基于基础模板创建，把个性内容写到相应的block中
+
+```shell
+# 基于index.html实现模板继承
+(nsd1906) [root@room8pc16 mysite]# cp templates/index.html templates/basic.html
+# templates/basic.html  # 把个性内容用block替换，共性内容保留
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body>
+<div class="container">
+    <div id="linux-carousel" class="carousel slide">
+        <ol class="carousel-indicators">
+            <li class="active" data-target="#linux-carousel" data-slide-to="0"></li>
+            <li data-target="#linux-carousel" data-slide-to="1"></li>
+            <li data-target="#linux-carousel" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="item active">
+                <a href="http://www.sogou.com" target="_blank">
+                    <img src="{% static 'imgs/first.jpg' %}">
+                </a>
+            </div>
+            <div class="item">
+                <img src="{% static 'imgs/second.jpg' %}">
+            </div>
+            <div class="item">
+                <img src="{% static 'imgs/third.jpg' %}">
+            </div>
+        </div>
+        <a href="#linux-carousel" data-slide="prev" class="carousel-control left">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a href="#linux-carousel" data-slide="next" class="carousel-control right">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+    </div>
+    <div>
+        {% block content %}{% endblock %}
+    </div>
+    <div class="h4 text-center">
+        达内云计算 <a href="#">nsd1906</a>
+    </div>
+</div>
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script type="text/javascript">
+    $('#linux-carousel').carousel({
+        interval : 3000
+    });
+</script>
+</body>
+</html>
+
+# 修改index.html去除共性部分，个性部分放到相应的block中
+{% extends 'basic.html' %}
+{% load static %}
+{% block title %}投票首页{% endblock %}
+{% block content %}
+    <h1 class="text-center text-warning">投票首页</h1>
+    <div class="h4">
+        <ol>
+            {% for question in questions %}
+                <li>
+                    <a href="{% url 'detail' question.id %}" target="_blank">
+                        {{ question.question_text }}
+                    </a>
+                    {{ question.pub_date }}
+                </li>
+            {% endfor %}
+        </ol>
+    </div>
+{% endblock %}
+```
+
+### 修改detail.html和result.html
+
+```shell
+# templates/detail.html
+{% extends 'basic.html' %}
+{% load static %}
+{% block title %}投票详情{% endblock %}
+{% block content %}
+    <h1 class="text-center text-warning">
+        {{ question_id }}号问题投票详情
+    </h1>
+{% endblock %}
+
+# templates/result.html
+{% extends 'basic.html' %}
+{% load static %}
+{% block title %}投票结果{% endblock %}
+{% block content %}
+    <h1 class="text-center text-warning">
+        {{ question_id }}号问题投票结果
+    </h1>
+{% endblock %}
+```
 
 
 
