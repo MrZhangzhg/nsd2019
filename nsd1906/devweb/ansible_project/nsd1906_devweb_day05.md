@@ -80,15 +80,30 @@ urlpatterns = []
 ```python
 # 编写url
 # index/urls.py
+from django.conf.urls import url
+from . import views
+
+urlpatterns = [
+    url(r'^$', views.index, name='index'),
+]
 
 # 编写函数
 # index/views.py
+from django.shortcuts import render
 
-# 编写模板
+# Create your views here.
+def index(request):
+    return render(request, 'index.html')
+
 
 # 实现模板继承
+# 复制投票项目的basic.html到templates目录
+(nsd1906) [root@room8pc16 myansible]# cp ../../day03/mysite/templates/basic.html templates/
 
-# 引入bootstrap
+# 编写模板
+# templates/index.html
+
+
 ```
 
 
