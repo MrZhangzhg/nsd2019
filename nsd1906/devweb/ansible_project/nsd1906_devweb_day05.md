@@ -102,6 +102,37 @@ def index(request):
 
 # 编写模板
 # templates/index.html
+{% extends 'basic.html' %}
+{% load static %}
+{% block title %}Ansible Webadmin{% endblock %}
+{% block content %}
+<div class="row h4">
+    <div class="col-sm-3 text-center">
+        <a href="#">
+            <img width="150px" src="{% static 'imgs/linux.jpg' %}"><br>
+            主机信息
+        </a>
+    </div>
+    <div class="col-sm-3 text-center">
+        <a href="#">
+            <img width="150px" src="{% static 'imgs/linux.jpg' %}"><br>
+            添加主机
+        </a>
+    </div>
+    <div class="col-sm-3 text-center">
+        <a href="#">
+            <img width="150px" src="{% static 'imgs/linux.jpg' %}"><br>
+            添加模块
+        </a>
+    </div>
+    <div class="col-sm-3 text-center">
+        <a href="#">
+            <img width="150px" src="{% static 'imgs/linux.jpg' %}"><br>
+            执行任务
+        </a>
+    </div>
+</div>
+{% endblock %}
 
 
 ```
