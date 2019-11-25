@@ -43,6 +43,52 @@ STATICFILES_DIRS = [  # 指定静态文件目录还有根目录的static
 # 将前面课程中的static目录拷贝到项目目录下
 (nsd1906) [root@room8pc16 myansible]# cp -r /var/ftp/nsd2019/nsd1906/devweb/day02/static/ .
 
+
+# 授权，将应用的url交给应用处理
+# myansible/urls.py
+from django.conf.urls import url, include
+from django.contrib import admin
+
+urlpatterns = [
+    url(r'^admin/', admin.site.urls),
+    url(r'^webadmin/', include('webadmin.urls')),
+    # r''可以匹配任意字符串
+    url(r'', include('index.urls')),
+]
+
+# webadmin/urls.py
+from django.conf.urls import url
+
+urlpatterns = []
+
+# index/urls.py
+from django.conf.urls import url
+
+urlpatterns = []
+
+# 生成数据库表
+(nsd1906) [root@room8pc16 myansible]# python manage.py makemigrations
+(nsd1906) [root@room8pc16 myansible]# python manage.py migrate
+
+# 创建管理员用户
+(nsd1906) [root@room8pc16 myansible]# python manage.py createsuperuser
+
+```
+
+## 编写index应用
+
+```python
+# 编写url
+# index/urls.py
+
+# 编写函数
+# index/views.py
+
+# 编写模板
+
+# 实现模板继承
+
+# 引入bootstrap
 ```
 
 
