@@ -324,7 +324,7 @@ def add_hosts(request):
 # templates/add_hosts.html
 {% extends 'basic.html' %}
 {% load static %}
-{% block title %}Ansible Webadmin{% endblock %}
+{% block title %}添加主机{% endblock %}
 {% block content %}
     {% comment %}action为空，表示提交给自己{% endcomment %}
     <form action="" method="post" class="form-inline h4">
@@ -377,6 +377,21 @@ def add_hosts(request):
     添加主机
 </a>
 
+# 完善add_hosts函数
+def add_hosts(request):
+    # 如果是表单的post方法，则取出相关的参数，创建主机和组
+    if request.method == 'POST':
+        group = request.POST.get('group').strip()
+        host = request.POST.get('host').strip()
+        ip = request.POST.get('ip').strip()
+        if group:  # 如果group字符串非空
+            # get_or_create返回的是元组: (组实例, True/False)
+            g = HostGroup.objects.get_or_create(groupname=group)[0]
+            if host and ip:  # 如果host和ip都非空
+                g.host_set.get_or_create(hostname=host, ipaddr=ip)
+
+    groups = HostGroup.objects.all()
+    return render(request, 'add_hosts.html', {'groups': groups})
 
 ```
 
