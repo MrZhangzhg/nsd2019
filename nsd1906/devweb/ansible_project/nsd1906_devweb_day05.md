@@ -303,6 +303,33 @@ def index(request):
 </a>
 ```
 
+## 完成添加主机页
+
+```python
+# webadmin/urls.py
+    url(r'^addhosts/$', views.add_hosts, name='add_hosts'),
+
+# webadmin/views.py
+from django.shortcuts import render
+from .models import HostGroup
+
+# Create your views here.
+def index(request):
+    return render(request, 'webadmin.html')
+
+def add_hosts(request):
+    groups = HostGroup.objects.all()
+    return render(request, 'add_hosts.html', {'groups': groups})
+
+# templates/add_hosts.html
+
+# templates/index.html
+<a href="{% url 'add_hosts' %}">
+    <img width="150px" src="{% static 'imgs/linux.jpg' %}"><br>
+    添加主机
+</a>
+```
+
 
 
 
