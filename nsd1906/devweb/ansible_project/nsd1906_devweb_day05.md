@@ -274,6 +274,35 @@ if __name__ == '__main__':
 
 ```
 
+## 配置主机信息页
+
+```python
+# 生成主机信息页
+(nsd1906) [root@room8pc16 ansible_cfg]# ansible all -m setup --tree /tmp/webadmin/
+(nsd1906) [root@room8pc16 ansible_cfg]# ansible-cmdb /tmp/webadmin/ > ../templates/webadmin.html
+
+# 编写url, webadmin/urls.py
+from django.conf.urls import url
+from . import views
+
+urlpatterns = [
+    url(r'^$', views.index, name='webadmin'),
+]
+
+# 编写函数，webadmin/views.py
+from django.shortcuts import render
+
+# Create your views here.
+def index(request):
+    return render(request, 'webadmin.html')
+
+# 修改templates/index.html，为主机信息加超链接
+<a href="{% url 'webadmin' %}" target="_blank">
+    <img width="150px" src="{% static 'imgs/linux.jpg' %}"><br>
+    主机信息
+</a>
+```
+
 
 
 
