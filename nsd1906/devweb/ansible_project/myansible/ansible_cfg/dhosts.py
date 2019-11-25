@@ -1,6 +1,6 @@
 #!/root/nsd1906/bin/python
 
-from sqlalchemy import create_engine, Column, Integer, String, Date, ForeignKey
+from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
@@ -26,4 +26,12 @@ class Host(Base):
 if __name__ == '__main__':
     session = Session()
     qset = session.query(HostGroup.groupname, Host.ipaddr).join(Host)
-    print(qset.all())
+    # print(qset.all())
+    result = {}
+    for g, ip in qset:
+        if g not in result:
+            result[g] = {}
+            result[g]['hosts'] = []
+        result[g]['hosts'].append(ip)
+
+    print(result)

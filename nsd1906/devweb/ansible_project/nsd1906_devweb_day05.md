@@ -194,7 +194,7 @@ for item in [HostGroup, Host, Module, Args]:
 
 ## 配置ansible
 
-```shell
+```python
 (nsd1906) [root@room8pc16 myansible]# mkdir ansible_cfg
 (nsd1906) [root@room8pc16 myansible]# cd ansible_cfg
 (nsd1906) [root@room8pc16 ansible_cfg]# vim ansible.cfg
@@ -203,6 +203,74 @@ inventory = dhosts.py
 remote_user = root
 (nsd1906) [root@room8pc16 ansible_cfg]# touch dhosts.py
 (nsd1906) [root@room8pc16 ansible_cfg]# chmod +x dhosts.py
+
+# 动态主机清单要求，脚本执行的输出为以下样式：
+{
+    'webservers': {
+        'hosts': ['192.168.4.5', '192.168.4.6']
+    },
+    '组2': {
+        'hosts': [组2的主机列表]
+    }
+}
+# 解题思路
+>>> result = {}   # 创建保存结果的字典
+>>> if 'webservers' not in result:
+...   result['webservers'] = {}
+... 
+>>> result
+{'webservers': {}}
+# result['webservers']也是字典
+>>> result['webservers']
+{}
+>>> result['webservers']['hosts'] = []
+>>> result
+{'webservers': {'hosts': []}}
+# result['webservers']['hosts']是列表，可以追加数据
+>>> result['webservers']['hosts'].append('192.168.4.5')
+>>> result['webservers']['hosts'].append('192.168.4.6')
+>>> result
+{'webservers': {'hosts': ['192.168.4.5', '192.168.4.6']}}
+
+
+(nsd1906) [root@room8pc16 ansible_cfg]# vim dhosts.py 
+#!/root/nsd1906/bin/python
+
+from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+
+engine = create_engine(
+    'sqlite:////var/ftp/nsd2019/nsd1906/devweb/ansible_project/myansible/db.sqlite3',
+    encoding='utf8',
+)
+Base = declarative_base()
+Session = sessionmaker(bind=engine)
+
+class HostGroup(Base):
+    __tablename__ = 'webadmin_hostgroup'
+    id = Column(Integer, primary_key=True)
+    groupname = Column(String(20), unique=True)
+
+class Host(Base):
+    __tablename__ = 'webadmin_host'
+    id = Column(Integer, primary_key=True)
+    hostname = Column(String(200))
+    ipaddr = Column(String(15))
+    group_id = Column(Integer, ForeignKey('webadmin_hostgroup.id'))
+
+if __name__ == '__main__':
+    session = Session()
+    qset = session.query(HostGroup.groupname, Host.ipaddr).join(Host)
+    # print(qset.all())
+    result = {}
+    for g, ip in qset:
+        if g not in result:
+            result[g] = {}
+            result[g]['hosts'] = []
+        result[g]['hosts'].append(ip)
+
+    print(result)
 
 ```
 
