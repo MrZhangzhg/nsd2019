@@ -323,6 +323,7 @@ def add_hosts(request):
 
 # templates/add_hosts.html
 
+
 # templates/index.html
 <a href="{% url 'add_hosts' %}">
     <img width="150px" src="{% static 'imgs/linux.jpg' %}"><br>
