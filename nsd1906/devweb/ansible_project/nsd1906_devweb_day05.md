@@ -133,9 +133,63 @@ def index(request):
     </div>
 </div>
 {% endblock %}
+```
 
+## 编写webadmin应用
+
+```python
+# 创建模型，webadmin/models.py
+from django.db import models
+
+# Create your models here.
+class HostGroup(models.Model):
+    groupname = models.CharField(max_length=50, unique=True)
+    
+    def __str__(self):
+        return self.groupname
+
+class Host(models.Model):
+    hostname = models.CharField(max_length=200)
+    ipaddr = models.CharField(max_length=15)
+    group = models.ForeignKey(HostGroup)
+
+    def __str__(self):
+        return "%s=>%s:%s" % (self.group, self.hostname, self.ipaddr)
+
+class Module(models.Model):
+    modulename = models.CharField(max_length=50, unique=True)
+    
+    def __str__(self):
+        return self.modulename
+
+class args(models.Model):
+    arg_text = models.CharField(max_length=200)
+    module = models.ForeignKey(Module)
+    
+    def __str__(self):
+        return "%s=>%s" % (self.module, self.arg_text)
+
+
+# 生成数据库表
+(nsd1906) [root@room8pc16 myansible]# python manage.py makemigrations
+(nsd1906) [root@room8pc16 myansible]# python manage.py migrate
+
+# 查看数据库
+(nsd1906) [root@room8pc16 myansible]# sqlite3 db.sqlite3 
+sqlite> .help   # 查看帮助
+sqlite> .tables   # show tables;
+sqlite> .schema webadmin_host   # desc webadmin_host
+sqlite> select * from webadmin_host;
+
+# 注册模型到web后台管理界面
 
 ```
+
+
+
+
+
+
 
 
 
