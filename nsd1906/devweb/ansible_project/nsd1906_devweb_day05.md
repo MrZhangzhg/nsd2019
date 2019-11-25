@@ -322,6 +322,53 @@ def add_hosts(request):
     return render(request, 'add_hosts.html', {'groups': groups})
 
 # templates/add_hosts.html
+{% extends 'basic.html' %}
+{% load static %}
+{% block title %}Ansible Webadmin{% endblock %}
+{% block content %}
+    {% comment %}action为空，表示提交给自己{% endcomment %}
+    <form action="" method="post" class="form-inline h4">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>主机组：</label>
+            <input class="form-control" type="text" name="group">
+        </div>
+        <div class="form-group">
+            <label>主机：</label>
+            <input class="form-control" type="text" name="host">
+        </div>
+        <div class="form-group">
+            <label>IP：</label>
+            <input class="form-control" type="text" name="ip">
+        </div>
+        <div class="form-group">
+            <input class="btn btn-primary" type="submit" value="提 交">
+        </div>
+    </form>
+    <hr>
+    <table class="table table-hover table-striped table-bordered h4">
+        <thead class="bg-primary">
+        <tr>
+            <th>主机组</th>
+            <th>主机</th>
+        </tr>
+        </thead>
+        {% for group in groups %}
+            <tr>
+                <td>{{ group.groupname }}</td>
+                <td>
+                    <ul class="list-unstyled">
+                        {% for host in group.host_set.all %}
+                            <li>
+                                {{ host.hostname }}: {{ host.ipaddr }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
 
 
 # templates/index.html
@@ -329,6 +376,8 @@ def add_hosts(request):
     <img width="150px" src="{% static 'imgs/linux.jpg' %}"><br>
     添加主机
 </a>
+
+
 ```
 
 
