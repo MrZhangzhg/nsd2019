@@ -4,13 +4,13 @@
 {% block content %}
 <div class="row h4">
     <div class="col-sm-3 text-center">
-        <a href="#">
+        <a href="{% url 'webadmin' %}" target="_blank">
             <img width="150px" src="{% static 'imgs/linux.jpg' %}"><br>
             主机信息
         </a>
     </div>
     <div class="col-sm-3 text-center">
-        <a href="#">
+        <a href="{% url 'add_hosts' %}">
             <img width="150px" src="{% static 'imgs/linux.jpg' %}"><br>
             添加主机
         </a>
