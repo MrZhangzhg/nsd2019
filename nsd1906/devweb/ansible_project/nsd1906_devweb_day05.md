@@ -162,7 +162,7 @@ class Module(models.Model):
     def __str__(self):
         return self.modulename
 
-class args(models.Model):
+class Args(models.Model):
     arg_text = models.CharField(max_length=200)
     module = models.ForeignKey(Module)
     
@@ -181,7 +181,28 @@ sqlite> .tables   # show tables;
 sqlite> .schema webadmin_host   # desc webadmin_host
 sqlite> select * from webadmin_host;
 
-# 注册模型到web后台管理界面
+# 注册模型到web后台管理界面后，访问http://127.0.0.1/admin
+# webadmin/admin.py
+from django.contrib import admin
+from .models import HostGroup, Host, Module, Args
+
+# Register your models here.
+for item in [HostGroup, Host, Module, Args]:
+    admin.site.register(item)
+
+```
+
+## 配置ansible
+
+```shell
+(nsd1906) [root@room8pc16 myansible]# mkdir ansible_cfg
+(nsd1906) [root@room8pc16 myansible]# cd ansible_cfg
+(nsd1906) [root@room8pc16 ansible_cfg]# vim ansible.cfg
+[defaults]
+inventory = dhosts.py
+remote_user = root
+(nsd1906) [root@room8pc16 ansible_cfg]# touch dhosts.py
+(nsd1906) [root@room8pc16 ansible_cfg]# chmod +x dhosts.py
 
 ```
 
