@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import HostGroup, Module, Host
+from .adhoc2 import adhoc
 
 # Create your views here.
 def index(request):
