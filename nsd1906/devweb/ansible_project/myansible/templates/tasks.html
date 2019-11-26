@@ -46,7 +46,7 @@
                 <td>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="module">
+                            <input type="radio" name="module" value="{{ module.modulename }}">
                             {{ module.modulename }}
                         </label>
                     </div>
@@ -57,7 +57,7 @@
                             <li>
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="args">
+                                        <input type="radio" name="args" value="{{ arg.arg_text }}">
                                         {{ arg.arg_text }}
                                     </label>
                                 </div>

@@ -34,6 +34,22 @@ def add_modules(request):
     return render(request, 'add_modules.html', {'modules': modules})
 
 def tasks(request):
+    if request.method == 'POST':
+        group = request.POST.get('group')
+        ip = request.POST.get('ip')
+        module = request.POST.get('module')
+        args = request.POST.get('args')
+        dest = None   # dest是ansible执行任务的目标
+        # 如果group和ip都是非空的，那么在组上执行任务
+        if group:
+            dest = group
+        elif ip:
+            dest = ip
+
+        if dest:  # 如果dest非空则扫行任务
+            if module and args:   # 如果module和args也是非空的
+                adhoc('ansible_cfg/dhosts.py', dest, module, args)
+
     hosts = Host.objects.all()
     groups = HostGroup.objects.all()
     modules = Module.objects.all()
