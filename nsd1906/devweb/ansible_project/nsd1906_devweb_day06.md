@@ -211,7 +211,57 @@ def tasks(request):
     return render(request, 'tasks.html', context)
 ```
 
+## 实现删除参数功能
 
+思路：
+
+- 删除参数，需要调用函数
+- 可以通过url来调用函数
+
+```python
+# webadmin/urls.py
+    url(r'^del_arg/(\d+)/$', views.del_arg, name='del_arg'),
+
+# webadmin/views.py
+from django.shortcuts import render, redirect
+from .models import HostGroup, Module, Host, Args
+
+def del_arg(request, arg_id):
+    arg = Args.objects.get(id=arg_id)
+    arg.delete()
+
+    return redirect('add_modules')
+
+# templates/add_modules.html
+    <table class="table table-hover table-striped table-bordered h4">
+        <thead class="bg-primary">
+        <tr>
+            <th>模块</th>
+            <th>参数</th>
+        </tr>
+        </thead>
+        {% for module in modules %}
+            <tr>
+                <td>{{ module.modulename }}</td>
+                <td>
+                    <ul class="list-unstyled">
+                        {% for arg in module.args_set.all %}
+                            <li>
+                                <div class="col-sm-9">
+                                    {{ arg.arg_text }}
+                                </div>
+                                <div class="col-sm-3">
+                                    <a href="{% url 'del_arg' arg.id %}">del</a>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+```
 
 
 

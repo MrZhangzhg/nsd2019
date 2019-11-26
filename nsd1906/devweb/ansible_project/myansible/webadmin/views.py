@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from .models import HostGroup, Module, Host
+from django.shortcuts import render, redirect
+from .models import HostGroup, Module, Host, Args
 from .adhoc2 import adhoc
 
 # Create your views here.
@@ -56,3 +56,9 @@ def tasks(request):
     context = {'hosts': hosts, 'groups': groups, 'modules': modules}
 
     return render(request, 'tasks.html', context)
+
+def del_arg(request, arg_id):
+    arg = Args.objects.get(id=arg_id)
+    arg.delete()
+
+    return redirect('add_modules')

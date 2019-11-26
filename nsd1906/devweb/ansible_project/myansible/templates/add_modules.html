@@ -31,7 +31,12 @@
                     <ul class="list-unstyled">
                         {% for arg in module.args_set.all %}
                             <li>
-                                {{ arg.arg_text }}
+                                <div class="col-sm-9">
+                                    {{ arg.arg_text }}
+                                </div>
+                                <div class="col-sm-3">
+                                    <a href="{% url 'del_arg' arg.id %}">del</a>
+                                </div>
                             </li>
                         {% endfor %}
                     </ul>
