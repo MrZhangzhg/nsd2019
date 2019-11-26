@@ -4,5 +4,6 @@ from . import views
 urlpatterns = [
     url(r'^$', views.index, name='webadmin'),
     url(r'^addhosts/$', views.add_hosts, name='add_hosts'),
-    url(r'^addmodules/$', views.add_modules, name='add_modules')
+    url(r'^addmodules/$', views.add_modules, name='add_modules'),
+    url(r'^tasks/$', views.tasks, name='tasks'),
 ]

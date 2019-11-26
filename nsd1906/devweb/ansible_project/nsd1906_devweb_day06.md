@@ -79,6 +79,32 @@ def add_modules(request):
 
 ```
 
+## 实现执行任务页面
+
+```python
+# webadmin/urls.py
+    url(r'^tasks/$', views.tasks, name='tasks'),
+
+# webadmin/views.py
+from .models import HostGroup, Module, Host
+def tasks(request):
+    hosts = Host.objects.all()
+    groups = HostGroup.objects.all()
+    modules = Module.objects.all()
+    context = {'hosts': hosts, 'groups': groups, 'modules': modules}
+
+    return render(request, 'tasks.html', context)
+
+# templates/tasks.html
+
+
+# templates/index.html
+<a href="{% url 'tasks' %}" target="_blank">
+    <img width="150px" src="{% static 'imgs/linux.jpg' %}"><br>
+    执行任务
+</a>
+```
+
 
 
 

@@ -1,0 +1,28 @@
+{% extends 'basic.html' %}
+{% load static %}
+{% block title %}执行任务{% endblock %}
+{% block content %}
+
+    <table class="table table-hover table-striped table-bordered h4">
+        <thead class="bg-primary">
+        <tr>
+            <th>模块</th>
+            <th>参数</th>
+        </tr>
+        </thead>
+        {% for module in modules %}
+            <tr>
+                <td>{{ module.modulename }}</td>
+                <td>
+                    <ul class="list-unstyled">
+                        {% for arg in module.args_set.all %}
+                            <li>
+                                {{ arg.arg_text }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

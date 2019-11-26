@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import HostGroup, Module
+from .models import HostGroup, Module, Host
 
 # Create your views here.
 def index(request):
@@ -31,3 +31,11 @@ def add_modules(request):
 
     modules = Module.objects.all()
     return render(request, 'add_modules.html', {'modules': modules})
+
+def tasks(request):
+    hosts = Host.objects.all()
+    groups = HostGroup.objects.all()
+    modules = Module.objects.all()
+    context = {'hosts': hosts, 'groups': groups, 'modules': modules}
+
+    return render(request, 'tasks.html', context)
