@@ -10,15 +10,31 @@
             <a href="#servergroup" data-toggle="tab">主机组</a>
         </li>
     </ul>
-    <div class="tab-content h4" style="margin: 15px 0;">
-        <div class="tab-pane active fade in" id="server">
-            这是主机
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="tab-content h4" style="margin: 15px 0;">
+        <div class="tab-pane active fade in form-group" id="server">
+            <select class="form-control" name="ip">
+                <option value="">无</option>
+                {% for host in hosts %}
+                    <option value="{{ host.ipaddr }}">
+                        {{ host.hostname }}:{{ host.ipaddr }}
+                    </option>
+                {% endfor %}
+            </select>
         </div>
-        <div class="tab-pane fade" id="servergroup">
-            这是主机组
+        <div class="tab-pane fade form-group" id="servergroup">
+            <select class="form-control" name="group">
+                <option value="">无</option>
+                {% for group in groups %}
+                    <option value="{{ group.groupname }}">
+                        {{ group.groupname }}
+                    </option>
+                {% endfor %}
+            </select>
         </div>
     </div>
-    <table class="table table-hover table-striped table-bordered h4">
+        <table class="table table-hover table-striped table-bordered h4">
         <thead class="bg-primary">
         <tr>
             <th>模块</th>
@@ -40,4 +56,5 @@
             </tr>
         {% endfor %}
     </table>
+    </form>
 {% endblock %}
