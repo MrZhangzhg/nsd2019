@@ -21,5 +21,13 @@ def add_hosts(request):
     return render(request, 'add_hosts.html', {'groups': groups})
 
 def add_modules(request):
+    if request.method == 'POST':
+        module = request.POST.get('module').strip()
+        arg = request.POST.get('param').strip()
+        if module:  # 如果模块名非空
+            m = Module.objects.get_or_create(modulename=module)[0]
+            if arg:  # 如果参数也是非空的
+                m.args_set.get_or_create(arg_text=arg)
+
     modules = Module.objects.all()
     return render(request, 'add_modules.html', {'modules': modules})

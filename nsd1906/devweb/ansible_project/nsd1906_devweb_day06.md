@@ -7,6 +7,8 @@
     url(r'^addmodules/$', views.add_modules, name='add_modules')
 
 # webadmin/views.py
+from .models import HostGroup, Module
+
 def add_modules(request):
     modules = Module.objects.all()
     return render(request, 'add_modules.html', {'modules': modules})
@@ -60,5 +62,32 @@ def add_modules(request):
     <img width="150px" src="{% static 'imgs/linux.jpg' %}"><br>
     添加模块
 </a>
+
+# 完成添加模块的功能
+# webadmin/views.py
+def add_modules(request):
+    if request.method == 'POST':
+        module = request.POST.get('module').strip()
+        arg = request.POST.get('param').strip()
+        if module:  # 如果模块名非空
+            m = Module.objects.get_or_create(modulename=module)[0]
+            if arg:  # 如果参数也是非空的
+                m.args_set.get_or_create(arg_text=arg)
+
+    modules = Module.objects.all()
+    return render(request, 'add_modules.html', {'modules': modules})
+
 ```
+
+
+
+
+
+
+
+
+
+
+
+
 
