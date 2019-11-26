@@ -96,6 +96,81 @@ def tasks(request):
     return render(request, 'tasks.html', context)
 
 # templates/tasks.html
+{% extends 'basic.html' %}
+{% load static %}
+{% block title %}执行任务{% endblock %}
+{% block content %}
+    <ul class="nav nav-tabs h4">
+        <li class="active">
+            <a href="#server" data-toggle="tab">主机</a>
+        </li>
+        <li>
+            <a href="#servergroup" data-toggle="tab">主机组</a>
+        </li>
+    </ul>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="tab-content h4" style="margin: 15px 0;">
+            <div class="tab-pane active fade in form-group" id="server">
+                <select class="form-control" name="ip">
+                    <option value="">无</option>
+                    {% for host in hosts %}
+                        <option value="{{ host.ipaddr }}">
+                            {{ host.hostname }}:{{ host.ipaddr }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="tab-pane fade form-group" id="servergroup">
+            <select class="form-control" name="group">
+                <option value="">无</option>
+                {% for group in groups %}
+                    <option value="{{ group.groupname }}">
+                        {{ group.groupname }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        </div>
+        <table class="table table-hover table-striped table-bordered h4">
+        <thead class="bg-primary">
+        <tr>
+            <th>模块</th>
+            <th>参数</th>
+        </tr>
+        </thead>
+        {% for module in modules %}
+            <tr>
+                <td>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="module">
+                            {{ module.modulename }}
+                        </label>
+                    </div>
+                </td>
+                <td>
+                    <ul class="list-unstyled">
+                        {% for arg in module.args_set.all %}
+                            <li>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="args">
+                                        {{ arg.arg_text }}
+                                    </label>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <div class="form-group text-center">
+        <input class="btn btn-primary" type="submit" value="执 行">
+    </div>
+    </form>
+{% endblock %}
 
 
 # templates/index.html
