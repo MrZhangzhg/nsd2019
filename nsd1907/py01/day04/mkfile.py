@@ -19,14 +19,18 @@ def get_content():
         line = input('(end to quit)> ')
         if line == 'end':
             break
+        # content.append(line + '\n')
         content.append(line)
 
     return content
 
 def wfile(fname, content):
     '用于将内容content，写入文件fname'
+    with open(fname, 'w') as fobj:
+        fobj.writelines(content)
 
 if __name__ == '__main__':
     fname = get_fname()
     content = get_content()
+    content = ['%s\n' % line for line in content]
     wfile(fname, content)
