@@ -12,6 +12,16 @@ def get_fname():
 
 def get_content():
     '用于获取内容'
+    content = []
+
+    print('请输入文件内容，在单独的一行输入end结束。')
+    while 1:
+        line = input('(end to quit)> ')
+        if line == 'end':
+            break
+        content.append(line)
+
+    return content
 
 def wfile(fname, content):
     '用于将内容content，写入文件fname'
