@@ -12,6 +12,7 @@ def randpass(n=8):
 
     return result
 
+
 if __name__ == '__main__':
     print(randpass())
     print(randpass(4))
