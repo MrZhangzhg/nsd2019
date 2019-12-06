@@ -1,11 +1,20 @@
+stack = []
+
 def push_it():
-    print('push')
+    data = input('数据: ').strip()
+    if data:   # 非空字符串为真
+        stack.append(data)
+    else:
+        print('\033[31;1m输入为空\033[0m')
 
 def pop_it():
-    print('pop')
+    if stack:  # 列表非空为真
+        print('从栈中弹出了: \033[34;1m%s\033[0m' % stack.pop())
+    else:
+        print('\033[31;1m空栈\033[0m')
 
 def view_it():
-    print('view')
+    print('\033[32;1m%s\033[0m' % stack)
 
 def show_menu():
     prompt = """(0) 压栈
