@@ -9,7 +9,7 @@ with open('mylog.txt') as fobj:
         if t > t12:
             break
         if t >= t9:
-            print(line)
+            print(line, end='')
 
 # with open('mylog.txt') as fobj:
 #     for line in fobj:
