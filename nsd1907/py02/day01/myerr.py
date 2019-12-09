@@ -5,4 +5,10 @@ def set_age(name, age):
     print('%s is %s years old' % (name, age))
 
 if __name__ == '__main__':
-    set_age('牛老师', 200)
+    try:
+        age = int(input('年龄: '))
+        set_age('牛老师', age)
+    except ValueError:
+        print('请输入0~120之间的数字')
+    except (KeyboardInterrupt, EOFError):
+        print('\nBye-bye')
