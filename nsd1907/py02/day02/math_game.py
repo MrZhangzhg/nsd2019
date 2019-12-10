@@ -16,19 +16,37 @@ def exam():
         result = nums[0] - nums[1]
 
     # 用户作答
+    counter = 0
     prompt = '%s %s %s = ' % (nums[0], op, nums[1])
-    answer = int(input(prompt))
-    if answer == result:
-        print('Very Good!!!')
+
+    while counter < 3:
+        try:
+            answer = int(input(prompt))
+        except:  # 不指定具体的异常，可以捕获全部异常，不推荐
+            print()
+            continue
+
+        if answer == result:
+            print('Very Good!!!')
+            break
+        else:
+            print('Wrong Anwswer!!!')
+        counter += 1
     else:
-        print('Wrong Anwswer!!!')
+        print('\033[31;1m%s%s\033[0m' % (prompt, result))
 
 
 def main():
     while 1:
         exam()
         # 将用户输入信息的额外空白字符删除后，取出第一个字符
-        yn = input('Continue(y/n)? ').strip()[0]
+        try:
+            yn = input('Continue(y/n)? ').strip()[0]
+        except IndexError:
+            continue
+        except (KeyboardInterrupt, EOFError):
+            yn = 'n'
+
         if yn in 'nN':
             print('\nBye-bye')
             break
