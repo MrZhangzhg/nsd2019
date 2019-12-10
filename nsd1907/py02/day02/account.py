@@ -24,9 +24,36 @@ def save(fname):
 
 def cost(fname):
     '记录支出'
+    date = strftime('%Y-%m-%d')
+    amount = int(input('金额: '))
+    comment = input('备注: ')
+
+    # 在fname文件中取出最新余额，减去当前收入金额，即为最新余额
+    with open(fname, 'rb') as fobj:
+        records = pickle.load(fobj)
+
+    balance = records[-1][-2] - amount
+
+    # 将最新记录添加到文件中
+    record = [date, 0, amount, balance, comment]
+    records.append(record)
+    with open(fname, 'wb') as fobj:
+        pickle.dump(records, fobj)
 
 def query(fname):
     '查询'
+    # 打印表头
+    print('%-12s%-8s%-8s%-12s%-20s' % ('date', 'save', 'cost', 'balance', 'comment'))
+    # print('%-12s%-8s%-8s%-12s%-20s' % ('日期', '收入', '开销', '余额', '备注'))
+
+    # 取出全部记录
+    with open(fname, 'rb') as fobj:
+        records = pickle.load(fobj)
+
+    # 打印记录
+    for record in records:
+        print('%-12s%-8s%-8s%-12s%-20s' % tuple(record))
+
 
 def show_menu():
     cmds = {'0': save, '1': cost, '2': query}
