@@ -1,5 +1,6 @@
 from sqlalchemy import create_engine, Column, Integer, String, Date, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
 
 # 创建到mysql数据库的连接引擎
 engine = create_engine(
@@ -11,6 +12,9 @@ engine = create_engine(
 
 # 创建实体类的基类
 Base = declarative_base()
+
+# 创建到数据库连接的会话类
+Session = sessionmaker(bind=engine)
 
 # 创建实体类，也就是创建表对应的类
 class Departments(Base):
@@ -26,6 +30,14 @@ class Employees(Base):
     birth_date = Column(Date)
     email = Column(String(50))
     dep_id = Column(Integer, ForeignKey('departments.dep_id'))
+
+class Salary(Base):
+    __tablename__ = 'salary'
+    id = Column(Integer, primary_key=True)
+    date = Column(Date)
+    emp_id = Column(Integer, ForeignKey('employees.emp_id'))
+    basic = Column(Integer)
+    awards = Column(Integer)
 
 if __name__ == '__main__':
     # 如果库中无表则创建，有表将不会执行
