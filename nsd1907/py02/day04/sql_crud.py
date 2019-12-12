@@ -58,11 +58,42 @@ session = Session()
 #     print(dep.dep_id, dep.dep_name)
 
 # 查询部门id是2到4的部门
-qset5 = session.query(Departments)\
-    .filter(Departments.dep_id>=2)\
-    .filter(Departments.dep_id<5)
-for dep in qset5:
-    print(dep.dep_id, dep.dep_name)
+# qset5 = session.query(Departments)\
+#     .filter(Departments.dep_id>=2)\
+#     .filter(Departments.dep_id<5)
+# for dep in qset5:
+#     print(dep.dep_id, dep.dep_name)
+
+# 模糊查询
+# qset6 = session.query(Employees.emp_name, Employees.email)\
+#     .filter(Employees.email.like('%@tedu.cn'))
+# for emp in qset6:
+#     print(emp.emp_name, emp.email)
+
+# 多表查询。query查询的时候，先写Employees.emp_name，就要join Departments
+# qset7 = session.query(Employees.emp_name, Departments.dep_name)\
+#     .join(Departments)
+# for data in qset7:
+#     print(data)
+
+# qset8 = session.query(Departments.dep_name, Employees.emp_name)\
+#     .join(Employees)
+# for data in qset8:
+#     print(data)
+
+# 修改
+# qset9 = session.query(Departments)\
+#     .filter(Departments.dep_name=='人事部')
+# hr = qset9.first()  # 取出查询结果的第一项
+# print(hr)
+# hr.dep_name = '人力资源部'
+
+# 删除
+qset10 = session.query(Departments)\
+    .filter(Departments.dep_name=='销售部')
+sales = qset10[0]
+print(sales)
+session.delete(sales)
 
 # 如果是增删改操作，需要确认commit
 session.commit()

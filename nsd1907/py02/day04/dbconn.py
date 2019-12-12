@@ -23,6 +23,9 @@ class Departments(Base):
     dep_id = Column(Integer, primary_key=True)  # 主键
     dep_name = Column(String(20), unique=True)  # 名称必须唯一
 
+    def __str__(self):
+        return "部门: %s" % self.dep_name
+
 class Employees(Base):
     __tablename__ = 'employees'
     emp_id = Column(Integer, primary_key=True)
