@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, Column, Integer, String
+from sqlalchemy import create_engine, Column, Integer, String, Date, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 
 # 创建到mysql数据库的连接引擎
@@ -18,6 +18,14 @@ class Departments(Base):
     # 每个字段都要用Column来定义
     dep_id = Column(Integer, primary_key=True)  # 主键
     dep_name = Column(String(20), unique=True)  # 名称必须唯一
+
+class Employees(Base):
+    __tablename__ = 'employees'
+    emp_id = Column(Integer, primary_key=True)
+    emp_name = Column(String(20))
+    birth_date = Column(Date)
+    email = Column(String(50))
+    dep_id = Column(Integer, ForeignKey('departments.dep_id'))
 
 if __name__ == '__main__':
     # 如果库中无表则创建，有表将不会执行
