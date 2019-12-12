@@ -39,14 +39,30 @@ session = Session()
 #     print(dep.dep_id, dep.dep_name)
 
 # 查询员工，传入的是字段，返回的是由字段构成的元组
-qset2 = session.query(Employees.emp_name, Employees.email)
-print(qset2)
-for data in qset2:
-    print(data)
-print('*' * 30)
-for name, email in qset2:
-    print(name, email)
+# qset2 = session.query(Employees.emp_name, Employees.email)
+# print(qset2)
+# for data in qset2:
+#     print(data)
+# print('*' * 30)
+# for name, email in qset2:
+#     print(name, email)
 
+# 查询部门，按id排序
+# qset3 = session.query(Departments).order_by(Departments.dep_id)
+# for dep in qset3:
+#     print(dep.dep_id, dep.dep_name)
+
+# 查询部门id是1的部门
+# qset4 = session.query(Departments).filter(Departments.dep_id==1)
+# for dep in qset4:
+#     print(dep.dep_id, dep.dep_name)
+
+# 查询部门id是2到4的部门
+qset5 = session.query(Departments)\
+    .filter(Departments.dep_id>=2)\
+    .filter(Departments.dep_id<5)
+for dep in qset5:
+    print(dep.dep_id, dep.dep_name)
 
 # 如果是增删改操作，需要确认commit
 session.commit()
