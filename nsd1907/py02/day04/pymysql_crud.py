@@ -15,7 +15,7 @@ cur = conn.cursor()
 
 # 创建部门
 # insert1 = "INSERT INTO departments VALUES(%s, %s)"
-# cur.executemany(insert1, [(1, '人事部')])
+# cur.execute(insert1, (1, '人事部'))
 # cur.executemany(insert1, [(2, '运维部'), (3, '开发部'), (4, '测试部')])
 
 # 更新部门，将人事部改为人力资源部
