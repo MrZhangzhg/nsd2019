@@ -75,7 +75,20 @@ b' HTML>\n'
 
 ```
 
+### html编码
 
+- url只允许一部分ASCII码字符
+- 其他字符必须编码
+
+```python
+>>> url = 'https://www.sogou.com/web?query=中国'
+>>> html = request.urlopen(url)   # 报错，因为含有不允许的字符
+>>> url = 'https://www.sogou.com/web?query=' + request.quote('北京')
+>>> url
+'https://www.sogou.com/web?query=%E5%8C%97%E4%BA%AC'
+>>> html = request.urlopen(url)   # OK
+# 也可以把url内容粘到浏览器中验证
+```
 
 
 
