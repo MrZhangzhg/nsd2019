@@ -112,6 +112,38 @@ b' HTML>\n'
 
 
 
+## paramiko模块
+
+- 实现ssh客户端功能
+
+```python
+(nsd1907) [root@room8pc16 day01]# pip install /var/ftp/pub/zzg_pypkgs/paramiko_pkgs/*
+
+>>> import paramiko
+>>> ssh = paramiko.SSHClient()  # 创建实例
+# 自动回答yes。服务器发来密钥，自动接受
+>>> ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+# 登陆
+>>> ssh.connect('192.168.4.4', username='root', password='123456')
+# 执行命令返回的结果是一个长度为3的元组
+>>> result = ssh.exec_command('id root; id john')
+>>> type(result)
+<class 'tuple'>
+>>> len(result)
+3
+# 执行命令返回的元组是：输入、输出和错误的类文件对象。类文件对象也有read方法
+>>> stdin, stdout, stderr = ssh.exec_command('id root; id john')
+>>> out = stdout.read()
+>>> err = stderr.read()
+>>> out
+b'uid=0(root) gid=0(root) \xe7\xbb\x84=0(root)\n'
+>>> err
+b'id: john: no such user\n'
+>>> out.decode()
+'uid=0(root) gid=0(root) 组=0(root)\n'
+>>> ssh.close()  # 关闭连接
+```
+
 
 
 
