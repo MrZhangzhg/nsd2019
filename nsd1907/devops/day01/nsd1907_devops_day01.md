@@ -58,6 +58,20 @@ b' HTML>\n'
 >>> data = html.read()
 >>> with open('/tmp/163.html', 'wb') as fobj:
 ...   fobj.write(data)
+```
+
+### 修改请求头
+
+```shell
+>>> url = 'http://www.jianshu.com'
+>>> html = request.urlopen(url)  # 403禁止访问
+
+# 修改请求头，将User-Agent设置为火狐
+>>> headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'}
+# 构建请求对象
+>>> r = request.Request(url, headers=headers)
+>>> html = request.urlopen(r)
+>>> html.read()
 
 ```
 
