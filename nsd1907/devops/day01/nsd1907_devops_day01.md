@@ -35,6 +35,38 @@
 - 主线程生成工作线程
 - 工作线程做具体的工作
 
+## urllib模块
+
+- 实现http、ftp的客户端功能
+- 包含几个子模块：
+  - urllib.request可以用来发送request和获取request的结果
+  - urllib.error包含了urllib.request产生的异常
+  - urllib.parse用来解析和处理URL
+  - urllib.robotparse用来解析页面的robots.txt文件
+
+```python
+>>> from urllib import request
+>>> url = 'http://www.163.com/'
+>>> html = request.urlopen(url)
+>>> html.read(10)
+b' <!DOCTYPE'
+>>> html.readline()
+b' HTML>\n'
+>>> html.readlines()
+
+>>> html = request.urlopen(url)
+>>> data = html.read()
+>>> with open('/tmp/163.html', 'wb') as fobj:
+...   fobj.write(data)
+
+```
+
+
+
+
+
+
+
 
 
 
