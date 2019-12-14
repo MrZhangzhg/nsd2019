@@ -90,6 +90,26 @@ b' HTML>\n'
 # 也可以把url内容粘到浏览器中验证
 ```
 
+## wget模块
+
+```python
+# 在线安装wget模块
+(nsd1907) [root@room8pc16 day01]# pip install wget
+>>> import wget
+>>> wget.download('https://img04.sogoucdn.com/app/a/100520021/204064f49f95bae8f87edb7280b5f2cb', '/tmp/a.jpg')
+```
+
+### 编码
+
+```python
+>>> wget.download('http://www.163.com/', '/tmp/11.html')
+>>> f = open('/tmp/11.html')   # 报错，因为网易使用的是gbk编码，默认python用utf8编码打开文件
+>>> f.close()
+>>> f = open('/tmp/11.html', encoding='gbk')
+>>> f.read()  # OK
+>>> f.close()
+```
+
 
 
 
