@@ -20,9 +20,9 @@ def inet_mail(text, sender, recievers, subject, server, passwd):
 
 if __name__ == '__main__':
     text = 'py发送邮件测试\n'
-    sender = 'zhangzhigang79@126.com'
+    sender = 'zhangzhigang79@qq.com'
     recievers = ['zhangzhigang79@126.com']
-    server = 'smtp.126.com'
+    server = 'smtp.qq.com'
     subject = 'py test'
     pwd = getpass.getpass()
     inet_mail(text, sender, recievers, subject, server, pwd)
