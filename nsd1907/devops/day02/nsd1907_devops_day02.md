@@ -71,10 +71,20 @@
 'ISO-8859-1'
 >>> r.encoding = 'utf8'   # 修改编码
 >>> r.json()
-
 ```
 
+查快递
 
+- url: http://www.kuaidi100.com/query?type=%s&postid=%s
+  - ?左边部分是url
+  - ?右边部分是传给url的参数
+
+```python
+>>> url = 'http://www.kuaidi100.com/query'
+>>> params = {'type': 'youzhengguonei', 'postid': '9897314440481'}
+>>> r = requests.get(url, params=params)
+>>> r.json()
+```
 
 
 
