@@ -86,6 +86,13 @@
 >>> r.json()
 ```
 
+## 钉钉机器人的实现
+
+- https://www.jianshu.com/p/a3c62eb71ae3
+- 创建一个群聊机器人。通过python让机器人在群中说话
+
+
+
 
 
 
