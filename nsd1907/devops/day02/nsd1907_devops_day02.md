@@ -64,6 +64,14 @@
 ...   fobj.write(r.content)
 (nsd1907) [root@room8pc16 day02]# eog /tmp/a.jpg 
 
+>>> url = 'http://www.weather.com.cn/data/zs/101010100.html'
+>>> r = requests.get(url)
+>>> r.json()   # 此时为乱码
+>>> r.encoding  # 查看当前字符编码
+'ISO-8859-1'
+>>> r.encoding = 'utf8'   # 修改编码
+>>> r.json()
+
 ```
 
 
