@@ -58,6 +58,11 @@ node6
 > echo -e "192.168.4.$i\tnode$i.tedu.cn\tnode$i" >> /etc/hosts
 > done
 
+# 收集密钥，加入到信任列表
+[root@room8pc16 day02]# ssh-keyscan node{4..6} >> ~/.ssh/known_hosts
+# 配置免密登陆
+(nsd1907) [root@room8pc16 day02]# ansible-doc authorized_key
+(nsd1907) [root@room8pc16 day02]# ansible all -m authorized_key -a "user=root state=present key='{{lookup(\'file\', \'/root/.ssh/id_rsa.pub\') }}'" -k
 ```
 
 
