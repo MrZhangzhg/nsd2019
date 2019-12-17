@@ -9,10 +9,15 @@ import ansible.constants as C
 
 # since API is constructed for CLI it expects certain options to always be set, named tuple 'fakes' the args parsing options object
 # 提供adhoc命令行选项
+# connection设置连接方式，有3种：
+# local表示在本机执行；ssh表示通过ssh连接到目标主机后执行
+# smart表示智能选择，默认也是采用ssh执行
+# forks是并发处理主机的数量
 Options = namedtuple('Options', ['connection', 'module_path', 'forks', 'become', 'become_method', 'become_user', 'check', 'diff'])
-options = Options(connection='local', module_path=['/to/mymodules'], forks=10, become=None, become_method=None, become_user=None, check=False, diff=False)
+options = Options(connection='smart', module_path=['/to/mymodules'], forks=10, become=None, become_method=None, become_user=None, check=False, diff=False)
 
 # initialize needed objects
+# DataLoader用于分析yaml / json / ini等格式的文件，将其转换成python的数据类型
 loader = DataLoader() # Takes care of finding and reading yaml, json and ini files
 passwords = dict(vault_pass='secret')
 

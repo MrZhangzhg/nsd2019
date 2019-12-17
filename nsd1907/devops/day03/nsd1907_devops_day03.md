@@ -153,7 +153,36 @@ https://docs.ansible.com/ -> Ansible Documentation -> 选2.7版本 -> 搜索pyth
 15
 >>> p1.z
 23
+```
 
+将playbook转换成python数据类型
+
+```python
+# lamp.yml
+[
+    {
+        'name': 'configure dbservers',
+        'hosts': 'dbservers',
+        'tasks': [
+            {
+                'name': 'install db pkgs',
+                'yum': {
+                    'name': 'mariadb-server',
+                    'state': 'present'
+                }
+            },
+            {
+                'name': 'config db service,
+                'service': {
+                    'name': 'mariadb',
+                    'state': 'started',
+                    'enabled': 'yes'
+                }
+            }
+        ]
+    },
+    {}
+]
 ```
 
 
