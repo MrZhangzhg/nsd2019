@@ -19,30 +19,38 @@ options = Options(connection='smart', module_path=['/to/mymodules'], forks=10, b
 # initialize needed objects
 # DataLoader用于分析yaml / json / ini等格式的文件，将其转换成python的数据类型
 loader = DataLoader() # Takes care of finding and reading yaml, json and ini files
+# 保存加密密码
 passwords = dict(vault_pass='secret')
 
 # create inventory, use path to host config file as source or hosts in a comma separated string
-inventory = InventoryManager(loader=loader, sources='localhost,')
+# 主机清单文件，有两种写法：
+# 一种是将管理的所有主机用逗号分隔，写成字符串
+# 另一种是使用主机清单文件列表
+# inventory = InventoryManager(loader=loader, sources='localhost,')
+inventory = InventoryManager(loader=loader, sources=['myansible/hosts'])
 
 # variable manager takes care of merging all the different sources to give you a unifed view of variables available in each context
+# 变量
 variable_manager = VariableManager(loader=loader, inventory=inventory)
 
 # create datastructure that represents our play, including tasks, this is basically what our YAML loader does internally.
-play_source =  dict(
-        name = "Ansible Play",
-        hosts = 'localhost',
-        gather_facts = 'no',
+play_source = dict(  # 将配置创建成一个play源
+        name="Ansible Play",
+        hosts='webservers',  # 在哪些主机上执行命令
+        gather_facts='no',
         tasks = [
-            dict(action=dict(module='shell', args='ls'), register='shell_out'),
+            dict(action=dict(module='shell', args='id root'), register='shell_out'),
             dict(action=dict(module='debug', args=dict(msg='{{shell_out.stdout}}')))
          ]
     )
 
 # Create play object, playbook objects use .load instead of init or new methods,
 # this will also automatically create the task objects from the info provided in play_source
+# 创建play对象
 play = Play().load(play_source, variable_manager=variable_manager, loader=loader)
 
 # Run it - instantiate task queue manager, which takes care of forking and setting up all objects to iterate over host list and tasks
+# 创建任务队列管理器，运行play
 tqm = None
 try:
     tqm = TaskQueueManager(
@@ -55,6 +63,7 @@ try:
     result = tqm.run(play) # most interesting data for a play is actually sent to the callback's methods
 finally:
     # we always need to cleanup child procs and the structres we use to communicate with them
+    # 清理环境
     if tqm is not None:
         tqm.cleanup()
 

@@ -181,9 +181,43 @@ https://docs.ansible.com/ -> Ansible Documentation -> 选2.7版本 -> 搜索pyth
             }
         ]
     },
-    {}
+    {
+        'name': 'configure webservers',
+        'hosts': 'webservers',
+        'tasks': [
+            {
+                'name': 'install web pkgs',
+                'yum': {
+                    'name': [httpd, php, php-mysql],
+                    'state': present
+                }
+            },
+            {
+                'name': 'config web service',
+                'service': {
+                    'name': 'httpd',
+                    'state': 'started',
+                    'enabled': 'yes'
+                }
+            }
+        ]
+    }
 ]
 ```
+
+### ansible加密
+
+```python
+(nsd1907) [root@room8pc16 myansible]# echo 'hello world' > /tmp/hello.txt
+(nsd1907) [root@room8pc16 myansible]# ansible-vault encrypt /tmp/hello.txt   # 加密
+(nsd1907) [root@room8pc16 myansible]# cat /tmp/hello.txt
+(nsd1907) [root@room8pc16 myansible]# ansible-vault decrypt /tmp/hello.txt  ＃ 解密
+(nsd1907) [root@room8pc16 myansible]# cat /tmp/hello.txt
+```
+
+
+
+
 
 
 

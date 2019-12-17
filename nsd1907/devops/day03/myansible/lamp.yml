@@ -17,7 +17,7 @@
   tasks:
     - name: install web pkgs
       yum:
-        name: httpd, php, php-mysql
+        name: [httpd, php, php-mysql]
         state: present
     - name: config web service
       service:
