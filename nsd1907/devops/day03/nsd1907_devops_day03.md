@@ -215,6 +215,18 @@ https://docs.ansible.com/ -> Ansible Documentation -> 选2.7版本 -> 搜索pyth
 (nsd1907) [root@room8pc16 myansible]# cat /tmp/hello.txt
 ```
 
+### ansible-cmdb
+
+```python
+(nsd1907) [root@room8pc16 day03]# pip install /var/ftp/pub/zzg_pypkgs/ansible-cmdb_pkgs/*
+# 收集远程主机的信息，保存到一个目录中
+(nsd1907) [root@room8pc16 myansible]# ansible all -m setup --tree /tmp/nsd1907out/
+# 将收集下来的信息通过ansible-cmdb转成web页面
+(nsd1907) [root@room8pc16 myansible]# ansible-cmdb /tmp/nsd1907out/ > /tmp/myhosts.html
+(nsd1907) [root@room8pc16 myansible]# firefox /tmp/myhosts.html
+
+```
+
 
 
 
