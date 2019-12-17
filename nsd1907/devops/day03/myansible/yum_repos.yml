@@ -1,0 +1,12 @@
+---
+- name: configure yum repository
+  hosts: all
+  tasks:
+    - name: config yum
+      yum_repository:
+        file: centos7
+        baseurl: ftp://192.168.4.254/centos7.4
+        name: centos7
+        description: local centos7 repository
+        gpgcheck: no
+        enabled: yes

@@ -60,9 +60,40 @@ node6
 
 # 收集密钥，加入到信任列表
 [root@room8pc16 day02]# ssh-keyscan node{4..6} >> ~/.ssh/known_hosts
+# 测试连通性
+(nsd1907) [root@room8pc16 myansible]# ansible all -m ping -k
 # 配置免密登陆
 (nsd1907) [root@room8pc16 day02]# ansible-doc authorized_key
 (nsd1907) [root@room8pc16 day02]# ansible all -m authorized_key -a "user=root state=present key='{{lookup(\'file\', \'/root/.ssh/id_rsa.pub\') }}'" -k
+```
+
+配置vim支持yaml语法
+
+```shell
+(nsd1907) [root@room8pc16 myansible]# vim ~/.vimrc 
+autocmd FileType yaml setlocal sw=2 ts=2 et ai
+```
+
+通过playbook配置yum
+
+```shell
+(nsd1907) [root@room8pc16 myansible]# ansible-doc yum_repository
+(nsd1907) [root@room8pc16 myansible]# vim yum_repos.yml
+---
+- name: configure yum repository
+  hosts: all
+  tasks:
+    - name: config yum
+      yum_repository:
+        file: centos7
+        baseurl: ftp://192.168.4.254/centos7.4
+        name: centos7
+        description: local centos7 repository
+        gpgcheck: no
+        enabled: yes
+(nsd1907) [root@room8pc16 myansible]# ansible-playbook --syntax-check yum_repos.yml
+(nsd1907) [root@room8pc16 myansible]# ansible-playbook yum_repos.yml
+
 ```
 
 
