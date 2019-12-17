@@ -258,15 +258,36 @@ if __name__ == '__main__':
 # 执行自定义的模块
 (nsd1907) [root@room8pc16 myansible]# ansible webservers -m rcopy -a "yuan=/etc/passwd mubiao=/tmp/mima"
 
+
+# download模块
+(nsd1907) [root@room8pc16 myansible]# cat /tmp/mylibs/download.py
+from ansible.module_utils.basic import AnsibleModule
+import wget
+
+def main():
+    module = AnsibleModule(
+        argument_spec=dict(
+            url=dict(required=True, type='str'),
+            dest=dict(required=True, type='str')
+        )
+    )
+    wget.download(module.params['url'], module.params['dest'])
+    module.exit_json(changed=True)
+
+if __name__ == '__main__':
+    main()
+
+# 执行模块报错。因为远端主机没有wget模块
+(nsd1907) [root@room8pc16 myansible]# ansible webservers -m download -a "url=http://192.168.4.254/zabbix.png dest=/tmp/zabbix.png"
+
+# 不使用pip安装wget模块(安装所有的python模块都可以采用这样的方法)
+# 1. 访问https://pypi.org/，搜索wget并下载
+# 2. 在目标主机上安装wget
+[root@node5 ~]# unzip wget-3.2.zip 
+[root@node5 ~]# cd wget-3.2/
+[root@node5 wget-3.2]# python setup.py install
+
+# 再次执行下载任务，成功
+(nsd1907) [root@room8pc16 myansible]# ansible webservers -m download -a "url=http://192.168.4.254/zabbix.png dest=/tmp/zabbix.png"
 ```
-
-
-
-
-
-
-
-
-
-
 
