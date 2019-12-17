@@ -227,6 +227,39 @@ https://docs.ansible.com/ -> Ansible Documentation -> 选2.7版本 -> 搜索pyth
 
 ```
 
+### ansible模块
+
+#### 自定义模块
+
+```python
+# 创建环境变量，指定自定义ansible模块的位置
+(nsd1907) [root@room8pc16 myansible]# mkdir /tmp/mylibs
+(nsd1907) [root@room8pc16 myansible]# export ANSIBLE_LIBRARY=/tmp/mylibs
+
+# 在模块目录下创建模块文件
+(nsd1907) [root@room8pc16 myansible]# cp ../rcopy.py /tmp/mylibs/
+(nsd1907) [root@room8pc16 myansible]# cat /tmp/mylibs/rcopy.py
+from ansible.module_utils.basic import AnsibleModule
+import shutil
+
+def main():
+    module = AnsibleModule(
+        argument_spec=dict(
+            yuan=dict(required=True, type='str'),
+            mubiao=dict(required=True, type='str')
+        )
+    )
+    shutil.copy(module.params['yuan'], module.params['mubiao'])
+    module.exit_json(changed=True)
+
+if __name__ == '__main__':
+    main()
+
+# 执行自定义的模块
+(nsd1907) [root@room8pc16 myansible]# ansible webservers -m rcopy -a "yuan=/etc/passwd mubiao=/tmp/mima"
+
+```
+
 
 
 
