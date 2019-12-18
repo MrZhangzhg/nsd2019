@@ -136,6 +136,32 @@ ansible_project  nsd1902  nsd1905  nsd1908    review
 ebooks           nsd1903  nsd1906  ppts       software
 nsd1812          nsd1904  nsd1907  README.md
 
+# 删除文件
+[root@node4 myapp]# git rm readme.md
+rm 'readme.md'
+[root@node4 myapp]# git status -s
+D  readme.md
+[root@node4 myapp]# git commit -m "del readme"
+
+# 查看提交历史
+[root@node4 myapp]# git log 
+... ...
+commit 3b43ddf9a35fad9e65dae77b78b8652a7f378fa0
+Author: zzg <zzg@tedu.cn>
+Date:   Wed Dec 18 11:35:47 2019 +0800
+
+    add readme
+... ...
+# 切换到某一个提交点
+[root@node4 myapp]# git checkout \
+3b43ddf9a35fad9e65dae77b78b8652a7f378fa0
+[root@node4 myapp]# ls
+hosts  index.html  readme.md
+# 回到最新状态
+[root@node4 myapp]# git checkout master
+[root@node4 myapp]# ls
+hosts  index.html
+
 ```
 
 
