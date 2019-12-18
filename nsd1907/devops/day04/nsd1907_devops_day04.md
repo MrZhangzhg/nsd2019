@@ -205,6 +205,32 @@ hosts  index.html  issue  redhat-release
 
 ```
 
+## gitlab
+
+准备一台内存4GB以上的虚拟机，安装docker，将gitlab镜像导入
+
+```shell
+[root@node5 images]# docker load -i gitlab_zh.tar 
+[root@node5 ~]# docker images  # 查看导入的镜像
+# 修改宿主机的ssh端口
+[root@node5 ~]# vim /etc/ssh/sshd_config 
+Port 2022
+[root@node5 ~]# systemctl restart sshd
+# 重新登陆
+[root@room8pc16 nsd2019]# ssh node5 -p2022
+# 创建容器
+[root@node5 ~]# docker run -d -h gitlab --name gitlab \
+> -p 443:443 -p 80:80 -p 22:22 --restart always \
+> -v /srv/gitlab/config:/etc/gitlab \
+> -v /srv/gitlab/logs:/var/log/gitlab \
+> -v /srv/gitlab/data:/var/opt/gitlab \
+> gitlab_zh:latest
+# 查看容器状态，直到容器的状态为healthy才是可用状态
+[root@node5 ~]# watch -n1 docker ps
+
+
+```
+
 
 
 
