@@ -259,9 +259,37 @@ Username for 'http://192.168.4.5': zzg
 Password for 'http://zzg@192.168.4.5': 
 ```
 
+### 配置免密推送代码
 
+1. 生成ssh密钥
+2. 访问gitlab用户的设置页面，将公钥拷贝进去
 
+```shell
+[root@node4 myapp]# ssh-keygen -t rsa -C "zzg@tedu.cn" -b 4096
+[root@node4 myapp]# cat ~/.ssh/id_rsa.pub 
+# 复制公钥内容，粘贴到web页面中
+```
 
+3. 将推送代码的方式改为ssh
+
+```shell
+[root@node4 myapp]# git remote -v
+origin	http://192.168.4.5/devops/myapp.git (fetch)
+origin	http://192.168.4.5/devops/myapp.git (push)
+[root@node4 myapp]# git remote remove origin 
+[root@node4 myapp]# git remote add origin \
+git@192.168.4.5:devops/myapp.git
+[root@node4 myapp]# git remote -v
+origin	git@192.168.4.5:devops/myapp.git (fetch)
+origin	git@192.168.4.5:devops/myapp.git (push)
+# 推送代码测试
+[root@node4 myapp]# echo '2nd version' >> index.html 
+[root@node4 myapp]# git add .
+[root@node4 myapp]# git commit -m "myapp version 2"
+[root@node4 myapp]# git tag 2.0
+[root@node4 myapp]# git push
+[root@node4 myapp]# git push --tag
+```
 
 
 
