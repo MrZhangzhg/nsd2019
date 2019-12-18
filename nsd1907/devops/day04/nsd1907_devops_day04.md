@@ -99,6 +99,26 @@ A  index.html
 # 位于分支 master
 无文件要提交，干净的工作区
 
+
+# 不打算将hosts文件提交，错误提交时，可以撤出暂存区
+[root@node4 myapp]# echo 'web project' > readme.md
+[root@node4 myapp]# cp /etc/hosts .
+[root@node4 myapp]# git add .
+[root@node4 myapp]# git status -s
+A  hosts
+A  readme.md
+# 将文件撤出暂存区
+[root@node4 myapp]# git reset HEAD
+
+# 创建.gitignore文件，指定不需要交由git管理的文件
+[root@node4 myapp]# vim .gitignore
+hosts
+*.swp
+.gitignore
+[root@node4 myapp]# git add .
+[root@node4 myapp]# git status -s
+A  readme.md
+
 ```
 
 
