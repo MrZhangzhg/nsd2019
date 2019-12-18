@@ -228,6 +228,7 @@ Port 2022
 # 查看容器状态，直到容器的状态为healthy才是可用状态
 [root@node5 ~]# watch -n1 docker ps
 
+# 访问http://x.x.x.x进行配置。初次登陆需要设置root的密码。
 
 ```
 
