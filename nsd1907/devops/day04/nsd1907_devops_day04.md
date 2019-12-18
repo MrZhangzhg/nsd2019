@@ -48,6 +48,56 @@ qa--交付-->ops(运维上线)
 初始化空的 Git 版本库于 /root/myapp/.git/
 [root@node4 myapp]# ls -A
 .git  index.html
+```
+
+### git的工作区域
+
+```mermaid
+graph LR
+w(工作区)--git add-->s(暂存区)
+s--git commit-->g(版本库)
+```
+
+```shell
+# 查看状态
+[root@node4 myapp]# git status
+# 位于分支 master
+#
+# 初始提交
+#
+# 未跟踪的文件:
+#   （使用 "git add <file>..." 以包含要提交的内容）
+#
+#	index.html
+提交为空，但是存在尚未跟踪的文件（使用 "git add" 建立跟踪）
+[root@node4 myapp]# git status -s
+?? index.html
+# 将指定文件存入暂存区
+[root@node4 myapp]# git add index.html
+# 将目录下所有文件存入暂存区
+[root@node4 myapp]# git add .
+[root@node4 myapp]# git status
+# 位于分支 master
+#
+# 初始提交
+#
+# 要提交的变更：
+#   （使用 "git rm --cached <file>..." 撤出暂存区）
+#
+#	新文件：    index.html
+#
+[root@node4 myapp]# git status -s
+A  index.html
+# 提交暂存区文件到版本库
+[root@node4 myapp]# git commit 
+# 将会跳出vim，不写任何内容，直接退出则不会提交
+
+[root@node4 myapp]# git status -s
+A  index.html
+[root@node4 myapp]# git commit -m "project init"
+[root@node4 myapp]# git status
+# 位于分支 master
+无文件要提交，干净的工作区
 
 ```
 
