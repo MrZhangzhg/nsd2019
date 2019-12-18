@@ -19,14 +19,14 @@ def adhoc(sources=None, hosts=None, module=None, args=None):
     variable_manager = VariableManager(loader=loader, inventory=inventory)
 
     play_source = dict(  # 将配置创建成一个play源
-            name="Ansible Play",
-            hosts=hosts,  # 在哪些主机上执行命令
-            gather_facts='no',
-            tasks = [
-                dict(action=dict(module=module, args=args), register='shell_out'),
-                # dict(action=dict(module='debug', args=dict(msg='{{shell_out.stdout}}')))
-             ]
-        )
+        name="Ansible Play",
+        hosts=hosts,  # 在哪些主机上执行命令
+        gather_facts='no',
+        tasks = [
+            dict(action=dict(module=module, args=args), register='shell_out'),
+            # dict(action=dict(module='debug', args=dict(msg='{{shell_out.stdout}}')))
+         ]
+    )
 
     play = Play().load(play_source, variable_manager=variable_manager, loader=loader)
 
