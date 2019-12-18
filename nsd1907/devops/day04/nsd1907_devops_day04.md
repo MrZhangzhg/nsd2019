@@ -118,6 +118,10 @@ hosts
 [root@node4 myapp]# git add .
 [root@node4 myapp]# git status -s
 A  readme.md
+[root@node4 myapp]# git commit -m "add readme"
+
+
+# 恢复误删除文件
 
 ```
 
