@@ -162,6 +162,47 @@ hosts  index.html  readme.md
 [root@node4 myapp]# ls
 hosts  index.html
 
+# 分支
+# 默认情况下，git使用名为master的分支
+[root@node4 myapp]# git branch 
+* master
+# 新建分支，分支名前有*号的，表示当前所处分支
+[root@node4 myapp]# git branch b1
+[root@node4 myapp]# git branch 
+  b1
+* master
+# 在主干分支上编写代码，进行提交
+[root@node4 myapp]# cp /etc/redhat-release .
+[root@node4 myapp]# git add .
+[root@node4 myapp]# git commit -m "add rh-release"
+[root@node4 myapp]# ls
+hosts  index.html  redhat-release
+# 切换分支
+[root@node4 myapp]# git checkout b1
+切换到分支 'b1'
+[root@node4 myapp]# git branch 
+* b1
+  master
+[root@node4 myapp]# ls   # 当前目录下没有redhat-release
+hosts  index.html
+# 在b1分支编写代码并提交
+[root@node4 myapp]# cp /etc/issue .
+[root@node4 myapp]# git add .
+[root@node4 myapp]# git commit -m "add issue"
+[root@node4 myapp]# ls
+hosts  index.html  issue
+# 切回到master分支
+[root@node4 myapp]# git checkout master
+切换到分支 'master'
+[root@node4 myapp]# ls 
+hosts  index.html  redhat-release
+# 将b1分支汇入到主干
+[root@node4 myapp]# git merge b1 -m "merge b1"
+[root@node4 myapp]# ls
+hosts  index.html  issue  redhat-release
+# 删除分支
+[root@node4 myapp]# git branch -d b1
+
 ```
 
 
