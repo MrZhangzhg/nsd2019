@@ -35,6 +35,20 @@ qa--交付-->ops(运维上线)
 [root@node4 ~]# git config --global user.email zzg@tedu.cn
 [root@node4 ~]# git config --global core.editor vim
 
+# 创建git仓库方法一：尚未开始编写项目
+[root@node4 ~]# git init mytest
+[root@node4 ~]# ls -A mytest/
+.git
+
+# 创建git仓库方法二：已存在项目目录
+[root@node4 ~]# mkdir myapp
+[root@node4 ~]# cd myapp/
+[root@node4 myapp]# echo '<h1>My Site</h1>' > index.html
+[root@node4 myapp]# git init
+初始化空的 Git 版本库于 /root/myapp/.git/
+[root@node4 myapp]# ls -A
+.git  index.html
+
 ```
 
 
