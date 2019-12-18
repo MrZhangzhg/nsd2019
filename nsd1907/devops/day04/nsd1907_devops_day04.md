@@ -229,10 +229,35 @@ Port 2022
 [root@node5 ~]# watch -n1 docker ps
 
 # 访问http://x.x.x.x进行配置。初次登陆需要设置root的密码。
-
 ```
 
+### gitlab重要概念
 
+- 群组group：对应开发团队
+- 成员member：将用户加入到组中
+- 项目project：对应软件项目
+
+在gitlab服务器上配置好项目之后，可以将代码推到gitlab的项目中
+
+```shell
+# 进入项目目录
+[root@node4 ~]# cd myapp/
+# 为git地址添加仓库名
+[root@node4 myapp]# git remote add origin \
+http://192.168.4.5/devops/myapp.git
+# 将代码推送至gitlab服务器
+[root@node4 myapp]# git push -u origin --all
+Username for 'http://192.168.4.5': zzg
+Password for 'http://zzg@192.168.4.5': 
+# 将当前commit标记为1.0
+[root@node4 myapp]# git tag 1.0
+[root@node4 myapp]# git tag 
+1.0
+# 推送tag到gitlab服务器
+[root@node4 myapp]# git push -u origin --tags
+Username for 'http://192.168.4.5': zzg
+Password for 'http://zzg@192.168.4.5': 
+```
 
 
 
