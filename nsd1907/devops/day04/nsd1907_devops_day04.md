@@ -122,6 +122,19 @@ A  readme.md
 
 
 # 恢复误删除文件
+# cd /tmp/nsd2019/
+(nsd1907) [root@room8pc16 nsd2019]# du -sh .
+188M	.
+(nsd1907) [root@room8pc16 nsd2019]# rm -rf *
+(nsd1907) [root@room8pc16 nsd2019]# ls -A
+.git  .gitignore
+(nsd1907) [root@room8pc16 nsd2019]# du -sh .
+61M	.
+(nsd1907) [root@room8pc16 nsd2019]# git checkout -- *
+(nsd1907) [root@room8pc16 nsd2019]# ls
+ansible_project  nsd1902  nsd1905  nsd1908    review
+ebooks           nsd1903  nsd1906  ppts       software
+nsd1812          nsd1904  nsd1907  README.md
 
 ```
 
