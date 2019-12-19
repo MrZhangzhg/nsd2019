@@ -39,6 +39,8 @@ def file_ok(fname, url):
     else:
         return False
 
+def deploy(app_fname):
+
 
 if __name__ == '__main__':
     # 判断是否有新版本，没有新版本退出
@@ -65,5 +67,6 @@ if __name__ == '__main__':
         exit(2)
 
     # 部署新版本
+    deploy(app_fname)
 
     # 更新本地版本
