@@ -55,9 +55,16 @@ Available -> 按ctrl + f搜索 -> 选中Localization: Chinese (Simplified)和Git
 [root@node4 mysite]# git tag 1.0
 ```
 
+2. 在gitlab上创建名为mysite的公开项目，为devops组创建。用户成为该项目的主程序员
+3. 将代码推送到gitlab
 
+```shell
+[root@node4 mysite]# git remote add origin \
+git@192.168.4.5:devops/mysite.git
+[root@node4 mysite]# git push -u origin --all
+[root@node4 mysite]# git push --tags
 
-
+```
 
 
 
