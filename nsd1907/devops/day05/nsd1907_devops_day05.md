@@ -41,5 +41,27 @@ a3(应用服务器)--拉取-->j
 
 Available -> 按ctrl + f搜索 -> 选中Localization: Chinese (Simplified)和Git Parameter -> Install without restart -> 勾>选Restart Jenkins when installation is complete and no jobs are running
 
+## 实现CI/CD流程
+
+1. 程序员编写代码
+
+```shell
+[root@node4 ~]# git init mysite
+初始化空的 Git 版本库于 /root/mysite/.git/
+[root@node4 ~]# cd mysite/
+[root@node4 mysite]# echo '<h1>My Web Site</h1>' > index.html
+[root@node4 mysite]# git add .
+[root@node4 mysite]# git commit -m "my site 1.0"
+[root@node4 mysite]# git tag 1.0
+```
+
+
+
+
+
+
+
+
+
 
 
