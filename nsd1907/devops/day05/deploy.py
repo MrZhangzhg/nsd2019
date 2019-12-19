@@ -1,8 +1,23 @@
+import os
+import requests
 
 
 def has_new_ver(ver_url, ver_fname):
     "有新版本返回True，没有返回False"
+    # 本地没有版本文件，则有新版本
+    if not os.path.exists(ver_fname):
+        return True
+    
+    # 取出本地版本号
+    with open(ver_fname) as fobj:
+        local_ver = fobj.read()
 
+    # 比较网上版本号和本地版本号，如果相同是没有新版本，否则有
+    r = requests.get(ver_url)
+    if local_ver == r.text:
+        return False
+    else:
+        return True
 
 
 if __name__ == '__main__':
