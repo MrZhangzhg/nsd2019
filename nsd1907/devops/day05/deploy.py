@@ -1,6 +1,7 @@
 import os
 import requests
 import wget
+import hashlib
 
 
 def has_new_ver(ver_url, ver_fname):
@@ -20,8 +21,23 @@ def has_new_ver(ver_url, ver_fname):
     else:
         return True
 
-def file_ok(url, fname):
+def file_ok(fname, url):
     "如果网上md5值和本地文件计算出的md5值相同，返回True；否则返回False"
+    # 计算本地文件的md5值
+    m = hashlib.md5()
+    with open(fname, 'rb') as fobj:
+        while 1:
+            data = fobj.read(4096)
+            if not data:
+                break
+            m.update(data)
+
+    # 取出网上md5值，和本地计算的值进行比较
+    r = requests.get(url)
+    if m.hexdigest() == r.text.strip():
+        return True
+    else:
+        return False
 
 
 if __name__ == '__main__':
@@ -47,7 +63,6 @@ if __name__ == '__main__':
         os.remove(app_fname)
         print('文件已损坏')
         exit(2)
-
 
     # 部署新版本
 
