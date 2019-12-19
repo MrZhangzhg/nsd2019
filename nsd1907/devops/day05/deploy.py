@@ -2,6 +2,7 @@ import os
 import requests
 import wget
 import hashlib
+import tarfile
 
 
 def has_new_ver(ver_url, ver_fname):
@@ -39,7 +40,23 @@ def file_ok(fname, url):
     else:
         return False
 
-def deploy(app_fname):
+def deploy(app_fname, deploy_dir, dest):
+    # 将压缩包解压至deploy_dir
+    tar = tarfile.open(app_fname)
+    tar.extractall(path=deploy_dir)
+    tar.close()
+
+    # 拼接出解压目录的绝对路径
+    app_path = os.path.basename(app_fname)
+    app_path = app_path.replace('.tar.gz', '')
+    app_path = os.path.join(deploy_dir, app_path)
+
+    # 如果目标软链接已存在，先删除它
+    if os.path.exists(dest):
+        os.remove(dest)
+
+    # 创建软链接
+    os.symlink(app_path, dest)
 
 
 if __name__ == '__main__':
@@ -67,6 +84,11 @@ if __name__ == '__main__':
         exit(2)
 
     # 部署新版本
-    deploy(app_fname)
+    deploy_dir = '/var/www/deploy'
+    dest = '/var/www/html/nsd1907'
+    deploy(app_fname, deploy_dir, dest)
 
     # 更新本地版本
+    if os.path.exists(ver_fname):
+        os.remove(ver_fname)
+    wget.download(ver_url, ver_fname)
