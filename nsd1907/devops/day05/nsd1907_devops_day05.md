@@ -89,11 +89,34 @@ Build with Parameters -> 选择相关的tag进行构建。构建完成的>内容
 [root@node4 mysite]# git tag 2.0
 [root@node4 mysite]# git push
 [root@node4 mysite]# git push --tags
+
+[root@node6 ~]# ls /var/lib/jenkins/workspace/mysite/
+mysite-1.0  mysite-2.0
 ```
 
+6. 为了方便应用服务器从jenkins上获取代码，在jenkins服务器上配置web服务，应用服务器可以使用http协议下载软件。
 
+```shell
+[root@node6 ~]# yum install -y httpd
+[root@node6 ~]# systemctl start httpd
+[root@node6 ~]# systemctl enable httpd
+```
 
+7. jenkins服务器规划
+   - /var/www/html/deploy/pkgs：软件包和它的md5值
+   - /var/www/html/deploy/{last_ver,live_ver}文件：记录前一版本和当前版本
 
+```shell
+[root@node6 ~]# mkdir -p /var/www/html/deploy/pkgs
+[root@node6 ~]# mkdir -p /var/www/html/deploy/pkgs
+[root@node6 ~]# chown -R jenkins.jenkins /var/www/html/deploy
+```
 
-
+8. 修改jenkins项目配置
+   - 将软件目录拷贝到/var/www/html/deploy/pkgs
+   - 将软件目录下的.git隐藏目录删除
+   - 将软件目录打包，便于下载
+   - 删除软件目录
+   - 计算压缩包的md5值
+   -  生成/var/www/html/deploy/{last_ver,live_ver}两个文件，分别记录前一版本号和当前版本号
 
