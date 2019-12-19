@@ -136,3 +136,17 @@ cd ..
 echo $webver > live_ver
 ```
 
+将物理主机作为对外提供服务的web服务器。
+
+- /var/www/html/nsd1907是对外提供服务的目录
+- /var/www/html/nsd1907是一个软链接，它指向某一个版本的目录
+- /var/www/download/：用于保存下载的软件版本
+- /var/www/deploy/：保存软件解压目录
+- /var/www/deploy/live_ver：记录当前应用的版本
+
+
+
+
+
+
+
