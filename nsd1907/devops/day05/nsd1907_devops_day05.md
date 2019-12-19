@@ -63,12 +63,20 @@ Available -> 按ctrl + f搜索 -> 选中Localization: Chinese (Simplified)和Git
 git@192.168.4.5:devops/mysite.git
 [root@node4 mysite]# git push -u origin --all
 [root@node4 mysite]# git push --tags
-
 ```
 
+4. 配置jenkins下载代码
 
+```shell
+# 在jenkins服务器上安装git
+[root@node6 ~]# yum install -y git
+```
 
+新建Item -> 任务名：website / Freestyle project -> 勾选This project is parameterized -> 添加参数 -> Git Parameter => Name: webver / Parameter Type: Branch or Tag  / Default Value: origin/master -> 源码管理 => Git => Repository URL: http://192.168.4.5/devops/website.git / Branches to build：$webver -> 保存
 
+构建：
+
+Build with Parameters -> 选择相关的tag进行构建。构建完成的>内容自动放到了/var/lib/jenkins/workspace目录
 
 
 
