@@ -20,6 +20,9 @@ def has_new_ver(ver_url, ver_fname):
     else:
         return True
 
+def file_ok(url, fname):
+    "如果网上md5值和本地文件计算出的md5值相同，返回True；否则返回False"
+
 
 if __name__ == '__main__':
     # 判断是否有新版本，没有新版本退出
@@ -37,6 +40,13 @@ if __name__ == '__main__':
     wget.download(app_url, down_dir)
 
     # 校验文件是否损坏，如果文件已损坏，则删除损坏文件并退出
+    app_fname = app_url.split('/')[-1]
+    app_fname = os.path.join(down_dir, app_fname)
+    md5_url = app_url + '.md5'
+    if not file_ok(app_fname, md5_url):
+        os.remove(app_fname)
+        print('文件已损坏')
+        exit(2)
 
 
     # 部署新版本
