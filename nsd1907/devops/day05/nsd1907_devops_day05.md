@@ -120,3 +120,19 @@ mysite-1.0  mysite-2.0
    - 计算压缩包的md5值
    -  生成/var/www/html/deploy/{last_ver,live_ver}两个文件，分别记录前一版本号和当前版本号
 
+编加jenkins项目配置：构建>增加构建步骤>Execute shell
+
+```shell
+deploy_dir=/var/www/html/deploy/pkgs
+cp -r mysite-$webver $deploy_dir
+cd $deploy_dir
+rm -rf mysite-$webver/.git
+tar czf mysite-$webver.tar.gz mysite-$webver
+rm -rf mysite-$webver
+md5sum mysite-$webver.tar.gz | awk '{print $1}' > \
+mysite-$webver.tar.gz.md5
+cd ..
+[ -f live_ver ] && cat live_ver > last_ver
+echo $webver > live_ver
+```
+
