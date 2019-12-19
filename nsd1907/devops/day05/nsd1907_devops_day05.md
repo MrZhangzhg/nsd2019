@@ -78,5 +78,22 @@ git@192.168.4.5:devops/mysite.git
 
 Build with Parameters -> 选择相关的tag进行构建。构建完成的>内容自动放到了/var/lib/jenkins/workspace目录
 
+5. 修改项目，下载软件后，放到不同的子目录
+
+编辑项目：Additional Behaviours > 新增 > Checkout to a sub-directory > mysite-$webver
+
+```shell
+[root@node4 mysite]# echo "<h2>web 2.0</h2>" > index.html 
+[root@node4 mysite]# git add .
+[root@node4 mysite]# git commit -m "my site 2.0"
+[root@node4 mysite]# git tag 2.0
+[root@node4 mysite]# git push
+[root@node4 mysite]# git push --tags
+```
+
+
+
+
+
 
 
