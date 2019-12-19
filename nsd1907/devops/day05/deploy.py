@@ -1,5 +1,6 @@
 import os
 import requests
+import wget
 
 
 def has_new_ver(ver_url, ver_fname):
@@ -7,7 +8,7 @@ def has_new_ver(ver_url, ver_fname):
     # 本地没有版本文件，则有新版本
     if not os.path.exists(ver_fname):
         return True
-    
+
     # 取出本地版本号
     with open(ver_fname) as fobj:
         local_ver = fobj.read()
@@ -29,8 +30,14 @@ if __name__ == '__main__':
         exit(1)
 
     # 下载新版本文件
+    r = requests.get(ver_url)
+    ver_num = r.text.strip()  # 去掉结尾的\n
+    down_dir = '/var/www/download'
+    app_url = 'http://192.168.4.6/deploy/pkgs/mysite-%s.tar.gz' % ver_num
+    wget.download(app_url, down_dir)
 
     # 校验文件是否损坏，如果文件已损坏，则删除损坏文件并退出
+
 
     # 部署新版本
 
