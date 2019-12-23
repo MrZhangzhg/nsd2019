@@ -10,13 +10,39 @@
         }
         .banner {
             height: 100px;
-            background: silver;
+            background: #5bbbc0;
         }
         .c1, .c2, .c3 {
             width: 333px;
             height: 200px;
             /*border: 1px solid black;*/
             float: left;
+        }
+        ul {
+            list-style-type: none;   /*去掉圆点*/
+            padding: 0;
+            margin: 0;
+        }
+        li {
+            float: left;
+            width: 166px;
+            background: #BEBEBE;
+        }
+        #nav1 {
+            width: 170px;
+        }
+        a {
+            display: block;    /*将a转为块元素*/
+            height: 30px;
+            line-height: 30px;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            font-weight: bold;
+            border-bottom: 2px solid #900B09;
+        }
+        a:hover {
+            background: #900B09;
         }
     </style>
 </head>
@@ -30,7 +56,7 @@
             <li><a href="#">LINUX</a></li>
             <li><a href="#">SHELL</a></li>
             <li><a href="#">PYTHON</a></li>
-            <li><a href="#">HTML</a></li>
+            <li id="nav1"><a href="#">HTML</a></li>
         </ul>
     </div>
     <div>
