@@ -37,7 +37,10 @@
   - 边框border
   - 外边距margin
 
+设置一个块级元素居中的方式：
 
+- 固定宽度：width: 1000px;
+- 设置外边距：margin: 0 auto;
 
 
 
