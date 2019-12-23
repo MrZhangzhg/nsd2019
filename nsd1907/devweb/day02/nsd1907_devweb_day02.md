@@ -49,7 +49,7 @@
 - twitter公司推出的开源前端web框架
 - 可以简单的理解为它是一个大的样式表文件
 - 中文官方站：https://www.bootcss.com/
-- 准备环境，将nsd1905班devweb/day02/目录的static目录拷贝到工作目录
+- 准备环境，将nsd1906班devweb/day02/目录的static目录拷贝到工作目录
 
 ```shell
 # ls static/
