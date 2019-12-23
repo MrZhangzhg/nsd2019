@@ -64,8 +64,7 @@ js->javascript脚本
 
 ## 一、排版样式
 
-- Bootstrap 将全局 font-size 设置为 14px,line-height 行高设置为 1.428(即20px);p段落元素被设
-置等于 1/2 行高(即 10px);颜色被设置为#333333。
+- Bootstrap 将全局 font-size 设置为 14px,line-height 行高设置为 1.428(即20px);p段落元素被设置等于 1/2 行高(即 10px);颜色被设置为#333333。
 - 标题元素大小
   - h1: 36px
   - h2: 30px
