@@ -30,9 +30,24 @@
         .c3, #id1 {
             font-size: 1.5em;
         }
+        a.c4:link {    /*访问前的样式*/
+            color: orangered;
+        }
+        a.c4:hover {   /*鼠标悬停时的样式*/
+            font-size: 1.5em;
+        }
+        a.c4:visited {   /*访问后的样式*/
+            color: darkgray;
+        }
     </style>
 </head>
 <body>
+<p>
+    <a class="c4" href="http://www.microsoft.com">微软</a>
+</p>
+<p>
+    <a href="http://z.cn">亚马逊中国</a>
+</p>
 <h1>云计算 1907</h1>
 <p class="c2">云计算 1907</p>
 <p class="c3">云计算 1907</p>
