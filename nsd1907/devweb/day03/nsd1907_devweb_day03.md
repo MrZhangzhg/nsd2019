@@ -155,6 +155,20 @@ def index(request):
     # render函数寻找名为index.html的模板文件，返回给用户
     return render(request, 'index.html')
 
+# 3. 编写模板文件
+# templates/index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票首页</title>
+</head>
+<body>
+<h1>投票首页</h1>
+</body>
+</html>
+
+
 ```
 
 
