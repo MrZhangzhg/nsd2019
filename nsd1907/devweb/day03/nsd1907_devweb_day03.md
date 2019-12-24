@@ -82,7 +82,9 @@ USE_TZ = False
 (nsd1907) [root@room8pc16 mysite]# python manage.py migrate
 
 # 创建管理员用户
+(nsd1907) [root@room8pc16 mysite]# python manage.py createsuperuser
 
+# 访问http://127.0.0.1/admin后台
 ```
 
 
