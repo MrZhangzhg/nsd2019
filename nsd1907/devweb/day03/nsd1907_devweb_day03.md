@@ -45,6 +45,37 @@ mytest
 
 2 directories, 5 files
 
+# 启动测试服务器，注意不要在生产环境下使用它
+(nsd1907) [root@room8pc16 mysite]# python manage.py runserver
+# 访问http://127.0.0.1:8000/查看页面
+
+# 创建数据库
+[root@room8pc16 day02]# mysql -uroot -ptedu.cn
+MariaDB [(none)]> CREATE DATABASE dj1907 DEFAULT CHARSET utf8;
+
+# mysite/__init__.py
+import pymysql
+
+pymysql.install_as_MySQLdb()
+
+# 设置django
+# mysite/settings.py
+ALLOWED_HOSTS = ['*']   # django可以监听在0.0.0.0
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'dj1907',
+        'USER': 'root',
+        'PASSWORD': 'tedu.cn',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+    }
+}
+LANGUAGE_CODE = 'zh-hans'
+TIME_ZONE = 'Asia/Shanghai'
+USE_TZ = False
+# 按ctrl+c停止开发服务器后，重新运行它，监听在0.0.0.0的80端口。只有root用户才可以使用1024以内的端口。
+(nsd1907) [root@room8pc16 mysite]# python manage.py runserver 0:80
 ```
 
 
