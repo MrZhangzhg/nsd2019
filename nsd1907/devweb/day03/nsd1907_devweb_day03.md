@@ -211,6 +211,35 @@ def detail(request, question_id):
 </html>
 ```
 
+### 投票详情页
+
+```python
+# 1. url
+# polls/urls.py
+urlpatterns = [
+    ... ...
+    url(r'^(\d+)/result/$', views.result, name='result'),
+]
+
+# 2. views
+# polls/views.py
+def result(request, question_id):
+    return render(request, 'result.html', {'question_id': question_id})
+
+# 3. templates
+# templates/result.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票结果页</title>
+</head>
+<body>
+<h1>{{ question_id }}号问题投票结果</h1>
+</body>
+</html>
+```
+
 
 
 

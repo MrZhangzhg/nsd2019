@@ -11,3 +11,6 @@ def detail(request, question_id):
     # key在模板文件中用于变量名，val是变量的值
     return render(request, 'detail.html', {'question_id': question_id})
 
+def result(request, question_id):
+    return render(request, 'result.html', {'question_id': question_id})
+
