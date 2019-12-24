@@ -167,8 +167,48 @@ def index(request):
 <h1>投票首页</h1>
 </body>
 </html>
+```
+
+### 制作投票详情页
+
+```python
+# 1. 设计url
+# polls/urls.py
+from django.conf.urls import url
+# from polls import views  # 也可以写为以下形式
+from . import views
 
 
+urlpatterns = [
+    # 从http://x.x.x.x/polls/后面匹配
+    # 用户访问polls首页时，将会调用views.index函数
+    # 给http://x.x.x.x/polls/起名，叫index
+    url(r'^$', views.index, name='index'),
+    # $前面的/务必填写，它可以匹配http://x.x.x.x/polls/1，
+    # 也可以匹配 http://x.x.x.x/polls/1/
+    # 为\d+添加()，将会把\d+匹配到的内容，传递给detail作为参数
+    url(r'^(\d+)/$', views.detail, name='detail'),
+]
+
+# 2. 编写函数
+# polls/views.py
+def detail(request, question_id):
+    # render的字符，将以key=val的形式发给模板文件
+    # key在模板文件中用于变量名，val是变量的值
+    return render(request, 'detail.html', {'question_id': question_id})
+
+# 3. 模板文件
+# templates/detail.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票详情</title>
+</head>
+<body>
+<h1>{{ question_id }}号问题投票详情</h1>
+</body>
+</html>
 ```
 
 
