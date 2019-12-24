@@ -87,6 +87,35 @@ USE_TZ = False
 # 访问http://127.0.0.1/admin后台
 ```
 
+### 应用
+
+- 一个web项目由多个功能模块构成，在django中，可以把功能模块创建为应用
+- 一个项目由多个应用构成
+- 一个应用可以部署到多个项目中
+
+### 投票应用
+
+- 规划：
+  - http://127.0.0.1:8000/polls/：投票首页，列出所有投票项
+  - http://127.0.0.1:8000/polls/1/：1号问题投票详情页，可以进行投票
+  - http://127.0.0.1:8000/polls/1/result/：1号问题投票结果页
+
+```python
+# 创建名为polls的投票应用
+(nsd1907) [root@room8pc16 mysite]# python manage.py startapp polls
+(nsd1907) [root@room8pc16 mysite]# ls
+... polls ...
+
+# 将投票应用集成到项目
+# mysite/settings.py
+INSTALLED_APPS = [
+    ... ...
+    'polls',
+]
+```
+
+
+
 
 
 
