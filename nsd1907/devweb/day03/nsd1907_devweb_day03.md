@@ -131,6 +131,7 @@ urlpatterns = []
 
 
 # 实现投票首页
+# 1. 设计url
 # polls/urls.py
 from django.conf.urls import url
 # from polls import views  # 也可以写为以下形式
@@ -141,8 +142,18 @@ urlpatterns = [
     # 从http://x.x.x.x/polls/后面匹配
     # 用户访问polls首页时，将会调用views.index函数
     # 给http://x.x.x.x/polls/起名，叫index
-    url('r^$', views.index, name='index')
+    url(r'^$', views.index, name='index')
 ]
+
+# 2. 编写index函数
+# polls/views.py
+from django.shortcuts import render
+
+# 用户的请求将自动作为第一个参数发给函数
+# 所以函数至少需要有一个参数
+def index(request):
+    # render函数寻找名为index.html的模板文件，返回给用户
+    return render(request, 'index.html')
 
 ```
 
