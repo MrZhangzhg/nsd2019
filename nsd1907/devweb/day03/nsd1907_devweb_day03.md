@@ -240,6 +240,34 @@ def result(request, question_id):
 </html>
 ```
 
+## Model模型
+
+- django的数据模型仍然使用ORM（对象关系映射）
+- 与sqlalchemy类似，django的模型将class与数据库表关联；将表中的记录与class的实例关联。
+- 投票需要2个模型：问题和选项
+  - 问题模型：问题、发布时间
+  - 选项模型：选项、选项票数、问题
+
+```python
+# polls/models.py
+from django.db import models
+
+# Create your models here.
+class Question(models.Model):
+    question_text = models.CharField(max_length=200)
+    pub_date = models.DateTimeField()
+
+class Choice(models.Model):
+    choice_text = models.CharField(max_length=200)
+    votes = models.IntegerField(default=0)
+    q = models.ForeignKey(Question)
+
+# 生成表
+(nsd1907) [root@room8pc16 mysite]# python manage.py makemigrations
+(nsd1907) [root@room8pc16 mysite]# python manage.py migrate
+
+```
+
 
 
 
