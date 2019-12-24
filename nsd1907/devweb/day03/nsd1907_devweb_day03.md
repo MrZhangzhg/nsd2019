@@ -281,13 +281,35 @@ class Choice(models.Model):
 Did you rename choice.q to choice.question (a ForeignKey)? [y/N] y
 (nsd1907) [root@room8pc16 mysite]# python manage.py migrate
 
+# 将模型注册到后台管理页面
+# polls/admin.py
+from django.contrib import admin
+# from polls.models import Question, Choice   # 也可以写为
+from .models import Question, Choice
+
+# Register your models here.
+admin.site.register(Question)
+admin.site.register(Choice)
+
+# 访问http://x.x.x.x/admin/可以添加问题和选项了。此时添加问题，显示的都是Question Object，添加选项都显示为Choice Object。
+# 修复此问题，需要为模型增加__str__方法。增加方法不用做数据迁移，即migrate。因为没有涉及字段改变。
+# polls/models.py
+from django.db import models
+
+# Create your models here.
+class Question(models.Model):
+    question_text = models.CharField(max_length=200)
+    pub_date = models.DateTimeField()
+    
+    def __str__(self):
+        return "问题: %s" % self.question_text
+
+class Choice(models.Model):
+    choice_text = models.CharField(max_length=200)
+    votes = models.IntegerField(default=0)
+    question = models.ForeignKey(Question)
+    
+    def __str__(self):
+        return "%s=>%s" % (self.question, self.choice_text)
 ```
-
-
-
-
-
-
-
-
 
