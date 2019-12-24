@@ -112,6 +112,24 @@ INSTALLED_APPS = [
     ... ...
     'polls',
 ]
+
+# 授权。将应用的url交给应用处理。以polls/开头的url交给polls应用
+# mysite/urls.py
+from django.conf.urls import url, include
+from django.contrib import admin
+
+urlpatterns = [
+    # url使用正则进行匹配，从http://x.x.x.x/后面开始匹配
+    url(r'^admin/', admin.site.urls),
+    url(r'^polls/', include('polls.urls')),
+]
+
+# polls/urls.py
+from django.conf.urls import url
+
+urlpatterns = []
+
+
 ```
 
 
