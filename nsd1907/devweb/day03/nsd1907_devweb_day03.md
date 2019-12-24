@@ -76,6 +76,13 @@ TIME_ZONE = 'Asia/Shanghai'
 USE_TZ = False
 # 按ctrl+c停止开发服务器后，重新运行它，监听在0.0.0.0的80端口。只有root用户才可以使用1024以内的端口。
 (nsd1907) [root@room8pc16 mysite]# python manage.py runserver 0:80
+
+# django默认的应用需要数据库，生成数据库的表
+(nsd1907) [root@room8pc16 mysite]# python manage.py makemigrations
+(nsd1907) [root@room8pc16 mysite]# python manage.py migrate
+
+# 创建管理员用户
+
 ```
 
 
