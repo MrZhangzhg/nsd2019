@@ -266,6 +266,21 @@ class Choice(models.Model):
 (nsd1907) [root@room8pc16 mysite]# python manage.py makemigrations
 (nsd1907) [root@room8pc16 mysite]# python manage.py migrate
 
+# 分析表名和字段名
+# 1. 表名：　a. 全部小写  b. 应用名_类名
+# 2. 没有明确声明主键，django将自动创建名为id的主键
+# 3. 表中的字段名，就是类中的变量名
+# 4. 外键字段名，是：类变量_id。如变量是q，则字段名为q_id；如果变量是question，则字段名是question_id
+# polls/models.py
+... ...
+class Choice(models.Model):
+    choice_text = models.CharField(max_length=200)
+    votes = models.IntegerField(default=0)
+    question = models.ForeignKey(Question)
+(nsd1907) [root@room8pc16 mysite]# python manage.py makemigrations
+Did you rename choice.q to choice.question (a ForeignKey)? [y/N] y
+(nsd1907) [root@room8pc16 mysite]# python manage.py migrate
+
 ```
 
 
