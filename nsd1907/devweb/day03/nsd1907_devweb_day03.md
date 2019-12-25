@@ -211,7 +211,7 @@ def detail(request, question_id):
 </html>
 ```
 
-### 投票详情页
+### 投票结果页
 
 ```python
 # 1. url
