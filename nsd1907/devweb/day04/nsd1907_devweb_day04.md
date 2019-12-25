@@ -285,6 +285,22 @@ def index(request):
     </ol>
 {% endblock %}
 
+# detail.html / result.html使用模板继承
+# templates/detail.html
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}投票详情{% endblock %}
+{% block content %}
+    <h1 class="text-center text-warning">{{ question_id }}号问题投票详情</h1>
+{% endblock %}
+
+# templates/result.html
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}投票结果{% endblock %}
+{% block content %}
+    <h1 class="text-center text-warning">{{ question_id }}号问题投票结果</h1>
+{% endblock %}
 
 ```
 
