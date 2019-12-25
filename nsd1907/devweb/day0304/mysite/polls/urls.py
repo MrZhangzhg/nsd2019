@@ -13,4 +13,5 @@ urlpatterns = [
     # 为\d+添加()，将会把\d+匹配到的内容，传递给detail作为参数
     url(r'^(\d+)/$', views.detail, name='detail'),
     url(r'^(\d+)/result/$', views.result, name='result'),
+    url(r'^(\d+)/vote/$', views.vote, name='vote'),
 ]

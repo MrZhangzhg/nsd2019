@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Question
 
 # 用户的请求将自动作为第一个参数发给函数
@@ -16,3 +16,16 @@ def detail(request, question_id):
 
 def result(request, question_id):
     return render(request, 'result.html', {'question_id': question_id})
+
+def vote(request, question_id):
+    # 取出问题
+    question = Question.objects.get(id=question_id)
+    # request是一个对象，它的POST属性是一个字典，字典中存储着表单数据
+    choice_id = request.POST.get('choice_id')
+    # 获取choice_id对应的选项实例
+    choice = question.choice_set.get(id=choice_id)
+    # 将选项的票数加1
+    choice.votes += 1
+    choice.save()
+    # 投票完成后，跳转到投票结果页
+    return redirect('result', question.id)

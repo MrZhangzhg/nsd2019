@@ -314,10 +314,60 @@ def detail(request, question_id):
 ... ...
 
 # templates/detail.html
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}投票详情{% endblock %}
+{% block content %}
+    <h1 class="text-center text-warning">{{ question.id }}号问题投票详情</h1>
+    <h2>{{ question.question_text }}</h2>
+    <form action="{% url 'vote' question.id %}" method="post" class="h3">
+        {% csrf_token %}
+        {% for choice in question.choice_set.all %}
+            <div class="checkbox">
+                <label>
+                    <input type="radio" name="choice_id" value="{{ choice.id }}">
+                    {{ choice.choice_text }}
+                </label>
+            </div>
+        {% endfor %}
+        <div class="form-group">
+            <input class="btn btn-primary" type="submit" value="提 交">
+        </div>
+    </form>
+{% endblock %}
 
 ```
 
+## 实现投票功能
 
+- 实现投票功能，需要执行一个函数。函数用于将数据库中相应的votes字段加1。
+- 执行投票函数需要访问一个url
+
+```python
+# 为投票功能设计url
+# polls/urls.py
+... ...
+    url(r'^(\d+)/vote/$', views.vote, name='vote'),
+... ...
+
+# 编写投票函数
+# polls/views.py
+from django.shortcuts import render, redirect
+... ...
+def vote(request, question_id):
+    # 取出问题
+    question = Question.objects.get(id=question_id)
+    # request是一个对象，它的POST属性是一个字典，字典中存储着表单数据
+    choice_id = request.POST.get('choice_id')
+    # 获取choice_id对应的选项实例
+    choice = question.choice_set.get(id=choice_id)
+    # 将选项的票数加1
+    choice.votes += 1
+    choice.save()
+    # 投票完成后，跳转到投票结果页
+    return redirect('result', question.id)
+
+```
 
 
 
