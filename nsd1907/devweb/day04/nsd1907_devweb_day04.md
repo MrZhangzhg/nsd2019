@@ -82,9 +82,60 @@ result2 = Question.objects.get_or_create(question_text='春节放几天假', pub
 >>> Question.objects.filter(pub_date__month__lt=12)
 # 查询以'你'开头的问题
 >>> Question.objects.filter(question_text__startswith='你')
+# 查询以'你'开头、12月的问题
+>>> Question.objects.filter(question_text__startswith='你')\
+.filter(pub_date__month=12)
+```
 
+## 完成投票首页
 
+```python
+# 修改函数
+# polls/views.py
+from django.shortcuts import render
+from .models import Question
 
+def index(request):
+    questions = Question.objects.order_by('-pub_date')
+    return render(request, 'index.html', {'questions': questions})
+... ...
+
+# 修改模板文件，展示相关的问题
+# 在模板文件里，{}内的部分是模板语法，{}外是html语法
+# {% url 'detail' question.id %}，detail是在urls.py中定义的名称
+# templates/index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票首页</title>
+</head>
+<body>
+<h1>投票首页</h1>
+<ol>
+    {% for question in questions %}
+        <li>
+            <a href="{% url 'detail' question.id %}" target="_blank">
+                {{ question.question_text }}
+            </a>
+            {{ question.pub_date }}
+        </li>
+    {% endfor %}
+</ol>
+</body>
+</html>
 
 ```
+
+
+
+
+
+
+
+
+
+
+
+
 
