@@ -7,16 +7,26 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 </head>
 <body>
-<h1>投票首页</h1>
-<ol>
-    {% for question in questions %}
-        <li>
-            <a href="{% url 'detail' question.id %}" target="_blank">
-                {{ question.question_text }}
-            </a>
-            {{ question.pub_date }}
-        </li>
-    {% endfor %}
-</ol>
+<div class="container">
+    <div class="row">
+
+    </div>
+    <div class="row">
+        <h1>投票首页</h1>
+            <ol>
+                {% for question in questions %}
+                    <li>
+                        <a href="{% url 'detail' question.id %}" target="_blank">
+                            {{ question.question_text }}
+                        </a>
+                        {{ question.pub_date }}
+                    </li>
+                {% endfor %}
+            </ol>
+    </div>
+    <div class="row">
+        达内云计算 <a href="#">NSD1907</a>
+    </div>
+</div>
 </body>
 </html>
