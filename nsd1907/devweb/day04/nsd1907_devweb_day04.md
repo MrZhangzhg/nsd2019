@@ -369,13 +369,43 @@ def vote(request, question_id):
 
 ```
 
+## 制作结果页
 
+```python
+# 取出问题，发给模板
+# polls/views.py
+... ...
+def result(request, question_id):
+    question = Question.objects.get(id=question_id)
+    return render(request, 'result.html', {'question': question})
+... ...
 
+# 在模板页，显示投票结果
+# templates/result.html
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}投票结果{% endblock %}
+{% block content %}
+    <h1 class="text-center text-warning">{{ question.id }}号问题投票结果</h1>
+    <h2>{{ question.question_text }}</h2>
+    <table class="table table-hover table-striped">
+        <thead class="bg-primary">
+            <tr class="text-center">
+                <td>选项</td>
+                <td>票数</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for choice in question.choice_set.all %}
+                <tr>
+                    <td>{{ choice.choice_text }}</td>
+                    <td>{{ choice.votes }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'index' %}">返回首页</a>
+{% endblock %}
 
-
-
-
-
-
-
+```
 
