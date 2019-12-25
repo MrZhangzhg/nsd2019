@@ -20,6 +20,15 @@ result2 = Question.objects.get_or_create(question_text='春节放几天假', pub
 >>> result2
 (<Question: 问题: 春节放几天假>, False)
 
+# 创建选项方法一：实例化
+>>> c1 = Choice(choice_text='1天', question=q1)
+>>> c1.save()
+# 创建选项方法二：通过objects管理器
+>>> c_result1 = Choice.objects.get_or_create(choice_text='2天', question=q1)
+# 创建选项方法三：通过问题实例的choice_set管理器创建
+# 因为Question和Choice具有主外键约束，一个问题可以有很多选项。django为问题实例创建了名为xxxx_set的管理器（选项类名为Choice，管理器名为choice_set）。
+>>> c_result2 = q1.choice_set.get_or_create(choice_text='3天')
+
 
 
 
