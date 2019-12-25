@@ -45,6 +45,13 @@ result2 = Question.objects.get_or_create(question_text='春节放几天假', pub
 # 查询
 # 查询全部
 >>> Question.objects.all()
+# 查询全部，根据pub_date进行排序
+>>> for q in Question.objects.order_by('pub_date'):
+...   print(q.question_text, q.pub_date)
+# 查询全部，根据pub_date进行降序排序
+>>> for q in Question.objects.order_by('-pub_date'):
+...   print(q.question_text, q.pub_date)
+
 # get要求返回一个结果，否则报错
 >>> Question.objects.get(id=10)  # 报错，不存在
 >>> Question.objects.get(id__gt=1)  # 报错，结果有多个
@@ -69,7 +76,12 @@ result2 = Question.objects.get_or_create(question_text='春节放几天假', pub
 >>> Question.objects.filter(id__gte=2)  # id >= 2
 <QuerySet [<Question: 问题: 你期待哪家公司给你发Offer？>, <Questio放几天假？>]>
 
-
+# 查询12月的问题
+>>> Question.objects.filter(pub_date__month=12)
+# 查询小于12月的问题
+>>> Question.objects.filter(pub_date__month__lt=12)
+# 查询以'你'开头的问题
+>>> Question.objects.filter(question_text__startswith='你')
 
 
 
