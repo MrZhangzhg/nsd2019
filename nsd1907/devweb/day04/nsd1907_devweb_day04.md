@@ -124,7 +124,82 @@ def index(request):
 </ol>
 </body>
 </html>
+```
 
+## 引入bootstrap
+
+```python
+# 将devweb/day02/static拷贝到应用目录下
+# django默认在每个应用的static目录中寻找静态文件
+(nsd1907) [root@room8pc16 mysite]# cp -r ../../day02/static polls/
+
+# 在index.html中引入bootstrap
+# templates/index.html
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票首页</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div id="linux-carousel" class="carousel slide">
+        <ol class="carousel-indicators">
+            <li class="active" data-target="#linux-carousel" data-slide-to="0"></li>
+            <li data-target="#linux-carousel" data-slide-to="1"></li>
+            <li data-target="#linux-carousel" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="item active">
+                <a href="http://www.sogou.com" target="_blank">
+                    <img src="{% static 'imgs/first.jpg' %}">
+                </a>
+            </div>
+            <div class="item">
+                <img src="{% static 'imgs/second.jpg' %}">
+            </div>
+            <div class="item">
+                <img src="{% static 'imgs/third.jpg' %}">
+            </div>
+        </div>
+        <a href="#linux-carousel" data-slide="prev" class="carousel-control left">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a href="#linux-carousel" data-slide="next" class="carousel-control right">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+    </div>
+    </div>
+    <div class="row h4">
+        <h1 class="text-center text-warning">投票首页</h1>
+            <ol>
+                {% for question in questions %}
+                    <li>
+                        <a href="{% url 'detail' question.id %}" target="_blank">
+                            {{ question.question_text }}
+                        </a>
+                        {{ question.pub_date }}
+                    </li>
+                {% endfor %}
+            </ol>
+    </div>
+    <div class="row h4 text-center">
+        达内云计算 <a href="#">NSD1907</a>
+    </div>
+</div>
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script type="text/javascript">
+    $('#linux-carousel').carousel({
+        interval: 3000
+    });
+</script>
+</body>
+</html>
 ```
 
 
