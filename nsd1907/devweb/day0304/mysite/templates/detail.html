@@ -2,5 +2,9 @@
 {% load static %}
 {% block title %}投票详情{% endblock %}
 {% block content %}
-    <h1 class="text-center text-warning">{{ question_id }}号问题投票详情</h1>
+    <h1 class="text-center text-warning">{{ question.id }}号问题投票详情</h1>
+    <h2>{{ question.question_text }}</h2>
+    {% for choice in question.choice_set.all %}
+        {{ choice.choice_text }}
+    {% endfor %}
 {% endblock %}

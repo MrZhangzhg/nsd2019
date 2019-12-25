@@ -9,9 +9,10 @@ def index(request):
     return render(request, 'index.html', {'questions': questions})
 
 def detail(request, question_id):
+    question = Question.objects.get(id=question_id)
     # render的字符，将以key=val的形式发给模板文件
     # key在模板文件中用于变量名，val是变量的值
-    return render(request, 'detail.html', {'question_id': question_id})
+    return render(request, 'detail.html', {'question': question})
 
 def result(request, question_id):
     return render(request, 'result.html', {'question_id': question_id})
