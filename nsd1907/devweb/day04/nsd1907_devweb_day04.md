@@ -29,6 +29,18 @@ result2 = Question.objects.get_or_create(question_text='春节放几天假', pub
 # 因为Question和Choice具有主外键约束，一个问题可以有很多选项。django为问题实例创建了名为xxxx_set的管理器（选项类名为Choice，管理器名为choice_set）。
 >>> c_result2 = q1.choice_set.get_or_create(choice_text='3天')
 
+# 修改、更新。只要将变量重新赋值即可
+>>> q1.question_text = '你们公司元旦放几天假？'
+>>> q1.save()
+
+# 删除。调用实例的delete方法
+>>> result1
+(<Question: 问题: 春节放几天假>, True)
+>>> q2 = result1[0]
+>>> q2
+<Question: 问题: 春节放几天假>
+>>> q2.delete()
+(1, {'polls.Choice': 0, 'polls.Question': 1})
 
 
 
