@@ -42,6 +42,35 @@ result2 = Question.objects.get_or_create(question_text='春节放几天假', pub
 >>> q2.delete()
 (1, {'polls.Choice': 0, 'polls.Question': 1})
 
+# 查询
+# 查询全部
+>>> Question.objects.all()
+# get要求返回一个结果，否则报错
+>>> Question.objects.get(id=10)  # 报错，不存在
+>>> Question.objects.get(id__gt=1)  # 报错，结果有多个
+# filter返回0到多个对象构成的列表
+>>> Question.objects.filter(id=10)
+<QuerySet []>
+>>> Question.objects.filter(id__gt=1)
+<QuerySet [<Question: 问题: 你期待哪家公司给你发Offer？>, <Questio放几天假？>]>
+# 在django中，判断时，使用双下划线表示一个对象的属性或方法
+>>> Question.objects.get(id__exact=1)
+<Question: 问题: 第一份工作，你期待的工资是多少？>
+# 上面的方法简写为以下形式：
+>>> Question.objects.get(id=1)
+<Question: 问题: 第一份工作，你期待的工资是多少？>
+        
+>>> Question.objects.filter(id__lt=2)  # id < 2
+<QuerySet [<Question: 问题: 第一份工作，你期待的工资是多少？>]>
+>>> Question.objects.filter(id__lte=2)  # id <= 2
+<QuerySet [<Question: 问题: 第一份工作，你期待的工资是多少？>, <Qu司给你发Offer？>]>
+>>> Question.objects.filter(id__gt=2)  # id > 2
+<QuerySet [<Question: 问题: 你们公司元旦放几天假？>]>
+>>> Question.objects.filter(id__gte=2)  # id >= 2
+<QuerySet [<Question: 问题: 你期待哪家公司给你发Offer？>, <Questio放几天假？>]>
+
+
+
 
 
 
