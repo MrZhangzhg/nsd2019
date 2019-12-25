@@ -202,7 +202,91 @@ def index(request):
 </html>
 ```
 
+## 模板继承
 
+- 为了实现各个页面的风格统一，可以使用模板继承的方式
+- 创建一个基础模板，将共性内容写到基础模板文件中；个性内容，使用block占位
+- 其他页面继承模板，共性内容不再需要，只要将个性内容写到相应的block中
+
+```python
+# 拷贝index.html为base.html
+# 修改base.html。block后面的title和content是自定义的字符串
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div id="linux-carousel" class="carousel slide">
+        <ol class="carousel-indicators">
+            <li class="active" data-target="#linux-carousel" data-slide-to="0"></li>
+            <li data-target="#linux-carousel" data-slide-to="1"></li>
+            <li data-target="#linux-carousel" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="item active">
+                <a href="http://www.sogou.com" target="_blank">
+                    <img src="{% static 'imgs/first.jpg' %}">
+                </a>
+            </div>
+            <div class="item">
+                <img src="{% static 'imgs/second.jpg' %}">
+            </div>
+            <div class="item">
+                <img src="{% static 'imgs/third.jpg' %}">
+            </div>
+        </div>
+        <a href="#linux-carousel" data-slide="prev" class="carousel-control left">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a href="#linux-carousel" data-slide="next" class="carousel-control right">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+    </div>
+    </div>
+    <div class="row h4">
+        {% block content %}{% endblock %}
+    </div>
+    <div class="row h4 text-center">
+        达内云计算 <a href="#">NSD1907</a>
+    </div>
+</div>
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script type="text/javascript">
+    $('#linux-carousel').carousel({
+        interval: 3000
+    });
+</script>
+</body>
+</html>
+
+# 修改index.html。将共性内容删除，个性内容写到相应的block中
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}投票首页{% endblock %}
+{% block content %}
+    <h1 class="text-center text-warning">投票首页</h1>
+    <ol>
+        {% for question in questions %}
+            <li>
+                <a href="{% url 'detail' question.id %}" target="_blank">
+                    {{ question.question_text }}
+                </a>
+                {{ question.pub_date }}
+            </li>
+        {% endfor %}
+    </ol>
+{% endblock %}
+
+
+```
 
 
 
