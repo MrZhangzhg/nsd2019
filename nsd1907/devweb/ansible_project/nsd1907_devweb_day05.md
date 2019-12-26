@@ -27,5 +27,15 @@ STATICFILES_DIRS = [   # 定义各个应用搜索静态文件路径，项目根�
 # 将前一个投票应用的static目录拷贝到当前项目根目录下
 (nsd1907) [root@room8pc16 myansible]# cp -r ../../day0304/mysite/polls/static/ .
 
+# 生成项目默认应用需要的数据库表
+(nsd1907) [root@room8pc16 myansible]# python manage.py \
+makemigrations
+(nsd1907) [root@room8pc16 myansible]# python manage.py migrate
+
+# 创建管理员用户
+(nsd1907) [root@room8pc16 myansible]# python manage.py \
+createsuperuser
+Username (leave blank to use 'root'): admin
+
 ```
 
