@@ -324,6 +324,52 @@ urlpatterns = [
 
 
 # templates/add_hosts.html
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}添加主机{% endblock %}
+{% block content %}
+    <form action="" class="form-inline" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>主机组：</label>
+            <input class="form-control" type="text" name="group">
+        </div>
+        <div class="form-group">
+            <label>主机：</label>
+            <input class="form-control" type="text" name="host">
+        </div>
+        <div class="form-group">
+            <label>IP：</label>
+            <input class="form-control" type="text" name="ip">
+        </div>
+        <div class="form-group">
+            <input class="btn btn-primary" type="submit" value="提 交">
+        </div>
+    </form>
+    <hr>
+    <table class="table table-striped table-hover table-bordered">
+        <thead class="bg-primary">
+        <tr>
+            <td>主机组</td>
+            <td>主机</td>
+        </tr>
+        </thead>
+        {% for group in groups %}
+            <tr>
+                <td>{{ group.groupname }}</td>
+                <td>
+                    <ul class="list-unstyled">
+                        {% for host in group.host_set.all %}
+                            <li>
+                                {{ host.hostname }}:{{ host.ip_addr }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
 
 
 # templates/index.html
