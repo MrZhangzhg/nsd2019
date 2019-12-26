@@ -74,6 +74,13 @@ urlpatterns = []
 
 ```
 
+## 编写首页应用
+
+```python
+# index/urls.py
+
+```
+
 
 
 
