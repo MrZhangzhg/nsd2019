@@ -235,6 +235,9 @@ if __name__ == '__main__':
     session = Session()
     qset = session.query(HostGroup.groupname, Host.ip_addr).join(Host)
     print(qset.all())
+    
+(nsd1907) [root@room8pc16 ansi_cfg]# ./dhosts.py 
+[('dbservers', '192.168.4.4'), ('webservers', '192.168.4.5'), ('webservers', '192.168.4.6')]
 
 ```
 
