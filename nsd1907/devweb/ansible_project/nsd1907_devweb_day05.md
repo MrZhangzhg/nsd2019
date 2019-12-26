@@ -205,6 +205,29 @@ remote_user = root
         'hosts': ['主机3', '主机4', ...]
     },
 }
+
+############################################
+# 思路和方法
+>>> alist = [('dbservers', '192.168.4.4'), ('webservers', '192.168.4.5'), ('webservers', '192.168.4.6')]
+>>> result = {}
+>>> group = 'dbservers'
+>>> ip = '192.168.4.4'
+>>> result[group] = {}
+>>> result
+{'dbservers': {}}
+>>> result[group]
+{}
+>>> result[group]['hosts'] = []
+>>> result
+{'dbservers': {'hosts': []}}
+>>> result[group]['hosts'] 
+[]
+>>> result[group]['hosts'].append(ip)
+>>> result
+{'dbservers': {'hosts': ['192.168.4.4']}}
+############################################
+
+
 (nsd1907) [root@room8pc16 ansi_cfg]# vim dhosts.py 
 #!/root/nsd1907/bin/python
 
@@ -234,10 +257,21 @@ class Host(Base):
 if __name__ == '__main__':
     session = Session()
     qset = session.query(HostGroup.groupname, Host.ip_addr).join(Host)
-    print(qset.all())
+    # print(qset.all())
+    result = {}
+    for group, ip in qset:
+        if group not in result:
+            result[group] = {}
+            result[group]['hosts'] = []
+
+        result[group]['hosts'].append(ip)
+
+    print(result)
     
 (nsd1907) [root@room8pc16 ansi_cfg]# ./dhosts.py 
-[('dbservers', '192.168.4.4'), ('webservers', '192.168.4.5'), ('webservers', '192.168.4.6')]
+{'dbservers': {'hosts': ['192.168.4.4']}, 'webservers': {'hosts': ['192.168.4.5', '192.168.4.6']}}
+(nsd1907) [root@room8pc16 ansi_cfg]# ansible all -m ping
+
 
 ```
 
