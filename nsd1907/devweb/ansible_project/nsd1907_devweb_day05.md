@@ -37,5 +37,24 @@ makemigrations
 createsuperuser
 Username (leave blank to use 'root'): admin
 
+# 访问数据库
+(nsd1907) [root@room8pc16 myansible]# sqlite3 db.sqlite3 
+sqlite> .help   # 查看帮助
+sqlite> .tables   # show tables
+sqlite> .schema auth_user   # desc auth_user
+sqlite> SELECT * FROM auth_user;
+
 ```
+
+
+
+
+
+
+
+
+
+
+
+
 
