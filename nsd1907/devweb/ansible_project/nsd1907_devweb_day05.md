@@ -272,6 +272,40 @@ if __name__ == '__main__':
 {'dbservers': {'hosts': ['192.168.4.4']}, 'webservers': {'hosts': ['192.168.4.5', '192.168.4.6']}}
 (nsd1907) [root@room8pc16 ansi_cfg]# ansible all -m ping
 
+```
+
+### 制作主机信息页
+
+```python
+# 生成web页
+(nsd1907) [root@room8pc16 ansi_cfg]# ansible all -m setup --tree /tmp/dj1907/
+(nsd1907) [root@room8pc16 ansi_cfg]# ansible-cmdb /tmp/dj1907/ > ../templates/hosts.html
+
+# webadmin/urls.py
+from django.conf.urls import url
+from . import views
+
+urlpatterns = [
+    url(r'^$', views.index, name='webadmin_index'),
+]
+
+# webadmin/views.py
+from django.shortcuts import render
+
+# Create your views here.
+def index(request):
+    return render(request, 'hosts.html')
+
+# 修改首页应用中的超链接
+... ...
+    <div class="col-sm-3 text-center">
+        <a href="{% url 'webadmin_index' %}" target="_blank">
+            <img width="150px" src="{% static 'imgs/linux.jpg' %}">
+            主机信息
+        </a>
+    </div>
+... ...
+
 
 ```
 
