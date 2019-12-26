@@ -78,6 +78,108 @@ urlpatterns = []
 
 ```python
 # index/urls.py
+from django.conf.urls import url
+from . import views
+
+urlpatterns = [
+    url(r'^$', views.index, name='index'),
+]
+
+# index/views.py
+from django.shortcuts import render
+
+# Create your views here.
+def index(request):
+    return render(request, 'index.html')
+
+# 拷贝polls应用中的base.html
+(nsd1907) [root@room8pc16 myansible]# cp \
+../../day0304/mysite/templates/base.html templates/
+
+# templates/index.html
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Ansible Webadmin{% endblock %}
+{% block content %}
+    <div class="col-sm-3 text-center">
+        <a href="#">
+            <img width="150px" src="{% static 'imgs/linux.jpg' %}">
+            主机信息
+        </a>
+    </div>
+    <div class="col-sm-3 text-center">
+        <a href="#">
+            <img width="150px" src="{% static 'imgs/linux.jpg' %}">
+            添加主机
+        </a>
+    </div>
+    <div class="col-sm-3 text-center">
+        <a href="#">
+            <img width="150px" src="{% static 'imgs/linux.jpg' %}">
+            添加模块
+        </a>
+    </div>
+    <div class="col-sm-3 text-center">
+        <a href="#">
+            <img width="150px" src="{% static 'imgs/linux.jpg' %}">
+            执行任务
+        </a>
+    </div>
+{% endblock %}
+
+```
+
+## 编写webadmin应用
+
+### 模型设计
+
+```python
+# webadmin/models.py
+from django.db import models
+
+# Create your models here.
+class HostGroup(models.Model):
+    groupname = models.CharField(max_length=50, unique=True)
+    
+    def __str__(self):
+        return self.groupname
+
+class Host(models.Model):
+    hostname = models.CharField(max_length=100)
+    ip_addr = models.CharField(max_length=15)
+    group = models.ForeignKey(HostGroup)
+    
+    def __str__(self):
+        return "%s: %s" % (self.group, self.hostname)
+
+class Module(models.Model):
+    modulename = models.CharField(max_length=50, unique=True)
+    
+    def __str__(self):
+        return self.modulename
+
+class Argument(models.Model):
+    arg_text = models.CharField(max_length=200)
+    module = models.ForeignKey(Module)
+    
+    def __str__(self):
+        return "%s: %s" % (self.module, self.arg_text)
+
+# 生成表
+(nsd1907) [root@room8pc16 myansible]# python manage.py \
+makemigrations
+(nsd1907) [root@room8pc16 myansible]# python manage.py migrate
+
+# 将模型注册到后台
+# webadmin/admin.py
+from django.contrib import admin
+from .models import HostGroup, Host, Module, Argument
+
+# Register your models here.
+for item in [HostGroup, Host, Module, Argument]:
+    admin.site.register(item)
+
+# 到http://127.0.0.1/admin查看，并添加一些主机和组
 
 ```
 
