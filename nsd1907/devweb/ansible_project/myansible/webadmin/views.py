@@ -1,8 +1,10 @@
 from django.shortcuts import render
+from .models import HostGroup
 
 # Create your views here.
 def index(request):
     return render(request, 'hosts.html')
 
 def add_hosts(request):
-    return render(request, 'add_hosts.html')
+    groups = HostGroup.objects.all()
+    return render(request, 'add_hosts.html', {'groups': groups})
