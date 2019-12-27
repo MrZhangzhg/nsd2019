@@ -205,7 +205,34 @@ def tasks(request):
 
 ```
 
+## 在“添加模块”页面增加删除参数的功能
 
+- 删除参数需要执行函数实现
+- 调用函数又是通过访问一个URL来实现的
+
+```python
+# webadmin/urls.py
+... ...
+    url(r'^del_arg/(\d+)/$', views.del_arg, name='del_arg'),
+... ...
+
+# webadmin/views.py
+from django.shortcuts import render, redirect
+from .models import HostGroup, Module, Host, Argument
+... ...
+def del_arg(request, arg_id):
+    args = Argument.objects.get(id=arg_id)
+    args.delete()
+    return redirect('add_modules')
+
+# templates/add_modules.html
+<li>
+    {{ args.arg_text }}
+    <a href="{% url 'del_arg' args.id %}">
+    	del
+    </a>
+</li>
+```
 
 
 
