@@ -77,6 +77,47 @@ def add_modules(request):
 ... ...
 ```
 
+## 制作执行任务页
+
+```python
+# webadmin/urls.py
+... ...
+    url(r'^tasks/$', views.tasks, name='tasks'),
+... ...
+
+# webadmin/views.py
+def tasks(request):
+    hosts = Host.objects.all()
+    groups = HostGroup.objects.all()
+    modules = Module.objects.all()
+    context = {'hosts': hosts, 'groups': groups, 'modules': modules}
+    return render(request, 'tasks.html', context)
+
+
+# templates/tasks.html
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Ansible Webadmin{% endblock %}
+{% block content %}
+
+{% endblock %}
+
+
+# templates/index.html
+    <div class="col-sm-3 text-center">
+        <a href="{% url 'tasks' %}" target="_blank">
+            <img width="150px" src="{% static 'imgs/linux.jpg' %}"><br>
+            执行任务
+        </a>
+    </div>
+
+
+```
+
+
+
+
+
 
 
 
