@@ -227,22 +227,14 @@ def del_arg(request, arg_id):
 
 # templates/add_modules.html
 <li>
-    {{ args.arg_text }}
-    <a href="{% url 'del_arg' args.id %}">
-    	del
-    </a>
+    <div class="col-sm-9">
+    	{{ args.arg_text }}
+    </div>
+    <div class="col-sm-3">
+        <a href="{% url 'del_arg' args.id %}">
+        	del
+        </a>
+    </div>
 </li>
 ```
-
-
-
-
-
-
-
-
-
-
-
-
 
