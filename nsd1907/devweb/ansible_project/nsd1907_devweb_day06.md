@@ -99,8 +99,76 @@ def tasks(request):
 {% load static %}
 {% block title %}Ansible Webadmin{% endblock %}
 {% block content %}
-
+    <ul class="nav nav-tabs h4">
+        <li class="active">
+            <a href="#server" data-toggle="tab">主机</a>
+        </li>
+        <li>
+            <a href="#servergroup" data-toggle="tab">主机组</a>
+        </li>
+    </ul>
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="tab-content h4">
+                <div class="tab-pane active fade in form-group" id="server">
+                    <select class="form-control" name="ip">
+                        <option value="">无</option>
+                        {% for host in hosts %}
+                            <option value="{{ host.ip_addr }}">
+                                {{ host.hostname }}:{{ host.ip_addr }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="tab-pane fade form-group" id="servergroup">
+                    <select class="form-control" name="group">
+                        <option value="">无</option>
+                        {% for group in groups %}
+                            <option value="{{ group.groupname }}">
+                                {{ group.groupname }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <table class="table table-striped table-hover table-bordered">
+                <thead class="bg-primary">
+                <tr>
+                    <td>模块</td>
+                    <td>参数</td>
+                </tr>
+                </thead>
+                {% for module in modules %}
+                    <tr>
+                        <td>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="module" value="{{ module.modulename }}">
+                                    {{ module.modulename }}
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <ul class="list-unstyled">
+                                {% for args in module.argument_set.all %}
+                                    <li class="radio">
+                                        <label>
+                                            <input type="radio" name="param" value="{{ args.arg_text }}">
+                                            {{ args.arg_text }}
+                                        </label>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <div class="form-group text-center">
+                <input class="btn btn-primary" type="submit" value="执 行">
+            </div>
+        </form>
 {% endblock %}
+
 
 
 # templates/index.html
