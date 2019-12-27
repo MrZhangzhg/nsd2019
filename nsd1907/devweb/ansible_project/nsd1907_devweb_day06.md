@@ -85,8 +85,30 @@ def add_modules(request):
     url(r'^tasks/$', views.tasks, name='tasks'),
 ... ...
 
+# 将ansilbe课程中的adhoc2.py拷贝过来
+(nsd1907) [root@room8pc16 ansi_cfg]# cp ../../../../devops/day03/adhoc2.py ../webadmin/
+
+
 # webadmin/views.py
+... ...
+from . import adhoc2
+... ...
 def tasks(request):
+    if request.method == 'POST':
+        ip = request.POST.get('ip')
+        group = request.POST.get('group')
+        module = request.POST.get('module')
+        args = request.POST.get('param')
+
+        dest = None   # 设定执行目标
+        if ip:  # 如果主机非空
+            dest = ip
+        elif group:
+            dest = group
+
+        if dest and module and args:  # 如果dest非空，模块和参数非空
+            adhoc2.adhoc(['ansi_cfg/dhosts.py'], dest, module, args)
+
     hosts = Host.objects.all()
     groups = HostGroup.objects.all()
     modules = Module.objects.all()
@@ -94,10 +116,11 @@ def tasks(request):
     return render(request, 'tasks.html', context)
 
 
+
 # templates/tasks.html
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Ansible Webadmin{% endblock %}
+{% block title %}执行任务{% endblock %}
 {% block content %}
     <ul class="nav nav-tabs h4">
         <li class="active">
