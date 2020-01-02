@@ -3,8 +3,13 @@ import random
 choices = ['石头', '剪刀', '布']
 # 将人胜利的情况，提前定义到列表中，人在前，计算机在后
 win_list = [['石头', '剪刀'], ['剪刀', '布'], ['布', '石头']]
+prompt = """(0) 石头
+(1) 剪刀
+(2) 布
+请选择(0/1/2): """
 computer = random.choice(choices)
-player = input('请出拳(石头/剪刀/布): ')
+ind = int(input(prompt))
+player = choices[ind]
 
 print("Your choice: %s, Computer's Choice: %s" % (player, computer))
 if player == computer:
