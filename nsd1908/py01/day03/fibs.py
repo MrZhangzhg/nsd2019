@@ -5,6 +5,9 @@ def mk_fib():
     for i in range(n - 2):
         fib.append(fib[-1] + fib[-2])
 
-    print(fib)
+    return fib
 
-mk_fib()
+alist = mk_fib()
+print(alist)
+blist = [i * 2 for i in alist]
+print(blist)
