@@ -1,15 +1,23 @@
+stack = []
 
 def push_it():
     '用于实现压栈功能'
-    print('push')
+    data = input('数据: ').strip()
+    if data:  # 非空字符串为True
+        stack.append(data)
+    else:
+        print('\033[31;1m输入为空\033[0m')
 
 def pop_it():
     '用于实现出栈功能'
-    print('pop')
+    if stack:  # 列表非空为True
+        print('从列表中，弹出了: \033[34;1m%s\033[0m' % stack.pop())
+    else:
+        print('\033[31;1m列表为空\033[0m')
 
 def view_it():
     '用于实现查询功能'
-    print('view')
+    print('\033[32;1m%s\033[0m' % stack)
 
 def show_menu():
     '用于在屏幕上打印菜单，根据用户选择，调用相关功能函数'
