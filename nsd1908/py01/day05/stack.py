@@ -21,6 +21,7 @@ def view_it():
 
 def show_menu():
     '用于在屏幕上打印菜单，根据用户选择，调用相关功能函数'
+    cmds = {'0': push_it, '1': pop_it, '2': view_it}
     prompt = """(0) 压栈
 (1) 出栈
 (2) 查询
@@ -32,15 +33,21 @@ def show_menu():
             print('无效的选择，请重试。')
             continue
 
-        if choice == '0':
-            push_it()
-        elif choice == '1':
-            pop_it()
-        elif choice == '2':
-            view_it()
-        else:
+        if choice == '3':
             print('\nBye-bye')
             break
+
+        cmds[choice]()
+
+        # if choice == '0':
+        #     push_it()
+        # elif choice == '1':
+        #     pop_it()
+        # elif choice == '2':
+        #     view_it()
+        # else:
+        #     print('\nBye-bye')
+        #     break
 
 if __name__ == '__main__':
     show_menu()
