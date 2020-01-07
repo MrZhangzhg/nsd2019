@@ -1,11 +1,26 @@
+import getpass
+
+userdb = {}
 
 def register():
     '用于注册用户'
-    print('注册')
+    user = input('用户名: ').strip()
+    # 如果用户名字符串非空，并且用户没有注册过
+    if user and (user not in userdb):
+        passwd = input('密码: ')
+        userdb[user] = passwd
+    else:
+        print('用户名为空或用户已存在')
 
 def login():
     '用于验证登陆'
-    print('登陆')
+    user = input('用户名: ').strip()
+    passwd = getpass.getpass('密码: ')
+    # if user in userdb and userdb[user] == passwd:
+    if userdb.get(user) == passwd:
+        print('登陆成功')
+    else:
+        print('登陆失败')
 
 def show_menu():
     cmds = {'0': register, '1': login}
