@@ -43,10 +43,17 @@ except (KeyboardInterrupt, EOFError):
     exit(101)  # 程序遇到exit将会结束，101是退出码，即$?
 else:  #　异常不发生才会执行的语句放到else中
     print(result)
+finally:  # 不管异常是否发生，都会执行的语句发到finally
+    print('Done')
 
-print('Done')
+##################
 
 
+# f = open('xxxx')
+# try:
+#     f.read(10)
+# finally:
+#     f.close()
 
 
 
