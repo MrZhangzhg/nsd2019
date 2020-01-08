@@ -15,4 +15,3 @@ with open('weblog.txt') as fobj:
         if t >= t9:
             print(line, end='')
 
-
