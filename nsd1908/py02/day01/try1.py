@@ -12,14 +12,41 @@
 # except EOFError:
 #     print('\nBye-bye')
 
+# try:
+#     num = int(input('number: '))
+#     result = 100 / num
+#     print(result)
+#     print('Done')
+# except (ValueError, ZeroDivisionError) as e:  # 将异常保存到变量e中
+#     print('只接受非0数字:', e)
+# except (KeyboardInterrupt, EOFError):
+#     print('\nBye-bye')
+
+# try:
+#     num = int(input('number: '))
+#     result = 100 / num
+# except (ValueError, ZeroDivisionError) as e:  # 将异常保存到变量e中
+#     print('只接受非0数字:', e)
+# except (KeyboardInterrupt, EOFError):
+#     print('\nBye-bye')
+#
+# print(result)
+# print('Done')
+
 try:
     num = int(input('number: '))
     result = 100 / num
-    print(result)
-    print('Done')
 except (ValueError, ZeroDivisionError) as e:  # 将异常保存到变量e中
     print('只接受非0数字:', e)
 except (KeyboardInterrupt, EOFError):
     print('\nBye-bye')
+    exit(101)  # 程序遇到exit将会结束，101是退出码，即$?
+else:  #　异常不发生才会执行的语句放到else中
+    print(result)
+
+print('Done')
+
+
+
 
 
