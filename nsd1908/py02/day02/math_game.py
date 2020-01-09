@@ -17,16 +17,33 @@ def exam():
 
     # 要求用户作答，并判断正误
     prompt = '%s %s %s = ' % (nums[0], op, nums[1])
-    answer = int(input(prompt))
-    if answer == result:
-        print('Very Good!!!')
-    else:
+    counter = 0
+    while counter < 3:
+        try:
+            answer = int(input(prompt))
+        except:
+            print()   # 打印回车
+            continue
+
+        if answer == result:
+            print('Very Good!!!')
+            break
+
         print('不对哟!!!')
+        counter += 1
+    else:
+        print('\033[31;1m正确答案: %s%s\033[0m' % (prompt, result))
 
 def main():
     while 1:
         exam()
-        yn = input('Continue(y/n)? ').strip()[0]  # 取第一个字符
+        try:
+            yn = input('Continue(y/n)? ').strip()[0]  # 取第一个字符
+        except IndexError:
+            continue
+        except (KeyboardInterrupt, EOFError):
+            yn = 'n'
+
         if yn in 'nN':
             print('\nBye-bye')
             break
