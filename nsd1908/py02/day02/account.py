@@ -21,10 +21,31 @@ def save(fname):
 
 def cost(fname):
     '用于记录开销'
-
+    amount = int(input('金额: '))
+    comment = input('备注: ')
+    date = strftime('%Y-%m-%d')
+    # 取出全部的收支情况列表
+    with open(fname, 'rb') as fobj:
+        records = pickle.load(fobj)
+    # 计算最新余额
+    balance = records[-1][-2] - amount
+    # 构建收入情况列表
+    line = [date, 0, amount, balance, comment]
+    records.append(line)
+    # 将更新后的收支情况列表写回文件
+    with open(fname, 'wb') as fobj:
+        pickle.dump(records, fobj)
 
 def query(fname):
     '用于查询收支情况'
+    with open(fname, 'rb') as fobj:
+        records = pickle.load(fobj)
+
+    # 打印表头
+    print('%-12s%-8s%-8s%-12s%-20s' % ('date', 'save', 'cost', 'balance', 'comment'))
+    # 打印内容
+    for line in records:
+        print('%-12s%-8s%-8s%-12s%-20s' % tuple(line))
 
 
 def show_menu():
