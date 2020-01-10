@@ -1,0 +1,28 @@
+class Role:
+    def __init__(self, name, weapon):
+        "__init__是构造器方法，创建实例时，它自动调用，一般用于将属性绑到对象"
+        self.name = name
+        self.weapon = weapon
+
+    def show_me(self):
+        "绑定在实例上的属性，在任意方法中都直接可用"
+        print("我是%s, 我的兵器是%s" % (self.name, self.weapon))
+
+    def say(self, words):
+        "没有绑定的变量，是临时变量"
+        print(words)
+
+# 创建战士类，它的父类(也叫基类)是Role
+class Warrior(Role):
+    pass
+
+class Mage(Role):
+    pass
+
+if __name__ == '__main__':
+    gy = Warrior('关羽', '青龙偃月刀')
+    km = Mage('孔明', '羽扇')
+    gy.show_me()
+    km.show_me()
+
+
