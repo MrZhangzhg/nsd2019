@@ -14,15 +14,17 @@ class Role:
 
 # 创建战士类，它的父类(也叫基类)是Role
 class Warrior(Role):
-    pass
+    def attack(self, target):
+        print('近身攻击: %s' % target)
 
 class Mage(Role):
-    pass
+    def attack(self, target):
+        print('远程攻击: %s' % target)
 
 if __name__ == '__main__':
     gy = Warrior('关羽', '青龙偃月刀')
     km = Mage('孔明', '羽扇')
     gy.show_me()
     km.show_me()
-
-
+    gy.attack('吕布')
+    km.attack('周瑜')
