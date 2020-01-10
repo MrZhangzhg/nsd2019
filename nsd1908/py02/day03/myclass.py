@@ -4,7 +4,12 @@ class Role:
         self.name = name
         self.weapon = weapon
 
+    def show_me(self):
+        "绑定在实例上的属性，在任意方法中都直接可用"
+        print("我是%s, 我的兵器是%s" % (self.name, self.weapon))
+
 if __name__ == '__main__':
     # 实例化时，实例名lb将自动作为第一个参数，传给相关的方法
     lb = Role('吕布', '方天画戟')
     print(lb.name, lb.weapon)
+    lb.show_me()
