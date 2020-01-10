@@ -14,6 +14,12 @@ class Role:
 
 # 创建战士类，它的父类(也叫基类)是Role
 class Warrior(Role):
+    def __init__(self, name, weapon, country):
+        # Role.__init__(self, name, weapon)
+        # 以上调用父类方法的语句，也可以使用：
+        super(Warrior, self).__init__(name, weapon)
+        self.country = country
+
     def attack(self, target):
         print('近身攻击: %s' % target)
 
@@ -22,7 +28,7 @@ class Mage(Role):
         print('远程攻击: %s' % target)
 
 if __name__ == '__main__':
-    gy = Warrior('关羽', '青龙偃月刀')
+    gy = Warrior('关羽', '青龙偃月刀', '蜀')
     km = Mage('孔明', '羽扇')
     gy.show_me()
     km.show_me()
