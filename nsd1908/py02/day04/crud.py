@@ -58,8 +58,8 @@ session = Session()
 
 ###############################################
 # 查询人事部和市场部以外的部门
-qset7 = session.query(Departments)\
-    .filter(~Departments.dep_name.in_(['人事部', '市场部']))
+# qset7 = session.query(Departments)\
+#     .filter(~Departments.dep_name.in_(['人事部', '市场部']))
 # for dep in qset7:
 #     print(dep.dep_id, dep.dep_name)
 ###############################################
@@ -67,9 +67,28 @@ qset7 = session.query(Departments)\
 # print(qset7.all())
 ###############################################
 # first()返回匹配内容的第一项
-dep = qset7.first()
-print(dep)
-print(dep.dep_id, dep.dep_name)
+# dep = qset7.first()
+# print(dep)
+# print(dep.dep_id, dep.dep_name)
+###############################################
+# 多表查询，query中先写Employees.emp_name，join时写Departments
+# query中先写Departments.dep_name，join时写Employees
+# qset8 = session.query(Employees.emp_name, Departments.dep_name)\
+#     .join(Departments)
+# for data in qset8:
+#     print(data)
+###############################################
+# 修改
+# qset9 = session.query(Departments).filter(Departments.dep_name=='人事部')
+# hr = qset9.first()
+# print(hr)
+# hr.dep_name = '人力资源部'
+###############################################
+# 删除
+qset10 = session.query(Departments).filter(Departments.dep_name=='销售部')
+sales = qset10.first()
+print(sales)
+session.delete(sales)
 
 
 # 确认
