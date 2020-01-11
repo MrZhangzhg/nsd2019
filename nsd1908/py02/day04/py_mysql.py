@@ -32,9 +32,9 @@ cur = conn.cursor()
 # cur.execute(mk_sal)
 #################################
 # 添加记录
-insert1 = 'INSERT INTO departments VALUES(%s, %s)'
+# insert1 = 'INSERT INTO departments VALUES(%s, %s)'
 # cur.executemany(insert1, [(1, '人事部'), (2, '运维部')])
-cur.executemany(insert1, [(2, '运维部'), (3, '开发部'), (4, '财务部'), (5, '测试部'), (6, '市场部')])
+# cur.executemany(insert1, [(2, '运维部'), (3, '开发部'), (4, '财务部'), (5, '测试部'), (6, '市场部')])
 #################################
 # 修改
 # update1 = 'UPDATE departments SET dep_name=%s WHERE dep_name=%s'
@@ -43,12 +43,18 @@ cur.executemany(insert1, [(2, '运维部'), (3, '开发部'), (4, '财务部'), 
 # 删除
 # delete1 = 'DELETE FROM departments WHERE dep_name=%s'
 # cur.execute(delete1, ('运维部',))
-
-
-
-
-
-
+#################################
+# 查询
+select1 = 'SELECT * FROM departments'
+cur.execute(select1)
+result1 = cur.fetchone()  # 取一行记录
+print(result1)
+print('*' * 30)
+result2 = cur.fetchmany(2)  # 取出2行记录
+print(result2)
+print('*' * 30)
+result3 = cur.fetchall()  # 取出所有记录
+print(result3)
 
 
 # 确认
