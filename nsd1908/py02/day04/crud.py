@@ -40,13 +40,28 @@ session = Session()
 #     print(dep.dep_id, dep.dep_name)
 ###############################################
 # 查询部门，根据id进行过滤
-qset4 = session.query(Departments).filter(Departments.dep_id>1)\
-    .filter(Departments.dep_id<5).order_by(Departments.dep_id)
-for dep in qset4:
+# qset4 = session.query(Departments).filter(Departments.dep_id>1)\
+#     .filter(Departments.dep_id<5).order_by(Departments.dep_id)
+# for dep in qset4:
+#     print(dep.dep_id, dep.dep_name)
+###############################################
+# 查询email以.com结尾的用户
+qset5 = session.query(Employees).filter(Employees.email.like('%.com'))
+for emp in qset5:
+    print(emp.emp_name, emp.email)
+###############################################
+# 查询人力资源部和市场部
+# qset6 = session.query(Departments)\
+#     .filter(Departments.dep_name.in_(['人事部', '市场部']))
+# for dep in qset6:
+#     print(dep.dep_id, dep.dep_name)
+
+###############################################
+# 查询人事部和市场部以外的部门
+qset7 = session.query(Departments)\
+    .filter(~Departments.dep_name.in_(['人事部', '市场部']))
+for dep in qset7:
     print(dep.dep_id, dep.dep_name)
-
-
-
 
 # 确认
 session.commit()
