@@ -22,6 +22,9 @@ class Departments(Base):
     dep_id = Column(Integer, primary_key=True)
     dep_name = Column(String(20), unique=True)
 
+    def __str__(self):
+        return "[%s: %s]" % (self.dep_id, self.dep_name)
+
 class Employees(Base):
     __tablename__ = 'employees'
     emp_id = Column(Integer, primary_key=True)

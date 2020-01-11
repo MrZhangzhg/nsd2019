@@ -46,9 +46,9 @@ session = Session()
 #     print(dep.dep_id, dep.dep_name)
 ###############################################
 # 查询email以.com结尾的用户
-qset5 = session.query(Employees).filter(Employees.email.like('%.com'))
-for emp in qset5:
-    print(emp.emp_name, emp.email)
+# qset5 = session.query(Employees).filter(Employees.email.like('%.com'))
+# for emp in qset5:
+#     print(emp.emp_name, emp.email)
 ###############################################
 # 查询人力资源部和市场部
 # qset6 = session.query(Departments)\
@@ -60,8 +60,17 @@ for emp in qset5:
 # 查询人事部和市场部以外的部门
 qset7 = session.query(Departments)\
     .filter(~Departments.dep_name.in_(['人事部', '市场部']))
-for dep in qset7:
-    print(dep.dep_id, dep.dep_name)
+# for dep in qset7:
+#     print(dep.dep_id, dep.dep_name)
+###############################################
+# all()返回所有值的列表
+# print(qset7.all())
+###############################################
+# first()返回匹配内容的第一项
+dep = qset7.first()
+print(dep)
+print(dep.dep_id, dep.dep_name)
+
 
 # 确认
 session.commit()
