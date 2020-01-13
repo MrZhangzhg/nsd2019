@@ -74,10 +74,11 @@ UnicodeEncodeError: 'ascii' codec can't encode characters in position 15-16: ord
 >>> url
 'https://www.sogou.com/web?query=%E5%85%83%E6%97%A6'
 >>> html = request.urlopen(url)
-
 ```
 
+### wget模块
 
+- 底层采用urllib，实现下载功能
 
 
 
