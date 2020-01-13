@@ -80,7 +80,44 @@ UnicodeEncodeError: 'ascii' codec can't encode characters in position 15-16: ord
 
 - 底层采用urllib，实现下载功能
 
+```python
+(nsd1908) [root@room8pc16 day01]# pip install wget
+>>> import wget
+>>> wget.download('https://img01.sogoucdn.com/app/a/100520021/3d14b6bc9f25f642eb896d30a3d8e413', '/tmp/aa.jpg')
 
+```
+
+## paramiko模块
+
+- 实现ssh客户端功能
+
+```python
+(nsd1908) [root@room8pc16 day01]# pip install /var/ftp/pub/zzg_pypkgs/paramiko_pkgs/*
+
+
+>>> import paramiko
+>>> ssh = paramiko.SSHClient()  # 创建sshclient客户端
+# 自动接受服务器发来的证书
+>>> ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+# 登陆
+>>> ssh.connect('192.168.4.4', username='root', password='123456')
+# 执行命令后，返回值是由3个类文件对象构成的元组: (输入, 输出, 错误)
+>>> result = ssh.exec_command('id root; id zhangsan')
+>>> len(result)
+3
+# 也可以把执行任务后的返回数据分别赋值
+>>> stdin, stdout, stderr = ssh.exec_command('id root; id zhangsan')
+>>> out = stdout.read()
+>>> err = stderr.read()
+>>> out
+b'uid=0(root) gid=0(root) \xe7\xbb\x84=0(root)\n'
+>>> err
+b'id: zhangsan: no such user\n'
+>>> out.decode()   # bytes类型转str类型
+'uid=0(root) gid=0(root) 组=0(root)\n'
+# 关闭连接
+>>> ssh.close()
+```
 
 
 
