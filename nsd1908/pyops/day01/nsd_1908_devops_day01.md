@@ -39,7 +39,23 @@
 b' <!DOCTYPE'
 >>> html.readline()
 b' HTML>\n'
->>> html.read()
+>>> html.readlines()
+```
+
+模拟客户端访问
+
+```python
+>>> url = 'http://www.jianshu.com'
+>>> request.urlopen(url)
+... ...
+urllib.error.HTTPError: HTTP Error 403: Forbidden
+
+# 设定请求头的User-Agent为Firefox
+>>> headers = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0"}
+# 构建一个请求对象
+>>> r = request.Request(url, headers=headers)
+>>> html = request.urlopen(r)
+>>> html.read()  # OK
 ```
 
 
