@@ -58,6 +58,31 @@ urllib.error.HTTPError: HTTP Error 403: Forbidden
 >>> html.read()  # OK
 ```
 
+数据编码：
+
+- url只允许一部分字符，其他字符必须进行编码
+
+```python
+>>> url = 'https://www.sogou.com/web?query=春节'
+>>> html = request.urlopen(url)
+... ...
+UnicodeEncodeError: 'ascii' codec can't encode characters in position 15-16: ordinal not in range(128)
+
+>>> request.quote('元旦')
+'%E5%85%83%E6%97%A6'
+>>> url = 'https://www.sogou.com/web?query=' + request.quote('元旦')
+>>> url
+'https://www.sogou.com/web?query=%E5%85%83%E6%97%A6'
+>>> html = request.urlopen(url)
+
+```
+
+
+
+
+
+
+
 
 
 
