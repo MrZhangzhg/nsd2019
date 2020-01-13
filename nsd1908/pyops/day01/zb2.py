@@ -12,3 +12,5 @@ else:
     print('子进程')
     time.sleep(10)
     print('child done')
+
+# watch -n1 ps a   # 观察进程状态
