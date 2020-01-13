@@ -27,7 +27,20 @@
 - 主线程只负责产生工作线程
 - 工作线程负责做具体的工作
 
+## urllib模块
 
+- 包含了4个子模块：request / error / parse / robotparse
+- 常用于http / ftp客户端编程
+
+```python
+>>> from urllib import request
+>>> html = request.urlopen('http://www.163.com')
+>>> html.read(10)
+b' <!DOCTYPE'
+>>> html.readline()
+b' HTML>\n'
+>>> html.read()
+```
 
 
 
