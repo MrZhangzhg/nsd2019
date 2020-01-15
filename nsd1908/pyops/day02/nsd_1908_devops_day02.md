@@ -84,6 +84,23 @@
 >>> r.text   # 正常内容
 ```
 
+### 传参
+
+```python
+# 查快递
+>>> url = 'http://www.kuaidi100.com/query'
+# type是快递公司名称，postid是单号
+>>> params = {'type': 'shentong', 'postid': '773022616159695'}
+>>> r = requests.get(url, params=params)
+>>> r.json()
+```
+
+
+
+
+
+
+
 
 
 
