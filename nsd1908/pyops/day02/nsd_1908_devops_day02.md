@@ -28,9 +28,37 @@
 <class 'dict'>
 ```
 
+## requests模块
 
+- 它是python语言编写的一个HTTP库
+- 底层采用urllib3
+- requests模块将每个httpd的方法都定义成了相关的函数
 
+### http的方法
 
+- GET：在浏览器中输入网址、点击超链接、一部分表单（如搜索）
+- POST：常用在表单提交数据（如注册、登陆）
+- HEAD
+- OPTIONS
+- DELETE
+
+```python
+# 安装
+(nsd1908) [root@room8pc16 day02]# pip install /var/ftp/pub/zzg_pypkgs/requests_pkgs/*
+
+# 获取文本内容
+>>> import requests
+>>> r = requests.get('http://www.163.com')
+>>> r.text
+
+# 获取非文本内容(bytes类型）
+>>> r = requests.get('https://i01picsos.sogoucdn.com/9fe8e2323d7f76a4')
+>>> r.content
+>>> with open('/tmp/abc.jpg', 'wb') as fobj:
+...   fobj.write(r.content)
+(nsd1908) [root@room8pc16 day02]# eog /tmp/abc.jpg 
+
+```
 
 
 
