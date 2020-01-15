@@ -32,7 +32,7 @@
 
 - 它是python语言编写的一个HTTP库
 - 底层采用urllib3
-- requests模块将每个httpd的方法都定义成了相关的函数
+- requests模块将每个http的方法都定义成了相关的函数
 
 ### http的方法
 
@@ -58,6 +58,30 @@
 ...   fobj.write(r.content)
 (nsd1908) [root@room8pc16 day02]# eog /tmp/abc.jpg 
 
+# 获取json内容
+# 实况天气获取:http://www.weather.com.cn/data/sk/城市代码.html
+# 城市信息获取:http://www.weather.com.cn/data/cityinfo/城市代码.html
+# 详细指数获取:http://www.weather.com.cn/data/zs/城市代码.html
+>>> url = 'http://www.weather.com.cn/data/sk/101010100.html'
+>>> r = requests.get(url)
+>>> r.json()  # 乱码
+>>> r.encoding  # 查看字符编码
+'ISO-8859-1'
+>>> r.encoding = 'utf8'  # 修改字符编码
+>>> r.json()
+{'weatherinfo': {'city': '北京', 'cityid': '101010100', 'temp': '27.9',WD': '南风', 'WS': '小于3级', 'SD': '28%', 'AP': '1002hPa', 'njd': '暂无WSE': '<3', 'time': '17:55', 'sm': '2.1', 'isRadar': '1', 'Radar': 'JC_RADAR_AZ9010_JB'}}
+```
+
+### 修改请求头
+
+```python
+>>> r = requests.get('http://www.jianshu.com')
+>>> r.text  # 内容有<title>403 Forbidden</title>
+
+# 修改头部的User-Agent为Firefox
+>>> headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'}
+>>> r = requests.get('http://www.jianshu.com', headers=headers)
+>>> r.text   # 正常内容
 ```
 
 
