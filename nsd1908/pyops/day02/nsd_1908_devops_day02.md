@@ -100,7 +100,11 @@
 - 图灵机器人：https://www.jianshu.com/p/3c0436af6e92
 - 微信模块：itchat https://www.jianshu.com/p/8f9c7e41eb55
 
+## zabbix编程
 
+- 官方手册：https://www.zabbix.com/documentation/3.4/zh/manual
+- api本地路径：/var/www/html/zabbix/api_jsonrpc.php
+- api url: http://x.x.x.x/zabbix/api_jsonrpc.php
 
 
 
