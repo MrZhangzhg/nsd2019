@@ -201,8 +201,45 @@ autocmd FileType yaml setlocal sw=2 ts=2 et ai
             }
         ]
     },
-    {}
+    {
+        name: configure webservers,
+        hosts: webservers,
+        tasks: [
+            {
+                name: install web pkgs,
+                yum: {
+                    name: [httpd, php, php-mysql],
+                    state: present
+                }
+            },
+            {
+                name: configure web serivce,
+                service: {
+                    name: httpd,
+                    state: started,
+                    enabled: yes
+                }
+            }
+        ]
+    }
 ]
+```
+
+### ansible加密文件
+
+```python
+(nsd1908) [root@room8pc16 myansible]# cp /etc/hosts /tmp/
+# 加密文件
+(nsd1908) [root@room8pc16 myansible]# ansible-vault encrypt /tmp/hosts 
+New Vault password: 
+Confirm New Vault password:
+(nsd1908) [root@room8pc16 myansible]# cat /tmp/hosts
+
+# 解密
+(nsd1908) [root@room8pc16 myansible]# ansible-vault decrypt /tmp/hosts
+Vault password: 
+(nsd1908) [root@room8pc16 myansible]# cat /tmp/hosts 
+
 ```
 
 

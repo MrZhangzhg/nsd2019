@@ -15,12 +15,16 @@ options = Options(connection='smart', module_path=['/to/mymodules'], forks=10, b
 
 # DataLoader用于解析json/ini/yaml等文件，将其转换成python的数据类型
 loader = DataLoader() # Takes care of finding and reading yaml, json and ini files
+# 设置密码
 passwords = dict(vault_pass='secret')
 
-# create inventory, use path to host config file as source or hosts in a comma separated string
-inventory = InventoryManager(loader=loader, sources='localhost,')
+# 主机清单文件，表示方式有两种
+# 一种是将各个主机用冒号分隔，成为一个字符串
+# 另外一种方式是使用主机路径列表
+# inventory = InventoryManager(loader=loader, sources='localhost,')
+inventory = InventoryManager(loader=loader, sources=['myansible/hosts'])
 
-# variable manager takes care of merging all the different sources to give you a unifed view of variables available in each context
+# 变量管理
 variable_manager = VariableManager(loader=loader, inventory=inventory)
 
 # create datastructure that represents our play, including tasks, this is basically what our YAML loader does internally.
