@@ -126,6 +126,27 @@ autocmd FileType yaml setlocal sw=2 ts=2 et ai
 
 - 官方文档：http://docs.ansible.com/ -> Ansible Documentation -> 选2.7版本 -> 搜索python api，将example中的代码复制、执行
 
+### 命名元组
+
+- 仍然是元组，只是扩展了元组的功能
+- 命名元组，为每个下标命名
+
+```python
+>>> from collections import namedtuple
+>>> Point = namedtuple('Point', ['x', 'y', 'z'])
+>>> p1 = Point(10, 20, 12)
+>>> p1[-1]
+12
+>>> p1[:2]
+(10, 20)
+>>> p1.x
+10
+>>> p1.y
+20
+>>> p1.z
+12
+```
+
 
 
 
