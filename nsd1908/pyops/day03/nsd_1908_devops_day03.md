@@ -122,7 +122,9 @@ autocmd FileType yaml setlocal sw=2 ts=2 et ai
 
 ```
 
+## ansible编程
 
+- 官方文档：http://docs.ansible.com/ -> Ansible Documentation -> 选2.7版本 -> 搜索python api，将example中的代码复制、执行
 
 
 
