@@ -87,7 +87,50 @@ autocmd FileType yaml setlocal sw=2 ts=2 et ai
 (nsd1908) [root@room8pc16 myansible]# ansible-playbook --syntax-check yum.yml 
 # 执行playbook
 (nsd1908) [root@room8pc16 myansible]# ansible-playbook yum.yml 
+
+
+# lamp配置
+(nsd1908) [root@room8pc16 myansible]# vim lamp.yml
+---
+- name: configure dbservers
+  hosts: dbservers
+  tasks:
+    - name: install db pkgs
+      yum:
+        name: mariadb-server
+        state: present
+    - name: configure db serivce
+      service:
+        name: mariadb
+        state: started
+        enabled: yes
+
+- name: configure webservers
+  hosts: webservers
+  tasks:
+    - name: install web pkgs
+      yum:
+        name: [httpd, php, php-mysql]
+        state: present
+    - name: configure web serivce
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+(nsd1908) [root@room8pc16 myansible]# ansible-playbook --syntax-check lamp.yml
+(nsd1908) [root@room8pc16 myansible]# ansible-playbook lamp.yml
+
 ```
+
+
+
+
+
+
+
+
+
+
 
 
 
