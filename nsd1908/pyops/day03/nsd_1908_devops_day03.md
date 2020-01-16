@@ -291,7 +291,39 @@ if __name__ == '__main__':
     main()
 
 (nsd1908) [root@room8pc16 myansible]# ansible dbservers -m download -a "url=http://192.168.4.254/zabbix.png dest=/tmp/"
-# 上一步将会出现ImportError: No module named wget
+# 上一步将会出现ImportError: No module named wget。这是因为远程主机没有wget模块，不是ansible主机没有该模块
+```
+
+安装python模块
+
+```python
+# 安装pip(安装其他python模块也是一样的方法)
+# https://pypi.org上下载pip
+# 在目标主机上安装pip
+[root@node4 ~]# tar xf pip-19.3.1.tar.gz 
+[root@node4 ~]# cd pip-19.3.1/
+[root@node4 pip-19.3.1]# python setup.py install
+
+# 安装wget，可以使用与安装pip一样的方法
+# 既然有了pip，可以使用pip安装wget
+[root@node4 ~]# pip install wget-3.2.zip 
+
+```
+
+### ansible-cmdb插件
+
+```python
+# 收集远程主机的信息
+(nsd1908) [root@room8pc16 myansible]# ansible all -m setup --tree /tmp/nsd1908out
+(nsd1908) [root@room8pc16 myansible]# ls /tmp/nsd1908out/
+node4  node5  node6
+
+# 安装ansible-cmdb
+(nsd1908) [root@room8pc16 myansible]# pip install /var/ftp/pub/zzg_pypkgs/ansible-cmdb_pkgs/*
+
+# 使用ansible-cmdb将远程主机信息生成html文件
+(nsd1908) [root@room8pc16 myansible]# ansible-cmdb /tmp/nsd1908out/ > /tmp/hosts.html
+(nsd1908) [root@room8pc16 myansible]# firefox /tmp/hosts.html
 
 ```
 
