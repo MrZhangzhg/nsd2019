@@ -239,10 +239,36 @@ Confirm New Vault password:
 (nsd1908) [root@room8pc16 myansible]# ansible-vault decrypt /tmp/hosts
 Vault password: 
 (nsd1908) [root@room8pc16 myansible]# cat /tmp/hosts 
-
 ```
 
+## 编写ansible模块
 
+```python
+# 设定ansible查找自定义模块的路径
+(nsd1908) [root@room8pc16 day03]# export ANSIBLE_LIBRARY=/tmp/mylibs
+
+# 编写模块
+(nsd1908) [root@room8pc16 day03]# vim /tmp/mylibs/rcopy.py
+import shutil
+from ansible.module_utils.basic import AnsibleModule
+
+def main():
+    module = AnsibleModule(
+        argument_spec=dict(
+            yuan=dict(required=True, type='str'),
+            mubiao=dict(required=True, type='str')
+        )
+    )
+    shutil.copy(module.params['yuan'], module.params['mubiao'])
+    module.exit_json(changed=True)
+
+if __name__ == '__main__':
+    main()
+
+(nsd1908) [root@room8pc16 day03]# cd myansible/
+(nsd1908) [root@room8pc16 myansible]# ansible dbservers -m rcopy -a "yuan=/etc/hosts mubiao=/tmp/zhuji.txt"
+
+```
 
 
 
