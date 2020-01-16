@@ -66,7 +66,27 @@ node6
         key: "{{ lookup('file', '/root/.ssh/id_rsa.pub') }}"
 (nsd1908) [root@room8pc16 myansible]# ansible-playbook myssh_key.yml -k
 
+# 配置vim，使它支持yaml的特点
+(nsd1908) [root@room8pc16 myansible]# vim ~/.vimrc 
+autocmd FileType yaml setlocal sw=2 ts=2 et ai
 
+# 配置yum
+(nsd1908) [root@room8pc16 myansible]# vim yum.yml
+- name: configure yum repo
+  hosts: all
+  tasks:
+    - name: configure yum client
+      yum_repository:
+        name: centos7
+        description: centos 7.4
+        baseurl: ftp://192.168.4.254/centos7.4
+        file: centos7
+        gpgcheck: no
+        enabled: yes
+# 检查语法
+(nsd1908) [root@room8pc16 myansible]# ansible-playbook --syntax-check yum.yml 
+# 执行playbook
+(nsd1908) [root@room8pc16 myansible]# ansible-playbook yum.yml 
 ```
 
 
