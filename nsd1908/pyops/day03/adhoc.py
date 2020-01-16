@@ -7,11 +7,13 @@ from ansible.playbook.play import Play
 from ansible.executor.task_queue_manager import TaskQueueManager
 import ansible.constants as C
 
-# since API is constructed for CLI it expects certain options to always be set, named tuple 'fakes' the args parsing options object
+# Options是在执行ansible临时命令时，提供的选项，需要了解的选项有
+# connection是连接方式，local表示在本机执行，ssh表示ssh执行，smart表示自动选择
+# forks指的是一次同时向多少台主机发送指令
 Options = namedtuple('Options', ['connection', 'module_path', 'forks', 'become', 'become_method', 'become_user', 'check', 'diff'])
-options = Options(connection='local', module_path=['/to/mymodules'], forks=10, become=None, become_method=None, become_user=None, check=False, diff=False)
+options = Options(connection='smart', module_path=['/to/mymodules'], forks=10, become=None, become_method=None, become_user=None, check=False, diff=False)
 
-# initialize needed objects
+# DataLoader用于解析json/ini/yaml等文件，将其转换成python的数据类型
 loader = DataLoader() # Takes care of finding and reading yaml, json and ini files
 passwords = dict(vault_pass='secret')
 

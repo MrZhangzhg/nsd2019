@@ -147,6 +147,64 @@ autocmd FileType yaml setlocal sw=2 ts=2 et ai
 12
 ```
 
+### 将yaml文件转成python的数据类型
+
+```yaml
+---
+- name: configure dbservers
+  hosts: dbservers
+  tasks:
+    - name: install db pkgs
+      yum:
+        name: mariadb-server
+        state: present
+    - name: configure db serivce
+      service:
+        name: mariadb
+        state: started
+        enabled: yes
+
+- name: configure webservers
+  hosts: webservers
+  tasks:
+    - name: install web pkgs
+      yum:
+        name: [httpd, php, php-mysql]
+        state: present
+    - name: configure web serivce
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+```
+
+```python
+[
+    {
+        name: configure dbservers,
+        hosts: dbservers,
+        tasks: [
+            {
+                name: install db pkgs,
+                yum: {
+                    name: mariadb-server,
+                    state: present
+                }
+            },
+            {
+                name: configure db serivce,
+                service: {
+                    name: mariadb,
+                    state: started
+                    enabled: yes
+                }
+            }
+        ]
+    },
+    {}
+]
+```
+
 
 
 
