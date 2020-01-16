@@ -270,6 +270,31 @@ if __name__ == '__main__':
 
 ```
 
+实现下载功能的模块
+
+```python
+(nsd1908) [root@room8pc16 myansible]# vim /tmp/mylibs/download.py 
+import wget
+from ansible.module_utils.basic import AnsibleModule
+
+def main():
+    module = AnsibleModule(
+        argument_spec=dict(
+            url=dict(required=True, type='str'),
+            dest=dict(required=True, type='str')
+        )
+    )
+    wget.download(module.params['url'], module.params['dest'])
+    module.exit_json(changed=True)
+
+if __name__ == '__main__':
+    main()
+
+(nsd1908) [root@room8pc16 myansible]# ansible dbservers -m download -a "url=http://192.168.4.254/zabbix.png dest=/tmp/"
+# 上一步将会出现ImportError: No module named wget
+
+```
+
 
 
 
