@@ -154,6 +154,21 @@ R  hosts -> hosts.txt
 [root@node4 myweb]# git commit -m "mv hosts hosts.txt"
 [root@node4 myweb]# git status -s
 
+# 切换到某一个commit点
+[root@node4 myweb]# git log    # 找到add issue的确认点，复制其id号
+[root@node4 myweb]# git status  # 工作区需要是干净的
+# 位于分支 master
+无文件要提交，干净的工作区
+[root@node4 myweb]# git checkout \
+2b60da12002b0fad328f4071a3fb7f49299ea5ad
+[root@node4 myweb]# ls
+hosts  index.html  issue  passwd
+
+# 切换回最新状态
+[root@node4 myweb]# git checkout master
+[root@node4 myweb]# ls
+hosts.txt  index.html  passwd
+
 ```
 
 
