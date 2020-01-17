@@ -261,12 +261,38 @@ Port 2022
 # 启动容器
 [root@node5 ~]# docker run -d -h gitlab --name gitlab -p 443:443 -p 80:80 -p 22:22 --restart always -v /srv/gitlab/config:/etc/gitlab -v /srv/gitlab/logs:/var/log/gitlab -v /srv/gitlab/data:/var/opt/gitlab gitlab_zh:latest
 
-# 查看状态，当显示health: OK时，容器才可用
+# 查看状态，当显示healthy时，容器才可用
 [root@node5 ~]# docker ps
-
 ```
 
+gitlab初始化：http://192.168.4.5。首次访问时，需要为root用户设置密码，密码要求长一些、复杂一些。
 
+### gitlab中重要的三个概念
+
+- 项目：project，对应程序员编写的软件项目
+- 群组：group，对应的是开发团队
+- 用户：对应使用gitlab的用户
+
+创建用户：创建用户时不能设置用户的密码，但是编辑用户时可以。
+
+创建组：再把创建的用户回入到组中，成为组的主程序员
+
+创建项目：创建名为myweb的项目，为devops组创建，类型是公开的
+
+### 程序员将代码推送到gitlab服务器
+
+```shell
+[root@node4 ~]# cd myweb/
+[root@node4 myweb]# git remote add origin \
+http://192.168.4.5/devops/myweb.git
+[root@node4 myweb]# git push -u origin --all
+Username for 'http://192.168.4.5': zzg
+Password for 'http://zzg@192.168.4.5': 
+[root@node4 myweb]# git push -u origin --tags
+Username for 'http://192.168.4.5': zzg
+Password for 'http://zzg@192.168.4.5': 
+
+```
 
 
 
