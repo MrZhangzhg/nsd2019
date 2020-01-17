@@ -171,6 +171,37 @@ hosts.txt  index.html  passwd
 
 ```
 
+### 分支管理
+
+- 默认情况下，git有一个名为master的分支
+- 用户也可以创建自己的分支
+
+```shell
+# 查看分支
+[root@node4 myweb]# git branch
+* master
+
+# 新建分支b1
+[root@node4 myweb]# git branch b1
+[root@node4 myweb]# git branch
+  b1
+* master   # 当前分支
+
+# 在master分支上提交代码
+[root@node4 myweb]# cp /etc/motd .
+[root@node4 myweb]# git add .
+[root@node4 myweb]# git commit -m "add motd"
+[root@node4 myweb]# ls
+hosts.txt  index.html  motd  passwd
+
+# 切换分支
+[root@node4 myweb]# git checkout b1
+切换到分支 'b1'
+[root@node4 myweb]# ls  # b1分支的工作区没有motd文件
+hosts.txt  index.html  passwd
+
+```
+
 
 
 
