@@ -98,6 +98,23 @@ A  index.html  # A表示新增加的文件
 无文件要提交，干净的工作区
 [root@node4 myweb]# git status -s
 
+# 将指定的文件加入跟踪
+[root@node4 myweb]# cp /etc/hosts .
+[root@node4 myweb]# cp /etc/passwd .
+[root@node4 myweb]# ls
+hosts  index.html  passwd
+[root@node4 myweb]# git add hosts
+[root@node4 myweb]# git commit -m "add hosts"
+
+# 设置不需要通过git管理的文件
+[root@node4 myweb]# vim .gitignore
+*.swp
+passwd
+.gitignore
+[root@node4 myweb]# git status
+# 位于分支 master
+无文件要提交，干净的工作区
+
 ```
 
 
