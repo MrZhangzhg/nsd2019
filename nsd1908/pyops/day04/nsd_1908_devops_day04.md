@@ -311,6 +311,27 @@ Password for 'http://zzg@192.168.4.5':
 
 ```
 
+### 实现ssh免密推送代码
+
+```shell
+# 生成密钥
+[root@node4 myweb]# ssh-keygen  -C "zzg@tedu.cn" -b 4096
+[root@node4 myweb]# cat ~/.ssh/id_rsa.pub 
+# 将查看到的公钥内容拷贝到gitlab用户ssh密钥窗格
+
+# 修改本地git配置
+[root@node4 myweb]# git remote remove origin  # 删除远程仓库的关联
+[root@node4 myweb]# git remote add origin \
+git@192.168.4.5:devops/myweb.git   # 重新关联到ssh
+
+# 上传测试
+[root@node4 myweb]# echo 'new line' >> index.html 
+[root@node4 myweb]# git add .
+[root@node4 myweb]# git commit -m "add line to index.html"
+[root@node4 myweb]# git push
+
+```
+
 
 
 
