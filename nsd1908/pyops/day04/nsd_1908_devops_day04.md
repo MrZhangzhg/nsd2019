@@ -240,10 +240,31 @@ access.conf  hosts.txt  index.html  motd  passwd
 [root@node4 myweb]# git tag
 1.0
 1.1
-
 ```
 
+## gitlab服务器
 
+- 准备一台内存至少4GB以上的虚拟机
+- 虚拟机上安装docker，将镜像导入
+
+```shell
+# ls /linux-soft/05/gitlab_zh.tar
+[root@node5 images]# docker load -i gitlab_zh.tar 
+
+# 将宿主机ssh更改端口
+[root@node5 ~]# vim /etc/ssh/sshd_config 
+Port 2022
+[root@node5 ~]# systemctl restart sshd
+[root@node5 ~]# exit 
+[root@room8pc16 phase5]# ssh -p2022 node5
+
+# 启动容器
+[root@node5 ~]# docker run -d -h gitlab --name gitlab -p 443:443 -p 80:80 -p 22:22 --restart always -v /srv/gitlab/config:/etc/gitlab -v /srv/gitlab/logs:/var/log/gitlab -v /srv/gitlab/data:/var/opt/gitlab gitlab_zh:latest
+
+# 查看状态，当显示health: OK时，容器才可用
+[root@node5 ~]# docker ps
+
+```
 
 
 
