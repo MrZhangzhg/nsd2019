@@ -137,6 +137,23 @@ ansible_project  nsd1902  nsd1905  nsd1908    review
 ebooks           nsd1903  nsd1906  ppts       software
 nsd1812          nsd1904  nsd1907  README.md
 
+# 删除文件
+[root@node4 myweb]# git add .
+[root@node4 myweb]# git commit 'add issue'
+[root@node4 myweb]# ls
+hosts  index.html  issue  passwd
+[root@node4 myweb]# git rm issue
+[root@node4 myweb]# git status
+[root@node4 myweb]# git commit -m "delete issue"
+[root@node4 myweb]# git status
+
+# 改名
+[root@node4 myweb]# git mv hosts hosts.txt
+[root@node4 myweb]# git status -s
+R  hosts -> hosts.txt
+[root@node4 myweb]# git commit -m "mv hosts hosts.txt"
+[root@node4 myweb]# git status -s
+
 ```
 
 
