@@ -115,6 +115,12 @@ passwd
 # 位于分支 master
 无文件要提交，干净的工作区
 
+# 将文件从暂存区中撤出
+[root@node4 myweb]# cp /etc/issue .
+[root@node4 myweb]# git add .
+[root@node4 myweb]# git status
+[root@node4 myweb]# git reset HEAD issue
+
 ```
 
 
