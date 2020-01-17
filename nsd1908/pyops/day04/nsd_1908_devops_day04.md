@@ -200,6 +200,25 @@ hosts.txt  index.html  motd  passwd
 [root@node4 myweb]# ls  # b1分支的工作区没有motd文件
 hosts.txt  index.html  passwd
 
+# 在b1上提交代码
+[root@node4 myweb]# cp /etc/security/access.conf .
+[root@node4 myweb]# git add .
+[root@node4 myweb]# git commit -m "add access.conf"
+[root@node4 myweb]# ls
+access.conf  hosts.txt  index.html  passwd
+
+# 将b1汇入主干
+[root@node4 myweb]# git checkout master
+[root@node4 myweb]# ls
+hosts.txt  index.html  motd  passwd
+[root@node4 myweb]# git merge b1 -m "merge b1"
+[root@node4 myweb]# ls
+access.conf  hosts.txt  index.html  motd  passwd
+
+# 删除分支
+[root@node4 myweb]# git branch -d b1
+[root@node4 myweb]# git branch 
+* master
 ```
 
 
