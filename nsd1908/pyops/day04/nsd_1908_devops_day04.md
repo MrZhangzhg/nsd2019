@@ -292,6 +292,23 @@ Password for 'http://zzg@192.168.4.5':
 Username for 'http://192.168.4.5': zzg
 Password for 'http://zzg@192.168.4.5': 
 
+# 创建README
+[root@node4 myweb]# vim README.md
+# my web site
+## 使用方法
+- 搭建web服务器
+- 启动服务
+- 将my web site拷贝到web服务器
+​```
+[root@node5 ~]# yum install -y httpd
+[root@node5 ~]# systemctl start httpd
+[root@node5 ~]# systemctl enable httpd
+​```
+[root@node4 myweb]# vim README.md
+[root@node4 myweb]# git add .
+[root@node4 myweb]# git commit -m "add README.md"
+[root@node4 myweb]# git push
+
 ```
 
 
