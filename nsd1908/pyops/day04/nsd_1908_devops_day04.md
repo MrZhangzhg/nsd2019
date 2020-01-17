@@ -79,6 +79,25 @@ s--git commit-->g(版本库)
 [root@node4 myweb]# ls -A
 .git  index.html
 
+# 查看状态
+[root@node4 myweb]# git status 
+[root@node4 myweb]# git status -s
+?? index.html   # ??表示状态未知
+
+# 将项目目录下所有内容加入到暂存区
+[root@node4 myweb]# git add .
+[root@node4 myweb]# git status
+[root@node4 myweb]# git status -s
+A  index.html  # A表示新增加的文件
+
+# 提交到版本库
+[root@node4 myweb]# git commit  # 跳出vim写日志，如果什么也不写，则不提交
+[root@node4 myweb]# git commit -m "init project"
+[root@node4 myweb]# git status
+# 位于分支 master
+无文件要提交，干净的工作区
+[root@node4 myweb]# git status -s
+
 ```
 
 
