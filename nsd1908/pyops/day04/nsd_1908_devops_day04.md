@@ -221,6 +221,28 @@ access.conf  hosts.txt  index.html  motd  passwd
 * master
 ```
 
+### tag标记
+
+```python
+# 查看标记
+[root@node4 myweb]# git tag
+
+# 为当前提交打标记
+[root@node4 myweb]# git tag 1.0
+[root@node4 myweb]# git tag
+1.0
+
+# 继续编代码，提交。为新提交打标记
+[root@node4 myweb]# echo '<h2>2nd version</h2>' >> index.html 
+[root@node4 myweb]# git add .
+[root@node4 myweb]# git commit -m "modify index.html"
+[root@node4 myweb]# git tag 1.1
+[root@node4 myweb]# git tag
+1.0
+1.1
+
+```
+
 
 
 
