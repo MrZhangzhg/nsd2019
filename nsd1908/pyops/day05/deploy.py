@@ -88,3 +88,6 @@ if __name__ == '__main__':
     deploy(app_fname, deploy_dir, dest)
 
     # 更新本地版本文件
+    if os.path.exists(ver_fname):
+        os.remove(ver_fname)
+    wget.download(ver_url, ver_fname)
