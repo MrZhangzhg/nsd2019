@@ -38,9 +38,12 @@ if __name__ == '__main__':
     wget.download(app_url, down_dir)
 
     # 校验软件包是否损坏，如损坏则删除它并退出
-    if not check_file():
+    app_fname = app_url.split('/')[-1]
+    app_fname = os.path.join(down_dir, app_fname)
+    md5_url = app_url + '.md5'
+    if not check_file(app_fname, md5_url):
         print('文件已损坏')
-
+        os.remove(app_fname)
         exit(2)
 
     # 部署软件包
