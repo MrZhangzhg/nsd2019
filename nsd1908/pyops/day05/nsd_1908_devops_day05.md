@@ -49,9 +49,9 @@ Available -> 勾选Localization: Chinese(Simplified) 和 Git Parameter -> 点击
 
 当执行任务后，代码将会拉取到/var/lib/jenkins/workspace/目录下
 
+- 修改任务，将代码下载到不同的子目录
 
-
-
+源码管理下面的 Additional Behaviours -> 新增 -> Check out to a sub-directory(检出到子目录) -> myweb-$webver -> 保存
 
 
 
