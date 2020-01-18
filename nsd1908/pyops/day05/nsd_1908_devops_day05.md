@@ -89,7 +89,11 @@ cd ..
 echo -n $webver > live_ver
 ```
 
+### 编写用于自动化部署的脚本
 
+- /var/www/download/：用于存储下载的压缩包
+- /var/www/deploy/：用于存储解压的目录和版本文件
+- /var/www/html/nsd1908：指向软件目录的软链接
 
 
 
