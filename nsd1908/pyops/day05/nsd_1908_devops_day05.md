@@ -29,7 +29,11 @@ app4(应用服务器)--下载-->j
 
 安装完毕后，点击右上角的"admin" -> "config" -> "password"修改密码
 
+### 使用国内镜像站点安装插件
 
+首页 -> Manage Jenkins -> Manage Plugins -> Advanced -> Update Site: https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/update-center.json -> submit
+
+Available -> 勾选Localization: Chinese(Simplified) 和 Git Parameter -> 点击Install Without Restart -> 勾选 Restart Jenkins when installation is complete and no jobs are running
 
 
 
