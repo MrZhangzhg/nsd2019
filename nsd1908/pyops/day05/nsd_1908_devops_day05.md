@@ -16,7 +16,18 @@ app4(应用服务器)--下载-->j
 - jenkins基于java语言，所以虚拟机要安装java
 - jenkins需要能与gitlab通信
 
+```shell
+[root@node6 ~]# rpm -ihv jenkins-2.190.1-1.1.noarch.rpm 
+[root@node6 ~]# systemctl start jenkins
+[root@node6 ~]# systemctl enable jenkins
 
+```
+
+### 安装
+
+安装插件时选“无”，不要通过官方站点安装；创建用户时，选择右下角“使用admin继续登陆“。
+
+安装完毕后，点击右上角的"admin" -> "config" -> "password"修改密码
 
 
 
