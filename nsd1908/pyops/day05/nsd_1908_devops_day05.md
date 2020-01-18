@@ -35,6 +35,26 @@ app4(应用服务器)--下载-->j
 
 Available -> 勾选Localization: Chinese(Simplified) 和 Git Parameter -> 点击Install Without Restart -> 勾选 Restart Jenkins when installation is complete and no jobs are running
 
+### 创建工程
+
+- 配置jenkins在gitlab上拉取代码
+
+```shell
+[root@node6 ~]# yum install -y git
+```
+
+首页 -> 创建新任务 -> 任务名myweb -> This project is parameterized(参数化构建) => 添加参数 => git parameter(git参数) => Name: webver / Parameter Type: Branch or Tag / Default Value: origin/master -> 源码管理 -> git => Repository URL: http://192.168.4.5/devops/myweb.git / Branches to build: $webver -> 保存
+
+当执行任务后，代码将会拉取到/var/lib/jenkins/workspace/目录下
+
+
+
+
+
+
+
+
+
 
 
 
