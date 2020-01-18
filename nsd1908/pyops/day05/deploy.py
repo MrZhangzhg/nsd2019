@@ -1,6 +1,7 @@
 import os
 import requests
 import wget
+import hashlib
 
 def has_new_ver(ver_fname, ver_url):
     '有新版本返回True，否则返回False'
@@ -17,8 +18,25 @@ def has_new_ver(ver_fname, ver_url):
     else:
         return False
 
-def check_file():
+def check_file(app_fname, md5_url):
     '如果文件md5值与网上提供的值一致，返回True; 否则返回False'
+    # 计算本地文件的md5值
+    m = hashlib.md5()
+    with open(app_fname, 'rb') as fobj:
+        while 1:
+            data = fobj.read(4096)
+            if not data:
+                break
+            m.update(data)
+
+    # 取出网上的md5值
+    r = requests.get(md5_url)
+
+    # 比较，注意，网上的md5值文件，要去除结尾的\n
+    if m.hexdigest() == r.text.strip():
+        return True
+    else:
+        return False
 
 def deploy():
     '用于部署软件包'
