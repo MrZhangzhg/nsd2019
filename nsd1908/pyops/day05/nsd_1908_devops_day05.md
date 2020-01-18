@@ -53,7 +53,41 @@ Available -> 勾选Localization: Chinese(Simplified) 和 Git Parameter -> 点击
 
 源码管理下面的 Additional Behaviours -> 新增 -> Check out to a sub-directory(检出到子目录) -> myweb-$webver -> 保存
 
+- 修改任务，增加额外的构建步骤，实现的功能有
+  - 将下载的代码打包
+  - 将打包文件放到web服务器目录下，以便下载
+  - 计算并存储压缩包的md5值，以便下载后检验
+  - 将最新版本和前一版本写到版本文件中
 
+```shell
+[root@node6 ~]# yum install -y httpd
+[root@node6 ~]# systemctl start httpd
+[root@node6 ~]# systemctl enable httpd
+[root@node6 ~]# mkdir -p /var/www/html/deploy/pkgs
+[root@node6 ~]# chown -R jenkins.jenkins /var/www/html/deploy
+```
+
+修改项目，最下面 构建 -> 增加构建步骤 -> Execute shell(执行shell)
+
+```shell
+# 定义压缩包和md5文件的存储目录
+pkg_dir=/var/www/html/deploy/pkgs
+# 拷贝myweb-$webver到目标目录
+cp -r myweb-$webver $pkg_dir
+cd $pkg_dir
+# 删除项目目录的版本库文件
+rm -rf myweb-$webver/.git
+# 把软件目录打包后删除软件目录
+tar czf myweb-$webver.tar.gz myweb-$webver
+rm -rf myweb-$webver
+# 计算压缩包的md5值
+md5sum myweb-$webver.tar.gz | awk '{print $1}' > \
+myweb-$webver.tar.gz.md5
+# 切换到上一级目录，生成前一版本文件last_ver和当前版本文件live_ver
+cd ..
+[ -f live_ver ] && cat live_ver > last_ver
+echo -n $webver > live_ver
+```
 
 
 
