@@ -1,5 +1,6 @@
 import os
 import requests
+import wget
 
 def has_new_ver(ver_fname, ver_url):
     '有新版本返回True，否则返回False'
@@ -31,6 +32,10 @@ if __name__ == '__main__':
         exit(1)
 
     # 下载软件包
+    down_dir = '/var/www/download'
+    r = requests.get(ver_url)
+    app_url = 'http://192.168.4.6/deploy/pkgs/myweb-%s.tar.gz' % r.text
+    wget.download(app_url, down_dir)
 
     # 校验软件包是否损坏，如损坏则删除它并退出
     if not check_file():
