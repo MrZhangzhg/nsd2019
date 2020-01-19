@@ -2,7 +2,7 @@
 
 ## web开发
 
-前端：在用户一侧执行、渲染的部分。HTML ＋ CSS ＋ JS
+前端：在用户一侧执行、渲染的部分。HTML ＋ CSS ＋ JS(JavaScript)
 
 后端：在服务一侧执行。PYTHON / PHP / JAVA
 
@@ -21,7 +21,7 @@
 - 元素可以嵌套
 - 元素可以设置属性，但是大多数的属性应该通过CSS样式表来设置
 - 标记分为块级标记和行内标记
-  - 块级标记至少占一行
+  - 块级标记至少占一行，如h1~h6标题、p、div、ul、ol
   - 行内标记不会产生换行
 - 基础html样式
 
@@ -38,7 +38,15 @@
 </html>
 ```
 
+### 静态文件的位置
 
+- 一般会在网站的目录下建立
+
+```shell
+(nsd1908) [root@room8pc16 day01]# mkdir -p  static/{imgs,js,css}
+(nsd1908) [root@room8pc16 day01]# ls static/
+css  imgs  js
+```
 
 
 
