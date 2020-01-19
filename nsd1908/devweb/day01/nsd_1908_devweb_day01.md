@@ -1,5 +1,7 @@
 # nsd_1908_devweb_day01
 
+w3school：https://www.w3school.com.cn/
+
 ## web开发
 
 前端：在用户一侧执行、渲染的部分。HTML ＋ CSS ＋ JS(JavaScript)
