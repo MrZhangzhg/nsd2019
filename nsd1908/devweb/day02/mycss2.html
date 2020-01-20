@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>my css2</title>
+    <style>
+        a:link {
+            text-decoration: none;   /*未访问，取消下划线*/
+        }
+        a:hover {
+            font-size: 1.5em;   /*鼠标悬停时，字号放大1.5倍*/
+        }
+        a:visited {
+            color: dimgray;   /*访问后的样式，历史记录中存在就是访问后*/
+        }
+        .c1 {
+            border: 1px dashed black;
+            width: 50%;
+        }
+        .c2 {
+            width: 200px;
+            height: 200px;
+            /*background: rgb(150, 150, 150);  !*10进制表示颜色*!*/
+            /*background: #1289ae;  !*16进制颜色*!*/
+            /*background: #33aa66;  !*等同于下面的写法*!*/
+            /*background: #3a6;*/
+            /*background: darkcyan;*/
+            background: #c6ab67;
+        }
+    </style>
+</head>
+<body>
+<div class="c2"></div>
+
+<div class="c1">达内云计算 NSD1908</div>
+<p>
+    <a href="http://www.icbc.com.cn" target="_blank">中国工商银行</a>
+</p>
+</body>
+</html>
