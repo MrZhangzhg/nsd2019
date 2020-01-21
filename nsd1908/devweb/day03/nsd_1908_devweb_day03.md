@@ -266,9 +266,39 @@ def result(request, question_id):
 </html>
 ```
 
+## ORM
 
+- 对象关系映射
+- 将数据库中的表和class映射
+- 将表中的记录与class的实例映射
+- 表中的每个字段与类变量映射
+- 数据库中用到的数据类型，django已定义好对应的class
 
+### 投票应用涉及到的字段
 
+- 问题、发布时间、选项、选项票数
+- 问题表：问题、发布时间
+- 选项表：选项、票数、问题ID
+
+```python
+# polls/models.py
+from django.db import models
+
+# Create your models here.
+class Question(models.Model):
+    question_text = models.CharField(max_length=200)
+    pub_date = models.DateTimeField()
+
+# 生成表
+(nsd1908) [root@room8pc16 mysite]# python manage.py makemigrations
+(nsd1908) [root@room8pc16 mysite]# python manage.py migrate
+MariaDB [dj1908]> show tables;
+... ...
+| polls_question             |
+... ..
+MariaDB [dj1908]> desc polls_question;
+
+```
 
 
 
