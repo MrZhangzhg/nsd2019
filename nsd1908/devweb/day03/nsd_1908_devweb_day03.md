@@ -293,10 +293,27 @@ class Question(models.Model):
 (nsd1908) [root@room8pc16 mysite]# python manage.py makemigrations
 (nsd1908) [root@room8pc16 mysite]# python manage.py migrate
 MariaDB [dj1908]> show tables;
+# 表名结构：应用名_class名   全部小写
 ... ...
 | polls_question             |
 ... ..
 MariaDB [dj1908]> desc polls_question;
+# class中没有明确声明主键，django自动创建名为id的主键；类变量成为表的字段
+
+# polls/models.py
+... ...
+class Choice(models.Model):
+    choice_text = models.CharField(max_length=50)
+    votes = models.IntegerField(default=0)
+    q = models.ForeignKey(Question)
+
+# 生成表
+(nsd1908) [root@room8pc16 mysite]# python manage.py makemigrations
+(nsd1908) [root@room8pc16 mysite]# python manage.py migrate
+MariaDB [dj1908]> show tables;
+... ...
+| polls_choice               |
+MariaDB [dj1908]> desc polls_choice;
 
 ```
 
