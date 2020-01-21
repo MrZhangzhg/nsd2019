@@ -10,4 +10,5 @@ urlpatterns = [
     # 注意正则中后面的/，务必写上
     # \d+匹配数字，用()括起来，它就会自动作为参数传给detail函数
     url(r'^(\d+)/$', views.detail, name='detail'),
+    url(r'^(\d+)/result/$', views.result, name='result'),
 ]

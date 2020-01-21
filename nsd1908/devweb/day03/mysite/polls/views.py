@@ -9,3 +9,6 @@ def index(request):
 def detail(request, question_id):
     # 字典的内容，将会被转义成key=val的形式，发送给detail.html
     return render(request, 'detail.html', {'question_id': question_id})
+
+def result(request, question_id):
+    return render(request, 'result.html', {'question_id': question_id})
