@@ -181,7 +181,26 @@ urlpatterns = [
 
 # 编写视图函数
 # polls/views.py
+from django.shortcuts import render
 
+# Create your views here.
+# 每个函数至少需要有一个参数，用于接收客户端发来的请求
+def index(request):
+    # render用于查找模板文件，并返回给用户
+    return render(request, 'index.html')
+
+# 编写模板网页文件
+# templates/index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票首页</title>
+</head>
+<body>
+<h1>投票首页</h1>
+</body>
+</html>
 ```
 
 
