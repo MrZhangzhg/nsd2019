@@ -314,7 +314,52 @@ MariaDB [dj1908]> show tables;
 ... ...
 | polls_choice               |
 MariaDB [dj1908]> desc polls_choice;
+# 注意，在Choice类中的q是外键，数据库表中自动创建一个名为q_id的字段
 
+# 修改q为question，数据库中表的外键名将成为question_id
+class Choice(models.Model):
+    choice_text = models.CharField(max_length=50)
+    votes = models.IntegerField(default=0)
+    question = models.ForeignKey(Question)
+
+(nsd1908) [root@room8pc16 mysite]# python manage.py makemigrations
+Did you rename choice.q to choice.question (a ForeignKey)? [y/N] y
+(nsd1908) [root@room8pc16 mysite]# python manage.py migrate
+
+```
+
+### 将模型注册到管理后台
+
+```python
+# polls/admin.py
+from django.contrib import admin
+# from polls.models import Question, Choice  # 也可以写为
+from .models import Question, Choice  # 从当前目录的modes模块中导入
+
+# Register your models here.
+admin.site.register(Question)
+admin.site.register(Choice)
+
+# 访问管理后台 http://x.x.x.x/admin。创建的问题，显示的是Question object。如果创建选项，选项显示为Choice object。可以使用以下办法更正：
+from django.db import models
+
+# Create your models here.
+class Question(models.Model):
+    question_text = models.CharField(max_length=200)
+    pub_date = models.DateTimeField()
+    
+    def __str__(self):
+        return "问题: %s" % self.question_text
+
+class Choice(models.Model):
+    choice_text = models.CharField(max_length=50)
+    votes = models.IntegerField(default=0)
+    question = models.ForeignKey(Question)
+    
+    def __str__(self):
+        return "%s=> %s" % (self.question, self.choice_text)
+
+# 再次访问管理后台
 ```
 
 
