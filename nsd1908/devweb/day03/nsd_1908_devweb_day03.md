@@ -109,9 +109,34 @@ Password: 1234.com
 
 ```
 
+## 创建应用
 
+- 应用就是一个功能模块
+- 每个应用对应一个目录
+- 一个项目可以包一到多个应用
+- 一个应用也可以应用到多个项目
 
+### 投票应用
 
+#### 规划
+
+- http://127.0.0.1:8000/polls/：投票首页，显示所有的投票项
+- http://127.0.0.1:8000/polls/1/：1号问题投票详情，可以投票
+- http://127.0.0.1:8000/polls/1/result/：1号问题投票结果页
+
+```python
+# 创建应用
+(nsd1908) [root@room8pc16 mysite]# python manage.py startapp polls
+(nsd1908) [root@room8pc16 mysite]# ls
+db.sqlite3  manage.py  mysite  polls  templates
+
+# 将应用加入到mysite项目
+# mysite/settings.py
+INSTALLED_APPS = [
+    ... ...
+    'polls',
+]
+```
 
 
 
