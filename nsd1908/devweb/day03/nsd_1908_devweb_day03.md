@@ -63,6 +63,52 @@ mytest
 # 访问 http://127.0.0.1:8000
 ```
 
+## 修改配置
+
+```python
+# 创建数据库
+[root@room8pc16 ~]# mysql -uroot -ptedu.cn
+MariaDB [(none)]> CREATE DATABASE dj1908 DEFAULT CHARSET utf8;
+
+# mysite/settings.py
+ALLOWED_HOSTS = ['*']   # 允许任意主机访问本机的任何地址
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'dj1908',
+        'USER': 'root',
+        'PASSWORD': 'tedu.cn',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+    }
+}
+LANGUAGE_CODE = 'zh-hans'
+TIME_ZONE = 'Asia/Shanghai'
+USE_TZ = False
+
+# 配置到mysql的连接
+import pymysql
+
+pymysql.install_as_MySQLdb()
+
+# 重新运行开发服务器，运行在0.0.0.0的80端口
+(nsd1908) [root@room8pc16 mysite]# python manage.py runserver 0:80
+
+
+# 生成后台数据库表
+(nsd1908) [root@room8pc16 mysite]# python manage.py makemigrations
+(nsd1908) [root@room8pc16 mysite]# python manage.py migrate
+
+# 创建管理员用户
+(nsd1908) [root@room8pc16 mysite]# python manage.py createsuperuser
+Username (leave blank to use 'root'): admin
+Email address: admin@tedu.cn
+Password: 1234.com
+
+# 访问后台管理页面：http://127.0.0.1/admin
+
+```
+
 
 
 
