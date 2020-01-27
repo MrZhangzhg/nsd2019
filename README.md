@@ -9,6 +9,10 @@
 
 第五阶段所用到的python软件包链接: 
 https://pan.baidu.com/s/1c-mY0hyxxYRBUdb05VUiEw 提取码: isp4 
+pycharm2017版软件下载地址：
+链接:https://pan.baidu.com/s/1pGYj3f9kQwmHG42pWe_WRA  密码:k0k3
+gitlab下载地址：
+链接:https://pan.baidu.com/s/1EtKb8wge7BVQtApJYyg1wQ  密码:27jb
 
 pycharm2017汉化方法：
 https://jingyan.baidu.com/article/9113f81b73add12b3214c73a.html
