@@ -147,7 +147,23 @@ Password (again): 1234.com
 # 访问管理后台：http://127.0.0.1/admin
 ```
 
+## 配置应用
 
+### 创建一个投票应用
+
+```python
+# 创建应用
+(nsd1908) [root@localhost mysite]# python manage.py startapp polls
+(nsd1908) [root@localhost mysite]# ls
+manage.py  mysite  polls  templates
+
+# 集成polls应用到项目
+# mysite/settings.py
+INSTALLED_APPS = [
+    ... ...
+    'polls',
+]
+```
 
 
 
