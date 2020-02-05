@@ -451,6 +451,30 @@ class Choice(models.Model):
 >>> for q in Question.objects.order_by('-pub_date'):
 ...   print(q.question_text, q.pub_date)
 
+
+# 将投票内容展示到web页面
+# polls/views.py
+from django.shortcuts import render
+from .models import Question
+
+def index(request):
+    questions = Question.objects.order_by('-pub_date')
+    return render(request, 'index.html', {'questions': questions})
+
+# templates/index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票首页</title>
+</head>
+<body>
+<h1>投票首页</h1>
+{{ questions }}
+</body>
+</html>
+
+# 访问http://127.0.0.1/polls/
 ```
 
 
