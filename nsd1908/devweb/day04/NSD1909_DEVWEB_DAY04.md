@@ -165,7 +165,31 @@ INSTALLED_APPS = [
 ]
 ```
 
+### 投票应用的规划
 
+- http://127.0.0.1/polls/：投票首页，显示所有的投票项
+- http://127.0.0.1/polls/1/：1号问题的投票详情，可以进行投票
+- http://127.0.0.1/polls/1/result/：1号问题的投票结果
+
+### 完成应用
+
+```python
+# 授权，将应用的url交给应用处理
+# mysite/urls.py
+from django.conf.urls import url, include
+from django.contrib import admin
+
+urlpatterns = [
+    url(r'^admin/', admin.site.urls),
+    include(r'^polls/', include('polls.urls')),
+]
+
+# polls/urls.py
+from django.conf.urls import url
+
+urlpatterns = []
+
+```
 
 
 
