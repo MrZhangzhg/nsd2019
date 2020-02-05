@@ -55,7 +55,41 @@ make && make install
 # 启动pycharm2017后，激活时，Lisence Server为http://127.0.0.1:1017
 ```
 
+## DJANGO
 
+### MTV
+
+M: Model模型，对应数据库
+
+T：Template模板，对应网页
+
+V：View视图，对应函数
+
+```mermaid
+graph LR
+c(client)--访问-->s(服务器URLCONF)
+s--调用-->v(Views视图)
+v--CRUD-->m(Model模型)
+m--返回-->v
+v--加载-->t(Template模板)
+t--发送-->c
+```
+
+### 在pycharm中创建django项目
+
+新建项目->左空格选择django项目，右窗格指定项目路径为/xxx/xxx/mysite。下面的解释器要改为/root/nsd1908/bin/python
+
+```python
+(nsd1908) [root@room8pc16 mysite]# tree .
+.
+├── manage.py             # 项目管理程序
+├── mysite                # 项目配置目录
+│   ├── __init__.py       # 初始化文件
+│   ├── settings.py       # 项目的配置文件
+│   ├── urls.py           # urlconf路由文件
+│   └── wsgi.py           # 部署项目到服务器的配置文件
+└── templates             # 模板目录，存放网页的目录
+```
 
 
 
