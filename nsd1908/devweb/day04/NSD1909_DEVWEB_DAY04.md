@@ -262,7 +262,33 @@ def detail(request, question_id):
 # 4. 访问http://x.x.x.x/polls/数字
 ```
 
+3. 制作投票结果页
 
+```python
+# 1. polls/urls.py
+... ...
+    url(r'^(\d+)/result/$', views.result, name='result'),
+... ...
+
+# 2. polls/views.py
+... ...
+def result(request, question_id):
+    return render(request, 'result.html', {'question_id': question_id})
+
+# 3. templates/result.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票结果</title>
+</head>
+<body>
+<h1>{{ question_id }}号问题投票结果</h1>
+</body>
+</html>
+
+# 4. 访问访问http://x.x.x.x/polls/数字/result
+```
 
 
 
