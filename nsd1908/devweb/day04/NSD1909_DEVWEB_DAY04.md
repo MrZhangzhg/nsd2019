@@ -404,6 +404,7 @@ class Choice(models.Model):
 <class 'tuple'>
 >>> r1  # 元组第一项是问题实例，第二项是True或False
 (<Question: 问题: 你喜欢吃什么?>, True)
+>>> q1 = r1[0]
 >>> q1.id
 3
 >>> q1.question_text
