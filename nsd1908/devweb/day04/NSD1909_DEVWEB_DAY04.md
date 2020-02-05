@@ -91,6 +91,47 @@ t--发送-->c
 └── templates             # 模板目录，存放网页的目录
 ```
 
+### 配置django项目
+
+```python
+# 配置数据库
+[root@localhost cloud5]# yum install -y mariadb-server
+[root@localhost cloud5]# systemctl start mariadb
+[root@localhost cloud5]# systemctl enable mariadb
+
+# 修改密码
+[root@localhost cloud5]# mysqladmin password tedu.cn
+
+# 创建数据库
+[root@localhost cloud5]# mysql -uroot -ptedu.cn
+MariaDB [(none)]> CREATE DATABASE nsd1908 DEFAULT CHARSET utf8;
+
+# 配置django可以使用pymysql模块： mysite/__init__.py
+import pymysql
+
+pymysql.install_as_MySQLdb()
+
+# 修改django项目配置： mysite/settings.py
+ALLOWED_HOSTS = ['*']   # 允许用户可以通过所有地址访问
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'nsd1908',
+        'USER': 'root',
+        'PASSWORD': 'tedu.cn',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+    }
+}
+LANGUAGE_CODE = 'zh-hans'
+TIME_ZONE = 'Asia/Shanghai'
+USE_TZ = False
+
+# 启动开发服务器测试，服务器运行在0.0.0.0的80端口
+(nsd1908) [root@localhost mysite]# python manage.py runserver 0:80
+# 访问http://127.0.0.1/
+```
+
 
 
 
