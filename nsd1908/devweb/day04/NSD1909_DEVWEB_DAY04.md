@@ -423,6 +423,7 @@ class Choice(models.Model):
 
 # 创建选项，方法二，创建实例：
 >>> c2 = Choice(choice_text="方便面", question=q1)
+>>> c2.save()
 
 # 创建选项，方法三，直接通过问题实例创建选项
 # 因为每个问题都可以有很多选项，选项模型名为Choice，那么每个问题的实例都有一个名为choice_set的管理器(如果模型名为xuanxiang，那么管理器就叫xuanxiang_set)，与objects类似，可以通过choice_set为问题创建选项
