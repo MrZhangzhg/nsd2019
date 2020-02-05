@@ -173,8 +173,9 @@ INSTALLED_APPS = [
 
 ### 完成应用
 
+1. 授权，将应用的url交给应用处理
+
 ```python
-# 授权，将应用的url交给应用处理
 # mysite/urls.py
 from django.conf.urls import url, include
 from django.contrib import admin
@@ -188,8 +189,10 @@ urlpatterns = [
 from django.conf.urls import url
 
 urlpatterns = []
+```
 
-# 制作投票首页
+2. 制作投票首页
+```python
 # 1. 创建路由映射
 # polls/urls.py
 from django.conf.urls import url
@@ -224,7 +227,40 @@ def index(request):
 # 4. 访问http://127.0.0.1/polls/进行测试
 ```
 
+2. 制作投票详情页
 
+```python
+# 1. polls/urls.py
+from django.conf.urls import url
+from . import views  # 从当前目录导入views模块
+
+urlpatterns = [
+    # 用户访问http://x.x.x.x/polls/时，使用index函数响应，为该url起名为index
+    url(r'^$', views.index, name='index'),
+    # 将url中的数字用\d+匹配，再通过()将其作为参数传递给detail函数
+    url(r'^(\d+)/$', views.detail, name='detail'),
+]
+
+# 2. polls/views.py
+... ...
+def detail(request, question_id):
+    # 字典的内容将转换成question_id=nn传给detail.html，作为它可以使用的变量
+    return render(request, 'detail.html', {'question_id': question_id})
+
+# 3. templates/detail.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票详情</title>
+</head>
+<body>
+<h1>{{ question_id }}号问题的投票详情</h1>
+</body>
+</html>
+
+# 4. 访问http://x.x.x.x/polls/数字
+```
 
 
 
