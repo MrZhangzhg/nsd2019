@@ -130,6 +130,21 @@ USE_TZ = False
 # 启动开发服务器测试，服务器运行在0.0.0.0的80端口
 (nsd1908) [root@localhost mysite]# python manage.py runserver 0:80
 # 访问http://127.0.0.1/
+
+# 为django项目中默认的应用生成数据库表
+(nsd1908) [root@localhost mysite]# python manage.py makemigrations
+(nsd1908) [root@localhost mysite]# python manage.py migrate
+
+# 创建管理员用户
+(nsd1908) [root@localhost mysite]# python manage.py createsuperuser
+Username (leave blank to use 'root'): admin
+Email address: admin@tedu.cn
+Password: 1234.com
+Password (again): 1234.com
+
+# 重新启动开发服务器
+(nsd1908) [root@localhost mysite]# python manage.py runserver 0:80
+# 访问管理后台：http://127.0.0.1/admin
 ```
 
 
