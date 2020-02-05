@@ -181,7 +181,7 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    include(r'^polls/', include('polls.urls')),
+    url(r'^polls/', include('polls.urls')),
 ]
 
 # polls/urls.py
@@ -189,6 +189,39 @@ from django.conf.urls import url
 
 urlpatterns = []
 
+# 制作投票首页
+# 1. 创建路由映射
+# polls/urls.py
+from django.conf.urls import url
+from . import views  # 从当前目录导入views模块
+
+urlpatterns = [
+    # 用户访问http://x.x.x.x/polls/时，使用index函数响应，为该url起名为index
+    url(r'^$', views.index, name='index'),
+]
+
+# 2. 创建视图函数
+# polls/views.py
+from django.shortcuts import render
+
+# 每个函数至少需要一个参数，用于接收用户发来的请求
+def index(request):
+    return render(request, 'index.html')
+
+# 3. 创建模板文件
+# templates/index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票首页</title>
+</head>
+<body>
+<h1>投票首页</h1>
+</body>
+</html>
+
+# 4. 访问http://127.0.0.1/polls/进行测试
 ```
 
 
