@@ -33,7 +33,26 @@ make && make install
 (nsd1908) [root@localhost ~]# pip install django==
 (nsd1908) [root@localhost ~]# pip install django==1.11.6
 (nsd1908) [root@localhost ~]# pip install pymysql
+```
 
+## pycharm配置
+
+```shell
+# 配置pycharm。注意：需要java
+(nsd1908) [root@localhost cloud5]# mkdir ~/bin
+(nsd1908) [root@localhost cloud5]# tar xf pycharm2017.tar.gz -C ~/bin/
+
+# 打开一个新的终端，运行破解工具
+[root@localhost ~]# /root/bin/crack &
+
+# 配置菜单，在菜单中添加pycharm
+[root@localhost bin]# yum install -y alacarte
+# 应用程序->杂项->主菜单
+# 选择“主菜单”窗口中的 应用程序->编程，在右窗格点“新建项目”
+# Name: PyCharm2017   Command: /root/bin/pycharm2017/bin/pycharm.sh
+# 点击图标，更换为：/root/bin/pycharm2017/bin/pycharm.png
+
+# 启动pycharm2017后，激活时，Lisence Server为http://127.0.0.1:1017
 ```
 
 
