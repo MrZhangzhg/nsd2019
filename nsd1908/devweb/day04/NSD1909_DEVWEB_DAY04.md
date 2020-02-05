@@ -356,6 +356,35 @@ Did you rename choice.q to choice.question (a ForeignKey)? [y/N] y
 
 MariaDB [nsd1908]> desc polls_choice;
 
+# 将模型注册到后台管理界面
+# polls/admin.py
+from django.contrib import admin
+from .models import Question, Choice  # 从当前目录下的models中导入模型
+
+# Register your models here.
+admin.site.register(Question)
+admin.site.register(Choice)
+# 访问后台管理界面：http://127.0.0.1/admin
+
+# 后台管理界面中添加问题后，问题全部显示为Question object，添加的选项全部显示为Choice object
+# 修复该问题的方法如下：
+from django.db import models
+
+class Question(models.Model):
+    question_text = models.CharField(max_length=200)
+    pub_date = models.DateTimeField()
+    
+    def __str__(self):
+        return "问题: %s" % self.question_text
+
+class Choice(models.Model):
+    choice_text = models.CharField(max_length=200)
+    votes = models.IntegerField(default=0)
+    question = models.ForeignKey(Question)
+    
+    def __str__(self):
+        return "%s=>%s" % (self.question, self.choice_text)
+
 ```
 
 
