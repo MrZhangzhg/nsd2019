@@ -340,6 +340,22 @@ MariaDB [nsd1908]> show tables;
 # 分析表结构：
 MariaDB [nsd1908]> desc polls_question;
 MariaDB [nsd1908]> desc polls_choice;
+# 如果模型中没有明确定义主键，django将自动创建一个名为id的主键
+
+# Choice模型中的q是外键，数据库的表将创建名为q_id的外键。如果将q改为question，那么数据库中的外键，将会变为question_id
+# polls/models.py
+... ...
+class Choice(models.Model):
+    choice_text = models.CharField(max_length=200)
+    votes = models.IntegerField(default=0)
+    question = models.ForeignKey(Question)
+
+(nsd1908) [root@localhost mysite]# python manage.py makemigrations
+Did you rename choice.q to choice.question (a ForeignKey)? [y/N] y
+(nsd1908) [root@localhost mysite]# python manage.py migrate
+
+MariaDB [nsd1908]> desc polls_choice;
+
 ```
 
 
