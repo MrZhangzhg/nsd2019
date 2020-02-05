@@ -290,6 +290,60 @@ def result(request, question_id):
 # 4. 访问访问http://x.x.x.x/polls/数字/result
 ```
 
+## 编写模型
+
+模型对应的是数据库，投票应用需要用到的字段：问题、发布时间、选项、选项所得票数
+
+需要两个模型（表）：
+
+- 问题表：问题内容、发布时间
+- 选项表：选项、票数、问题
+
+### ORM对象关系映射
+
+Object：对象
+
+Relationship：关系
+
+Mapper：映射
+
+- 数据库的表与django的class映射
+- 表的字段与class的类变量映射
+- 表中的记录与类的实例映射
+- 数据库的数据类型与django内部的相应的类映射
+
+### 创建模型
+
+```python
+# polls/models.py
+from django.db import models
+
+class Question(models.Model):
+    question_text = models.CharField(max_length=200)
+    pub_date = models.DateTimeField()
+
+class Choice(models.Model):
+    choice_text = models.CharField(max_length=200)
+    votes = models.IntegerField(default=0)
+    q = models.ForeignKey(Question)
+
+# 生成表
+(nsd1908) [root@localhost mysite]# python manage.py makemigrations
+(nsd1908) [root@localhost mysite]# python manage.py migrate
+
+# 分析表名：表名是 应用名_类名   全部采用小写
+MariaDB [nsd1908]> show tables;
+... ...
+| polls_choice               |
+| polls_question             |
+
+# 分析表结构：
+MariaDB [nsd1908]> desc polls_question;
+MariaDB [nsd1908]> desc polls_choice;
+```
+
+
+
 
 
 
