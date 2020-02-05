@@ -387,6 +387,44 @@ class Choice(models.Model):
 
 ```
 
+## 操作模型
+
+### 增加记录
+
+```python
+# 进入python shell
+(nsd1908) [root@localhost mysite]# python manage.py shell
+>>> from polls.models import Question, Choice
+
+# 创建问题方法一：
+# django为每个模型都创建了一个名为objects的管理器，我们可以通过该管理器对模型实现各种操作
+# 在数据库中取出问题，如果问题不存在则创建
+>>> r1 = Question.objects.get_or_create(question_text="你喜欢吃什么?", pub_date='2020-2-5')
+>>> type(r1)
+<class 'tuple'>
+>>> r1  # 元组第一项是问题实例，第二项是True或False
+(<Question: 问题: 你喜欢吃什么?>, True)
+>>> q1.id
+3
+>>> q1.question_text
+'你喜欢吃什么?'
+>>> q1.pub_date
+'2020-2-5'
+
+# 创建问题，方法以二：直接创建实例
+>>> q2 = Question(question_text="你一天吃几顿饭？", pub_date='2020-2-2')
+>>> q2.save()
+
+```
+
+
+
+
+
+
+
+
+
 
 
 
