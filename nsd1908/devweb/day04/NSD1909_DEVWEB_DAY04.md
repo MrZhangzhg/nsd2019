@@ -434,6 +434,25 @@ class Choice(models.Model):
 
 ```
 
+### 查询
+
+```python
+# 取出全部问题，返回由问题实例构成的列表
+>>> Question.objects.all()
+<QuerySet [<Question: 问题: 你期待第一份工作的工资是多少？>, <Question: 问题: 你打算去哪个喜欢吃什么?>, <Question: 问题: 你一天吃几顿饭？>]>
+
+# 取出全部问题，按发布时间进行升序列，返回由问题实例构成的列表
+>>> Question.objects.order_by('pub_date')
+<QuerySet [<Question: 问题: 你期待第一份工作的工资是多少？>, <Question: 问题: 你一天吃几顿什么?>, <Question: 问题: 你打算去哪个城市工作？>]>
+>>> for q in Question.objects.order_by('pub_date'):
+...   print(q.question_text, q.pub_date)
+
+# 取出全部问题，按发布时间进行降序列，返回由问题实例构成的列表
+>>> for q in Question.objects.order_by('-pub_date'):
+...   print(q.question_text, q.pub_date)
+
+```
+
 
 
 
