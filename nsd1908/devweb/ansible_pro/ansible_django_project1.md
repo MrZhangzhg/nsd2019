@@ -77,6 +77,44 @@ urlpatterns = []
 
 ```
 
+### 编写首页应用
+
+```python
+# index/urls.py
+from django.conf.urls import url
+from . import views
+
+urlpatterns = [
+    url(r'', views.index, name='index'),
+]
+
+# index/views.py
+from django.shortcuts import render
+
+def index(request):
+    return render(request, 'index.html')
+
+# 将polls项目中的base.html拷贝到myanisble/templates/目录中
+(nsd1908) [root@localhost myansible]# ls templates/
+base.html
+# templates/index.html
+{% extends 'base.html' %}
+{% block title %}Ansible Webadmin{% endblock %}
+{% block content %}
+ansible webadmin
+{% endblock %}
+
+# 启动开发服务器，访问http://127.0.0.1/
+(nsd1908) [root@localhost myansible]# python manage.py runserver 0:80
+
+```
+
+
+
+
+
+
+
 
 
 
