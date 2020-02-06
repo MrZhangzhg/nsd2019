@@ -238,7 +238,31 @@ def index(request):
 {% endblock %}
 ```
 
+实现投票详情页和投票结果页的模板继承
 
+```python
+# templates/detail.html
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}投票详情{% endblock %}
+{% block content %}
+    <div>
+        <h1 class="text-center text-warning">{{ question_id }}号问题的投票详情</h1>
+    </div>
+{% endblock %}
+
+
+# templates/result.html
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}投票结果{% endblock %}
+{% block content %}
+    <div>
+        <h1 class="text-center text-warning">{{ question_id }}号问题投票结果</h1>
+    </div>
+{% endblock %}
+
+```
 
 
 
