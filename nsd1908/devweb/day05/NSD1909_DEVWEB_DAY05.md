@@ -19,6 +19,36 @@
 <QuerySet []>
 >>> Question.objects.filter(id__lt=10)  # 返回几个实例构成的列表
 <QuerySet [<Question: 问题: 你期待第一份工作的工资是多少？>, <Question: 问题: 你打算去哪个喜欢吃什么?>, <Question: 问题: 你一天吃几顿饭？>]>
-
 ```
+
+3. django采用双下划线表示属性
+
+```python
+# 判断相等
+>>> Question.objects.filter(id=1)  # 它实际上是以下方式的简写
+>>> Question.objects.filter(id__exact=1)
+
+# 其他判断
+>>> Question.objects.filter(id__gt=1)   # id>1
+>>> Question.objects.filter(id__gte=1)  # id>=1
+>>> Question.objects.filter(id__lt=3)   # id<3
+>>> Question.objects.filter(id__lte=3)  # id<=3
+>>> Question.objects.filter(pub_date__month=1)  # 1月的问题
+>>> Question.objects.filter(pub_date__month=2)  # 2月的问题
+>>> s1 = 'hello'
+>>> s1.startswith('he')
+True
+>>> Question.objects.filter(question_text__startswith='你')  # 以'你'开头的问题
+>>> Question.objects.filter(question_text__contains='工作')  # 包含'工作'的问题
+
+# 更多应用：https://docs.djangoproject.com/en/1.11/topics/db/queries/
+```
+
+
+
+
+
+
+
+
 
