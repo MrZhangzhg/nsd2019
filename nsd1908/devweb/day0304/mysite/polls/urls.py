@@ -7,4 +7,5 @@ urlpatterns = [
     # 将url中的数字用\d+匹配，再通过()将其作为参数传递给detail函数
     url(r'^(\d+)/$', views.detail, name='detail'),
     url(r'^(\d+)/result/$', views.result, name='result'),
+    url(r'^(\d+)/vote/$', views.vote, name='vote'),
 ]

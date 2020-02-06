@@ -5,7 +5,7 @@
     <div>
         <h1 class="text-center text-warning">{{ question.id }}号问题的投票详情</h1>
         <h2>{{ question.question_text }}</h2>
-        <form action="" method="post">
+        <form action="{% url 'vote' question.id %}" method="post">
             {% csrf_token %}
             <div class="form-group">
                 {% for choice in question.choice_set.all %}

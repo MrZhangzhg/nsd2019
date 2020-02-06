@@ -299,6 +299,37 @@ def detail(request, question_id):
 
 ```
 
+### 实现投票功能
+
+要实现投票功能，需要执行一个函数；在django中，访问一个url，就可以执行函数了。函数的作用是把数据库中相应的选项票数加1。
+
+```python
+# polls/urls.py
+... ...
+    url(r'^(\d+)/vote/$', views.vote, name='vote'),
+... ...
+
+# polls/views.py
+from django.shortcuts import render, redirect
+
+def vote(request, question_id):
+    # request是用户发来的请求，它是一个对象，其中它的POST属性是字典形式，对应表单post数据
+    choice_id = request.POST.get('choice_id')
+    question = Question.objects.get(id=question_id)  # 取出问题
+    if choice_id:  # 如果choice_id非空
+        choice = question.choice_set.get(id=choice_id)  # 通过问题取出选项
+        choice.votes += 1
+        choice.save()
+    
+    # 投票完成后跳转到投票结果页
+    return redirect('result', question.id)
+
+# templates/detail.html
+... ...
+        <form action="{% url 'vote' question.id %}" method="post">
+... ...
+```
+
 
 
 
