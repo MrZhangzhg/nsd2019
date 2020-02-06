@@ -56,7 +56,26 @@ STATICFILES_DIRS = [
 index  manage.py  myansible  static  templates  webadmin
 ```
 
+4. 授权，将应用的url交给应用处理
 
+```python
+# myansible/urls.py
+from django.conf.urls import url, include
+from django.contrib import admin
+
+urlpatterns = [
+    url(r'^admin/', admin.site.urls),
+    url(r'^webadmin/', include('webadmin.urls')),
+    # 注意: r''可以匹配任意url，它必须出现在最后一行
+    url(r'', include('index.urls')),
+]
+
+# index/urls.py 和 webadmin/urls.py内容相同
+from django.conf.urls import url
+
+urlpatterns = []
+
+```
 
 
 
