@@ -4,6 +4,21 @@
 {% block content %}
     <div>
         <h1 class="text-center text-warning">{{ question.id }}号问题投票结果</h1>
-        {{ question.choice_set.all }}
+        <table class="table table-bordered table-striped table-hover h4">
+            <thead class="bg-primary">
+                <tr>
+                    <td colspan="2">{{ question.question_text }}</td>
+                </tr>
+            </thead>
+            {% for choice in question.choice_set.all %}
+                <tr>
+                    <td>{{ choice.choice_text }}</td>
+                    <td>{{ choice.votes }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        <div>
+            <a href="{% url 'index' %}">返回首页</a>
+        </div>
     </div>
 {% endblock %}
