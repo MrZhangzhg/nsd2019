@@ -21,3 +21,48 @@
 # 访问http://127.0.0.1:8000
 ```
 
+### 创建项目
+
+1. 通过pycharm创建名为myansible的项目
+2. 创建应用
+
+```python
+# 创建名为index的应用
+(nsd1908) [root@localhost myansible]# python manage.py startapp index
+
+# 创建名为webadmin的应用
+(nsd1908) [root@localhost myansible]# python manage.py startapp webadmin
+```
+
+3. 修改配置
+
+```python
+# myansible/settings.py
+ALLOWED_HOSTS = ['*']
+INSTALLED_APPS = [
+    ... ...
+    'index',
+    'webadmin',
+]
+LANGUAGE_CODE = 'zh-hans'
+TIME_ZONE = 'Asia/Shanghai'
+USE_TZ = False
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
+
+# 将polls项目的static目录拷贝到外层myansible目录
+(nsd1908) [root@localhost myansible]# ls
+index  manage.py  myansible  static  templates  webadmin
+```
+
+
+
+
+
+
+
+
+
+
+
