@@ -82,6 +82,14 @@ def index(request):
 </html>
 ```
 
+### 在模板页面中引入bootstrap
+
+```python
+# 将devweb/day02/static拷贝到polls目录中
+# templates/index.html
+
+```
+
 
 
 

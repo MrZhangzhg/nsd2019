@@ -1,20 +1,31 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>投票首页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 </head>
 <body>
-<h1>投票首页</h1>
-<ol>
-    {% for question in questions %}
-        <li>
-            <a href="{% url 'detail' question.id %}" target="_blank">
-                {{ question.question_text }}
-            </a>
-            {{ question.pub_date }}
-        </li>
-    {% endfor %}
-</ol>
+<div class="container">
+    <div></div>
+    <div>
+        <h1>投票首页</h1>
+        <ol>
+            {% for question in questions %}
+                <li>
+                    <a href="{% url 'detail' question.id %}" target="_blank">
+                        {{ question.question_text }}
+                    </a>
+                    {{ question.pub_date }}
+                </li>
+            {% endfor %}
+        </ol>
+    </div>
+    <div>
+        达内云计算学院 <a href="#">NSD1908</a>
+    </div>
+</div>
 </body>
 </html>
