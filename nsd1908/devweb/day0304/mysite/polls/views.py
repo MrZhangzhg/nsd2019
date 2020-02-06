@@ -7,8 +7,10 @@ def index(request):
     return render(request, 'index.html', {'questions': questions})
 
 def detail(request, question_id):
+    question = Question.objects.get(id=question_id)
+    return render(request, 'detail.html', {'question': question})
     # 字典的内容将转换成question_id=nn传给detail.html，作为它可以使用的变量
-    return render(request, 'detail.html', {'question_id': question_id})
+    # return render(request, 'detail.html', {'question_id': question_id})
 
 def result(request, question_id):
     return render(request, 'result.html', {'question_id': question_id})

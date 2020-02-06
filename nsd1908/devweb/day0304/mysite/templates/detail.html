@@ -3,6 +3,8 @@
 {% block title %}投票详情{% endblock %}
 {% block content %}
     <div>
-        <h1 class="text-center text-warning">{{ question_id }}号问题的投票详情</h1>
+        <h1 class="text-center text-warning">{{ question.id }}号问题的投票详情</h1>
+        <h2>{{ question.question_text }}</h2>
+        {{ question.choice_set.all }}
     </div>
 {% endblock %}

@@ -264,6 +264,27 @@ def index(request):
 
 ```
 
+### 制作投票详情页
+
+```python
+# polls/views.py
+def detail(request, question_id):
+    question = Question.objects.get(id=question_id)
+    return render(request, 'detail.html', {'question': question})
+
+# templates/detail.html
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}投票详情{% endblock %}
+{% block content %}
+    <div>
+        <h1 class="text-center text-warning">{{ question.id }}号问题的投票详情</h1>
+        <h2>{{ question.question_text }}</h2>
+        {{ question.choice_set.all }}
+    </div>
+{% endblock %}
+```
+
 
 
 
