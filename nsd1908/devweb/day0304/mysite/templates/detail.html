@@ -5,6 +5,19 @@
     <div>
         <h1 class="text-center text-warning">{{ question.id }}号问题的投票详情</h1>
         <h2>{{ question.question_text }}</h2>
-        {{ question.choice_set.all }}
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                {% for choice in question.choice_set.all %}
+                    <div class="radio">
+                        <label>
+                                <input type="radio" name="choice_id" value="{{ choice.id }}">
+                                {{ choice.choice_text }}
+                        </label>
+                    </div>
+                {% endfor %}
+            </div>
+            <input class="btn btn-primary" type="submit" value="提 交">
+        </form>
     </div>
 {% endblock %}
