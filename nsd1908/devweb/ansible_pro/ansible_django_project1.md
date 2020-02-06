@@ -132,7 +132,31 @@ base.html
 
 # 启动开发服务器，访问http://127.0.0.1/
 (nsd1908) [root@localhost myansible]# python manage.py runserver 0:80
+```
 
+### 数据库
+
+当前项目使用的数据库是sqlite数据库，这个数据库是文件型的。一个文件就是一个数据库。
+
+```python
+# 生成项目默认应用的数据库表
+(nsd1908) [root@localhost myansible]# python manage.py makemigrations
+(nsd1908) [root@localhost myansible]# python manage.py migrate
+
+# 查看数据库
+(nsd1908) [root@localhost myansible]# sqlite3 db.sqlite3 
+sqlite> .help  # 查看帮助
+sqlite> .tables  # 相当于show tables;
+sqlite> .schema auth_user  # 相当于desc auth_user;
+sqlite> select * from auth_user;
+sqlite> .quit  # 退出
+
+# 创建管理员用户
+(nsd1908) [root@localhost myansible]# python manage.py createsuperuser
+Username (leave blank to use 'root'): admin
+Email address: admin@tedu.cn
+Password: 1234.com
+Password (again): 1234.com
 ```
 
 
