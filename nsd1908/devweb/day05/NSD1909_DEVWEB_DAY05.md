@@ -330,6 +330,26 @@ def vote(request, question_id):
 ... ...
 ```
 
+### 制作投票结果页
+
+```python
+# polls/views.py
+def result(request, question_id):
+    question = Question.objects.get(id=question_id)
+    return render(request, 'result.html', {'question': question})
+
+# templates/result.html
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}投票结果{% endblock %}
+{% block content %}
+    <div>
+        <h1 class="text-center text-warning">{{ question.id }}号问题投票结果</h1>
+        {{ question.choice_set.all }}
+    </div>
+{% endblock %}
+```
+
 
 
 

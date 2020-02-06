@@ -13,7 +13,8 @@ def detail(request, question_id):
     # return render(request, 'detail.html', {'question_id': question_id})
 
 def result(request, question_id):
-    return render(request, 'result.html', {'question_id': question_id})
+    question = Question.objects.get(id=question_id)
+    return render(request, 'result.html', {'question': question})
 
 def vote(request, question_id):
     # request是用户发来的请求，它是一个对象，其中它的POST属性是字典形式，对应表单post数据
