@@ -99,9 +99,35 @@ def index(request):
 base.html
 # templates/index.html
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}Ansible Webadmin{% endblock %}
 {% block content %}
-ansible webadmin
+<div class="row h4">
+    <div class="col-sm-3 text-center">
+        <a href="#" target="_blank">
+            <img width="150px" src="{% static 'imgs/linux.jpg' %}"><br>
+            主机信息
+        </a>
+    </div>
+    <div class="col-sm-3 text-center">
+        <a href="#" target="_blank">
+            <img width="150px" src="{% static 'imgs/linux.jpg' %}"><br>
+            添加主机
+        </a>
+    </div>
+    <div class="col-sm-3 text-center">
+        <a href="#" target="_blank">
+            <img width="150px" src="{% static 'imgs/linux.jpg' %}"><br>
+            添加模块
+        </a>
+    </div>
+    <div class="col-sm-3 text-center">
+        <a href="#" target="_blank">
+            <img width="150px" src="{% static 'imgs/linux.jpg' %}"><br>
+            执行任务
+        </a>
+    </div>
+</div>
 {% endblock %}
 
 # 启动开发服务器，访问http://127.0.0.1/
