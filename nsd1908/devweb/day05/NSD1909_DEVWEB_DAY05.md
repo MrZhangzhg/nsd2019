@@ -44,6 +44,52 @@ True
 # 更多应用：https://docs.djangoproject.com/en/1.11/topics/db/queries/
 ```
 
+### 制作投票首页
+
+```python
+# polls/views.py
+from django.shortcuts import render
+from .models import Question
+
+# 每个函数至少需要一个参数，用于接收用户发来的请求
+def index(request):
+    questions = Question.objects.order_by('-pub_date')
+    return render(request, 'index.html', {'questions': questions})
+
+# templates/index.html
+# 在{}中的部分都是django的模板语法，{}外面的是html语法
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票首页</title>
+</head>
+<body>
+<h1>投票首页</h1>
+<ol>
+# 模板支持循环语句，从问题列表中逐个取出问题实例，问题实例属性有id / question_text / pub_date
+# {% url %}是模板中的标签，detail是在urls.py中定义的。question.id是传给detail的参数
+    {% for question in questions %}
+        <li>
+            <a href="{% url 'detail' question.id %}" target="_blank">
+                {{ question.question_text }}
+            </a>
+            {{ question.pub_date }}
+        </li>
+    {% endfor %}
+</ol>
+</body>
+</html>
+```
+
+
+
+
+
+
+
+
+
 
 
 
