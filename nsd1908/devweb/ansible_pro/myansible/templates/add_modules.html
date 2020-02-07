@@ -28,7 +28,10 @@
                 <td>
                     <ul class="list-unstyled">
                         {% for arg in module.argument_set.all %}
-                            <li>{{ arg.arg_text }}</li>
+                            <li>
+                                {{ arg.arg_text }}
+                                <a href="{% url 'del_arg' arg.id %}">del</a>
+                            </li>
                         {% endfor %}
                     </ul>
                 </td>

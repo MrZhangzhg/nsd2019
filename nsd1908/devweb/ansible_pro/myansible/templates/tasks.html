@@ -38,7 +38,7 @@
                     <tr>
                         <td>
                             <label>
-                                <input type="radio" name="mod">
+                                <input type="radio" name="mod" value="{{ module.modluename }}">
                                 {{ module.modluename }}
                             </label>
                         </td>
@@ -47,7 +47,7 @@
                                 {% for arg in module.argument_set.all %}
                                     <li>
                                         <label>
-                                            <input type="radio" name="param">
+                                            <input type="radio" name="param" value="{{ arg.arg_text }}">
                                             {{ arg.arg_text }}
                                         </label>
                                     </li>

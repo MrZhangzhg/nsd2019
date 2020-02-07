@@ -318,8 +318,25 @@ def add_modules(request):
 
 # webadmin/views.py
 from .models import HostGroup, Module, Host
+from .adhoc2 import adhoc  # 把devops课程中的adhoc2当作模块导入
 
 def tasks(request):
+    if request.method == 'POST':
+        ip = request.POST.get('ip')
+        group = request.POST.get('hostgroup')
+        module = request.POST.get('mod')
+        arg = request.POST.get('param')
+        # 决定在主机还是组上执行任务，优先选组
+        if group:
+            dest = group
+        elif ip:
+            dest = ip
+        else:
+            dest = None
+
+        if dest:  # 如果dest不是None
+            adhoc(['ansi_cfg/dhosts.py'], dest, module, arg)
+
     hosts = Host.objects.all()
     groups = HostGroup.objects.all()
     modules = Module.objects.all()
@@ -367,7 +384,7 @@ def tasks(request):
                     <tr>
                         <td>
                             <label>
-                                <input type="radio" name="mod">
+                                <input type="radio" name="mod" value="{{ module.modluename }}">
                                 {{ module.modluename }}
                             </label>
                         </td>
@@ -376,7 +393,7 @@ def tasks(request):
                                 {% for arg in module.argument_set.all %}
                                     <li>
                                         <label>
-                                            <input type="radio" name="param">
+                                            <input type="radio" name="param" value="{{ arg.arg_text }}">
                                             {{ arg.arg_text }}
                                         </label>
                                     </li>
@@ -393,12 +410,48 @@ def tasks(request):
     </div>
 {% endblock %}
 
-
 # templates/index.html
 <a href="{% url 'tasks' %}" target="_blank">
     <img width="150px" src="{% static 'imgs/linux.jpg' %}"><br>
     执行任务
 </a>
+```
+
+#### 为参数增加删除功能
+
+删除参数，需要执行一个函数。函数通过访问url来调用。
+
+```python
+# webadmin/urls.py
+... ...
+    url(r'^del_arg/(\d+)/$', views.del_arg, name='del_arg'),
+... ...
+
+# webadmin/views.py
+from django.shortcuts import render, redirect
+from .models import HostGroup, Module, Host, Argument
+
+def del_arg(request, arg_id):
+    arg = Argument.objects.get(id=arg_id)
+    arg.delete()
+    return redirect('add_modules')
+
+# templates/add_modules.html
+        {% for module in modules %}
+            <tr>
+                <td>{{ module.modluename }}</td>
+                <td>
+                    <ul class="list-unstyled">
+                        {% for arg in module.argument_set.all %}
+                            <li>
+                                {{ arg.arg_text }}
+                                <a href="{% url 'del_arg' arg.id %}">del</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
 ```
 
 
