@@ -47,6 +47,15 @@ class Argument(models.Model):
 (nsd1908) [root@localhost myansible]# python manage.py makemigrations
 (nsd1908) [root@localhost myansible]# python manage.py migrate
 
+# 将模型注册到后台管理界面
+# webadmin/admin.py
+from django.contrib import admin
+from .models import HostGroup, Host, Module, Argument
+
+for item in [HostGroup, Host, Module, Argument]:
+    admin.site.register(item)
+
+# 登陆到http://127.0.0.1/admin/，添加两个组和一些主机
 ```
 
 
