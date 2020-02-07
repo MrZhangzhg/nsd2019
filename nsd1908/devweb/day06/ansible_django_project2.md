@@ -153,6 +153,36 @@ def index(request):
 </a>
 ```
 
+#### 制作添加主机页
+
+```python
+# webadmin/urls.py
+from django.conf.urls import url
+from . import views
+
+urlpatterns = [
+    url(r'^$', views.index, name='mainpage'),
+    url(r'^add_hosts/$', views.add_hosts, name='add_hosts'),
+]
+
+# webadmin/views.py
+def add_hosts(request):
+    return render(request, 'add_hosts.html')
+
+# templates/add_hosts.html
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}添加主机{% endblock %}
+{% block content %}
+{% endblock %}
+
+# templates/index.html
+<a href="{% url 'add_hosts' %}" target="_blank">
+    <img width="150px" src="{% static 'imgs/linux.jpg' %}"><br>
+    添加主机
+</a>
+```
+
 
 
 
