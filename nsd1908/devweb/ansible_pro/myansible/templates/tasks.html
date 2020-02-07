@@ -18,7 +18,14 @@
                         {% endfor %}
                     </select>
                 </div>
-                <div class="tab-pane fade" id="servergroup">主机组</div>
+                <div class="tab-pane fade" id="servergroup">
+                    <select class="form-control" name="hostgroup">
+                        <option value="">无</option>
+                        {% for group in groups %}
+                            <option value="{{ group.groupname }}">{{ group.groupname }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
             </div>
         </form>
     </div>
