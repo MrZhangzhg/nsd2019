@@ -238,6 +238,76 @@ def add_hosts(request):
 </a>
 ```
 
+#### 制作添加模块页
+
+```python
+# webadmin/urls.py
+... ...
+    url(r'^add_modules/$', views.add_modules, name='add_modules'),
+... ...
+
+# webadmin/views.py
+from .models import HostGroup, Module
+
+def add_modules(request):
+    if request.method == 'POST':
+        module = request.POST.get('module').strip()
+        arg = request.POST.get('param').strip()
+        if module:
+            m = Module.objects.get_or_create(modluename=module)[0]
+            m.argument_set.get_or_create(arg_text=arg)
+
+    modules = Module.objects.all()
+    return render(request, 'add_modules.html', {'modules': modules})
+
+
+# templates/add_modules.html
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}添加模块{% endblock %}
+{% block content %}
+    <form action="" method="post" class="form-inline h4">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>模块：</label>
+            <input class="form-control" type="text" name="module">
+        </div>
+        <div class="form-group">
+            <label>参数：</label>
+            <input class="form-control" type="text" name="param">
+        </div>
+        <input class="btn btn-primary" type="submit" value="提 交">
+    </form>
+    <hr>
+    <table class="table table-bordered table-striped table-hover h4">
+        <thead>
+            <tr class="bg-primary">
+                <td>模块</td>
+                <td>参数</td>
+            </tr>
+        </thead>
+        {% for module in modules %}
+            <tr>
+                <td>{{ module.modluename }}</td>
+                <td>
+                    <ul class="list-unstyled">
+                        {% for arg in module.argument_set.all %}
+                            <li>{{ arg.arg_text }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
+
+# templates/index.html
+<a href="{% url 'add_modules' %}" target="_blank">
+    <img width="150px" src="{% static 'imgs/linux.jpg' %}"><br>
+    添加模块
+</a>
+```
+
 
 
 
