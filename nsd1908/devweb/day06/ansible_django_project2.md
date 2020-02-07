@@ -132,6 +132,25 @@ if __name__ == '__main__':
 (nsd1908) [root@localhost ansi_cfg]# ansible all -m setup --tree /tmp/nsd1908out/
 (nsd1908) [root@localhost ansi_cfg]# ansible-cmdb /tmp/nsd1908out/ > ../templates/hosts.html
 
+# webadmin/urls.py
+from django.conf.urls import url
+from . import views
+
+urlpatterns = [
+    url(r'^$', views.index, name='mainpage'),
+]
+
+# webadmin/views.py
+from django.shortcuts import render
+
+def index(request):
+    return render(request, 'hosts.html')
+
+# templates/index.html
+<a href="{% url 'mainpage' %}" target="_blank">
+    <img width="150px" src="{% static 'imgs/linux.jpg' %}"><br>
+    主机信息
+</a>
 ```
 
 
