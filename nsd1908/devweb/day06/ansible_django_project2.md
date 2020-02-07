@@ -58,6 +58,23 @@ for item in [HostGroup, Host, Module, Argument]:
 # 登陆到http://127.0.0.1/admin/，添加两个组和一些主机
 ```
 
+#### 配置ansible
+
+```python
+(nsd1908) [root@localhost myansible]# mkdir ansi_cfg
+(nsd1908) [root@localhost ansi_cfg]# vim ansible.cfg
+[defaults]
+inventory = ./dhosts.py
+remote_user = root
+# 实现到远程主机的免密登陆
+(nsd1908) [root@localhost ansi_cfg]# ssh-keygen 
+(nsd1908) [root@localhost ansi_cfg]# ssh-copy-id 127.0.0.1
+
+(nsd1908) [root@localhost ansi_cfg]# touch dhosts.py
+(nsd1908) [root@localhost ansi_cfg]# chmod 755 dhosts.py
+
+```
+
 
 
 
