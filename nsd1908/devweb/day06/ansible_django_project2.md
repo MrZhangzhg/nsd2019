@@ -182,6 +182,22 @@ def add_hosts(request):
 {% load static %}
 {% block title %}添加主机{% endblock %}
 {% block content %}
+    <form action="" method="post" class="form-inline h4">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>主机组：</label>
+            <input class="form-control" type="text" name="group">
+        </div>
+        <div class="form-group">
+            <label>主机：</label>
+            <input class="form-control" type="text" name="host">
+        </div>
+        <div class="form-group">
+            <label>IP：</label>
+            <input class="form-control" type="text" name="ip">
+        </div>
+        <input class="btn btn-primary" type="submit" value="提 交">
+    </form>
     <hr>
     <table class="table table-bordered table-striped table-hover h4">
         <thead>
@@ -204,6 +220,7 @@ def add_hosts(request):
         {% endfor %}
     </table>
 {% endblock %}
+
 
 
 # templates/index.html
