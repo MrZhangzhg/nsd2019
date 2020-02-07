@@ -62,6 +62,7 @@ for item in [HostGroup, Host, Module, Argument]:
 
 ```python
 (nsd1908) [root@localhost myansible]# mkdir ansi_cfg
+(nsd1908) [root@localhost myansible]# cd ansi_cfg
 (nsd1908) [root@localhost ansi_cfg]# vim ansible.cfg
 [defaults]
 inventory = ./dhosts.py
@@ -72,6 +73,46 @@ remote_user = root
 
 (nsd1908) [root@localhost ansi_cfg]# touch dhosts.py
 (nsd1908) [root@localhost ansi_cfg]# chmod 755 dhosts.py
+```
+
+#### 创建动态主机清单文件
+
+```python
+动态主机清单文件就是一个脚本，它必须输出以下格式：
+{
+    'dbservers': {'hosts': ['主机1', '主机2']},
+    'webservers' {'hosts': ['主机3', '主机4']},
+}
+
+# vim dhosts.py
+#!/root/nsd1908/bin/python
+from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Date
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+
+engine = create_engine(
+    'sqlite:////var/ftp/nsd2019/nsd1908/devweb/ansible_pro/myansible/db.sqlite3',
+    encoding='utf8',
+)
+Session = sessionmaker(bind=engine)
+Base = declarative_base()
+
+class HostGroup(Base):
+    __tablename__ = 'webadmin_hostgroup'
+    id = Column(Integer, primary_key=True)
+    groupname = Column(String(50), unique=True)
+
+class Host(Base):
+    __tablename__ = 'webadmin_host'
+    id = Column(Integer, primary_key=True)
+    hostname = Column(String(100))
+    ipaddr = Column(String(15))
+    group_id = Column(ForeignKey('webadmin_hostgroup.id'))
+
+if __name__ == '__main__':
+    session = Session()
+    qset = session.query(Host.ipaddr, HostGroup.groupname).join(HostGroup)
+    print(qset.all())
 
 ```
 
