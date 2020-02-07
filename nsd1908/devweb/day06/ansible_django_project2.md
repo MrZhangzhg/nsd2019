@@ -123,6 +123,14 @@ if __name__ == '__main__':
 (nsd1908) [root@localhost ansi_cfg]# ./dhosts.py 
 {'dbservers': {'hosts': ['127.0.0.1']}, 'webservers': {'hosts': ['127.0.0.1', '127.0.0.1']}}
 (nsd1908) [root@localhost ansi_cfg]# ansible all -m ping
+```
+
+#### 制作webadmin首页
+
+```python
+# 通过ansible-cmdb生成信息
+(nsd1908) [root@localhost ansi_cfg]# ansible all -m setup --tree /tmp/nsd1908out/
+(nsd1908) [root@localhost ansi_cfg]# ansible-cmdb /tmp/nsd1908out/ > ../templates/hosts.html
 
 ```
 
