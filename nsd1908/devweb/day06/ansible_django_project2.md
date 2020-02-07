@@ -166,15 +166,45 @@ urlpatterns = [
 ]
 
 # webadmin/views.py
+from django.shortcuts import render
+from .models import HostGroup
+
+def index(request):
+    return render(request, 'hosts.html')
+
 def add_hosts(request):
-    return render(request, 'add_hosts.html')
+    groups = HostGroup.objects.all()
+    return render(request, 'add_hosts.html', {'groups': groups})
+
 
 # templates/add_hosts.html
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}添加主机{% endblock %}
 {% block content %}
+    <hr>
+    <table class="table table-bordered table-striped table-hover h4">
+        <thead>
+            <tr class="bg-primary">
+                <td>主机组</td>
+                <td>主机</td>
+            </tr>
+        </thead>
+        {% for group in groups %}
+            <tr>
+                <td>{{ group.groupname }}</td>
+                <td>
+                    <ul class="list-unstyled">
+                        {% for host in group.host_set.all %}
+                            <li>{{ host.hostname }}:{{ host.ipaddr }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
 {% endblock %}
+
 
 # templates/index.html
 <a href="{% url 'add_hosts' %}" target="_blank">

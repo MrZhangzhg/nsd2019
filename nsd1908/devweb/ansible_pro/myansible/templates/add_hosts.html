@@ -2,4 +2,25 @@
 {% load static %}
 {% block title %}添加主机{% endblock %}
 {% block content %}
+    <hr>
+    <table class="table table-bordered table-striped table-hover h4">
+        <thead>
+            <tr class="bg-primary">
+                <td>主机组</td>
+                <td>主机</td>
+            </tr>
+        </thead>
+        {% for group in groups %}
+            <tr>
+                <td>{{ group.groupname }}</td>
+                <td>
+                    <ul class="list-unstyled">
+                        {% for host in group.host_set.all %}
+                            <li>{{ host.hostname }}:{{ host.ipaddr }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
 {% endblock %}
