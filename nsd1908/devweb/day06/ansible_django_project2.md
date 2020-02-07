@@ -173,6 +173,15 @@ def index(request):
     return render(request, 'hosts.html')
 
 def add_hosts(request):
+    if request.method == 'POST':
+        group = request.POST.get('group').strip()
+        host = request.POST.get('host').strip()
+        ip = request.POST.get('ip').strip()
+        if group:  # 如果group非空
+            g = HostGroup.objects.get_or_create(groupname=group)[0]
+            if host and ip:  # 如果host和ip非空
+                g.host_set.get_or_create(hostname=host, ipaddr=ip)
+
     groups = HostGroup.objects.all()
     return render(request, 'add_hosts.html', {'groups': groups})
 
@@ -182,6 +191,7 @@ def add_hosts(request):
 {% load static %}
 {% block title %}添加主机{% endblock %}
 {% block content %}
+# action=""表示提交表单时，提交到当前url，即http://127.0.0.1/webadmin/add_hosts/
     <form action="" method="post" class="form-inline h4">
         {% csrf_token %}
         <div class="form-group">
@@ -220,8 +230,6 @@ def add_hosts(request):
         {% endfor %}
     </table>
 {% endblock %}
-
-
 
 # templates/index.html
 <a href="{% url 'add_hosts' %}" target="_blank">
