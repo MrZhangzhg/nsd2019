@@ -112,7 +112,17 @@ class Host(Base):
 if __name__ == '__main__':
     session = Session()
     qset = session.query(Host.ipaddr, HostGroup.groupname).join(HostGroup)
-    print(qset.all())
+    # print(qset.all())
+    result = {}
+    for ip, group in qset:
+        if group not in result:
+            result[group] = {}
+            result[group]['hosts'] = []
+        result[group]['hosts'].append(ip)
+    print(result)
+(nsd1908) [root@localhost ansi_cfg]# ./dhosts.py 
+{'dbservers': {'hosts': ['127.0.0.1']}, 'webservers': {'hosts': ['127.0.0.1', '127.0.0.1']}}
+(nsd1908) [root@localhost ansi_cfg]# ansible all -m ping
 
 ```
 

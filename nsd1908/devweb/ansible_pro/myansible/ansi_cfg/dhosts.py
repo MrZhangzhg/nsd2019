@@ -25,4 +25,11 @@ class Host(Base):
 if __name__ == '__main__':
     session = Session()
     qset = session.query(Host.ipaddr, HostGroup.groupname).join(HostGroup)
-    print(qset.all())
+    # print(qset.all())
+    result = {}
+    for ip, group in qset:
+        if group not in result:
+            result[group] = {}
+            result[group]['hosts'] = []
+        result[group]['hosts'].append(ip)
+    print(result)
