@@ -26,3 +26,4 @@ elif [player, computer] in win_list:
 else:
     print('\033[31;1mYou LOSE!!!\033[0m')
 
+# echo -e "\033[31;43;1mOK\033[0m"
