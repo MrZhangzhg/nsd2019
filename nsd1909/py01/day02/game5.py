@@ -28,4 +28,3 @@ while 1:  # 1是非0值，表示True，也就是条件永远为真
 
     if pwin == 2 or cwin == 2:
         break
-
