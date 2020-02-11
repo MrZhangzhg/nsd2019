@@ -3,5 +3,6 @@ hi = 'Hello World!'
 def pstar(n=30):
     print('*' * n)
 
-print(hi)
-pstar(n=50)
+if __name__ == '__main__':
+    print(hi)
+    pstar(n=50)
