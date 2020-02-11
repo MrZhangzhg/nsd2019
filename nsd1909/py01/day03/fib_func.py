@@ -7,7 +7,8 @@ def mk_fib():
     for i in range(n - 2):
         fib.append(fib[-1] + fib[-2])
 
-    print(fib)
+    return fib  # 返回的是fib代表的列表，而不是返回fib变量
 
-mk_fib()   # 调用函数，就是执行函数内的代码
-mk_fib()
+a = mk_fib()   # 调用函数，就是执行函数内的代码
+b = [i + 2 for i in a]
+print(b)
