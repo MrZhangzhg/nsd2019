@@ -1,3 +1,5 @@
+# 该文件非常重要，将来有很多代码都采用这种形式
+
 src_fname = '/bin/ls'
 dst_fname = '/tmp/list'
 src_fobj = open(src_fname, 'rb')
