@@ -21,15 +21,18 @@ def get_content():
         if line == 'end':
             break
 
+        # content.append(line + '\n')
         content.append(line)
 
     return content
 
-
 def wfile(fname, content):
     '需要文件名和内容作为参数，将内容写入文件'
+    with open(fname, 'w') as fobj:
+        fobj.writelines(content)
 
 if __name__ == '__main__':
     fname = get_fname()
     content = get_content()
+    content = ['%s\n' % line for line in content]  # 给字串加上\n后，替换content变量
     wfile(fname, content)
