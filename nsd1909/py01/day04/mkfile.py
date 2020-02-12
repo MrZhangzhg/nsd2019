@@ -13,6 +13,18 @@ def get_fname():
 
 def get_content():
     '用于获取内容，返回一个列表'
+    content = []  # 创建一个列表，用于存储用户输入内容
+
+    print('请输入内容，在单独的一行输入end表示结束。')
+    while 1:
+        line = input('(end to quit)> ')
+        if line == 'end':
+            break
+
+        content.append(line)
+
+    return content
+
 
 def wfile(fname, content):
     '需要文件名和内容作为参数，将内容写入文件'
