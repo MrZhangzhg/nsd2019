@@ -1,3 +1,5 @@
+import getpass
+
 userdb = {}  # 用于保存用户名和密码的字典
 
 def register():
@@ -13,9 +15,10 @@ def register():
 def login():
     '用于实现用户登陆'
     username = input('用户: ')
-    password = input('密码: ')
+    password = getpass.getpass('密码: ')
     # 用户名不存在字典中，或者字典中的密码和用户登陆时填写的密码不一样，则为失败
-    if (username not in userdb) or (userdb[username] != password):
+    # if (username not in userdb) or (userdb[username] != password):
+    if userdb.get(username) != password:
         print('登陆失败')
     else:
         print('登陆成功')
