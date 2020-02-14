@@ -20,6 +20,8 @@ def view():
 
 def show_menu():
     '用于实现菜单，根据用户的选择调用相应的函数'
+    # 字典是容器类型，将函数保存到字典
+    cmds = {'0': push, '1': pop, '2': view}
     prompt = '''(0) push
 (1) pop
 (2) view
@@ -31,15 +33,11 @@ Please input your choice(0/1/2/3): '''
             print('无效的选择，请重试。')
             continue
 
-        if xuan == '0':
-            push()
-        elif xuan == '1':
-            pop()
-        elif xuan == '2':
-            view()
-        else:
+        if xuan == '3':
             print('Bye-bye')
             break
+
+        cmds[xuan]()  # 在字典中取出函数，再加上()调用函数
 
 
 if __name__ == '__main__':
