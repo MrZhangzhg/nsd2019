@@ -1,10 +1,24 @@
+userdb = {}  # 用于保存用户名和密码的字典
+
 def register():
     '用于注册新用户'
-    print('注册')
+    username = input('用户: ').strip()
+    # 如果用户名非空，并且不是字典的key，则提示输入密码
+    if username and (username not in userdb):
+        password = input('密码: ')
+        userdb[username] = password
+    else:
+        print('用户名为空或用户已存在')
 
 def login():
     '用于实现用户登陆'
-    print('登陆')
+    username = input('用户: ')
+    password = input('密码: ')
+    # 用户名不存在字典中，或者字典中的密码和用户登陆时填写的密码不一样，则为失败
+    if (username not in userdb) or (userdb[username] != password):
+        print('登陆失败')
+    else:
+        print('登陆成功')
 
 def show_menu():
     '用于打印菜单，根据用户选择调用相关函数'
