@@ -1,14 +1,22 @@
+# 写在函数外面的变量，是全局变量。全局变量从定义开始，到程序结束，一直可见可用。
+stack = []
+
 def push():
     '用于实现压栈功能'
-    print('push')
+    data = input('data:').strip()  # 删除用户输入字符串两端的空格
+    if data:  # 非空字符串为真，空为假
+        stack.append(data)
 
 def pop():
     '用于实现出栈功能'
-    print('pop')
+    if stack:  # 非空列表为真，空为假
+        print('从栈中，弹出: %s' % stack.pop())
+    else:
+        print('\033[31;1m空栈\033[0m')
 
 def view():
     '实现查询功能'
-    print('view')
+    print(stack)
 
 def show_menu():
     '用于实现菜单，根据用户的选择调用相应的函数'
