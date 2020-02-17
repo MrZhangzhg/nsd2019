@@ -26,13 +26,3 @@ if __name__ == '__main__':
     result2 = map(lambda x: x + 2, nums)
     print(list(result2))
 
-
-
-
-
-
-
-
-
-
-
