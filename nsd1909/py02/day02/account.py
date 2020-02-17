@@ -39,7 +39,10 @@ def query(fname):
     # 取出数据
     with open(fname, 'rb') as fobj:
         data = pickle.load(fobj)
-    print(data)
+    # 打印表头
+    print('%-12s%-8s%-8s%-12s%-20s' % ('date', 'save', 'cost', 'balance', 'comment'))
+    for line in data:
+        print('%-12s%-8s%-8s%-12s%-20s' % tuple(line))
 
 def show_menu():
     '用于展示主菜单'
