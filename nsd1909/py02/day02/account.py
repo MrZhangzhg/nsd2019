@@ -4,15 +4,42 @@ from time import strftime
 
 def save(fname):
     '用于记录收入'
-    print('save')
+    date = strftime('%Y-%m-%d')
+    jin_e = int(input('金额: '))
+    shuoming = input('备注: ')
+    # 取出所有的记账内容
+    with open(fname, 'rb') as fobj:
+        data = pickle.load(fobj)
+    yu_e = data[-1][-2] + jin_e
+    # 构建最新一笔收入
+    line = [date, jin_e, 0, yu_e, shuoming]
+    data.append(line)
+    # 将记账内容写回文件
+    with open(fname, 'wb') as fobj:
+        pickle.dump(data, fobj)
 
 def cost(fname):
     '用于记录支出'
-    print('cost')
+    date = strftime('%Y-%m-%d')
+    jin_e = int(input('金额: '))
+    shuoming = input('备注: ')
+    # 取出所有的记账内容
+    with open(fname, 'rb') as fobj:
+        data = pickle.load(fobj)
+    yu_e = data[-1][-2] - jin_e
+    # 构建最新一笔支出
+    line = [date, 0, jin_e, yu_e, shuoming]
+    data.append(line)
+    # 将记账内容写回文件
+    with open(fname, 'wb') as fobj:
+        pickle.dump(data, fobj)
 
 def query(fname):
     '用于查帐'
-    print('query')
+    # 取出数据
+    with open(fname, 'rb') as fobj:
+        data = pickle.load(fobj)
+    print(data)
 
 def show_menu():
     '用于展示主菜单'
