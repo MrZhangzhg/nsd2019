@@ -1,4 +1,3 @@
-
 class Role:
     def __init__(self, name, wuqi):
         '称作构造器方法，创建实例时，自动调用。通常用于将属性绑定到实例。'
@@ -19,4 +18,4 @@ if __name__ == '__main__':
     lb.speak('马中赤兔，人中吕布')
     zf = Role('张飞', '丈八蛇矛')
     zf.show_me()
-    zf.speak('我是燕人张飞张冀德')
+    zf.speak('我乃燕人张飞张冀德')
