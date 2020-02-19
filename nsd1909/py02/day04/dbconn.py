@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
+from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Date
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -7,7 +7,7 @@ engine = create_engine(
     # mysql+pymysql://用户名:密码@服务器/数据库?选项
     'mysql+pymysql://root:tedu.cn@127.0.0.1/tedu1909?charset=utf8',
     encoding='utf8',  # 字符编码
-    echo=True         # 在终端上打印debug日志信息，生产环境下不要打开
+    # echo=True         # 在终端上打印debug日志信息，生产环境下不要打开
 )
 
 # 创建会话类，用于连接到数据库，通过会话连接操作数据库
@@ -28,6 +28,14 @@ class Employee(Base):
     emp_name = Column(String(20))
     email = Column(String(50))
     dep_id = Column(Integer, ForeignKey('departments.dep_id'))
+
+class Salary(Base):
+    __tablename__ = 'salary'
+    id = Column(Integer, primary_key=True)
+    date = Column(Date)
+    emp_id = Column(Integer, ForeignKey('employees.emp_id'))
+    basic = Column(Integer)
+    awards = Column(Integer)
 
 if __name__ == '__main__':
     # 创建表，如果表已存在，不会报错，不会重建
