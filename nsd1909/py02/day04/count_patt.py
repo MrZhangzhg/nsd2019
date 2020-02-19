@@ -27,5 +27,8 @@ if __name__ == '__main__':
     br = 'Firefox|MSIE'
     result1 = count_patt(fname, ip)
     result2 = count_patt(fname, br)
-    print(result1)
+    # print(result1)
+    l = list(result1.items())
+    l.sort(key=lambda seq: seq[-1], reverse=True)
+    print(l)
     print(result2)
