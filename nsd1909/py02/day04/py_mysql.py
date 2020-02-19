@@ -24,7 +24,7 @@ PRIMARY KEY (emp_id), FOREIGN KEY (dep_id) REFERENCES departments(dep_id)
 # salary -> 工资
 mk_sal = '''CREATE TABLE salary(
 id INT, date DATE, emp_id INT, basic INT, awards INT,
-PRIMARY KEY (id), FOREIGN KEY (id) REFERENCES employees(emp_id)
+PRIMARY KEY (id), FOREIGN KEY (emp_id) REFERENCES employees(emp_id)
 )'''
 cur.execute(mk_dep)   # execute -> 执行
 cur.execute(mk_emp)
