@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -16,3 +16,19 @@ Session = sessionmaker(bind=engine)
 # 创建实体类(数据库中表对应的类)的基类
 Base = declarative_base()
 
+# 创建实体类
+class Department(Base):
+    __tablename__ = 'departments'   # 声明该类与哪个表关联
+    dep_id = Column(Integer, primary_key=True)  # dep_id字段，整型，主键
+    dep_name = Column(String(20), unique=True)  # dep_name字段，VARCHAR(20)，唯一
+
+class Employee(Base):
+    __tablename__ = 'employees'
+    emp_id = Column(Integer, primary_key=True)
+    emp_name = Column(String(20))
+    email = Column(String(50))
+    dep_id = Column(Integer, ForeignKey('departments.dep_id'))
+
+if __name__ == '__main__':
+    # 创建表，如果表已存在，不会报错，不会重建
+    Base.metadata.create_all(engine)
