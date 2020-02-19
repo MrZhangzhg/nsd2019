@@ -39,13 +39,23 @@ session = Session()
 # 基础查询1：将类作为参数，返回实例构成的列表
 qset1 = session.query(Department)
 # print(qset1)  # 只是一个SQL语句，当向它取值时，sql语句才执行
-for bumen in qset1:
-    print(bumen.dep_id, bumen.dep_name)
+# for bumen in qset1:
+#     print(bumen.dep_id, bumen.dep_name)
 
 # 基础查询2：将类变量作为参数，返回的是各个属性构成的元组，元组构成列表
 qset2 = session.query(Employee.emp_name, Employee.email)
-for data in qset2:
-    print(data)
+# for data in qset2:
+#     print(data)
+
+# 修改，将人事部改为人力资源部
+# qset3 = session.query(Department).filter(Department.dep_id==1)
+# hr = qset3.first()
+# hr.dep_name = '人力资源部'
+
+# 删除，删除市场部
+qset4 = session.query(Department).filter(Department.dep_id==6)
+market = qset4.first()
+session.delete(market)
 
 # 确认
 session.commit()
