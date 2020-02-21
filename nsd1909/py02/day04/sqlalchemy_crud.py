@@ -66,8 +66,24 @@ qset4 = session.query(Department).filter(Department.dep_id>2).order_by(Departmen
 
 # filter方法，可以多次使用
 qset5 = session.query(Department).filter(Department.dep_id>2).filter(Department.dep_id<5)
-for bumen in qset5:
+# for bumen in qset5:
+#     print(bumen.dep_id, bumen.dep_name)
+
+# 模糊查询，找出email以.com为结尾的员工
+qset6 = session.query(Employee.emp_name, Employee.email).filter(Employee.email.like('%.com'))
+# for data in qset6:
+#     print(data)
+
+# 查询2、3、4号部门是哪些部门
+qset7 = session.query(Department).filter(Department.dep_id.in_([2, 3, 4]))
+# for bumen in qset7:
+#     print(bumen.dep_id, bumen.dep_name)
+
+# 查询部门ID不是2，3，4的部门
+qset8 = session.query(Department).filter(~Department.dep_id.in_([2, 3, 4]))
+for bumen in qset8:
     print(bumen.dep_id, bumen.dep_name)
+
 
 
 
