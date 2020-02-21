@@ -47,15 +47,28 @@ qset2 = session.query(Employee.emp_name, Employee.email)
 # for data in qset2:
 #     print(data)
 
+
+
+# 可以对查询的结果进一步应用其他方法
+qset3 = session.query(Department).order_by(Department.dep_id)
+for bumen in qset3:
+    print(bumen.dep_id, bumen.dep_name)
+
+
+
+
+
+
 # 修改，将人事部改为人力资源部
 # qset3 = session.query(Department).filter(Department.dep_id==1)
 # hr = qset3.first()
 # hr.dep_name = '人力资源部'
 
+
 # 删除，删除市场部
-qset4 = session.query(Department).filter(Department.dep_id==6)
-market = qset4.first()
-session.delete(market)
+# qset4 = session.query(Department).filter(Department.dep_id==6)
+# market = qset4.first()
+# session.delete(market)
 
 # 确认
 session.commit()
