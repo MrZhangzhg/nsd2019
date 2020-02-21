@@ -22,6 +22,9 @@ class Department(Base):
     dep_id = Column(Integer, primary_key=True)  # dep_id字段，整型，主键
     dep_name = Column(String(20), unique=True)  # dep_name字段，VARCHAR(20)，唯一
 
+    def __str__(self):
+        return "%s:%s" % (self.dep_name, self.dep_id)
+
 class Employee(Base):
     __tablename__ = 'employees'
     emp_id = Column(Integer, primary_key=True)

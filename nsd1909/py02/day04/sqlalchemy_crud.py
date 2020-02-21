@@ -81,10 +81,23 @@ qset7 = session.query(Department).filter(Department.dep_id.in_([2, 3, 4]))
 
 # 查询部门ID不是2，3，4的部门
 qset8 = session.query(Department).filter(~Department.dep_id.in_([2, 3, 4]))
-for bumen in qset8:
-    print(bumen.dep_id, bumen.dep_name)
+# for bumen in qset8:
+#     print(bumen.dep_id, bumen.dep_name)
 
+# 查询结果可以使用for循环遍历取出数据，也可以使用all方法返回列表
+# print(qset7)
+deps = qset7.all()
+# print(deps)
 
+# first方法返回all方法结果中的第一项
+bumen = qset7.first()
+# print(bumen)
+
+# 多表查询。两张表有主外键关系，在query中，先写Employee.emp_name，join的时候就要写Department
+# 在query中，先写Department.dep_name，join的时候就要写Employee
+qset9 = session.query(Employee.emp_name, Department.dep_name).join(Department)
+result = qset9.all()
+print(result)
 
 
 # 修改，将人事部改为人力资源部
