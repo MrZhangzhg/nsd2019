@@ -31,6 +31,18 @@
 - 主线程(类似于父进程)只负责生成工作线程(类似于子进程)
 - 工作线程做具体的工作
 
+## urllib模块
+
+```python
+>>> from urllib import request
+>>> html = request.urlopen('http://www.163.com')
+>>> html.read(10)
+b' <!DOCTYPE'
+>>> html.readline()
+b' HTML>\n'
+>>> html.readlines()
+```
+
 
 
 
