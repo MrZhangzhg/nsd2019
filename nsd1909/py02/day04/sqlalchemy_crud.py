@@ -51,11 +51,23 @@ qset2 = session.query(Employee.emp_name, Employee.email)
 
 # 可以对查询的结果进一步应用其他方法
 qset3 = session.query(Department).order_by(Department.dep_id)
-for bumen in qset3:
+# for bumen in qset3:
+#     print(bumen.dep_id, bumen.dep_name)
+
+# get方法，可以根据主键取出实例
+# dep = session.query(Department).get(1)
+# print(type(dep))
+# print(dep.dep_id, dep.dep_name)
+
+# filter方法，实现sql语句中的where，它返回的是列表，列表长度是0到多
+qset4 = session.query(Department).filter(Department.dep_id>2).order_by(Department.dep_id)
+# for bumen in qset4:
+#     print(bumen.dep_id, bumen.dep_name)
+
+# filter方法，可以多次使用
+qset5 = session.query(Department).filter(Department.dep_id>2).filter(Department.dep_id<5)
+for bumen in qset5:
     print(bumen.dep_id, bumen.dep_name)
-
-
-
 
 
 
