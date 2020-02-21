@@ -20,4 +20,3 @@ if __name__ == '__main__':
     os.waitpid(-1, 0)   # 因为有两个子进程，所以需要两个waitpid
     end = time.time()
     print(end-start)
-
