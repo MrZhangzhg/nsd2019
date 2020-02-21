@@ -68,7 +68,35 @@ wget模块底层使用的是urllib，可以将下载简化
 >>> html = request.urlopen(r)
 ```
 
+### url编码
 
+- URL中，只允许一部分ascii码字符
+- 如果使用其他字符，需要转码
+
+```python
+>>> url = 'https://www.sogou.com/web?query=北京'
+>>> html = request.urlopen(url)  # 报错，url中含中文
+
+>>> url = 'https://www.sogou.com/web?query=' + request.quote('武汉')
+>>> url
+'https://www.sogou.com/web?query=%E6%AD%A6%E6%B1%89'
+```
+
+### 异常处理
+
+- urllib模块的子模块error定义了可能出现的异常
+- 所以在捕获异常时，需要将它导入
+
+```python
+>>> js_url = 'http://www.jianshu.com'
+>>> from urllib import error
+>>> try:
+...   html = request.urlopen(js_url)
+... except error.HTTPError:
+...   print('无法访问')
+... 
+无法访问
+```
 
 
 
