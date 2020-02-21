@@ -43,6 +43,31 @@ b' HTML>\n'
 >>> html.readlines()
 ```
 
+### wget模块
+
+wget模块底层使用的是urllib，可以将下载简化
+
+```python
+[root@localhost day01]# pip3 install wget
+>>> url = 'http://n.sinaimg.cn/ent/4_img/upload/a57892fc/300/w1620h1080/20200218/2958-iprtayz1488773.jpg'
+>>> import wget
+>>> wget.download(url, '/tmp/zhou.jpg')
+```
+
+### 修改请求头
+
+```python
+>>> js_url = 'http://www.jianshu.com'
+>>> html = request.urlopen(js_url)  # 403错误
+# 因为简书有基本的反爬虫功能，发现是机器爬虫程序，就拒绝
+
+>>> js_url = 'http://www.jianshu.com'
+>>> headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'}
+# 创建一个请求对象，访问简书服务器时，携带修改的请求头发请求
+>>> r = request.Request(js_url, headers=headers)
+>>> html = request.urlopen(r)
+```
+
 
 
 
