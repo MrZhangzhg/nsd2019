@@ -39,7 +39,30 @@ b'id: dingjie: no such user\n'
 - 准备邮件使用email模块
 - 发送邮件使用smtplib模块
 
+## JSON
 
+- JavaScript Object Notation
+- json应用
+
+```python
+>>> import json
+>>> data = {'name': 'tom', 'age': 20}
+# 发送之前，需要将数据转换成json字符串
+>>> jdata = json.dumps(data)
+>>> type(jdata)
+<class 'str'>
+>>> jdata
+'{"name": "tom", "age": 20}'
+
+# 接收到的数据，再通过loads转换成对应的数据类型
+>>> jdata
+'{"name": "tom", "age": 20}'
+>>> info = json.loads(jdata)
+>>> type(info)
+<class 'dict'>
+>>> info
+{'name': 'tom', 'age': 20}
+```
 
 
 
