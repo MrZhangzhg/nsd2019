@@ -33,6 +33,20 @@ b'id: dingjie: no such user\n'
 'uid=0(root) gid=0(root) 组=0(root)\n'
 ```
 
+## 邮件
+
+- 发送邮件使用SMTP协议，端口号25
+- 准备邮件使用email模块
+- 发送邮件使用smtplib模块
+
+
+
+
+
+
+
+
+
 
 
 
