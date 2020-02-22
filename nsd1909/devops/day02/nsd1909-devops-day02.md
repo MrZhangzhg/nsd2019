@@ -111,9 +111,25 @@ b'id: dingjie: no such user\n'
 {'weatherinfo': {'city': '北京', 'cityid': '101010100', 'temp': '27.9', 'WD': '南风', 'WS': '小于3级', 'SD': '28%', 'AP': '1002hPa', 'njd': '暂无实况', 'WSE': '<3', 'time': '17:55', 'sm': '2.1', 'isRadar': '1', 'Radar': 'JC_RADAR_AZ9010_JB'}}
 ```
 
+- 传参
 
+```python
+>>> kd_url = 'http://www.kuaidi100.com/query'
+>>> params = {'type': 'youzhengguonei', 'postid': '9893442769997'}
+>>> r = requests.get(kd_url, params=params)
+>>> r.json()
+```
 
+- 修改请求头
 
+```python
+>>> js_url = 'http://www.jianshu.com'
+>>> r = requests.get(js_url)
+>>> r.text   # 403 forbidden
+
+>>> r = requests.get(js_url, headers=headers)
+>>> r.text    # 正常内容
+```
 
 
 
