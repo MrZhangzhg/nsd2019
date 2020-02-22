@@ -64,6 +64,38 @@ b'id: dingjie: no such user\n'
 {'name': 'tom', 'age': 20}
 ```
 
+## requests模块
+
+- 是用Python语言编写的、优雅而简单的HTTP库
+- 内部采用来urillib3
+- HTTP最常用的方法：
+  - get：浏览器中输入url访问；页面中点击超链接；搜索引擎提交表单
+  - post：一般用于表单提交数据，比如登陆、注册
+- requests模块将每个HTTP的方法都创建出了对应的函数
+
+### requests应用
+
+```python
+# 安装
+[root@localhost day02]# pip3 install requests
+
+>>> import requests
+# 文本形式的内容，使用text属性获取
+>>> url1 = 'http://www.163.com'
+>>> r1 = requests.get(url1)
+>>> r1.text
+
+# 非文本数据，使用content属性获取，bytes类型。文本数据也可以使用此种方式。
+>>> url2 = 'http://world.people.com.cn/NMediaFile/2020/0217/MAIN202002171833000079364831028.JPG'
+>>> r2 = requests.get(url2)
+>>> r2.content
+>>> with open('/tmp/a.jpg', 'wb') as fobj:
+...   fobj.write(r2.content)
+
+```
+
+
+
 
 
 
