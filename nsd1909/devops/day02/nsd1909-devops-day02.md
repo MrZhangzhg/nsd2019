@@ -75,6 +75,13 @@ b'id: dingjie: no such user\n'
 
 ### requests应用
 
+- api：应用程序接口
+- 中国天气网提供的接口
+  - 实况天气:http://www.weather.com.cn/data/sk/城市代码.html
+  - 城市信息:http://www.weather.com.cn/data/cityinfo/城市代码.html
+  - 详细指数:http://www.weather.com.cn/data/zs/城市代码.html
+  - 城市代码通过网络搜索
+
 ```python
 # 安装
 [root@localhost day02]# pip3 install requests
@@ -92,6 +99,16 @@ b'id: dingjie: no such user\n'
 >>> with open('/tmp/a.jpg', 'wb') as fobj:
 ...   fobj.write(r2.content)
 
+# json数据，通过json()方法获取
+>>> url3 = 'http://www.weather.com.cn/data/sk/101010100.html'
+>>> r3 = requests.get(url3)
+>>> r3.json()   # 乱码，因为编码问题
+{'weatherinfo': {'city': 'å\x8c\x97äº¬', 'cityid': '101010100', 'temp': '27.9', 'WD': 'å\x8d\x97é£\x8e', 'WS': 'å°\x8fäº\x8e3çº§', 'SD': '28%', 'AP': '1002hPa', 'njd': 'æ\x9a\x82æ\x97\xa0å®\x9eå\x86µ', 'WSE': '<3', 'time': '17:55', 'sm': '2.1', 'isRadar': '1', 'Radar': 'JC_RADAR_AZ9010_JB'}}
+>>> r3.encoding  # 查看当前编码
+'ISO-8859-1'
+>>> r3.encoding = 'utf8'   # 修改编码
+>>> r3.json()
+{'weatherinfo': {'city': '北京', 'cityid': '101010100', 'temp': '27.9', 'WD': '南风', 'WS': '小于3级', 'SD': '28%', 'AP': '1002hPa', 'njd': '暂无实况', 'WSE': '<3', 'time': '17:55', 'sm': '2.1', 'isRadar': '1', 'Radar': 'JC_RADAR_AZ9010_JB'}}
 ```
 
 
